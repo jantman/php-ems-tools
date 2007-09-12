@@ -1,0 +1,6 @@
+PHP EMS Tools
+http://www.php-ems-tools.com
+----------------------------------------------------------
+Version 2.0
+Time-stamp: "2007-03-26 23:34:46 jantman"
+

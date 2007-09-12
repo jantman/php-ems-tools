@@ -1,0 +1,15 @@
+PHP EMS Tools
+
+Changelog
+------------------------------------------------------------
+
+Release 1.1 - 2006-11-16
+- Fixed database bugs in authorization/login in rosterEdit.php and schedule.php
+- Added project news feature.
+- Added stylesheet to index.php
+- Added checking for HTML directory in install-db.sh
+- Added required file version.php
+
+
+Release 1 - 2006-11-13
+**Initial Release**

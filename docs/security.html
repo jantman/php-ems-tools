@@ -1,0 +1,55 @@
+<html>
+<!-- Time-stamp: "2006-11-13 00:58:42 jantman" -->
+<!-- php-ems-tools docs -->
+<head>
+<title>PHP EMS Tools Documentation - Security</title>
+</head>
+<body>
+<h3>PHP EMS Tools Documentation - Security</h3>
+<p>
+<a href="index.html">Docs</a>
+</p>
+<p>
+<b>A FEW NOTES ON SECURITY:</b></p>
+<p>
+The passwords used in this package are weak. They are stored in the database
+both as an MD5 sum and as CLEAR TEXT. A user with rudimentary knowledge of
+Unix, MySQL, PHP, or any relevant programming language could gain access to
+them. Any user with access to the server on which PHP EMS Tools is hosted can
+view the passwords, if they have MySQL permissions. Furthermore, with
+Anonymous access, most any user who understands MySQL can access them. You
+should be sure that Anonymous access is granted for users @localhost ONLY, and
+that ALL users with accounts on the machine have specific permissions assigned
+in MySQL, or they will be able to have FULL access to the database.
+</p><p>
+That being said, these passwords are NOT intended for true security, or for
+tracking which users performed what actions. They are simply intended as a way
+to stop CASUAL users from making changes to the schedule, roster, etc.
+</p><p>
+I HIGHLY recommend that if you are worried about data integrity, you upgrade
+to a better authentication scheme.
+</p><p>
+<b>The authentication in PHP EMS Tools is intended for LOCAL networks ONLY,
+not externally-visible machines.</b> If you are intending on serving these
+documents to the internet (i.e. NOT just on the LAN inside your building), you MUST upgrade the
+authentication scheme. In this case, I would recommend sessions and/or HTTPS
+authentication. Furthermore, if at all possible, I would recommend creating a
+seperate directory or seperate files for access from the outside world, which
+cannot be used to make any changes. This seperate directory, with a view-only
+schedule, should be included in one of the next releases.
+</p><p>
+The setup of the MySQL server for php-ems-tools requires Anonymous access. It
+is IMPERATIVE that if you setup the php-ems-tools server so that it is
+accessible from the outside world, you have ONLY the web server port open. You
+MUST block access to the MySQL port.
+</p><p>
+A NOTE ON THE .HTACCESS:
+</p><p>
+That being said, I have decided that my builtin authentication is the best
+method. If you consider doing Apache Auth (in httpd.conf or .htaccess) please
+BE AWARE that this WILL save a password on the computer being used to access
+the site. It WILL NOT allow multiple people do use multiple
+usernames/passwords in a short span of time.
+</p>
+</body>
+</html>

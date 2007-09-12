@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "MPAC Schedule"
+AuthUserFile /srv/www/password.files/.htpasswd
+AuthGroupFile /srv/www/password.files/groups
+Require group php-ems-tools

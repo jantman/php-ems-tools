@@ -1,0 +1,143 @@
+<html>
+<!-- Time-stamp: "2007-03-27 00:07:33 jantman" -->
+<!-- php-ems-tools docs -->
+<head>
+<title>PHP EMS Tools Documentation - Requirements</title>
+</head>
+<body>
+<p>
+<h3>
+PHP EMS Tools Package Requirements and Development Platform Information
+<br>
+SourceForge package "php-ems-tools"
+</h3>
+</p>
+<p>
+<a href="index.html">Docs</a>
+</p>
+<hr>
+<p>
+Table Of Contents:
+<br><br>
+1) Package Dependencies
+<br><br>
+2) Development Platform Information
+<br><br>
+3) Tested Platforms
+<hr>
+<br>
+<b>Package Dependencies:</b>
+<p>
+PHP EMS Tools requires that the following packages be installed on the server
+in order to function. The only way around this is to modify the code, which
+requires some knowledge of PHP programming and will probably result in some
+loss of functionality. WARNING - Please do not modify the code unless you know
+what you are doing! Be aware that improper modification of a single CHARACTER
+in the code could result in the program not running, or not behaving
+correctly. ALSO - be aware that changes, whether major or minor, do not always
+have easily visible effects. Moving a space, quote, or other character may
+allow the program to run but will cause unintended errors.
+</p><p>
+These dependencies are for the SERVER only. The web interface can be used with
+any modern web browser, provided that it supports JAVASCRIPT and the JS
+support is enabled.
+</p><p>
+NOTE - Please read through these dependencies. I WILL ONLY SUPPORT the
+configurations listed as "recommended". If you choose to use something else,
+that is perfectly acceptable (perhaps superior for your purposes) but I will
+not provide support related to alternate configurations, as the permutations
+are infinite, and I would rather have in-depth knowledge about a few systems
+rather than know bits about all of them.
+</p><p>
+A NOTE ON PORTABILITY/PLATFORM-INDEPENDENCE - PHP-EMS-Tools is coded in PHP
+and JavaScript, which are platform-independent languages. That being said, all
+development was done on a LAMP (Linux/MySQL/Apache/PHP) platform. While it
+*should* run with *minor* modifications on any platform that supports the
+requirements, it is HIGHLY recommended that a Linux- or Unix-based server be used.
+</p><p>
+A NOTE ON COST - If you have gotten this far into the documentation, you
+probably have some knowledge about *nix systems. If not, I understand that
+there's a steep learning curve, and will do my best to help you. Before we
+proceed to the list, it should be noted that ALL of the dependencies can be
+obtained free of charge, and most (if not all) are Open-Source Software. Thus,
+it should not cost you ANYTHING (except time) to get this up and running.
+</p><p>
+i) *nix - Some of the commands implemented rely on the standard built-in
+libraries of *nix (Unix/Linux) systems. These include date, awk, etc. They
+should be found in most standard installations of these systems. Functionality
+under Windows has not been tested, and is not recommended. 
+</p><p>
+ii) Web Server - Obviously, a web server is required. It must support
+JavaScript and PHP, as well as Authentication. Apache2 is highly
+recommended. Apache2 also supports authentication by MySQL, which is a plus
+with the roster system.
+</p><p>
+iii) MySQL - PHP-EMS-Tools uses MySQL as its database server. This should be
+installed locally on the server machine, along with its' command-line client
+tools. Be sure that the user which the web server runs as has appropriate
+(full) permissions to the databases.
+</p><p>
+iv) PHP5 - The heart of the package is PHP. It is written for PHP5. Be sure to have the COMPLETE
+PHP package installed, with ay options that seem logical (such as
+--with-mysql). If you do not know what this means, please review the PHP
+documentation. For the email alerts to work, you must have the PHP mail()
+function <i>working</i>. This means a proper configuration of your
+sendmail/postfix or other MTA, and making sure that it works with PHP.
+</p><p>
+v) PEAR - The PEAR extensions package for PHP should be installed.
+</p><p>
+vi) Java - You may find it helpful to have Java and an appropriate compiler
+installed on the server, for development use.
+</p><p>
+vii) LibChart - LibChart, a free, open-source (GPL) package is used to provide
+all of the graphs for statistics. It must be installed to have these functions.
+</p><p>
+viii) GD - The statistics functions (graphing) provided by LibChart rely on
+the GD library, as well as the JPEG, PNG, and ZLIB libraries. Be sure to have
+the libraries and their includes installed.
+</p><p>
+ix) HTML_QuickForms - All of the form-based pages (which are required parts of
+the package) are created using the PEAR package HTML_QuickForms. You must have
+this installed on the server.
+</p>
+<p>
+x) Broswer - The client browser must have JavaScript enabled. Also, as the
+site utilizes pop-up windows, pop-up support should be enabled. Mozilla
+Firefox is HIGHLY recommended over other browsers. Also please note that the
+JavaScript popups will NOT work on a text browser such as lynx that doesn't
+support Java.
+</p>
+<hr>
+<p>
+<b>2) Development Platform Information:</b>
+</p><p>
+Development was conducted on the following platform: 
+</p><p>
+SuSE Linux 9.3 on an i586 platform<br>
+Apache 2.0.53<br>
+MySQL 4.1.10a<br>
+PHP 4.3.10<br>
+</p>
+
+<hr>
+<p>
+3) Tested Platforms:<br>
+</p><p>
+As of this time, only the development platform above has been tested.
+</p><p>
+I have run it on a few machines, but all of them are configured more or less
+the same.
+</p><p>
+*Minor* departures from the above configuration should not cause major issues.
+</p>
+<hr>
+<p>
+A NOTE ON SOURCE CODE - Personally, I recommend that all of these dependencies
+(PHP, Apache, MySQL, etc.) be compiled from source code. Their individual
+documentation should include instructions for this. You can also find ample
+HOWTO's on the installation procedure for, say, Apache + MySQL + PHP. When you
+do this, please BE SURE to keep the source code in a directory on your
+machine, as you may have to re-compile a few times to get all of the kinks
+worked out. Keep these sources in a common, easy-to-remember location, such as
+in directories in /usr/src
+</p>

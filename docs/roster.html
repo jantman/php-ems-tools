@@ -1,0 +1,58 @@
+<html>
+<!-- Time-stamp: "2006-11-24 20:27:38 jantman" -->
+<!-- php-ems-tools docs -->
+<head>
+<title>PHP EMS Tools Documentation - Roster</title>
+</head>
+<body>
+<h3>PHP EMS Tools Documentation - Roster</h3>
+<p>
+<a href="index.html">Docs</a>
+</p>
+<p>
+<b>Rights Level - </b>The rights level field dictates how much a user can do,
+when authenticated with a ID and password. The possible values are 0, 1,
+2. When the package checks for rights levels, it uses an evaluation with the
+algebraic greater than operator, therefore any given rights level has all of
+the rights of the lower levels.</p>
+<p><b>0</b> - the lowest, standard user rights. These users have access to all
+normal user functions (i.e. signing on the schedule) but NO administrative
+privilages.</p>
+<p><b>1</b> - Standard administrator/officer rights. This includes
+adding/editing/removing members from the roster and changing schedule entries
+that occurred in the past.</p>
+<p><b>2</b> - This is the "super-user" rights level. It is analagous to root
+access, and allows the user to make changes above and beyond the
+officers/administrators. I recommend that only the one person in charge of
+maintaining the system use this level, and furthermore that you create a
+special account for these tasks, using a longer-than-usual ID and a secure
+password. <b>NOTE: There are, as of the currently released version, no
+festures which require use of this level. However, I would recommend giving it
+to your own ID for future use.</b> <i>Note:</i> for security reasons, this
+level cannot be assigned through php-ems-tools. You must modify the MySQL
+database directly to use it. In order to do this, get a command prompt on the
+server running MySQL, on an account with rights to modify the table. Now,
+issue the following commands in MySQL (client): <code>USE roster;</code> then
+<code>UPDATE ROSTER SET rightsLevel=2 WHERE EMTid="myID";</code> where myID is
+the ID of the account you want to change, in quotes.
+</p>
+<p><i>Another note on rights levels: </i>the administrators, obviously, can
+change rightsLevels through the web-based roster edit tool. There are a few
+things to remember with this:
+<ul>
+<li>People who lose their positions as administrators or officers should have
+their rightsLevel brought back down to 0 (user).</li>
+<li>Your administrators should NOT assign a higher rightsLevel to an
+unauthorized user as a convenience. This is only asking for trouble.</li>
+<li>It IS possible for an administrator to change their own rightsLevel back
+to 0, thereby requiring intervention from another administrator to restore
+it. All administrators should be careful when editing the roster entries of
+other administrators.</li></p>
+<p><i>Removing a member:</i> In order to keep records accurate, it's best not
+to remove members mid-year. It is suggested that to remove a member, you
+should set their membership status to 'Resigned' in the Edit form. To
+permanently remove a member, you must remove them manually from the MySQL database.</p>
+
+
+</body>
+</html>
