@@ -1,0 +1,30 @@
+PHP EMS Tools (php-ems-tools) LICENSE
+
+Please refer to www.php-ems-tools.com for more information.
+
+This software is distributed under the GNU GPL License, with the following
+provisions:
+
+1) If you are intending to use PHP EMS Tools for your EMS organization, please fill out the user survey at http://jantman.dyndns.org:10011/php-ems-tools/survey.php This information is for my research purposes only, as I would like to keep the package up-to-date for the needs of the users.
+
+2) You are free to modify the code however you choose, provided that you include attribution to the original project (PHP EMS Tools available at http://www.php-ems-tools.com).
+
+3) If you choose to modify the code, I ask that you e-mail me with your additions, or a brief synopsis of what they do, so that I can incorporate the features into the next release.
+
+4) If you choose (purely voluntary) I would like to put a link to your organization's web site on the php-ems-tools webpage, under a list of current users.
+
+5) If you feel that the software has helped your organization, recognize the savings that you have gained by using free software, and would like to help my development efforts, I accept donations to support the costs of running my web sites and development machines. Please contact me at jason@php-ems-tools.com
+
+6) I highly encourage all users to consider making a donation, of any amount,
+   to:
+
+   Midland Park Volunteer Ambulance Corps
+   PO Box 38
+   Midland Park, NJ
+   07432
+   http://www.midlandparkambulance.com
+
+   Checks Payable To: Midland Park Ambulance Corps
+
+   This donation is tax deductable (MPAC is a 501(c)(3) Non-Profit) and can be
+   considered payment for the software.

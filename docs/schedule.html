@@ -1,0 +1,62 @@
+<html>
+<!-- Time-stamp: "2006-12-13 19:51:39 jantman" -->
+<!-- php-ems-tools docs -->
+<head>
+<title>PHP EMS Tools Documentation - Schedule</title>
+</head>
+<body>
+<h3>PHP EMS Tools Documentation - Schedule</h3>
+<p>
+<a href="index.html">Docs</a>
+</p>
+<p>
+schedule.php
+</p>
+<p>
+The schedule layout is fairly straightforward. It displays a monthly schedule,
+showing all of the days in a given month with six slots per day. In
+custom.php, you can restrict sign-ons for shifts previous to the current one
+(allowing only administrators to change events in the past) as well as
+optionally requiring a password or administrator for sign-ons, removals, or
+changes. The "<< Month" link goes to the previous month's schedule, and the "
+Month >>" link goes to the next month. The "HELP" link opens a JavaScript
+Pop-Up with some simple instructions and explanations. When viewing the Night
+schedule, the "Days" link shows the day schedule for the current month. The
+"Nights" link on the Days schedule works likewise. The "Count Hours" link goes
+directly to the Count Monthly Hours page for the month being viewed. The
+"Current Shift" link goes to the current shift (by month and time of day).</p>
+
+<p>If the current date is the 15th of the month or later, the schedule
+automatically scrolls down to the lower half of the page, if the current month
+is being viewed.</p>
+
+<p>The schedule page automatically refreshes itself every time a change is
+made by the computer that is viewing it. It also refreshes itself every 180
+seconds (3 minutes) to update changes that may have been made on different
+computers.</p>
+
+<p>To sign a member on, simply click in an empty slot (dashed box) in the
+desired day of the desired month/shift. This will open a JavaScript window to
+sign on. If the settings in custom.php dictate it, an ID and password may need
+to be entered. The member can select the action to be taken (Sign On, Edit -
+to change ID or times, or Remove), type in their ID, select the start and end
+times (by default, set to the start and end of the shift), and click
+Submit. The pop-up will submit the data, refresh the schedule window, and
+close itself.</p>
+
+<p>To set a message for a particular day (text to display next to the date),
+click in the area next to the date. A similar pop-up will open, allowing the
+administrator to enter their ID and password, and add/edit or remove a
+message. It is recommended that this task be restricted to
+administrators/officers, but this can be changed in custom.php</p>
+
+<p><b>Email & text message alerts:</b><br>
+The schedule has the option to send out email alerts and/or text messages (via
+email) to the other members in a given shift to notify them of a member
+signing on, editing their times, or signing off. These options are set in the
+custom.php file. Currently, the only way to disable alerts for a specific
+member is to remove their email or textEmail address from the roster.
+
+</p>
+</body>
+</html>

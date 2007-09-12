@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Web Admin"
+AuthUserFile /srv/www/password.files/.htpasswd
+AuthGroupFile /srv/www/password.files/groups
+Require group admin

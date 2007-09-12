@@ -1,0 +1,101 @@
+table.roster {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+}
+table.roster th {
+    border-width: 1px 1px 1px 1px;
+ padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.roster td {
+    border-width: 1px 1px 1px 1px;
+ padding: 1px 1px 1px 1px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+table.day {
+    border-width: 0px 0px 0px 0px;
+    border-collapse: collapse;
+}
+
+table.day th {
+    border-width: 0px 0px 0px 0px;
+}
+
+table.day td {
+    border-style: dashed dashed dashed dashed;
+    border-color: #C0C0C0 #C0C0C0 #C0C0C0 #C0C0C0;
+    border-width: 0px 0px 1px 0px;
+}
+.signon {
+    border-style: dashed dashed dashed dashed;
+    border-color: #C0C0C0 #C0C0C0 #C0C0C0 #C0C0C0;
+    border-width: 0px 0px 1px 0px;
+    cursor: hand;
+    cursor: pointer;
+}
+
+.nocurs {
+    border-style: dashed dashed dashed dashed;
+    border-color: #C0C0C0 #C0C0C0 #C0C0C0 #C0C0C0;
+    border-width: 0px 0px 1px 0px;
+}
+
+
+table.dayExt {
+    border-width: 0px 0px 0px 0px;
+    border-collapse: collapse;
+}
+
+table.dayExt th {
+    border-width: 0px 0px 0px 0px;
+}
+
+table.dayExt td {
+    border-style: dashed dashed dashed dashed;
+    border-color: #C0C0C0 #C0C0C0 #C0C0C0 #C0C0C0;
+    border-width: 0px 0px 1px 0px;
+}
+
+slot {
+    border-style: solid solid solid solid;
+    border-color: #C0C0C0 #C0C0C0 #C0C0C0 #C0C0C0;
+    border-width: 1px 1px 1px 1px;
+    cursor: hand;
+    corsor: pointer;
+}
+
+A {
+
+	font-family: Verdana;
+
+	font-size: 10px;
+
+}
+
+
+
+TABLE, TD, TH, P, DIV, LI, INPUT, TEXTAREA {
+
+	font-size: 11px;
+
+}
+
+A {
+
+	font-family: Verdana;
+
+	font-size: 10px;
+
+}
+
