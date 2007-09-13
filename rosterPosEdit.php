@@ -2,7 +2,7 @@
 //
 // rosterPosEdit.php
 //
-// Version 0.1 as of Time-stamp: "2006-12-13 21:01:33 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 15:58:45 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 
@@ -296,7 +296,7 @@ mysql_close($connection);
 <?php
 echo '<TITLE>'.$shortName.' Roster - Administrative Tool</TITLE>';
 ?>
-	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="stylesheet" href="php_ems.css" type="text/css">
 </HEAD>
 <BODY>
 <?php

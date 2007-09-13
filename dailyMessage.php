@@ -1,7 +1,7 @@
 <?php 
 // PHP EMS Tools
 // Edit Daily Message Form
-// Time-stamp: "2006-11-15 01:02:29 jantman"
+// Time-stamp: "2007-09-13 15:59:15 jantman"
 //
 
 //required for HTML_QuickForm PEAR Extension
@@ -181,7 +181,7 @@ function addFormElements()
 <HEAD> 
 	<TITLE>Schedule Sign On</TITLE>
 	<BASEFONT face="Arial" size="2" >
-	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="stylesheet" href="php_ems.css" type="text/css">
 </HEAD>
 <BODY>	
 <?php
