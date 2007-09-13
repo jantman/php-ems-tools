@@ -4,7 +4,7 @@
 //(C) 2006 Jason Antman. All Rights Reserved.
 // with questions, go to www.jasonantman.com
 // or email jason AT jasonantman DOT com
-// Time-stamp: "2007-08-31 01:36:48 jantman"
+// Time-stamp: "2007-09-12 19:53:43 jantman"
 
 //This software may not be copied, altered, or distributed in any way, shape, form, or means.
 // version: 2.0 as of 2006-10-3
@@ -18,26 +18,35 @@ require('custom.php');
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+
 ?>
 </head>
 <body>
 
 <?php
-echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
+if(! empty($_GET['index']))
+{
+    $rigIndex = $_GET['index'];
+}
+
+global $rigChecks;
+$rigCheckData = $rigChecks[$rigIndex]['data'];
+$table2start = $rigChecks[$rigIndex]['table2start'];
+$table3start = $rigChecks[$rigIndex]['table3start'];
+$rigNum = $rigChecks[$rigIndex]['name'];
+
+echo '<h3 align=center>'.$shortName.' Rig Check - '.$rigNum.'</h3>';
 
 
-global $rigCheckData;
-global $table2start;
-global $table3start;
+showTable($rigCheckData, $table2start, $table3start, $rigNum);
 
-showTable($rigCheckData, $table2start, $table3start);
-
-function showTable($rigCheckData, $table2start, $table3start)
+function showTable($rigCheckData, $table2start, $table3start, $rigNum)
 {
     echo '<form method="post" action="doRigCheck.php">';
     echo '<DIV align="center"><b>Crew: </b><input type="text" name="crew1" size=3> <input type="text" name="crew2" size=3> <input type="text" name="crew3" size=3> <input type="text" name="crew4" size=3>';
     echo '<b>&nbsp;&nbsp;Rig:&nbsp;</b>';
-    echo '<select name="rig"><option value="588">588</option><option value="589">589</option></select>';
+    echo '<input type=hidden name="rig" value="'.$rigNum.'">';
+    echo $rigNum."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
     echo '<b>&nbsp;&nbsp;Mileage:&nbsp;</b>';
     echo '<input type="text" name="mileage" size=6>';
     echo '</DIV><br>';

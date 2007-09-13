@@ -3,6 +3,20 @@ PHP EMS Tools
 Changelog
 ------------------------------------------------------------
 
+Release 2.1 -
+- Added code to allow rig names and check data to be defined by user. Moved
+this information to rigCheckData.php and added a require_once for this file in
+custom.php. 
+- Added rigCheckHandler.php to handle selection of different rigs and take the
+user to the right page
+- Changed link in index.php to point to rigCheckHandler.php
+- Changed rigCheck.php and blankRigCheck.php to use a URL variable for the rig
+number
+-
+
+Release 2 - 
+- many sweeping changes, see CVS
+
 Release 1.1 - 2006-11-16
 - Fixed database bugs in authorization/login in rosterEdit.php and schedule.php
 - Added project news feature.

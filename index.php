@@ -1,5 +1,5 @@
 <html>
-<!-- Time-stamp: "2006-12-20 20:35:39 jantman" -->
+<!-- Time-stamp: "2007-09-13 15:38:51 jantman" -->
 <!-- php-ems-tools index -->
 <head>
 
@@ -65,11 +65,7 @@ echo '<a href="countHours.php?year='.$year.'&style=yearly">Yearly Hour Totals</a
 </p>
 
 <p>
-<a href="rigCheck.php">Rig Check</a>
-</p>
-
-<p>
-<a href="blankRigCheck.php">Print Blank Rig Check</a>
+<a href="rigCheckHandler.php">Rig Check</a>
 </p>
 
 <?php
