@@ -1,5 +1,5 @@
 <html>
-<!-- Time-stamp: "2007-09-13 16:22:08 jantman" -->
+<!-- Time-stamp: "2007-09-13 18:16:49 jantman" -->
 <!-- php-ems-tools index -->
 <head>
 
@@ -15,7 +15,7 @@ echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css
 <?php
 
 // import values
-require('global.php');
+require('./inc/global.php');
 global $dbName;
 
 // get the preliminary stuff

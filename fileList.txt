@@ -8,8 +8,6 @@ RELEASE PACKAGE FILE LIST
 addBkEdit.php		Form to edit the organization address book
 addBk.php		Page to display the organization address book
 			     data stored in DB 'addBk' table
-antman.php		Include file of some of the developer's common PHP functions
-			     at the moment just turns a month number into name
 blankRigCheck.php	Page displays a blank rig check sheet to be printed
 changelog.txt		Project's change log in a human-readable, descriptive format
 checkCustomConfig.php	Script to check basic stuff in the config.php script
@@ -22,14 +20,11 @@ dispatchSchedule.php	Page that attempts to calculate how many members are on dut
 doMassSignon.php	Handler script to update DB with data from massSignon.php
 doRigCheck.php		Handler script to update DB with rig check data from rigCheck.php
 emailList.php		Page that displays a list of all members' emails for easy cut-and-paste.
-global.php		A short set of global functions for use by other scripts.
 index.php		Main entry page with navigation links
 install.php		PHP-based install script. Can be removed after installation.
 LICENSE.txt		Copy of the License (GNU GPLv3)
 localLinks.php		A script to include your own links on index.php
 massSignOns.php		Form to allow a member to sign on for multiple shifts at once.
-notify.php		Script to notify members via email or SMS when someone
-on their shift signs on, edits, or removes themselves.
 PEAR.php		Required file for PEAR / HTML_QuickForm
 php_ems.css		Main CSS file for *all* of the project.
 php-ems-tools.js	JavaScript file for all pages - popups
@@ -86,4 +81,11 @@ schedule.php	Modified for read-only
 HTML/
 	directory for HTML_QuickForm and Smarty
 --------------------------------------------------------------------------------------
+inc/		Includes directory
+antman.php		Include file of some of the developer's common PHP functions
+			     at the moment just turns a month number into name
+global.php		A short set of global functions for use by other scripts.
+notify.php		Script to notify members via email or SMS when someone
+on their shift signs on, edits, or removes themselves.
 
+--------------------------------------------------------------------------------------

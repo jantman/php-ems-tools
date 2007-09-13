@@ -4,7 +4,7 @@
 //(C) 2006 Jason Antman. All Rights Reserved.
 // with questions, go to www.jasonantman.com
 // or email jason AT jasonantman DOT com
-// Time-stamp: "2007-09-13 16:15:58 jantman"
+// Time-stamp: "2007-09-13 18:16:35 jantman"
 
 //This software may not be copied, altered, or distributed in any way, shape, form, or means.
 // version: 2.0 as of 2006-10-3
@@ -15,7 +15,7 @@
 
 
 require('./config/config.php');
-require('global.php');
+require('./inc/global.php');
 global $shortName;
 $key = $_GET['pKey'];
 echo '<title>'.$shortName.' Rig Check '.$key.'</title>';
