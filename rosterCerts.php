@@ -1,8 +1,8 @@
 <?php
 //
-// roster.php
+// rosterCerts.php
 //
-// Version 0.1 as of Time-stamp: "2007-09-13 16:18:03 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 17:12:10 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 

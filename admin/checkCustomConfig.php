@@ -2,7 +2,7 @@
 //
 // checkCustomConfig.php
 //
-// Version 2.0 as of Time-stamp: "2007-09-13 16:23:22 jantman"
+// Version 2.0 as of Time-stamp: "2007-09-13 16:41:00 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at www.php-ems-tools.com
@@ -44,7 +44,7 @@ function checkCustom()
 {
     $configOK = true;
 
-    if(! file_exists('custom.php'))
+    if(! file_exists('./config/config.php'))
     {
 	out("Cannot find custom.php. The sky is falling!!");
 	return false;
@@ -164,10 +164,10 @@ function checkCustom()
 	$configOK = false;
     }
 
-    global $rigCheckData;
-    if(! isset($rigCheckData))
+    global $rigChecks;
+    if(! isset($rigChecks))
     {
-	out("The rigCheckData array is not declared. It must be at least declared and empty.");
+	out("The rigChecks array is not declared. It must be at least declared and empty.");
 	$configOK = false;
     }
 

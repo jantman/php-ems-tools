@@ -16,6 +16,7 @@ number
 in place for reverse-compatibility. For old versions, move your existing
 custom.php to config/config.php and then just bring everything else in and
 change as needed.
+- Change *all* includes which pointed to custom.php to now point to config/config.php
 - Corrected stylesheet links in most of the roster pages, they had been
 pointing to a deprecated "style.css", all should point to "php_ems.css".
 
