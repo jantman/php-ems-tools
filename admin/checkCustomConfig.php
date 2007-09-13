@@ -2,7 +2,7 @@
 //
 // checkCustomConfig.php
 //
-// Version 2.0 as of Time-stamp: "2007-01-18 00:13:56 jantman"
+// Version 2.0 as of Time-stamp: "2007-09-13 16:23:22 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at www.php-ems-tools.com
@@ -18,7 +18,7 @@
 // 
 
 // this file will import the user's customization
-include('custom.php');
+include('./config/config.php');
 
 // CLI or CGI is ok. so anything goes.
 

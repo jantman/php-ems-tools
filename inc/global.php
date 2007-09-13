@@ -4,7 +4,7 @@
 
 // Global Functions
 
-require('custom.php');
+require_once('./config/config.php');
 
 
 

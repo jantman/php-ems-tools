@@ -1,6 +1,6 @@
 #! /usr/bin/php
 <?php
-require('custom.php');
+require('./config/config.php');
 
 global $dbName;
 $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);

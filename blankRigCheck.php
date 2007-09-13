@@ -4,7 +4,7 @@
 //(C) 2006 Jason Antman. All Rights Reserved.
 // with questions, go to www.jasonantman.com
 // or email jason AT jasonantman DOT com
-// Time-stamp: "2007-09-12 19:57:01 jantman"
+// Time-stamp: "2007-09-13 16:23:30 jantman"
 
 //This software may not be copied, altered, or distributed in any way, shape, form, or means.
 // version: 2.0 as of 2006-10-3
@@ -14,7 +14,7 @@
 // see custom.php for more information - specifically rigCheckData variable
 
 
-require('custom.php');
+require('./config/config.php');
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule

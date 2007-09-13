@@ -2,7 +2,7 @@
 //
 // rosterPositions.php
 //
-// Version 0.1 as of Time-stamp: "2006-12-13 21:07:03 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 16:17:22 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 
@@ -12,7 +12,7 @@
 // GNU General Public License (GPL)
 //
 
-require_once('custom.php');
+require_once('./config/config.php');
 
 // this script views the roster from the DB
 if(! empty($_GET['adminView']))

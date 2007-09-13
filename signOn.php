@@ -1,7 +1,7 @@
 <?php 
 // PHP EMS Tools
 // Edit Shift Slot Form
-// Time-stamp: "2006-12-13 02:05:19 jantman"
+// Time-stamp: "2007-09-13 16:16:22 jantman"
 //
 
 //required for HTML_QuickForm PEAR Extension
@@ -23,7 +23,7 @@ else
 }
 
 // this file will import the user's customization
-require('custom.php');
+require('./config/config.php');
 
 // for email notifications:
 require('notify.php');

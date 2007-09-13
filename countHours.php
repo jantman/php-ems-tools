@@ -2,7 +2,7 @@
 //
 // countHours.php
 //
-// Version 0.1 as of Time-stamp: "2007-04-02 22:58:14 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 16:23:01 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 
@@ -11,7 +11,7 @@
 // This package is licensed under the terms of the
 // GNU General Public License (GPL)
 //
-require_once('custom.php');
+require_once('./config/config.php');
 if(! empty($_GET['style']))
 {
     //style monthly or yearly

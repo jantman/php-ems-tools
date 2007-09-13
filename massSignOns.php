@@ -2,7 +2,7 @@
 //
 // schedule.php
 //
-// Version 0.1 as of Time-stamp: "2006-11-21 01:56:02 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 16:19:16 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 
@@ -18,7 +18,7 @@
 // 
 
 // this file will import the user's customization
-require('custom.php');
+require('./config/config.php');
 
 // this script views the current schedule from the DB
 

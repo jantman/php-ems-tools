@@ -3,7 +3,7 @@
 // form to select which rig check to do
 
 
-require_once('custom.php');
+require_once('./config/config.php');
 ?>
 
 <html>

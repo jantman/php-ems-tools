@@ -1,6 +1,6 @@
 <?php
 //script to make shownAs field
-require_once("custom.php");
+require_once("./config/config.php");
 
 $conn = mysql_connect() or die("error making connection");
 mysql_select_db($dbName) or die("error selecting DB");

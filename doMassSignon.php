@@ -1,10 +1,10 @@
 <html>
-<!-- Time-stamp: "2006-12-20 20:35:39 jantman" -->
+<!-- Time-stamp: "2007-09-13 16:22:08 jantman" -->
 <!-- php-ems-tools index -->
 <head>
 
 <?php
-require('custom.php');
+require_once('./config/config.php');
 echo '<title>Schedule Mass Signon Results</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 //figure out the month and year

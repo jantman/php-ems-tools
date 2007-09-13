@@ -2,7 +2,7 @@
 //
 // install.php
 //
-// Version 2.0 as of Time-stamp: "2007-03-27 00:51:36 jantman"
+// Version 2.0 as of Time-stamp: "2007-09-13 16:20:09 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at www.php-ems-tools.com
@@ -18,7 +18,7 @@
 // 
 
 // this file will import the user's customization
-require('custom.php');
+require('./config/config.php');
 require('checkCustomConfig.php');
 //
 

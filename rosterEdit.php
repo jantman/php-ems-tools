@@ -2,7 +2,7 @@
 //
 // rosterEdit.php
 //
-// Version 0.1 as of Time-stamp: "2007-09-13 15:58:56 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 16:17:46 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 
@@ -18,7 +18,7 @@
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
-require('custom.php');
+require('./config/config.php');
 
 
 // tell PHP to ignore any errors less than E_ERROR

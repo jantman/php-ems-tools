@@ -1,11 +1,11 @@
 <?php 
 // PHP EMS Tools
 // Email Notification Module
-// Time-stamp: "2006-12-13 02:14:08 jantman"
+// Time-stamp: "2007-09-13 16:19:08 jantman"
 //
 
 // this file will import the user's customization
-require('custom.php');
+require('./config/config.php');
 
 function schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end)
 {

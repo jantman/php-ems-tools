@@ -1,7 +1,7 @@
 <?php 
 // PHP EMS Tools
 // Edit Daily Message Form
-// Time-stamp: "2007-09-13 15:59:15 jantman"
+// Time-stamp: "2007-09-13 16:22:49 jantman"
 //
 
 //required for HTML_QuickForm PEAR Extension
@@ -23,7 +23,7 @@ else
 }
 
 // this file will import the user's customization
-require('custom.php');
+require('./config/config.php');
 
 //instantiate the form
 $form = new HTML_QuickForm('firstForm');
