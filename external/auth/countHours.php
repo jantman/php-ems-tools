@@ -5,7 +5,7 @@
 // EXTERNAL VERSION
 //
 //
-// Version 0.1 as of Time-stamp: "2007-04-02 23:24:53 jantman"
+// Version 0.1 as of Time-stamp: "2007-09-13 17:32:04 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at 
@@ -14,7 +14,7 @@
 // This package is licensed under the terms of the
 // GNU General Public License (GPL)
 //
-require_once('../../custom.php');
+require_once('../../config/config.php');
 if(! empty($_GET['style']))
 {
     //style monthly or yearly

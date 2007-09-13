@@ -1,9 +1,9 @@
 <?php
 
 // isOnDuty test script
-// Time-stamp: "2007-03-20 15:47:33 jantman"
+// Time-stamp: "2007-09-13 17:31:02 jantman"
  
-require('../../custom.php');
+require('../../config/config.php');
 require('isOnDuty.php');
 
 $debug = false; // true for debug mode

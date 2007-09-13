@@ -3,7 +3,7 @@
 //(C) 2006 Jason Antman. All Rights Reserved.
 // with questions, go to www.jasonantman.com
 // or email jason AT jasonantman DOT com
-// Time-stamp: "2006-12-03 13:50:57 jantman"
+// Time-stamp: "2007-09-13 17:31:43 jantman"
 
 //This software may not be copied, altered, or distributed in any way, shape, form, or means.
 // version: 0.1 as of 2006-10-3
@@ -26,7 +26,7 @@ $debug = false;
 
 
 // GLOBALS
-require('../../custom.php');
+require('../../config/config.php');
 $day = 86400; // seconds in a day
 
 
