@@ -13,7 +13,6 @@ antman.php		Include file of some of the developer's common PHP functions
 blankRigCheck.php	Page displays a blank rig check sheet to be printed
 changelog.txt		Project's change log in a human-readable, descriptive format
 checkCustomConfig.php	Script to check basic stuff in the config.php script
-checkMD5.php		***Unknown***
 Common.php		Part of the HTML_QuickForms class
 countHours.php		Script to count up monthly hours for all members
 custom.php		Left in for reverse-compatibility
@@ -28,12 +27,10 @@ index.php		Main entry page with navigation links
 install.php		PHP-based install script. Can be removed after installation.
 LICENSE.txt		Copy of the License (GNU GPLv3)
 localLinks.php		A script to include your own links on index.php
-makeMD5.php		**Unknown**
-makeShownAs.php		Updates the shownAs roster field for anyone who doesn't have it.
 massSignOns.php		Form to allow a member to sign on for multiple shifts at once.
 notify.php		Script to notify members via email or SMS when someone
 on their shift signs on, edits, or removes themselves.
-PEAR.php		**Unknown**
+PEAR.php		Required file for PEAR / HTML_QuickForm
 php_ems.css		Main CSS file for *all* of the project.
 php-ems-tools.js	JavaScript file for all pages - popups
 Quickform.php		Main HTML_Quickform include script
@@ -45,7 +42,6 @@ robots.txt		Simple little file to make sure nothing's indexed by a
 search engine
 rosterEdit.php		Form to enter/edit roster data
 rosterCerts.php		Page to view certifications data
-rosterCheck.php		Unimplemented script to check roster for invalid entries
 rosterCertsEdit.php	Form to edit/add certification data in roster
 rosterNote.html		**Unknown**
 roster.php		Page to view the roster
@@ -62,6 +58,11 @@ viewRigChecks.php	Page to view list of completed rig checks
 admin/
 .htaccess		Apache .htaccess file to control access for these scripts to administrators only. Please configure as per your site.
 changes.php		Page to view recent changes to schedule.
+checkMD5.php		***Unknown***
+makeMD5.php		**Unknown**
+rosterCheck.php		Unimplemented script to check roster for invalid entries
+makeShownAs.php		Updates the shownAs roster field for anyone who doesn't have it.
+
 --------------------------------------------------------------------------------------
 config/
 config.php		Main configuration file. Used to be custom.php
