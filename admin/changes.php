@@ -26,7 +26,7 @@
 // DO NOT MAKE CHANGES
 // UNLESS YOU KNOW WHAT YOU ARE DOING.
 // 
-require('../custom.php');
+require('../config/config.php');
 
 global $dbName;
 
