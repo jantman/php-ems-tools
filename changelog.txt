@@ -12,7 +12,10 @@ user to the right page
 - Changed link in index.php to point to rigCheckHandler.php
 - Changed rigCheck.php and blankRigCheck.php to use a URL variable for the rig
 number
--
+- Moved all site-specific configuration to config/ directory. Kept custom.php
+in place for reverse-compatibility. For old versions, move your existing
+custom.php to config/config.php and then just bring everything else in and
+change as needed.
 
 Release 2 - 
 - many sweeping changes, see CVS
