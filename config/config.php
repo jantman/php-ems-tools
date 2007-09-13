@@ -3,7 +3,7 @@
 //(C) 2006 Jason Antman. All Rights Reserved.
 // with questions, go to www.jasonantman.com
 // or email jason AT jasonantman DOT com
-// Time-stamp: "2007-09-13 15:43:01 jantman"
+// Time-stamp: "2007-09-13 16:26:30 jantman"
 
 //This software may not be copied, altered, or distributed in any way, shape, form, or means.
 // version: 0.1 as of 2006-10-3
@@ -27,12 +27,12 @@ $orgName = "Ambulance Corps"; // string
 $shortName = "AC"; // string
 // this is the base URL of the folder which php_ems resides in
 // with a trailing /, as seen from the rest of the world.
-$serverWebRoot = "http://192.168.1.107/"; // string
+$serverWebRoot = "http://jantman.dyndns.org:10011/cvswork/php-ems-tools-trunk/"; // string
 // this is the root for the external/auth folder
 $serverExtRoot = "http://yourdomain/auth/"; // string
 // this is the name of the database on the server used by php-ems-tools
 // the default is php-ems-tools
-$dbName = "php-ems-tools";
+$dbName = "php_ems_tools_demo";
 
 // MEMBER TYPES
 // this defines the types of members for roster and schedule, as well as how many hours per month they are required to do, how many of them are required to complete a crew, how they show up in the roster, and whether they can sign on duty
