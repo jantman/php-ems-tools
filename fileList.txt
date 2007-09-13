@@ -10,7 +10,6 @@ addBk.php		Page to display the organization address book
 			     data stored in DB 'addBk' table
 blankRigCheck.php	Page displays a blank rig check sheet to be printed
 changelog.txt		Project's change log in a human-readable, descriptive format
-checkCustomConfig.php	Script to check basic stuff in the config.php script
 Common.php		Part of the HTML_QuickForms class
 countHours.php		Script to count up monthly hours for all members
 custom.php		Left in for reverse-compatibility
@@ -53,6 +52,7 @@ viewRigChecks.php	Page to view list of completed rig checks
 admin/
 .htaccess		Apache .htaccess file to control access for these scripts to administrators only. Please configure as per your site.
 changes.php		Page to view recent changes to schedule.
+checkCustomConfig.php	Script to check basic stuff in the config.php script
 checkMD5.php		***Unknown***
 makeMD5.php		**Unknown**
 rosterCheck.php		Unimplemented script to check roster for invalid entries

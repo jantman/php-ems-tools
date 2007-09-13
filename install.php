@@ -2,7 +2,7 @@
 //
 // install.php
 //
-// Version 2.0 as of Time-stamp: "2007-09-13 16:20:09 jantman"
+// Version 2.0 as of Time-stamp: "2007-09-13 18:34:27 jantman"
 //
 // This file is part of the php-ems-tools package
 // available at www.php-ems-tools.com
@@ -18,8 +18,8 @@
 // 
 
 // this file will import the user's customization
-require('./config/config.php');
-require('checkCustomConfig.php');
+require_once('./config/config.php');
+require_once('./admin/checkCustomConfig.php');
 //
 
 $dontMakeDB = false; // whether or not to make the DB.
@@ -142,7 +142,7 @@ fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
 fwrite(STDOUT, "Before we do anything, let's check to see that custom.php is configured correctly.\n");
-fwrite(STDOUT, "You can run the custom.php check from the command line or via the web, using checkCustomConfig.php\n");
+fwrite(STDOUT, "You can run the custom.php check from the command line or via the web, using admin/checkCustomConfig.php\n");
 fwrite(STDOUT, "It is recommended that you do this every time you change custom.php\n");
 fwrite(STDOUT, "This script only checks for MAJOR errors that will being everything to a grinding halt. Minor errors may effect functionality but slip by me right now...\n\n\n\n");
 fwrite(STDOUT, "Checking custom.php...\n");
