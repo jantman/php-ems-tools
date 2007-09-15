@@ -1,6 +1,6 @@
 PHP EMS Tools		http://www.php-ems-tools.com
 --------------------------------------------------------------------------------------
-Time-stamp: "2007-09-14 19:50:50 jantman"
+Time-stamp: "2007-09-14 20:17:22 jantman"
 #	$Id$	
 --------------------------------------------------------------------------------------
 
@@ -57,8 +57,6 @@ admin/
 .htaccess		Apache .htaccess file to control access for these scripts to administrators only. Please configure as per your site.
 changes.php		Page to view recent changes to schedule.
 checkCustomConfig.php	Script to check basic stuff in the config.php script
-checkMD5.php		***Unknown***
-makeMD5.php		**Unknown**
 rosterCheck.php		Unimplemented script to check roster for invalid entries
 makeShownAs.php		Updates the shownAs roster field for anyone who doesn't have it.
 
