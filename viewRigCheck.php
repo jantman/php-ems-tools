@@ -55,11 +55,27 @@ mysql_close($conn);
 $OKa = explode(',', $row['OK']);
 $NGa = explode(',', $row['NG']);
 
-$check = makeArray($OKa, $NGa);
 
-//echo '<pre>';
-//echo var_dump($check);
-//echo '</pre>';
+// code introduced to handle different items for different rigs
+$rigNum = $row['rig']; // get the rig number
+$rigIndex = '';
+global $rigChecks;
+
+foreach($rigChecks as $idx => $arr)
+{
+    if($arr['name'] == $rigNum)
+    {
+	$rigIndex = $idx;
+    }
+}
+
+$rigCheckData = $rigChecks[$rigIndex]['data'];
+$table2start = $rigChecks[$rigIndex]['table2start'];
+$table3start = $rigChecks[$rigIndex]['table3start'];
+// DONE with implementing the multi-rig stuff
+
+
+$check = makeArray($OKa, $NGa);
 
 echo '</head>';
 echo '<body>';
@@ -68,9 +84,6 @@ echo '<h3 align=center>'.$shortName.' Rig Check '.$key.'</h3>';
 
 $time = $row['time'];
 
-global $rigCheckData;
-global $table2start;
-global $table3start;
 
 showTable($rigCheckData, $table2start, $table3start, $check, $row);
 
