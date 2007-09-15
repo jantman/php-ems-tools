@@ -1,15 +1,36 @@
 <?php
-
-//(C) 2006 Jason Antman. All Rights Reserved.
-// with questions, go to www.jasonantman.com
-// or email jason AT jasonantman DOT com
-// Time-stamp: "2007-09-13 16:22:40 jantman"
-
-//This software may not be copied, altered, or distributed in any way, shape, form, or means.
-// version: 0.1 as of 2006-10-3
-
 // dispatchSchedule.php
-// generates a dispatch schedule for the week
+//
+// Page that attempts to generate a weekly schedule of when coverage is needed.
+//   This is still a mostly experimental feature.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
 // this turns debugging mode on and off
 $debug = false;

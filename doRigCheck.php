@@ -1,18 +1,37 @@
 <html>
 <head>
 <?php
-//(C) 2006 Jason Antman. All Rights Reserved.
-// with questions, go to www.jasonantman.com
-// or email jason AT jasonantman DOT com
-// Time-stamp: "2007-09-13 18:16:42 jantman"
-
-//This software may not be copied, altered, or distributed in any way, shape, form, or means.
-// version: 2.0 as of 2006-10-3
-
 // doRigCheck.php
-// page to do rig checks
-// see custom.php for more information - specifically rigCheckData variable
-
+//
+// Script to handle the output from the rig check form and put it in the DB.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
 require('./config/config.php');
 require('./inc/global.php');

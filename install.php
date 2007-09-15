@@ -1,21 +1,37 @@
 <?php
-//
 // install.php
 //
-// Version 2.0 as of Time-stamp: "2007-09-13 18:34:27 jantman"
+// Command-Line installation script. Handles all database stuff and
+//   checks for dependencies. 
+// FOR UNIX OR LINUX ONLY!
 //
-// This file is part of the php-ems-tools package
-// available at www.php-ems-tools.com
-//
-// (C) 2006 Jason Antman.
-// This package is licensed under the terms of the
-// GNU General Public License (GPL)
-//
-
-// 
-// DO NOT MAKE CHANGES
-// UNLESS YOU KNOW WHAT YOU ARE DOING.
-// 
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
 // this file will import the user's customization
 require_once('./config/config.php');

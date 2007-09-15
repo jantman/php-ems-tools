@@ -2,7 +2,8 @@ PHP EMS Tools
 Version 2.0 README
 http://www.php-ems-tools.com
 
-Time-stamp: "2007-09-14 12:04:26 jantman"
+Time-stamp: "2007-09-14 19:40:59 jantman"
+#	$Id$	
 
 
 This software is licensed under GNU GPLv3. The full text of this license can
