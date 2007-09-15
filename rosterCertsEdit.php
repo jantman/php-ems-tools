@@ -133,8 +133,6 @@ else
 	$tempE = HTML_QuickForm::createElement('header', null, 'New Member');
 	$form->insertElementBefore($tempE, 'adminID');
 	$defaults = array(); 
-	// TODO: here, we must find the next EMT ID# not assigned.
-	// this will be organization-dependent. we should assume the next integer.
 	
 	$form->setDefaults($defaults);
 }
