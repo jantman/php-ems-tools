@@ -48,11 +48,6 @@ echo '<body>';
 
 echo '<h3 align=center>'.$shortName.' Rig Checks</h3>';
 
-global $rigCheckData;
-global $table2start;
-global $table3start;
-
-
 $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
 mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
 $query = 'SELECT * FROM rigCheck;';
