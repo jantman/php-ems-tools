@@ -75,9 +75,23 @@ echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
 
 $time = time();
 
-global $rigCheckData;
-global $table2start;
-global $table3start;
+// code introduced to handle different items for different rigs
+$rigNum = $_REQUEST['rig']; // get the rig number
+$rigIndex = '';
+global $rigChecks;
+
+foreach($rigChecks as $idx => $arr)
+{
+    if($arr['name'] == $rigNum)
+    {
+	$rigIndex = $idx;
+    }
+}
+
+$rigCheckData = $rigChecks[$rigIndex]['data'];
+$table2start = $rigChecks[$rigIndex]['table2start'];
+$table3start = $rigChecks[$rigIndex]['table3start'];
+// DONE with implementing the multi-rig stuff
 
 putToDB();
 
