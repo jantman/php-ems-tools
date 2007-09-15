@@ -3,7 +3,7 @@
 <meta http-equiv="refresh" content="180">
 
 <?php
-// changes.php
+// admin/changes.php
 //
 // Page to view changes by users as logged by the system.
 //
