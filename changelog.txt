@@ -27,7 +27,7 @@ change as needed.
 - Corrected stylesheet links in most of the roster pages, they had been
 pointing to a deprecated "style.css", all should point to "php_ems.css".
 - moved some files to the admin/ directory to clean things up - files were
-checkMD5.php, makeMD5.php, rosterCheck.php, makeShowAs.php
+checkMD5.php, makeMD5.php, makeShowAs.php
 - moved some files to the inc/ directory to clean things up - files were
 global.php, notify.php, antman.php
 
