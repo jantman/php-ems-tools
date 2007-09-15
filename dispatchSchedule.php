@@ -404,21 +404,11 @@ function numOnDuty($type, $timestamp)
 		if($debug) {echo $r[$i.'ID']." start=".date("Y-m-d H:i:s", $start)." timestamp=".date("Y-m-d H:i:s", $timestamp)." end=".date("Y-m-d H:i:s", $end)."<br>";}
 
 
-		//DEBUG
-		//echo 'ID'.$r[$i.'ID'].' startHr='.$startHr.' start='.date("Y-m-d H:i:s", $start).' endHr='.$endHr.'end='.date("Y-m-d H:i:s", $end).' timestamp='.date("Y-m-d H:i:s", $timestamp);
-		//END DEBUG
-
 		if($start <= $timestamp && $end >= $timestamp)
 		{
-		    // DEBUG
-		    //echo " true";
-		    //END DEBUG
 		    if($debug) { echo "count++ EMTid=".$r[$i.'ID']."<br>";}
 		    $count++;
 		}
-		// DEBUG
-		//echo '<br>';
-		//END DEBUG
 	    }
 	}
     }
@@ -445,20 +435,12 @@ function altDay($d)
 
 	for($i = $firstH + 1; $i <= ($lastH + 1); $i++)
 	{
-	    // DEBUG
-            //echo "i=".$i."<br>";
 	    $hour = strtotime(date("Y-m-d", $d)." ".intToHour($i));
 	    $hourMinus = $hour - 1;
 	    $hourPlus = $hour + 1;
-	    // DEBUG
-	    //echo 'i='.$i.'num='.numOnDuty("Senior", $hourPlus).'<br>';
-	    // END DEBUG
 
 	    if((numOnDuty("Senior", $tempHr) <> numOnDuty("Senior", $hourPlus)) && ((numOnDuty("Senior", $tempHr) < 2) || ( numOnDuty("Senior", $hourPlus) < 2)))
 	    {
-	        // we have a change
-		// DEBUG
-	        //echo "tempHrNum=".numOnDuty("Senior", $tempHr)." tempHr=".date("H", $tempHr)." hourPlusNum=".numOnDuty("Senior", $hourPlus)." hourPlus=".date("H", $hourPlus)."<br>";
 		showInterval($tempHr, $hour, $tempNum);
 
 		$tempHr = $hourPlus;
@@ -501,8 +483,6 @@ function altNight($d)
 	    $hourPlus = $hour + 1;
 	    if($debug) { echo "i=".$i." numOnDuty tempHr=".numOnDuty("Senior", $tempHr)." hourMinus=".numOnDuty("Senior", $hourMinus)." hourPlus=".numOnDuty("Senior", $hourPlus)."<br>";}
 
-	    // DEBUG
-	    //echo "i=".$i."tempHrNum=".numOnDuty("Senior", $tempHr)." hourMinusNum=".numOnDuty("Senior", $hourMinus)." hourPlusNum=".numOnDuty("Senior", $hourPlus)."<br>";
 
 	    if((numOnDuty("Senior", $tempHr) <> numOnDuty("Senior", $hourPlus)) && ((numOnDuty("Senior", $tempHr) < 2) || ( numOnDuty("Senior", $hourPlus) < 2)))
 	    {
@@ -546,7 +526,6 @@ function altNight($d)
 
 	    elseif($i == ($lastH + 1))
 	    {
-		//echo "i=lastH+1<br>";
 		$tempNum = numOnDuty("Senior", $hourMinus);
 		showInterval($tempHr, $hour, $tempNum);
 	    }

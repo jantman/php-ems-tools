@@ -220,11 +220,6 @@ function makeArray($OKa, $NGa)
 	    $i = substr($str, strpos($str, '[') + 1, (strpos($str, ']') - strpos($str, '[') - 1));
 	    $c = substr($str, strrpos($str, '[') + 1, (strrpos($str, ']') - strrpos($str, '[') - 1));
 
-	    // DEBUG
-	    //echo 'i='.$i.' c='.$c.'<br>';
-	    //echo $OKa[$n];
-	    // END DEBUG
-
 	    $check[$i][$c] = "OK";
 	}
     }
@@ -237,11 +232,6 @@ function makeArray($OKa, $NGa)
 	    // get the $i and $c from the string
 	    $i = substr($str, strpos($str, '[') + 1, (strpos($str, ']') - strpos($str, '[') - 1));
 	    $c = substr($str, strrpos($str, '[') + 1, (strrpos($str, ']') - strrpos($str, '[') - 1));
-
-	    // DEBUG
-	    //echo 'i='.$i.' c='.$c.'<br>';
-	    //echo $OKa[$n];
-	    // END DEBUG
 
 	    $check[$i][$c] = "NG";
 	}

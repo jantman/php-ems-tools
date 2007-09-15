@@ -33,9 +33,6 @@
 
 
 
-//comments needing attention are tagged with TODO or DEBUG or TEST depending on their purpose 
-//code to be removed is prefaced by '//DEP' for deprecated code 
-
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';

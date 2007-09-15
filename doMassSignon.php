@@ -71,11 +71,6 @@ else
 echo '<p align="center"><h3>Schedule Mass Signon For: '.GetMonthString($month).' '.$year.' '.$shiftName.'</h3></p>';
 echo '<p align="center"><h3>Results:</h3></p>';
 
-// DEBUG
-//echo 'dbName='.$dbName.' year='.$year.' month='.$month.' shift='.$shift.'<br>';
-//echo 'EMTid='.$EMTid.' start='.$start.' end='.$end.'<br>';
-// END DEBUG
-
 // check validity of ID
 if(! canPullDuty($EMTid))
 {
@@ -139,10 +134,6 @@ for($i = 1; $i <= $_REQUEST['numDays']; $i++)
             $chQuery = 'INSERT INTO schedule_'.$year.'_'.$month.'_change SET timestamp='.time().',EMTid="'.$adminID.'",query="'.make_safe($query).'",host="'.$host.'",address="'.$address.'",form="mass sign on";';
             mysql_query($chQuery) or die ("Query Error".mysql_error()." in query ".$chQuery);
 	}
-
-        // DEBUG
-	//echo $query;
-	// END DEBUG
 
 	// issue a confirmation message
 	$query = 'SELECT * FROM schedule_'.$year.'_'.$month.'_'.$shift.' WHERE Date='.$i.';';
