@@ -48,7 +48,7 @@ echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css
 <?php
 
 // import values
-require('./inc/global.php');
+require_once('./inc/global.php');
 global $dbName;
 
 // get the preliminary stuff
