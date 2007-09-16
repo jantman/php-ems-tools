@@ -31,6 +31,13 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
+// if true, show an alert on index.php if any rig has not been checked for rigCheckAlertTime seconds
+$rigCheckAgeAlert = true; 
+
+// alert on index.php if last rig check for a truck was longer than this amount of time
+$rigCheckAlertTime = 691200; // time in seconds (691200 sec = 8 days)
+
+
 // setup is as follows - 
 // the rigCheckData array holds arrays for the sections - each section is highlighted in bold
 // each section holds a number of items.

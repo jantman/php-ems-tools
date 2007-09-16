@@ -225,5 +225,7 @@ function showHoursSetup()
 // require the file containing the rig check data
 require_once('rigCheckData.php');
 global $rigChecks; // and get the main (giant) array
+global $rigCheckAgeAlert; // whether to alert for old rig checks or not
+global $rigCheckAlertTime; // how long to wait before alerting for uncomplete rig check
 
 ?>
