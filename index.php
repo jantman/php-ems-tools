@@ -125,6 +125,64 @@ include('localLinks.php');
 <a href="viewRigChecks.php">View Rig Checks</a>
 </p>
 
+<!-- BEGIN RIG CHECK ALERT CODE -->
+
+<hr>
+<p>
+<?php
+global $rigCheckAlertTime;
+global $rigCheckAgeAlert;
+
+if($rigCheckAgeAlert)
+{
+    // if rigCheckAgeAlert is true, calculate alerts
+ 
+    // alerts for last rig check
+    $connection = mysql_connect() or die ('ERROR: Unable to connect to MySQL!');
+    mysql_select_db($dbName) or die ('ERROR: Unable to select database!');
+    $query = 'SELECT * FROM rigCheck ORDER BY timeStamp ASC;';
+    $result = mysql_query($query) or die('Error in query in countMonthDays '.$query." ERROR ".mysql_error());
+
+    // get the rig names
+    global $rigChecks;
+    $lastRigCheck = array();
+    foreach($rigChecks as $valArray)
+    {
+	$lastRigCheck[$valArray['name']] = 0;
+    }
+
+    while($row = mysql_fetch_array($result))
+    {
+	if($row['timeStamp'] > $lastRigCheck[$row['rig']])
+	{
+	    $lastRigCheck[$row['rig']] = $row['timeStamp'];
+	}
+    }
+
+    $now = time();
+
+    foreach($lastRigCheck as $key => $value)
+    {
+	if(($now - $value) >= $rigCheckAlertTime)
+	{
+	    if($value == 0)
+	    {
+		echo '<font color="red">'.$key.' rig check never entered!</font><br>';
+	    }
+	    else
+	    {
+		echo '<font color="red">'.$key.' last rig check: '.date("D n-d-Y", $value).'</font><br>';
+	    }
+	}
+    }
+}
+?>
+
+</p>
+<hr>
+
+<!-- END RIG CHECK CODE -->
+
 <p>
 For documentation, see <a href="docs/index.html">The documentation</a> or <a href="http://www.php-ems-tools.com">the project homepage</a>.
 </p>
