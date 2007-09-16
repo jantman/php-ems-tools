@@ -33,6 +33,15 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
+// for good EMTs only: if you add &OK=true to the url, all fields will default to OK.
+if(! empty($_GET['OK']))
+{
+    if($_GET['OK'] == "true")
+    {
+	//default to OK
+	$OK = true;
+    }
+}
 
 require('./config/config.php');
 global $shortName;
@@ -62,6 +71,7 @@ showTable($rigCheckData, $table2start, $table3start, $rigNum);
 
 function showTable($rigCheckData, $table2start, $table3start, $rigNum)
 {
+    global $OK;
     echo '<form method="post" action="doRigCheck.php">';
     echo '<DIV align="center"><b>Crew: </b><input type="text" name="crew1" size=3> <input type="text" name="crew2" size=3> <input type="text" name="crew3" size=3> <input type="text" name="crew4" size=3>';
     echo '<b>&nbsp;&nbsp;Rig:&nbsp;</b>';
@@ -83,8 +93,12 @@ function showTable($rigCheckData, $table2start, $table3start, $rigNum)
 	for($c = 0; $c < count($items); $c++)
 	{
 	    echo '<tr><td>&nbsp;&nbsp;&nbsp; '.$items[$c].'</td>';
-	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="OK"></td>'; // OK
-	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="NG" checked="yes"></td>'; // NG
+	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="OK" ';
+	    if($OK){ echo 'checked="yes"';}
+	    echo '></td>'; // OK
+	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="NG" ';
+	    if(! $OK){ echo 'checked="yes"';}
+	    echo '></td>'; // NG
 	    echo '<tr>';
 	}
     }
@@ -101,8 +115,12 @@ function showTable($rigCheckData, $table2start, $table3start, $rigNum)
 	for($c = 0; $c < count($items); $c++)
 	{
 	    echo '<tr><td>&nbsp;&nbsp;&nbsp; '.$items[$c].'</td>';
-	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="OK"></td>'; // OK
-	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="NG" checked="yes"></td>'; // NG
+	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="OK" ';
+	    if($OK){ echo 'checked="yes"';}
+	    echo '></td>'; // OK
+	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="NG" ';
+	    if(! $OK){ echo 'checked="yes"';}
+	    echo '></td>'; // NG
 	    echo '<tr>';
 	}
     }
@@ -118,8 +136,12 @@ function showTable($rigCheckData, $table2start, $table3start, $rigNum)
 	for($c = 0; $c < count($items); $c++)
 	{
 	    echo '<tr><td>&nbsp;&nbsp;&nbsp; '.$items[$c].'</td>';
-	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="OK"></td>'; // OK
-	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="NG" checked="yes"></td>'; // NG
+	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="OK" ';
+	    if($OK){ echo 'checked="yes"';}
+	    echo '></td>'; // OK
+	    echo '<td><input type="radio" name="check['.$i.']['.$c.']" value="NG" ';
+	    if(! $OK){ echo 'checked="yes"';}
+	    echo '></td>'; // NG
 	    echo '<tr>';
 	}
     }
