@@ -188,12 +188,38 @@ For documentation, see <a href="docs/index.html">The documentation</a> or <a hre
 </p>
 
 <?php
+// this code will notify you of new updates at the bottom of the index page.
 
-require('version.php');
+// this has been re-worked as of version 2.0 to provide a secure method of performing this action
 
-// PHP EMS Tools News
+require_once('version.php'); // so we know the current version number
 
-include("http://www.php-ems-tools.com/news.php?verNum=".$verNum);
+global $verNum; // the current version number
+
+$url = "http://www.php-ems-tools.com/news.php?verNum=".$verNum; // the URL to check for update notices
+$head = get_headers($url); // get the HTTP headers returned by the server. current version number is in them.
+
+// if we had an error trying to get the headers, just skip this part
+if($head)
+{
+    $newestVer = ""; // this will store the latest version number
+
+    // parse the version number from the HTTP headers
+    foreach($head as $val)
+    {
+	if(strstr($val, "PHP-EMS-Tools-Current-Version:")) // find the header which has the version info
+	{
+	    $newestVer = explode(" ", $val); // turn the header string into a space-separated array
+	    $newestVer = $newestVer[1]; // get the second element, i.e. the version number
+	}
+    }
+
+    // if the local version (this program) is a lower number than the latest, show a message
+    if($verNum < $newestVer)
+    {
+	echo '<p><font color="red">An updated version of PHP EMS Tools has been released. It has added features and possibly bug fixes, some of which may be very important. Please see <a href="http://www.php-ems-tools.com">php-ems-tools.com</a> for more information. Please be sure to notify whoever setup this program for you, and ask them to upgrade. If you have any questions, please contact the project developers via the email link at <a href="http://www.php-ems-tools.com">php-ems-tools.com</a>.</font></p>';
+    }
+}
 
 ?>
 <hr>
