@@ -241,7 +241,7 @@ function showMember($r)
 
     if($adminView<>1 && $r['unitID']<>"")
     {
-	echo '<td>'.$r['unitID'].'</td>';
+	echo '<td>'.$r['unitID']." (".$r['EMTid'].')</td>';
     }
     else
     {
@@ -354,7 +354,7 @@ function showMemberShort($r)
 
     if($adminView<>1 && $r['unitID']<>"")
     {
-	echo '<td>'.$r['unitID'].'</td>';
+	echo '<td>'.$r['unitID']." (".$r['EMTid'].')</td>';
     }
     else
     {
