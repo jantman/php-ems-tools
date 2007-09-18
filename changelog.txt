@@ -30,6 +30,8 @@ pointing to a deprecated "style.css", all should point to "php_ems.css".
 checkMD5.php, makeMD5.php, makeShowAs.php
 - moved some files to the inc/ directory to clean things up - files were
 global.php, notify.php, antman.php
+- Added columns to roster table in database - OtherPositions and OtherCerts -
+both TEXT.
 
 Release 2 - 
 - many sweeping changes, see CVS
