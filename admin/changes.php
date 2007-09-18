@@ -35,8 +35,6 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-// TODO: sort by EMTid, show only EMTid, sort by date, show only date (both changes made and date of shift for change)
-
 // 
 // DO NOT MAKE CHANGES
 // UNLESS YOU KNOW WHAT YOU ARE DOING.
