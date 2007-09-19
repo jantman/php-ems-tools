@@ -31,11 +31,21 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-// Extended Certifications:
-// to use certifications other than the default, define them in an array here. 
-// if you don't want to use any, just leave tha array blank.
-// you cannot have a comma in any of the certification strings!
+/**
+ * Defines extended positions, certifications, etc.
+ * 
+ * @version $Revision$
+ * @package php-ems-tools
+ */
 
+/**
+ * Extended Certifications Array
+ * 
+ * <p>to use certifications other than the default, define them in an array here. 
+ * if you don't want to use any, just leave tha array blank.
+ * you cannot have a comma in any of the certification strings!</p>
+ * @var array
+ */
 $extdCerts = array("ICS100", "ICS200", "ICS700/NIMS", "ALS", "OtherCert");
 
 // Extended Types:
