@@ -31,6 +31,16 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
+/**
+ * Main configuration file
+ *
+ * <p>Defines the main, program-wide configuration for PHP EMS Tools.
+ * Includes server information, MySQL info, etc.</p>
+ * 
+ * @version $Revision$
+ * @package php-ems-tools
+ */
+
 // INSTRUCTIONS:
 // set the variables in the file to the appropriate values for your squad.
 // It may be helpful to know some PHP.
@@ -41,7 +51,11 @@
 // FOR ALL PROGRAMS IN THE PACKAGE:
 
 // this is the full name of your organization
-$orgName = "Ambulance Corps"; // string
+/**
+ * Full name of user organization.
+ * @var string
+ */
+$orgName = "Ambulance Corps";
 // this is the short name/abbreviation for your organization
 $shortName = "AC"; // string
 // this is the base URL of the folder which php_ems resides in
@@ -222,16 +236,34 @@ function showHoursSetup()
 }
 */
 
-// require the file containing the rig check data, and declare all variables as global
+/**
+ * require the file containing the rig check data, and declare all variables as global
+ */
 require_once('rigCheckData.php');
-global $rigChecks; // and get the main (giant) array
-global $rigCheckAgeAlert; // whether to alert for old rig checks or not
-global $rigCheckAlertTime; // how long to wait before alerting for uncomplete rig check
+/**
+ * @global array Array of the rig check data.
+ */
+global $rigChecks;
+/**
+ * @global boolean Whether or not to alert for no recent rig checks
+ */
+global $rigCheckAgeAlert;
+/**
+ * @global int how long to wait before alerting for uncomplete rig check
+ */
+global $rigCheckAlertTime;
 
-// require file for extended types and certs. 
-// if you don't want to use these, just look at the file
+/**
+ * file containing configuration of extended types and certifications
+ */
 require_once('extendedUserInfo.php');
+/**
+ * @global array list of extended type names
+ */
 global $extdTypes;
+/**
+ * @global array list of extended certification names
+ */
 global $extdCerts;
 
 ?>
