@@ -53,11 +53,4 @@ $serverExtRoot = "http://yourdomain/auth/"; // string
 // the default is php-ems-tools
 $dbName = "php_ems_tools_demo";
 
-// require the file containing the rig check data, and declare all variables as global
-require_once('rigCheckData.php');
-
-// require file for extended types and certs. 
-// if you don't want to use these, just look at the file
-require_once('extendedUserInfo.php');
-
 ?>
