@@ -36,7 +36,7 @@
 // if you don't want to use any, just leave tha array blank.
 // you cannot have a comma in any of the certification strings!
 
-$extdCerts = array("ALS", "OtherCert");
+$extdCerts = array("ICS100", "ICS200", "ICS700/NIMS", "ALS", "OtherCert");
 
 // Extended Types:
 // this allows a second set of member types such as driver, medic, trainee, etc.
