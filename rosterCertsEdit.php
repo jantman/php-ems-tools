@@ -35,8 +35,8 @@
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
-require('./config/config.php');
-
+require_once('./config/config.php');
+global $extdCerts; // extended certifications information
 
 // tell PHP to ignore any errors less than E_ERROR
 error_reporting(1);
@@ -84,9 +84,13 @@ $form->addElement('checkbox', 'PHTLSchk', 'PHTLS');
 $form->addElement('date', 'PHTLS', null);
 $form->addElement('checkbox', 'NREMTchk', 'NREMT');
 $form->addElement('date', 'NREMT', null);
-$form->addElement('checkbox', 'ICS100chk', 'ICS100');
-$form->addElement('checkbox', 'ICS200chk', 'ICS200');
-$form->addElement('checkbox', 'NIMSchk', 'IC700/NIMS');
+
+// the following code will handle the extended certifications
+foreach($extdCerts as $val)
+{
+    // create a checkbox for each extended certification
+    $form->addElement('checkbox', $val, $val);
+}
 
 $form->addElement('header', null, '  ');
 
@@ -152,11 +156,12 @@ if ($form->validate())
     // exit the script, on successful insertion
 
 ?>
+
 <SCRIPT LANGUAGE="JavaScript">
 <!--hide
      opener.location.reload(true);
 	self.close();
-//-->
+-->
 </SCRIPT>
 
 <?php
@@ -189,6 +194,7 @@ function processForm($formItems)
 }
 function putToDB($formItems, $action)
 {
+    global $extdCerts; // global information for extended certifications info
 	global $EMTid;
 
 	$EMTid = $formItems['EMTid'];
@@ -267,34 +273,30 @@ function putToDB($formItems, $action)
 	{
 	    $NREMT = $max;
 	}
-	if($formItems['ICS100chk']=="1")
+
+	// handle the extended certs information:
+	$otherCerts = ""; // string to hold the info.
+	foreach($extdCerts as $val)
 	{
-	    $ICS100 = $max;
+	    // loop through the possible certs, check the status of each
+	    if($formItems[$val]=="1")
+	    {
+		// if true, add to the comma-separated list of other certs
+		$otherCerts .= $val.",";
+	    }
 	}
-	else
-	{
-	    $ICS100 = 1;
-	}
-	if($formItems['ICS200chk']=="1")
-	{
-	    $ICS200 = $max;
-	}
-	else
-	{
-	    $ICS200 = 1;
-	}
-	if($formItems['NIMSchk']=="1")
-	{
-	    $NIMS = $max;
-	}
-	else
-	{
-	    $NIMS = 1;
-	}
+	// we now have a comma-separated list of all other certs.
+	$otherCerts = trim($otherCerts, ","); // get rid of the trailing comma
 
 
 	
-	$statementBody = 'EMTid="'.$formItems['EMTid'].'",EMT='.$EMT.',CPR='.$CPR.',FR='.$FR.',HazMat='.$HazMat.',BBP='.$BBP.',ICS100='.$ICS100.',ICS200='.$ICS200.',NIMS='.$NIMS.',PHTLS='.$PHTLS.',NREMT='.$NREMT;
+	$statementBody = 'EMTid="'.$formItems['EMTid'].'",EMT='.$EMT.',CPR='.$CPR.',FR='.$FR.',HazMat='.$HazMat.',BBP='.$BBP.',PHTLS='.$PHTLS.',NREMT='.$NREMT;
+
+	// if we have any extended certs info, include it in the statement
+	if($otherCerts != "")
+	{
+	    $statementBody .= ',OtherCerts="'.$otherCerts.'"';
+	}
 
 	if($action=='edit')
 	{
@@ -315,11 +317,11 @@ function putToDB($formItems, $action)
 
 	if(mysql_query($query))
 	{
-		// success
+	    // success
 	}
 	else
 	{
-		echo "MYSQL error: ".mysql_error();
+	    echo "MYSQL error: ".mysql_error();
 	}
 	mysql_close($conn);
 } 
@@ -327,6 +329,7 @@ function putToDB($formItems, $action)
 function populateMe($EMTid) 
 {
 	global $action; 
+	global $extdCerts; // extended certs array
 	//populate from the DB 
 	$defaults = array(); 
 
@@ -374,6 +377,18 @@ function populateMe($EMTid)
 		}
 		
 		// STOPPED HERE.
+		
+		// get the information for the extended certs from the database
+		$otherCerts = $row['OtherCerts']; // other certs CSV list from database
+		$otherCertsA = explode(",", $otherCerts); // make an array of the certs
+		foreach($extdCerts as $val)
+		{
+		    if(in_array($val, $otherCertsA))
+		    {
+			// if true, this extd cert (val) is in the member's list (otherCertsA)
+			$defaults[$val] = 1;
+		    }
+		}
 
 
 	}
