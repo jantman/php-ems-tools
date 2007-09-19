@@ -33,7 +33,7 @@
 
 require_once('./config/config.php');
 
-// this script views the roster from the DB
+global $extdCerts; // the extended certifications array
 
 if(! empty($_GET['sort']))
 {
@@ -75,9 +75,13 @@ echo '<table class="roster">';
 
 //Finish setting up the table
 if($adminView==1)
-{ $colspan = 15;}
+{ $colspan = 12;}
 else
-{ $colspan = 14;}
+{ $colspan = 11;}
+
+// compensate colspan for the extended certs array
+$colspan = $colspan + sizeof($extdCerts);
+
 echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Certifications Roster</b><br> (as of '.date("M d Y").')';
 echo '<a href="javascript:helpPopUp('."'docs/roster_help.php'".')">HELP</a>';
@@ -144,21 +148,16 @@ mysql_close($connection);
     echo '<td><a href="rosterCerts.php?sort=BBP';
     if($adminView==1){ echo '&adminView=1';}
     echo '">BBP</a></td>';
-    echo '<td><a href="rosterCerts.php?sort=ICS100';
-    if($adminView==1){ echo '&adminView=1';}
-    echo '">ICS100</a></td>';
-    echo '<td><a href="rosterCerts.php?sort=ICS200';
-    if($adminView==1){ echo '&adminView=1';}
-    echo '">ICS200</a></td>';
-    echo '<td><a href="rosterCerts.php?sort=NIMS';
-    if($adminView==1){ echo '&adminView=1';}
-    echo '">NIMS</a></td>';
     echo '<td><a href="rosterCerts.php?sort=PHTLS';
     if($adminView==1){ echo '&adminView=1';}
     echo '">PHTLS</a></td>';
     echo '<td><a href="rosterCerts.php?sort=NREMT';
     if($adminView==1){ echo '&adminView=1';}
     echo '">NREMT</a></td>';
+    foreach($extdCerts as $certName)
+    {
+	echo '<td>'.$certName.'</td>';
+    }
     echo '</tr>';
 
 //loop through the members and call the showMember function
@@ -194,6 +193,7 @@ mysql_free_result($result);
 function showMember($r)
 {
     global $adminView;
+    global $extdCerts; // extended certifications info
     
     // figure out the member type
     $memberType = "";
@@ -283,63 +283,6 @@ function showMember($r)
     {
 	echo '<td>&nbsp;</td>';
     }
-    if(! empty($r['ICS100']))
-    {
-	if($r['ICS100'] == 1922331600)
-	{
-	    echo '<td>VALID</td>';
-	}
-	elseif($r['ICS100'] == 1)
-	{
-	    echo '<td>no cert</td>';
-	}
-	else
-	{
-	    echo '<td>&nbsp;</td>';
-	}
-    }
-    else
-    {
-	echo '<td>&nbsp;</td>';
-    }
-    if(! empty($r['ICS200']))
-    {
-	if($r['ICS200'] == 1922331600)
-	{
-	    echo '<td>VALID</td>';
-	}
-	elseif($r['ICS200'] == 1)
-	{
-	    echo '<td>no cert</td>';
-	}
-	else
-	{
-	    echo '<td>&nbsp;</td>';
-	}
-    }
-    else
-    {
-	echo '<td>&nbsp;</td>';
-    }
-    if(! empty($r['NIMS']))
-    {
-	if($r['NIMS'] == 1922331600)
-	{
-	    echo '<td>VALID</td>';
-	}
-	elseif($r['NIMS'] == 1)
-	{
-	    echo '<td>no cert</td>';
-	}
-	else
-	{
-	    echo '<td>&nbsp;</td>';
-	}
-    }
-    else
-    {
-	echo '<td>&nbsp;</td>';
-    }
     if(! empty($r['PHTLS']))
     {
 	echo '<td>'.certDate($r['PHTLS']).'</td>';
@@ -355,6 +298,22 @@ function showMember($r)
     else
     {
 	echo '<td>&nbsp;</td>';
+    }
+
+    // get the information for the extended certs from the database
+    $otherCerts = $r['OtherCerts']; // other certs CSV list from database
+    $otherCertsA = explode(",", $otherCerts); // make an array of the certs
+    foreach($extdCerts as $val)
+    {
+	if(in_array($val, $otherCertsA))
+	{
+	    // if true, this extd cert (val) is in the member's list (otherCertsA)
+	    echo '<td>Yes</td>';
+	}
+	else
+	{
+	    echo '<td>&nbsp;</td>';
+	}
     }
 
     echo '</tr>';
