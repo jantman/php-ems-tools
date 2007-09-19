@@ -32,18 +32,6 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-function signOn(int year, int month, int date, String shift, int slot)
-{
-    URL = "signOn.php?year="+year+"&month="+month+"&date="+date+"&shift="+shift+"&slot="+slot;
-    eval("page" + id + " = window.open(URL, '" + id + "','toolbar=0,scrollbars=0,location=0,statusbar=1,menubar=0,resizable=1,width=450,height=400,left = 312,top = 84');");
-}
-function dailyMessage(int year, int month, int date, String shift)
-{
-    URL = "signOn.php?year="+year+"&month="+month+"&date="+date+"&shift="+shift;
-    eval("page" + id + " = window.open(URL, '" + id + "','toolbar=0,scrollbars=0,location=0,statusbar=1,menubar=0,resizable=1,width=450,height=400,left = 312,top = 84');");
-}
-*/
-
 function popUp(URL) 
 {
 day = new Date();
