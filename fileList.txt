@@ -1,6 +1,6 @@
 PHP EMS Tools		http://www.php-ems-tools.com
 --------------------------------------------------------------------------------------
-Time-stamp: "2007-09-14 23:58:31 jantman"
+Time-stamp: "2007-09-19 12:58:32 jantman"
 #	$Id$	
 --------------------------------------------------------------------------------------
 
@@ -18,6 +18,7 @@ Common.php		Part of the HTML_QuickForms class
 countHours.php		Script to count up monthly hours for all members
 custom.php		Left in for reverse-compatibility
 			     just includes config/config.php
+			     DEPRECATED
 dailyMessage.php	Form to edit daily message shown on schedule
 dispatchSchedule.php	Page that attempts to calculate how many members are on duty or needed at a given time (on a weekly basis)
 doMassSignon.php	Handler script to update DB with data from massSignon.php
