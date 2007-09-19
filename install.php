@@ -157,11 +157,11 @@ else
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-fwrite(STDOUT, "Before we do anything, let's check to see that custom.php is configured correctly.\n");
-fwrite(STDOUT, "You can run the custom.php check from the command line or via the web, using admin/checkCustomConfig.php\n");
-fwrite(STDOUT, "It is recommended that you do this every time you change custom.php\n");
+fwrite(STDOUT, "Before we do anything, let's check to see that config.php is configured correctly.\n");
+fwrite(STDOUT, "You can run the config.php check from the command line or via the web, using admin/checkCustomConfig.php\n");
+fwrite(STDOUT, "It is recommended that you do this every time you change config.php\n");
 fwrite(STDOUT, "This script only checks for MAJOR errors that will being everything to a grinding halt. Minor errors may effect functionality but slip by me right now...\n\n\n\n");
-fwrite(STDOUT, "Checking custom.php...\n");
+fwrite(STDOUT, "Checking config.php...\n");
 
 $checked = checkCustom();
 
@@ -223,13 +223,13 @@ else
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-// has custom.php been edited?
-fwrite(STDOUT, "Before we go any farther, please be sure that you have edited custom.php to the correct values, especially the dbName value. \n\n");
+// has config.php been edited?
+fwrite(STDOUT, "Before we go any farther, please be sure that you have edited config.php to the correct values, especially the dbName value. \n\n");
 fwrite(STDOUT, "Have you done so? yes or no.\n");
 $command = trim(fgets(STDIN));
 if($command != "yes")
 {
-    die("Please edit custom.php and then re-run this script.");
+    die("Please edit config.php and then re-run this script.");
 }
 
 fwrite(STDOUT, "\n\n");
@@ -926,7 +926,7 @@ fwrite(STDOUT, "----------------------------------------------------------------
     $correct = false;
     while($correct == false)
     {
-	fwrite(STDOUT, "You can now select your status/member type from the options set in custom.php.\n");
+	fwrite(STDOUT, "You can now select your status/member type from the options set in config.php.\n");
 	fwrite(STDOUT, "Please type one of the following numbers...\n");
 
 	global $memberTypes;
