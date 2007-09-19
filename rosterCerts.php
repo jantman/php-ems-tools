@@ -53,16 +53,6 @@ else
     $adminView = 0;
 }
 
-// shortView determines whether we show type/ID/Names only, or everything
-if((! empty($_GET['shortView'])) && $_GET['shortView'] == 1)
-{
-    $shortView = true;
-}
-else
-{
-    $shortView = false;
-}
-
 echo '<head>';
 echo '<meta http-equiv="refresh" content="180">';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
@@ -85,14 +75,6 @@ $colspan = $colspan + sizeof($extdCerts);
 echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Certifications Roster</b><br> (as of '.date("M d Y").')';
 echo '<a href="javascript:helpPopUp('."'docs/roster_help.php'".')">HELP</a>';
-if(!$shortView)
-{
-    echo '&nbsp;&nbsp;<a href="rosterCerts.php?sort='.$sort.'&shortView=1">Short View</a>';
-}
-else
-{
-    echo '&nbsp;&nbsp;<a href="rosterCerts.php?sort='.$sort.'&shortView=0">Normal View</a>';
-}
 if($adminView==1)
 {
     echo '<br><a href="javascript:rosterPopUp('."'rosterCertsEdit.php?action=new'".')">Add New Member</a>';
@@ -316,59 +298,6 @@ function showMember($r)
 	}
     }
 
-    echo '</tr>';
-}
-
-//this function will display a row for a member
-function showMemberShort($r)
-{
-    global $adminView;
-
-    // figure out the member type
-    $memberType = "";
-    global $memberTypes;
-    for($i = 0; $i < count($memberTypes); $i++)
-    {
-	if($memberTypes[$i]['name'] == $r['status'])
-	{
-	    $memberType = $memberTypes[$i]['rosterName'];
-	}
-    }
-
-    echo '<tr>';
-    //get the roster view of the status/memberType
-    
-    if($memberType=="")
-    {
-	$memberType = "&nbsp;";
-    }
-    echo '<td>'.$memberType.'</td>';
-
-    if($adminView<>1 && $r['unitID']<>"")
-    {
-	echo '<td>'.$r['unitID'].'</td>';
-    }
-    else
-    {
-	echo '<td>'.$r['EMTid'].'</td>';
-    }
-
-    if(! empty($r['LastName']))
-    {
-	echo '<td>'.$r['LastName'].'</td>';
-    }
-    else
-    {
-	echo '<td>&nbsp;</td>';
-    }
-    if(! empty($r['FirstName']))
-    {
-	echo '<td>'.$r['FirstName'].'</td>';
-    }
-    else
-    {
-	echo '<td>&nbsp;</td>';
-    }
     echo '</tr>';
 }
 
