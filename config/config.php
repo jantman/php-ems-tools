@@ -55,14 +55,9 @@ $dbName = "php_ems_tools_demo";
 
 // require the file containing the rig check data, and declare all variables as global
 require_once('rigCheckData.php');
-global $rigChecks; // and get the main (giant) array
-global $rigCheckAgeAlert; // whether to alert for old rig checks or not
-global $rigCheckAlertTime; // how long to wait before alerting for uncomplete rig check
 
 // require file for extended types and certs. 
 // if you don't want to use these, just look at the file
 require_once('extendedUserInfo.php');
-global $extdTypes;
-global $extdCerts;
 
 ?>
