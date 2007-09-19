@@ -35,5 +35,10 @@
 // this is simply kept here for backward-compatibility
 
 require_once('./config/config.php');
+require_once('./config/extendedUserInfo.php');
+require_once('./config/rigCheckData.php');
+require_once('./config/rosterConfig.php');
+require_once('./config/scheduleConfig.php');
+
 
 ?>
