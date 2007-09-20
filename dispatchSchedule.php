@@ -47,7 +47,10 @@ $debug = false;
 
 
 // GLOBALS
-require('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // scheule configuration
+
 $day = 86400; // seconds in a day
 
 

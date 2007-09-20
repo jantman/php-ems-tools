@@ -31,7 +31,10 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-require_once('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // schedule configuration
+
 if(! empty($_GET['style']))
 {
     //style monthly or yearly

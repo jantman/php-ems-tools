@@ -35,8 +35,14 @@
 
 // this file will import the user's customization
 require_once('./config/config.php');
+
+// import ALL of the config files
+require_once('./config/rigCheckData.php');
+require_once('./config/extendedUserInfo.php');
+require_once('./config/rosterConfig.php');
+require_once('./config/scheduleConfig.php');
+
 require_once('./admin/checkCustomConfig.php');
-//
 
 $dontMakeDB = false; // whether or not to make the DB.
 

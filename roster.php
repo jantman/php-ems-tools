@@ -31,7 +31,9 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-require_once('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/rosterConfig.php'); // roster configuration
 
 // this script views the roster from the DB
 

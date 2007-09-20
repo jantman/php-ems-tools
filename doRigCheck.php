@@ -33,8 +33,12 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-require_once('./config/config.php');
-require_once('./inc/global.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./inc/global.php'); // global functions
+
+require_once('./config/rigCheckData.php'); // rig check configuration
+
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule

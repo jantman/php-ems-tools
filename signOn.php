@@ -53,6 +53,9 @@ else
 // this file will import the user's customization
 require_once('./config/config.php');
 
+// schedule configuration
+require_once('./config/scheduleConfig.php');
+
 // for email notifications:
 require_once('./inc/notify.php');
 require_once('./inc/global.php');

@@ -32,7 +32,10 @@
 //      $Id$
 
 
-require_once('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/rigCheckData.php'); // roster configuration
+
 ?>
 
 <html>

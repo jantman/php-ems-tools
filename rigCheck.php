@@ -43,7 +43,10 @@ if(! empty($_GET['OK']))
     }
 }
 
-require('./config/config.php');
+require_once('./config/config.php'); // mian configuration
+
+require_once('./config/rigCheckData.php'); // roster configuration
+
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule

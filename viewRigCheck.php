@@ -34,8 +34,9 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-require('./config/config.php');
-require('./inc/global.php');
+require_once('./config/config.php'); // main configuration
+require_once('./config/rigCheckData.php'); // rig check configration
+require_once('./inc/global.php'); // global functions
 global $shortName;
 $key = $_GET['pKey'];
 echo '<title>'.$shortName.' Rig Check '.$key.'</title>';

@@ -36,7 +36,10 @@
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
-require('./config/config.php');
+
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/rosterConfig.php'); // roster configuration
 
 
 // tell PHP to ignore any errors less than E_ERROR

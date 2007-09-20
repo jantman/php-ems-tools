@@ -37,7 +37,8 @@
 <head>
 
 <?php
-require_once('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
 echo '<title>'.$shortName.' - PHP EMS Tools Index</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 //figure out the month and year

@@ -49,8 +49,9 @@ else
     require_once 'HTML/QuickForm/element.php';
 }
 
-// this file will import the user's customization
-require('./config/config.php');
+require_once ('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // schedule configuration
 
 //instantiate the form
 $form = new HTML_QuickForm('firstForm');

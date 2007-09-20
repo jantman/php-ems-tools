@@ -37,7 +37,10 @@
 <head>
 
 <?php
-require_once('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // schedule configuration
+
 echo '<title>Schedule Mass Signon Results</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 //figure out the month and year
