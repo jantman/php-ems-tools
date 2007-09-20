@@ -127,9 +127,6 @@ $positions = array(0 => 'None', 1 => 'President', 2 => '1st VP', 3 => '2nd VP', 
 $committees = array(0 => 'None', 1 => 'Good & Welfare', 2 => 'Building & Grounds', 3 => 'Awards', 4 => 'Publicity', 5 => 'Membership', 6 => 'Computers', 7 => 'Fund Drive', 8 => 'Grievance', 9 => '20th District', 10 => 'Uniforms', 11 => 'By-Laws', 12 => 'Insurance', 13 => 'Safety', 14 => 'Points & LOSAP', 15 => 'Activities');
 $commPositions = array(0 => 'None', 1 => 'Chairman', 2 => 'Co-Chairman', 3 => 'Member');
 
-// this defines the possible certifications other than the ones which are hard-coded
-$otherCertsA = array("Certification Name 1", "Certification Name 2");
-
 // Extended Certifications:
 // to use certifications other than the default, define them in an array here. 
 // if you don't want to use any, just leave tha array blank.
