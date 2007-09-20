@@ -138,8 +138,10 @@ $extdCerts = array("ICS100", "ICS200", "ICS700/NIMS", "ALS", "OtherCert");
 // this allows a second set of member types such as driver, medic, trainee, etc.
 // this is intended for uses where members have MULTIPLE types.
 // if your members only have one type, please use the member types array in config.php 
-// and leave this as an empty array.
+// and leave useExtdTypes = false.
 
-$extdTypes = array("EMT/Medic", "Driver", "AIC", "Probie");
+$useExtdTypes = true; // whether or not to use the array below as an option
+
+$extdTypes = array("EMT/Medic", "Driver", "AIC", "Probie"); // extended member types
 
 ?>
