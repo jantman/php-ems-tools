@@ -31,7 +31,9 @@
 // +----------------------------------------------------------------------+
 //	$Id$
 
-require('./config/config.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // schedule configuration
 
 function schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end)
 {
