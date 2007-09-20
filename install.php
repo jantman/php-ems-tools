@@ -676,122 +676,39 @@ exit(0);
 function doTableSetup()
 {
     global $conn;
-  
-    // define the queries
-$addBk = "CREATE TABLE `addBk` (`pKey` int(10) NOT NULL auto_increment, `company` tinytext, `description` tinytext, `contact` tinytext, `address` tinytext, `phone1` tinytext, `phone2` tinytext, `fax` tinytext, `email` tinytext, `notes` blob, `web` tinytext, PRIMARY KEY  (`pKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+    require_once('./admin/dbTableSchema.php'); // db table schema
+    // this file has $dbTableSchemaA which is the array that holds all queries to setup the table
 
-$rigCheck = "CREATE TABLE `rigCheck` ( `pKey` int(11) NOT NULL auto_increment, `timeStamp` int(11) default NULL, `crew1` tinytext, `crew2` tinytext, `crew3` tinytext, `crew4` tinytext, `rig` tinytext, `comments` text, `stillBroken` text, `sigID` tinytext, `OK` text, `NG` text, `mileage` int(6) default NULL, PRIMARY KEY  (`pKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-$roster = "CREATE TABLE `roster` ( `EMTid` tinytext NOT NULL, `LastName` tinytext NOT NULL, `FirstName` tinytext NOT NULL, `password` tinytext, `rightsLevel` tinyint(4) NOT NULL default '0', `status` text NOT NULL, `driver` tinyint(1) NOT NULL default '1', `Address` text, `HomePhone` tinytext, `CellPhone` tinytext, `Email` tinytext, `CPR` int(11) default NULL, `EMT` int(11) default NULL, `HazMat` int(11) default NULL, `BBP` int(11) default NULL, `ICS100` int(11) default NULL, `ICS200` int(11) default NULL, `NIMS` int(11) default NULL, `Pkey` int(11) NOT NULL default '0', `SpouseName` varchar(30) character set latin1 collate latin1_bin default NULL, `pwdMD5` tinytext, `shownAs` varchar(15) default NULL, `unitID` tinytext, `textEmail` tinytext, `position` tinytext, `comm1` tinytext, `comm1pos` tinytext, `comm2` tinytext, `comm2pos` tinytext, `officer` tinytext, `PHTLS` int(11) default NULL, `NREMT` int(11) default NULL, `FR` int(11) default NULL, `trustee` tinytext, `comm3` tinytext, `comm3pos` tinytext, `OtherPositions` text, `OtherCerts` text) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-$sched_change_temp = "CREATE TABLE `schedule_change_template` ( `pKey` int(11) NOT NULL auto_increment, `timestamp` int(11) default NULL, `query` text, `EMTid` tinytext, `host` tinytext, `address` tinytext, `form` tinytext, PRIMARY KEY  (`pKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-$schedule = "CREATE TABLE `schedule_template` ( `PKey` int(11) NOT NULL auto_increment, `Date` tinyint(4) NOT NULL default '0', `1ID` varchar(6) default NULL, `1Start` time default NULL, `1End` time default NULL, `2ID` varchar(6) default NULL, `2Start` time default NULL, `2End` time default NULL, `3ID` varchar(6) default NULL, `3Start` time default NULL, `3End` time default NULL, `4ID` varchar(6) default NULL, `4Start` time default NULL, `4End` time default NULL, `5ID` varchar(6) default NULL, `5Start` time default NULL, `5End` time default NULL, `6ID` varchar(6) default NULL, `6Start` time default NULL, `6End` time default NULL, `message` varchar(50) default NULL, PRIMARY KEY  (`PKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-$schedule_data = "INSERT INTO `schedule_template` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(11,11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(12,12,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(13,13,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,14,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,17,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,18,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(19,19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,21,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,23,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,24,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(27,27,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,29,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(30,30,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(31,31,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(32,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);";
-
-
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
-
-    // addBk
-    fwrite(STDOUT, "Creating the addBk table...\n");
-    mysql_query($addBk) or die("I'm sorry, but there was an error in creating the addBk table: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE addBk;");
-    if(mysql_num_rows($result) > 0)
+    // begin table creation loop
+    foreach($dbTableSchemaA as $val)
     {
-	fwrite(STDOUT, "Ok.\n");
+	$tblName = $val['name'];
+	$tblDesc = $val['description'];
+	$query = $val['query'];
+	fwrite(STDOUT, "Creating the ".$tblName." table...\n");
+	mysql_query($query) or die("I'm sorry, but there was an error in creating the ".$tblName." table: ".mysql_error());
+	fwrite(STDOUT, "Done.\n");
+	fwrite(STDOUT, "Checking that it worked...\n");
+	$result = mysql_query("SHOW TABLES LIKE ".$tblName.";");
+	if(mysql_num_rows($result) > 0)
+	{
+	    fwrite(STDOUT, "Ok.\n");
+	}
+	else
+	{
+	    fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
+	}
     }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // rigCheck
-    fwrite(STDOUT, "Creating the rigCheck table...\n");
-    mysql_query($rigCheck) or die("I'm sorry, but there was an error in creating the rigCheck table: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE rigCheck;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-  
-    // roster
-    fwrite(STDOUT, "Creating the roster table...\n");
-    mysql_query($roster) or die("I'm sorry, but there was an error in creating the roster table: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE roster;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // schedule template
-    fwrite(STDOUT, "Creating the schedule_template table...\n");
-    mysql_query($schedule) or die("I'm sorry, but there was an error in creating the table schedule_template: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE schedule_template;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // schedule data
-    fwrite(STDOUT, "Adding the default data into the schedule_template table...\n");
-    mysql_query($schedule_data) or die("I'm sorry, but there was an error in adding the schedule template data: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SELECT * FROM schedule_template;");
-    $row = mysql_fetch_array($result);
-
-    if($row['Date'] == 1 || $row['Date'] == "1")
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table data isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // schedule change template
-    fwrite(STDOUT, "Creating the schedule_change_template table...\n");
-    mysql_query($sched_change_temp) or die("I'm sorry, but there was an error in creating the table schedule_change_template: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE schedule_change_template;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
+    // end table creation loop
 
     fwrite(STDOUT, "Table creation complete.\n");
     fwrite(STDOUT, "\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "Now, we have to setup an initial administrative user for you, so that you can make changes and modify other users.\n");
     fwrite(STDOUT, "We will give you a rightsLevel of 2 - the highest.\n");
@@ -941,8 +858,8 @@ fwrite(STDOUT, "----------------------------------------------------------------
 
     fwrite(STDOUT, "Ok, we're done collecting your information. You can enter the rest with the web interface.\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "\n\n");
     fwrite(STDOUT, "Our MySQL query is as follows:\n");
@@ -963,8 +880,8 @@ fwrite(STDOUT, "----------------------------------------------------------------
     mysql_query($userInfo)or die("I'm sorry, but there was an error in creating the table schedule_change_template: ".mysql_error());
     fwrite(STDOUT, "Done.\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "Confirming that it was input correctly...\n");
     $result = mysql_query('SELECT * FROM roster WHERE EMTid="'.$EMTid.'";');
@@ -978,8 +895,8 @@ fwrite(STDOUT, "----------------------------------------------------------------
 
     fwrite(STDOUT, "Tables and user data successfully added.\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
 
 }
@@ -991,8 +908,8 @@ function setupDatabase()
     $grants = "CREATE, DELETE, INSERT, SHOW DATABASES, SELECT, UPDATE";
     $query = "FLUSH PRIVILEGES; USE \`".$dbName."\`; GRANT ".$grants." ON \`".$dbName."\`.* TO ''@'localhost'; FLUSH PRIVILEGES;";
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "Creating the database using the command-line utilities through a shell escape...\n");
     fwrite(STDOUT, "sending 'mysqladmin CREATE ".$dbName."'...\n");
