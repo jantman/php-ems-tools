@@ -377,8 +377,33 @@ function populateMe($EMTid)
 		{
 		    $defaults['HazMatchk'] = 1;
 		}
-		
-		// STOPPED HERE.
+		$defaults['BBP'] = date("Y-M-d", $row['BBP']);
+		if($row['BBP'] == 1)
+		{
+		    $defaults['BBPchk'] = 0;
+		}
+		else
+		{
+		    $defaults['BBPchk'] = 1;
+		}
+		$defaults['PHTLS'] = date("Y-M-d", $row['PHTLS']);
+		if($row['PHTLS'] == 1)
+		{
+		    $defaults['PHTLSchk'] = 0;
+		}
+		else
+		{
+		    $defaults['PHTLSchk'] = 1;
+		}
+		$defaults['NREMT'] = date("Y-M-d", $row['NREMT']);
+		if($row['NREMT'] == 1)
+		{
+		    $defaults['NREMTchk'] = 0;
+		}
+		else
+		{
+		    $defaults['NREMTchk'] = 1;
+		}
 		
 		// get the information for the extended certs from the database
 		$otherCerts = $row['OtherCerts']; // other certs CSV list from database
