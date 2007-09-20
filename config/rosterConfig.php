@@ -130,4 +130,19 @@ $commPositions = array(0 => 'None', 1 => 'Chairman', 2 => 'Co-Chairman', 3 => 'M
 // this defines the possible certifications other than the ones which are hard-coded
 $otherCertsA = array("Certification Name 1", "Certification Name 2");
 
+// Extended Certifications:
+// to use certifications other than the default, define them in an array here. 
+// if you don't want to use any, just leave tha array blank.
+// you cannot have a comma in any of the certification strings!
+
+$extdCerts = array("ICS100", "ICS200", "ICS700/NIMS", "ALS", "OtherCert");
+
+// Extended Types:
+// this allows a second set of member types such as driver, medic, trainee, etc.
+// this is intended for uses where members have MULTIPLE types.
+// if your members only have one type, please use the member types array in config.php 
+// and leave this as an empty array.
+
+$extdTypes = array("EMT/Medic", "Driver", "AIC", "Probie");
+
 ?>
