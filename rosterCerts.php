@@ -286,10 +286,10 @@ function showMember($r)
 
     // get the information for the extended certs from the database
     $otherCerts = $r['OtherCerts']; // other certs CSV list from database
-    $otherCertsA = explode(",", $otherCerts); // make an array of the certs
+    $otherCertsAry = explode(",", $otherCerts); // make an array of the certs
     foreach($extdCerts as $val)
     {
-	if(in_array($val, $otherCertsA))
+	if(in_array($val, $otherCertsAry))
 	{
 	    // if true, this extd cert (val) is in the member's list (otherCertsA)
 	    echo '<td>Yes</td>';

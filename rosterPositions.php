@@ -65,6 +65,13 @@ echo '<table class="roster">';
 
 //Finish setting up the table
 $colspan = 11;
+
+// extended positions option
+if($useExtdTypes)
+{
+    $colspan = $colspan + 1;
+}
+
 echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Roster - Positions</b><br> (as of '.date("M d Y").')';
 if($adminView==1)
@@ -109,6 +116,10 @@ echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm1pos">P
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm2">Committee 2</a></td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm2pos">Position</a></td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=trustee">Trustee</a></td>';
+if($useExtdTypes)
+{
+    echo '<td>Other Types</td>'; // extended member types
+}
 echo '</tr>';
 
 //loop through the members and call the showMember function
@@ -122,6 +133,7 @@ mysql_free_result($result);
 function showMember($r)
 {
     global $adminView;
+    global $useExtdTypes;
     echo '<tr>';
     //get the roster view of the status/memberType
     if($r['unitID']<>"")
@@ -208,6 +220,18 @@ function showMember($r)
     else
     {
 	echo '<td>Yes</td>';
+    }
+    // extended member types
+    if($useExtdTypes)
+    {
+	if(isEmpty($r['OtherPositions']))
+	{
+	    echo '<td>&nbsp;</td>';
+	}
+	else
+	{
+	    echo '<td>'.$r['OtherPositions'].'</td>';
+	}
     }
 
     echo '</tr>';
