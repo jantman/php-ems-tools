@@ -36,7 +36,7 @@
 // this file will import the user's customization
 require_once('./config/config.php');
 
-// import ALL of the config files
+// import ALL of the config files for checking
 require_once('./config/rigCheckData.php');
 require_once('./config/extendedUserInfo.php');
 require_once('./config/rosterConfig.php');
@@ -64,14 +64,10 @@ fwrite(STDOUT, "------------------------------------------------------------- \n
 fwrite(STDOUT, "This script is for Linux/Unix/BSD systems ONLY! \n");
 fwrite(STDOUT, "------------------------------------------------------------- \n\n");
 
-fwrite(STDOUT, "Please be WARNED that PHP EMS Tools is not designed to be used\n");
-fwrite(STDOUT, "on the internet. To do so, you must be sure to configure additioanl\n");
-fwrite(STDOUT, "security. At the minimum, use .htaccess files!\n");
-fwrite(STDOUT, "Until we are done with configuration, this directory (and the MySQL database)\n");
-fwrite(STDOUT, "should probably NOT be visible from the Internet.\n");
+fwrite(STDOUT, "Please be WARNED that PHP EMS Tools is not designed to be used on the internet. To do so, you must be sure to configure additional security. At the minimum, use .htaccess files!\n");
+fwrite(STDOUT, "Until we are done with configuration, this directory (and the MySQL database) should NOT be visible from the Internet.\n");
 
-fwrite(STDOUT, "If nothing is visible to the Internet, or you understand and choose to disregard\n");
-fwrite(STDOUT, "this warning, please type yes. Otherwise, type no\n");
+fwrite(STDOUT, "If nothing is visible to the Internet, or you understand and choose to disregard this warning, please type yes. Otherwise, type no.\n");
 fwrite(STDOUT, "yes or no?\n");
 $command = trim(fgets(STDIN));
 if($command == "yes")
@@ -86,30 +82,24 @@ else
     die();
 }
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
-fwrite(STDOUT, "I am about to display the PHP EMS Tools License....\n");
 fwrite(STDOUT, "\n");
+fwrite(STDOUT, "PHP EMS Tools (php-ems-tools) is licensed under the GNU General Public License (GPL). A copy of the license is included as the LICENSE.txt file in this directory.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "PHP EMS Tools (php-ems-tools) LICENSE\n");
+fwrite(STDOUT, "This is *free* software, both in terms of price and in terms of *freedom*. You have the freedom to redistribute, modify, and use the code in any way that you choose.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "Please refer to www.php-ems-tools.com for more information.\n");
+fwrite(STDOUT, "That being said, I do have the following requests (and only requests):\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "This software is distributed under the GNU GPL License, with the following provisions:\n");
+fwrite(STDOUT, "1) If you are intending to use PHP EMS Tools for your EMS organization, please fill out the user survey at http://www.php-ems-tools.com This information is for my research purposes only, as I would like to keep the package up-to-date for the needs of the users. Your information will be kept completely private. I will only use it for planning future features, and you will not be contacted via email more than once unless you subscribe to a mailing list.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "1) If you are intending to use PHP EMS Tools for your EMS organization, please fill out the user survey at http://jantman.dyndns.org:10011/php-ems-tools/survey.php This information is for my research purposes only, as I would like to keep the package up-to-date for the needs of the users.\n");
-fwrite(STDOUT, "\n");
-fwrite(STDOUT, "2) You are free to modify the code however you choose, provided that you include attribution to the original project (PHP EMS Tools available at http://www.php-ems-tools.com).\n");
+fwrite(STDOUT, "2) You are free to modify the code however you choose, but please include attribution to the original project (PHP EMS Tools available at http://www.php-ems-tools.com).\n");
 fwrite(STDOUT, "\n");
 fwrite(STDOUT, "3) If you choose to modify the code, I ask that you e-mail me with your additions, or a brief synopsis of what they do, so that I can incorporate the features into the next release.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "4) If you choose (purely voluntary) I would like to put a link to your organization's web site on the php-ems-tools webpage, under a list of current users.\n");
+fwrite(STDOUT, "4) I REQUEST that you do NOT redistribute this code unless it can not be downloaded from php-ems-tools.com or SourceForge. This is an effort to be sure that everyone gets the most recent version.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "5) If you modify and redistribute this code, you must include this license agreement with it.\n");
+fwrite(STDOUT, "5) If you feel that the software has helped your organization, recognize the savings that you have gained by using free software. I mean this both in terms of cost savings from cost-free software, and the merits of Free/Open Source Software - specifically, the ability to modify the software to your liking, and the avoidance of vendor lock-in with proprietary software. If you would like to help my development efforts, I accept donations to support the costs of running my web sites and development machines. Please contact me at jason@php-ems-tools.com or visit www.php-ems-tools.com\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "6) I REQUEST that you do NOT redistribute this code without notifying me - I would like to try and have all downloads from SourceForge or my web site, in order to keep the distributed code up-to-date.\n");
-fwrite(STDOUT, "\n");
-fwrite(STDOUT, "7) If you feel that the software has helped your organization, recognize the savings that you have gained by using free software, and would like to help my development efforts, I accept donations to support the costs of running my web sites and development machines. Please contact me at jason@php-ems-tools.com\n");
-fwrite(STDOUT, "\n");
-fwrite(STDOUT, "8) I highly encourage all users to consider making a donation in return for the software, in any amount, to:\n");
+fwrite(STDOUT, "6) I highly encourage all users to consider making a donation in return for the software, in any amount, to:\n");
 fwrite(STDOUT, "\n");
 fwrite(STDOUT, "   Midland Park Volunteer Ambulance Corps\n");
 fwrite(STDOUT, "   PO Box 38\n");
@@ -141,17 +131,14 @@ fwrite(STDOUT, "----------------------------------------------------------------
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
 fwrite(STDOUT, "NOTICE: \n");
-fwrite(STDOUT, "This piece of free, open-source software relies on user feedback for development.\n");
-fwrite(STDOUT, "It is highly important that if you have ANY problems or suggestions, you\n");
-fwrite(STDOUT, "report them on the tracker at SourceForge.net or email me at:\n");
-fwrite(STDOUT, "jason@php-ems-tools.com\n");
+fwrite(STDOUT, "This piece of free, open-source software relies on user feedback for development. It is highly important that if you have ANY problems or suggestions, you report them using the Bug Report link at www.php-ems-tools.com\n");
 fwrite(STDOUT, "\n\n");
 
-fwrite(STDOUT, "Do you understand this? yes or no\n");
+fwrite(STDOUT, "Please press enter to continue with the installation.\n");
 $command = trim(fgets(STDIN));
-if($command == "yes")
+if($command != "")
 {
-    fwrite(STDOUT, "Thank You.\n");
+    fwrite(STDOUT, "Moving on...\n");
 }
 else
 {
@@ -169,7 +156,7 @@ fwrite(STDOUT, "It is recommended that you do this every time you change config.
 fwrite(STDOUT, "This script only checks for MAJOR errors that will being everything to a grinding halt. Minor errors may effect functionality but slip by me right now...\n\n\n\n");
 fwrite(STDOUT, "Checking config.php...\n");
 
-$checked = checkCustom();
+$checked = checkCustom(); // run checkCustom from ./admin/checkCustomConfig.php
 
 if($checked == true)
 {
@@ -198,6 +185,7 @@ else
 {
     // Windoze or Mac. die.
     fwrite(STDOUT, "This script is not for Windows or Mac. Sorry. \n Please contact the developer for more information.\n");
+    fwrite(STDOUT, "The installation procedure is actually quite simple. Please read through the documentation (either included or online at our web site). It generally just consists of setting up a database in MySQL and setting up the tables, which can be done easily.\n");
     die();
 }
 
@@ -212,8 +200,8 @@ fwrite(STDOUT, "Root permissions are only needed to initially setup the database
 $euid = posix_geteuid();
 if($euid != 0)
 {
-    fwrite(STDOUT, "Your user id (uid) does not appear to be 0, that of root. This script must be run as root. \n");
-    fwrite(STDOUT, "If you are ABSOLUTELY sure that you ARE root (and you have root set to a uid other than 0??? \n");
+    fwrite(STDOUT, "Your user id (euid) does not appear to be 0, that of root. This script must be run as root. \n");
+    fwrite(STDOUT, "If you are ABSOLUTELY sure that you ARE root (or you have root set to a uid other than 0???) or have already intialized the database and granted privileges to the user that you're running as, \n");
     fwrite(STDOUT, "Type YES to continue, otherwise press any key. \n");
     $command = trim(fgets(STDIN));
     if($command != "YES")
@@ -230,7 +218,7 @@ fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
 // has config.php been edited?
-fwrite(STDOUT, "Before we go any farther, please be sure that you have edited config.php to the correct values, especially the dbName value. \n\n");
+fwrite(STDOUT, "Before we go any farther, please be sure that you have edited config.php to the correct values, especially the dbName value and your server information. \n\n");
 fwrite(STDOUT, "Have you done so? yes or no.\n");
 $command = trim(fgets(STDIN));
 if($command != "yes")
@@ -262,7 +250,8 @@ $command = trim(fgets(STDIN));
 if($command == "yes")
 {
     fwrite(STDOUT, "Good choice. \n");
-    fwrite(STDOUT, "Let's see if it's running... \n");
+    fwrite(STDOUT, "Let's see if it's running... (we'll do ps -A | grep httpd)\n");
+    // a bit of a kludge...
     $httpd = shell_exec("ps -A | grep httpd");
     if(stristr($httpd, "httpd") != false)
     {
@@ -389,7 +378,7 @@ if($failed || ($num < 1))
 }
 elseif($num == 1)
 {
-    fwrite(STDOUT, "It looks to me like you have setup the tables already, but never vieded the schedule.\n");
+    fwrite(STDOUT, "It looks to me like you have setup the tables already, but never viewed the schedule.\n");
     fwrite(STDOUT, "You should point a web browser to the schedule and view it, to populate a table for this month.\n");
     $setupTables = false;
 }
@@ -618,7 +607,7 @@ mysql_close($conn);
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-fwrite(STDOUT, "Do you have a wbe browser (lynx is OK) on this machine? yes or no\n");
+fwrite(STDOUT, "Do you have a web browser (lynx is OK) on this machine? yes or no\n");
 $command = trim(fgets(STDIN));
 if($command == "yes")
 {
@@ -644,6 +633,22 @@ if($command == "yes")
 
     }
 }
+else
+{
+    fwrite(STDOUT, "That's ok. Please try using another machine that should be able to view documents served by the web server on this machine. You will want to point your browser to this directory (php-ems-tools). It seems from your configuration file that the full URL should be ".$URL.$dir." If this is not right, please correct your config.php file.\n\n\n");
+    fwrite(STDOUT, "Please take a moment to try to view this URL. If it doesn't seem to load correctly, I will give you some simple troubleshooting hints. If none of them work, please visit the online documentation at http://www.php-ems-tools.com and also attempt troubleshooting specific to your web server and system.\n");
+    fwrite(STDOUT, "Can you view this page? yes or no\n");
+    $command = trim(fgets(STDIN));
+    if($command = "yes")
+    {
+	fwrite(STDOUT, "GREAT! Installation has finished successfully...");
+	exit(0);
+    }
+    else
+    {
+	fwrite(STDOUT, "Ok. Well, troubleshooting time!\n");
+    }
+}
 
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
@@ -653,11 +658,9 @@ fwrite(STDOUT, "I'm sorry that you are having some problems.\n");
 fwrite(STDOUT, "First, please make sure that Apache (or whatever web server you're using) is properly configured and serving pages.\n");
 fwrite(STDOUT, "If that was not the problem, you have a few choices for support:\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "You can look on our wbe page at\n");
+fwrite(STDOUT, "You can look at our web page at\n");
 fwrite(STDOUT, "http://www.php-ems-tools.com\n");
-fwrite(STDOUT, "Or check out our SourceForge page at:\n");
-fwrite(STDOUT, "http://sourceforge.net/projects/php-ems-tools/\n");
-fwrite(STDOUT, "where you can look through previous known bugs.\n");
+fwrite(STDOUT, "for documentation and also a list of previous bugs and support requests.\n");
 fwrite(STDOUT, "\n");
 fwrite(STDOUT, "As a last resort, feel free to e-mail the developer at:\n");
 fwrite(STDOUT, "jason@php-ems-tools.com\n");
@@ -668,37 +671,7 @@ fwrite(STDOUT, "\n");
 
 fwrite(STDOUT, "Please make note of these options, and press ENTER to continue...\n");
 $command = trim(fgets(STDIN));
-finishText();
 exit(0);
-
-function finishText()
-{
-	    fwrite(STDOUT, "If you have not yet done so, please fill out the user survey at:\n");
-	    fwrite(STDOUT, "http://www.php-ems-tools.com/survey.php \n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "If you have any questions or comments, please feel free to e-mail the developer at:\n");
-	    fwrite(STDOUT, "jason@php-ems-tools.com\n");
-	    fwrite(STDOUT, "All feedback is always appreciated.\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "But reports can be submitted via SourceForge at:\n");
-	    fwrite(STDOUT, "http://sourceforge.net/projects/php-ems-tools/ \n");
-	    fwrite(STDOUT, "Clock on 'Tracker' near the top, and then 'Bugs'\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "If you think that this project is worth a donation, you may send one to:\n");
-	    fwrite(STDOUT, "Midland Park Ambulance Corps\n");
-	    fwrite(STDOUT, "PO Box 38\n");
-	    fwrite(STDOUT, "Midland Park, NJ\n");
-	    fwrite(STDOUT, "07432\n");
-	    fwrite(STDOUT, "MPAC is a 501(c)(3) non-profit, and donations are tax-deductable.\n");
-	    fwrite(STDOUT, "Be sure to include a note that this donation was suggested by PHP EMS Tools\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "Please be sure to check www.php-ems-tools.com occasionally\n");
-	    fwrite(STDOUT, "for new releases, patches, and other information\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "Thank You for choosing PHP EMS Tools - software by volunteers for volunteers.\n");
-}
 
 function doTableSetup()
 {
@@ -1016,7 +989,7 @@ function setupDatabase()
     global $conn;
     global $dbName;
     $grants = "CREATE, DELETE, INSERT, SHOW DATABASES, SELECT, UPDATE";
-    $query = "FLUSH PRIVILEGES; USE \`php-ems-tools-GVAC\`; GRANT ".$grants." ON \`php-ems-tools-GVAC\`.* TO ''@'localhost'; FLUSH PRIVILEGES;";
+    $query = "FLUSH PRIVILEGES; USE \`".$dbName."\`; GRANT ".$grants." ON \`".$dbName."\`.* TO ''@'localhost'; FLUSH PRIVILEGES;";
 
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
