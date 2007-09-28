@@ -10,7 +10,10 @@ Please report bugs, etc. at the site above.
 CHANGELOG
 ------------------------------------------------------------
 
-Release 2.1 -
+Release 3.0 -
+- MAJOR RELEASE - this is not compatible with previous versions as the table
+structure has changed and config files have changed. If you wish to upgrade,
+please contact the developer for a migration script.
 - Added code to allow rig names and check data to be defined by user. Moved
 this information to rigCheckData.php and added a require_once for this file in
 custom.php. 
@@ -32,6 +35,8 @@ checkMD5.php, makeMD5.php, makeShowAs.php
 global.php, notify.php, antman.php
 - Added columns to roster table in database - OtherPositions and OtherCerts -
 both TEXT.
+- Removed the external/auth folder as it had gotten messy.
+- Fixed some bugs in install.php
 
 Release 2 - 
 - many sweeping changes, see CVS
