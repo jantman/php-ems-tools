@@ -47,8 +47,6 @@ $shortName = "AC"; // string
 // this is the base URL of the folder which php_ems resides in
 // with a trailing /, as seen from the rest of the world.
 $serverWebRoot = "http://jantman.dyndns.org:10011/cvswork/php-ems-tools-trunk/"; // string
-// this is the root for the external/auth folder
-$serverExtRoot = "http://yourdomain/auth/"; // string
 // this is the name of the database on the server used by php-ems-tools
 // the default is php-ems-tools
 $dbName = "php_ems_tools_demo";
