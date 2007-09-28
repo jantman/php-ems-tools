@@ -626,7 +626,6 @@ if($command == "yes")
 	{
 	    fwrite(STDOUT, "GREAT! We're done. Thanks for using PHP EMS Tools.\n");
 	    fwrite(STDOUT, "\n");
-	    finishText();
 	    exit(0);
 	}
 
