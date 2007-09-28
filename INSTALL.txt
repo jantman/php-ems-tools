@@ -44,6 +44,15 @@ a web server. It will *not* run on a Windows or Mac machine. if you're running
 one of them, please visit our web site and contact the developer for
 assistance - something *will* be coded just for you! That's how nice we are.
 
+APACHE NOTES - Please make sure that your Apache installation is setup to
+serve PHP files properly. You can test this by creating a file called test.php
+containing just: <?php phpinfo(); ?>
+If you can see lots of stuff on this page, it is ok. If not, please be sure
+that Apache is loading the php5 module (in a LoadModule directive) and that
+there is an AddType directive for php (and that the
+application/... cooresponds to a type in mime.types).
+**Also please be sure that the DirectoryIndex directive for your root folder includes "index.php".
+
 -----------------------------------------------------------------
 1 - Installation using install.php
 
