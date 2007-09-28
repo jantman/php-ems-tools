@@ -1,6 +1,6 @@
 PHP EMS Tools		http://www.php-ems-tools.com
 --------------------------------------------------------------------------------------
-Time-stamp: "2007-09-19 12:58:32 jantman"
+Time-stamp: "2007-09-28 01:04:40 jantman"
 #	$Id$	
 --------------------------------------------------------------------------------------
 
@@ -26,6 +26,7 @@ doRigCheck.php		Handler script to update DB with rig check data from rigCheck.ph
 emailList.php		Page that displays a list of all members' emails for easy cut-and-paste.
 index.php		Main entry page with navigation links
 install.php		PHP-based install script. Can be removed after installation.
+INSTALL.txt		Installation instructions
 LICENSE.txt		Copy of the License (GNU GPLv3)
 localLinks.php		A script to include your own links on index.php
 massSignOns.php		Form to allow a member to sign on for multiple shifts at once.
@@ -35,21 +36,20 @@ php-ems-tools.js	JavaScript file for all pages - popups
 Quickform.php		Main HTML_Quickform include script
 README.txt		Main README
 rigCheckHandler.php	Allows user to select which rig to check. Links to the
-rigCheck and blankRigCheck with the appropriate URL variable.
+			rigCheck and blankRigCheck with the appropriate URL variable.
 rigCheck.php		Form for rig checks
 robots.txt		Simple little file to make sure nothing's indexed by a
-search engine
+			search engine
 rosterEdit.php		Form to enter/edit roster data
 rosterCerts.php		Page to view certifications data
 rosterCertsEdit.php	Form to edit/add certification data in roster
-rosterNote.html		**Unknown**
 roster.php		Page to view the roster
 rosterPosEdit.php	Form to edit positions and committees in roster
 rosterPositions.php	Page to view positions and committees in roster
 schedule.php		Main schedule page
 signOn.php		Page (JS pop-up) to sign on to schedule
 version.php		Script that contains the current program version. Used
-to notify user of new versions available.
+			to notify user of new versions available.
 version.txt		Text file to track which release you're using
 viewRigCheck.php	Page to view details of a rig check
 viewRigChecks.php	Page to view list of completed rig checks
@@ -58,27 +58,19 @@ admin/
 .htaccess		Apache .htaccess file to control access for these scripts to administrators only. Please configure as per your site.
 changes.php		Page to view recent changes to schedule.
 checkCustomConfig.php	Script to check basic stuff in the config.php script
-makeShownAs.php		Updates the shownAs roster field for anyone who doesn't have it.
+makeShownAs.php		Updates the shownAs roster field for anyone who
+doesn't have it.
+dumpTableSQL.php	Dumps the SQL code to initialize the tables
 
 --------------------------------------------------------------------------------------
 config/
 config.php		Main configuration file. Used to be custom.php
 rigCheckData.php	Data for the rig checks
+rosterConfig.php	Roster configuration
+scheduleConfig.php	Schedule configuration
 --------------------------------------------------------------------------------------
 docs/
 --Documentation--
---------------------------------------------------------------------------------------
-external/	Directory that can be somewhat safely served on the web
-index.html		  Simple html index page
-robots.txt		  File to make sure this isn't indexed by search engines
-
-external/auth/  Directory that should be .htaccess protected for member access
-only
-(these files should be the same as those in the main directory, except a
-correct relative path to config.php)
-schedule.php	Modified for read-only
-.htaccess	Apache file for user-based authentication and access control
-
 --------------------------------------------------------------------------------------
 HTML/
 	directory for HTML_QuickForm and Smarty

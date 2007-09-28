@@ -1,6 +1,6 @@
 PHP EMS Tools
 http://www.php-ems-tools.com
 ----------------------------------------------------------
-Version 2.0
-Time-stamp: "2007-09-14 19:27:58 jantman"
+Version 3.0
+Time-stamp: "2007-09-28 00:57:33 jantman"
 $Id$
