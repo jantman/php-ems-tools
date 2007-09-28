@@ -38,7 +38,6 @@ require_once('./config/config.php');
 
 // import ALL of the config files for checking
 require_once('./config/rigCheckData.php');
-require_once('./config/extendedUserInfo.php');
 require_once('./config/rosterConfig.php');
 require_once('./config/scheduleConfig.php');
 
@@ -135,7 +134,7 @@ fwrite(STDOUT, "This piece of free, open-source software relies on user feedback
 fwrite(STDOUT, "\n\n");
 
 fwrite(STDOUT, "Please press enter to continue with the installation.\n");
-$command = trim(fgets(STDIN));
+$command = fgets(STDIN);
 if($command != "")
 {
     fwrite(STDOUT, "Moving on...\n");
