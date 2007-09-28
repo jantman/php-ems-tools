@@ -1,4 +1,4 @@
-<?
+<?php
 // admin/checkCustomConfig.php
 //
 // Script to check the validity of config.php - included in install file
