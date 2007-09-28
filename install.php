@@ -903,7 +903,7 @@ function setupDatabase()
 {
     global $conn;
     global $dbName;
-    $grants = "CREATE, DELETE, INSERT, SHOW DATABASES, SELECT, UPDATE";
+    $grants = "CREATE, DELETE, INSERT, SELECT, UPDATE";
     $query = "FLUSH PRIVILEGES; USE \`".$dbName."\`; GRANT ".$grants." ON \`".$dbName."\`.* TO ''@'localhost'; FLUSH PRIVILEGES;";
 
     fwrite(STDOUT, "\n\n");

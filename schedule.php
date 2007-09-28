@@ -188,8 +188,8 @@ function showCurrentMonth()
     global $dbName;
     global $shift;
     // make sure the table exists
-    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
-    mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed. ".mysql_error());
+    mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".mysql_error());
     $query = 'SHOW TABLES LIKE "schedule_'.$year.'_'.$month.'_'.$shift.'";';
     $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
     if(mysql_num_rows($result)<1)
