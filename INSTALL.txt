@@ -24,8 +24,7 @@ versions, just replace the included ones (files PEAR.php, Common.php, and
 directory HTML) with symlinks to your own (assuming that your server/PHP is
 told to follow them).
 
-Please be sure to view the online or included docs and README, paying special
-attention to the system requirements.
+Please be sure to view the online or included docs, paying special attention to the system requirements.
 
 There are two methods of installation - 
 1) the install.php script
@@ -43,6 +42,15 @@ interactive mode and will prompt the user for input. It will *not* run through
 a web server. It will *not* run on a Windows or Mac machine. if you're running
 one of them, please visit our web site and contact the developer for
 assistance - something *will* be coded just for you! That's how nice we are.
+
+APACHE NOTES - Please make sure that your Apache installation is setup to
+serve PHP files properly. You can test this by creating a file called test.php
+containing just: <?php phpinfo(); ?>
+If you can see lots of stuff on this page, it is ok. If not, please be sure
+that Apache is loading the php5 module (in a LoadModule directive) and that
+there is an AddType directive for php (and that the
+application/... cooresponds to a type in mime.types).
+**Also please be sure that the DirectoryIndex directive for your root folder includes "index.php".
 
 -----------------------------------------------------------------
 1 - Installation using install.php
@@ -67,17 +75,19 @@ E) Follow the on-screen instructions. You will need to know:
    in your path
 F) Assmung everything goes well, you'll be able to view the pages in a web
 browser. I recommend hacing a GUI-based system to test this on.
-G) Once installation is finished, go back and edit the other relevant
-configuration files in config/. These files are rigCheckData.php,
-rosterConfig.php, and scheduleConfig.php. Instructions are included as
-comments in the files. Their names give away which components they are
-responsible for.
 
 -----------------------------------------------------------------
 2 - Manual Installation
 
 ***This is NOT recommended for novices. You should have already ensured that
    all requirements are met, and that you know what you're doing.
+
+WARNING: The installation script creates a first (administrative/master) user
+in the Roster table. If you install manually, you will need to do this
+manually as well. You will need to insert a user in the roster table for
+yourself. At a minimum, this must include the following fields:
+EMTid,LastName,FirstName,password (plain text), rightsLevel (=2), and pwdMD5
+(an MD5 hash of your password).
 
 To get an idea of what's going on, it is helpful to look at fileList.txt which
 lists all files in the package and what they do.
@@ -106,6 +116,23 @@ page in a web browser and clicking on "schedule". If you run "SHOW TABLES" in
 MySQL again, you should see a pair like "schedule_YYYY_MM_day" and _night.
 
 You should now be finished.
+
+-----------------------------------------------------------------
+POST-INSTALLATION:
+
+Once installation is finished, go back and edit the other relevant
+configuration files in config/. These files are rigCheckData.php,
+rosterConfig.php, and scheduleConfig.php. Instructions are included as
+comments in the files. Their names give away which components they are
+responsible for.
+
+A side note for the schedule - by default, it displays members using the
+"ShownAs" field of the roster. When you add new users, this should be added.
+For the administrator that you created during installation (if you used the
+script), you will need to go back and edit the ShownAs field (In the Roster
+Administrative View) in order for the user to show up on the
+schedule. Alternatively, you can run the admin/makeShownAs.php script to fill
+in this field for any users that don't have it.
 
 -----------------------------------------------------------------
 

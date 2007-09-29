@@ -3,30 +3,45 @@
 <meta http-equiv="refresh" content="180">
 
 <?php
+// admin/changes.php
+//
+// Page to view changes by users as logged by the system.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
-//
-// changes.php
-//
-// tool to view schedule change log
-// should be accessible by admins only
-//
-// Version 1.0 as of Time-stamp: "2007-02-05 00:19:18 jantman"
-//
-// This file is part of the php-ems-tools package
-// available at http://www.php-ems-tools.com 
-//
-// (C) 2006 Jason Antman.
-// This package is licensed under the terms of the
-// GNU General Public License (GPL)
-//
-
-// TODO: sort by EMTid, show only EMTid, sort by date, show only date (both changes made and date of shift for change)
+// ToDo: See Issue # 30
 
 // 
 // DO NOT MAKE CHANGES
 // UNLESS YOU KNOW WHAT YOU ARE DOING.
 // 
-require('../custom.php');
+require('../config/config.php');
 
 global $dbName;
 

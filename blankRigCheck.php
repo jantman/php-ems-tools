@@ -1,20 +1,42 @@
 <html>
 <head>
 <?php
-//(C) 2006 Jason Antman. All Rights Reserved.
-// with questions, go to www.jasonantman.com
-// or email jason AT jasonantman DOT com
-// Time-stamp: "2006-11-27 20:46:28 jantman"
+// blankRigCheck.php
+//
+// Page to display a blank rig check form for printing.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
-//This software may not be copied, altered, or distributed in any way, shape, form, or means.
-// version: 2.0 as of 2006-10-3
+require_once('./config/config.php'); // main configuration
 
-// rigCheck.php
-// page to do rig checks
-// see custom.php for more information - specifically rigCheckData variable
+require_once('./config/rigCheckData.php'); // rig check configuration
 
-
-require('custom.php');
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
@@ -23,21 +45,28 @@ echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css
 <body>
 
 <?php
-echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
+if(! empty($_GET['index']))
+{
+    $rigIndex = $_GET['index'];
+}
+
+global $rigChecks;
+$rigCheckData = $rigChecks[$rigIndex]['data'];
+$table2start = $rigChecks[$rigIndex]['table2start'];
+$table3start = $rigChecks[$rigIndex]['table3start'];
+$rigNum = $rigChecks[$rigIndex]['name'];
+
+echo '<h3 align=center>'.$shortName.' Rig Check - '.$rigNum.'</h3>';
 
 
-global $rigCheckData;
-global $table2start;
-global $table3start;
+showTable($rigCheckData, $table2start, $table3start, $rigNum);
 
-showTable($rigCheckData, $table2start, $table3start);
-
-function showTable($rigCheckData, $table2start, $table3start)
+function showTable($rigCheckData, $table2start, $table3start, $rigNum)
 {
     echo '<form method="post" action="doRigCheck.php">';
     echo '<DIV align="center"><b>Crew: </b>____&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;____';
     echo '<b>&nbsp;&nbsp;Rig:&nbsp;</b>';
-    echo '_______';
+    echo $rigNum.'&nbsp;&nbsp;&nbsp;&nbsp;';
     echo '<b>&nbsp;&nbsp;Mileage:&nbsp;</b>';
     echo '__________';
     echo '</DIV><br>';

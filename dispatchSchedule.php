@@ -1,15 +1,36 @@
 <?php
-
-//(C) 2006 Jason Antman. All Rights Reserved.
-// with questions, go to www.jasonantman.com
-// or email jason AT jasonantman DOT com
-// Time-stamp: "2006-12-03 13:50:57 jantman"
-
-//This software may not be copied, altered, or distributed in any way, shape, form, or means.
-// version: 0.1 as of 2006-10-3
-
 // dispatchSchedule.php
-// generates a dispatch schedule for the week
+//
+// Page that attempts to generate a weekly schedule of when coverage is needed.
+//   This is still a mostly experimental feature.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
 // this turns debugging mode on and off
 $debug = false;
@@ -26,7 +47,10 @@ $debug = false;
 
 
 // GLOBALS
-require('custom.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // scheule configuration
+
 $day = 86400; // seconds in a day
 
 
@@ -383,21 +407,11 @@ function numOnDuty($type, $timestamp)
 		if($debug) {echo $r[$i.'ID']." start=".date("Y-m-d H:i:s", $start)." timestamp=".date("Y-m-d H:i:s", $timestamp)." end=".date("Y-m-d H:i:s", $end)."<br>";}
 
 
-		//DEBUG
-		//echo 'ID'.$r[$i.'ID'].' startHr='.$startHr.' start='.date("Y-m-d H:i:s", $start).' endHr='.$endHr.'end='.date("Y-m-d H:i:s", $end).' timestamp='.date("Y-m-d H:i:s", $timestamp);
-		//END DEBUG
-
 		if($start <= $timestamp && $end >= $timestamp)
 		{
-		    // DEBUG
-		    //echo " true";
-		    //END DEBUG
 		    if($debug) { echo "count++ EMTid=".$r[$i.'ID']."<br>";}
 		    $count++;
 		}
-		// DEBUG
-		//echo '<br>';
-		//END DEBUG
 	    }
 	}
     }
@@ -424,20 +438,12 @@ function altDay($d)
 
 	for($i = $firstH + 1; $i <= ($lastH + 1); $i++)
 	{
-	    // DEBUG
-            //echo "i=".$i."<br>";
 	    $hour = strtotime(date("Y-m-d", $d)." ".intToHour($i));
 	    $hourMinus = $hour - 1;
 	    $hourPlus = $hour + 1;
-	    // DEBUG
-	    //echo 'i='.$i.'num='.numOnDuty("Senior", $hourPlus).'<br>';
-	    // END DEBUG
 
 	    if((numOnDuty("Senior", $tempHr) <> numOnDuty("Senior", $hourPlus)) && ((numOnDuty("Senior", $tempHr) < 2) || ( numOnDuty("Senior", $hourPlus) < 2)))
 	    {
-	        // we have a change
-		// DEBUG
-	        //echo "tempHrNum=".numOnDuty("Senior", $tempHr)." tempHr=".date("H", $tempHr)." hourPlusNum=".numOnDuty("Senior", $hourPlus)." hourPlus=".date("H", $hourPlus)."<br>";
 		showInterval($tempHr, $hour, $tempNum);
 
 		$tempHr = $hourPlus;
@@ -480,8 +486,6 @@ function altNight($d)
 	    $hourPlus = $hour + 1;
 	    if($debug) { echo "i=".$i." numOnDuty tempHr=".numOnDuty("Senior", $tempHr)." hourMinus=".numOnDuty("Senior", $hourMinus)." hourPlus=".numOnDuty("Senior", $hourPlus)."<br>";}
 
-	    // DEBUG
-	    //echo "i=".$i."tempHrNum=".numOnDuty("Senior", $tempHr)." hourMinusNum=".numOnDuty("Senior", $hourMinus)." hourPlusNum=".numOnDuty("Senior", $hourPlus)."<br>";
 
 	    if((numOnDuty("Senior", $tempHr) <> numOnDuty("Senior", $hourPlus)) && ((numOnDuty("Senior", $tempHr) < 2) || ( numOnDuty("Senior", $hourPlus) < 2)))
 	    {
@@ -525,7 +529,6 @@ function altNight($d)
 
 	    elseif($i == ($lastH + 1))
 	    {
-		//echo "i=lastH+1<br>";
 		$tempNum = numOnDuty("Senior", $hourMinus);
 		showInterval($tempHr, $hour, $tempNum);
 	    }

@@ -1,21 +1,44 @@
 <html>
 <head>
 <?php
-//(C) 2006 Jason Antman. All Rights Reserved.
-// with questions, go to www.jasonantman.com
-// or email jason AT jasonantman DOT com
-// Time-stamp: "2006-11-27 20:46:28 jantman"
-
-//This software may not be copied, altered, or distributed in any way, shape, form, or means.
-// version: 2.0 as of 2006-10-3
-
 // doRigCheck.php
-// page to do rig checks
-// see custom.php for more information - specifically rigCheckData variable
+//
+// Script to handle the output from the rig check form and put it in the DB.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
+require_once('./config/config.php'); // main configuration
 
-require('custom.php');
-require('global.php');
+require_once('./inc/global.php'); // global functions
+
+require_once('./config/rigCheckData.php'); // rig check configuration
+
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
@@ -56,9 +79,23 @@ echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
 
 $time = time();
 
-global $rigCheckData;
-global $table2start;
-global $table3start;
+// code introduced to handle different items for different rigs
+$rigNum = $_REQUEST['rig']; // get the rig number
+$rigIndex = '';
+global $rigChecks;
+
+foreach($rigChecks as $idx => $arr)
+{
+    if($arr['name'] == $rigNum)
+    {
+	$rigIndex = $idx;
+    }
+}
+
+$rigCheckData = $rigChecks[$rigIndex]['data'];
+$table2start = $rigChecks[$rigIndex]['table2start'];
+$table3start = $rigChecks[$rigIndex]['table3start'];
+// DONE with implementing the multi-rig stuff
 
 putToDB();
 
