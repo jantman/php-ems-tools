@@ -1,26 +1,47 @@
 <?php
-//
 // install.php
 //
-// Version 2.0 as of Time-stamp: "2007-03-27 00:51:36 jantman"
+// Command-Line installation script. Handles all database stuff and
+//   checks for dependencies. 
+// FOR UNIX OR LINUX ONLY!
 //
-// This file is part of the php-ems-tools package
-// available at www.php-ems-tools.com
-//
-// (C) 2006 Jason Antman.
-// This package is licensed under the terms of the
-// GNU General Public License (GPL)
-//
-
-// 
-// DO NOT MAKE CHANGES
-// UNLESS YOU KNOW WHAT YOU ARE DOING.
-// 
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
 // this file will import the user's customization
-require('custom.php');
-require('checkCustomConfig.php');
-//
+require_once('./config/config.php');
+
+// import ALL of the config files for checking
+require_once('./config/rigCheckData.php');
+require_once('./config/rosterConfig.php');
+require_once('./config/scheduleConfig.php');
+
+require_once('./admin/checkCustomConfig.php');
 
 $dontMakeDB = false; // whether or not to make the DB.
 
@@ -42,14 +63,10 @@ fwrite(STDOUT, "------------------------------------------------------------- \n
 fwrite(STDOUT, "This script is for Linux/Unix/BSD systems ONLY! \n");
 fwrite(STDOUT, "------------------------------------------------------------- \n\n");
 
-fwrite(STDOUT, "Please be WARNED that PHP EMS Tools is not designed to be used\n");
-fwrite(STDOUT, "on the internet. To do so, you must be sure to configure additioanl\n");
-fwrite(STDOUT, "security. At the minimum, use .htaccess files!\n");
-fwrite(STDOUT, "Until we are done with configuration, this directory (and the MySQL database)\n");
-fwrite(STDOUT, "should probably NOT be visible from the Internet.\n");
+fwrite(STDOUT, "Please be WARNED that PHP EMS Tools is not designed to be used on the internet. To do so, you must be sure to configure additional security. At the minimum, use .htaccess files!\n");
+fwrite(STDOUT, "Until we are done with configuration, this directory (and the MySQL database) should NOT be visible from the Internet.\n");
 
-fwrite(STDOUT, "If nothing is visible to the Internet, or you understand and choose to disregard\n");
-fwrite(STDOUT, "this warning, please type yes. Otherwise, type no\n");
+fwrite(STDOUT, "If nothing is visible to the Internet, or you understand and choose to disregard this warning, please type yes. Otherwise, type no.\n");
 fwrite(STDOUT, "yes or no?\n");
 $command = trim(fgets(STDIN));
 if($command == "yes")
@@ -64,30 +81,24 @@ else
     die();
 }
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
-fwrite(STDOUT, "I am about to display the PHP EMS Tools License....\n");
 fwrite(STDOUT, "\n");
+fwrite(STDOUT, "PHP EMS Tools (php-ems-tools) is licensed under the GNU General Public License (GPL). A copy of the license is included as the LICENSE.txt file in this directory.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "PHP EMS Tools (php-ems-tools) LICENSE\n");
+fwrite(STDOUT, "This is *free* software, both in terms of price and in terms of *freedom*. You have the freedom to redistribute, modify, and use the code in any way that you choose.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "Please refer to www.php-ems-tools.com for more information.\n");
+fwrite(STDOUT, "That being said, I do have the following requests (and only requests):\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "This software is distributed under the GNU GPL License, with the following provisions:\n");
+fwrite(STDOUT, "1) If you are intending to use PHP EMS Tools for your EMS organization, please fill out the user survey at http://www.php-ems-tools.com This information is for my research purposes only, as I would like to keep the package up-to-date for the needs of the users. Your information will be kept completely private. I will only use it for planning future features, and you will not be contacted via email more than once unless you subscribe to a mailing list.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "1) If you are intending to use PHP EMS Tools for your EMS organization, please fill out the user survey at http://jantman.dyndns.org:10011/php-ems-tools/survey.php This information is for my research purposes only, as I would like to keep the package up-to-date for the needs of the users.\n");
-fwrite(STDOUT, "\n");
-fwrite(STDOUT, "2) You are free to modify the code however you choose, provided that you include attribution to the original project (PHP EMS Tools available at http://www.php-ems-tools.com).\n");
+fwrite(STDOUT, "2) You are free to modify the code however you choose, but please include attribution to the original project (PHP EMS Tools available at http://www.php-ems-tools.com).\n");
 fwrite(STDOUT, "\n");
 fwrite(STDOUT, "3) If you choose to modify the code, I ask that you e-mail me with your additions, or a brief synopsis of what they do, so that I can incorporate the features into the next release.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "4) If you choose (purely voluntary) I would like to put a link to your organization's web site on the php-ems-tools webpage, under a list of current users.\n");
+fwrite(STDOUT, "4) I REQUEST that you do NOT redistribute this code unless it can not be downloaded from php-ems-tools.com or SourceForge. This is an effort to be sure that everyone gets the most recent version.\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "5) If you modify and redistribute this code, you must include this license agreement with it.\n");
+fwrite(STDOUT, "5) If you feel that the software has helped your organization, recognize the savings that you have gained by using free software. I mean this both in terms of cost savings from cost-free software, and the merits of Free/Open Source Software - specifically, the ability to modify the software to your liking, and the avoidance of vendor lock-in with proprietary software. If you would like to help my development efforts, I accept donations to support the costs of running my web sites and development machines. Please contact me at jason@php-ems-tools.com or visit www.php-ems-tools.com\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "6) I REQUEST that you do NOT redistribute this code without notifying me - I would like to try and have all downloads from SourceForge or my web site, in order to keep the distributed code up-to-date.\n");
-fwrite(STDOUT, "\n");
-fwrite(STDOUT, "7) If you feel that the software has helped your organization, recognize the savings that you have gained by using free software, and would like to help my development efforts, I accept donations to support the costs of running my web sites and development machines. Please contact me at jason@php-ems-tools.com\n");
-fwrite(STDOUT, "\n");
-fwrite(STDOUT, "8) I highly encourage all users to consider making a donation in return for the software, in any amount, to:\n");
+fwrite(STDOUT, "6) I highly encourage all users to consider making a donation in return for the software, in any amount, to:\n");
 fwrite(STDOUT, "\n");
 fwrite(STDOUT, "   Midland Park Volunteer Ambulance Corps\n");
 fwrite(STDOUT, "   PO Box 38\n");
@@ -119,17 +130,14 @@ fwrite(STDOUT, "----------------------------------------------------------------
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
 fwrite(STDOUT, "NOTICE: \n");
-fwrite(STDOUT, "This piece of free, open-source software relies on user feedback for development.\n");
-fwrite(STDOUT, "It is highly important that if you have ANY problems or suggestions, you\n");
-fwrite(STDOUT, "report them on the tracker at SourceForge.net or email me at:\n");
-fwrite(STDOUT, "jason@php-ems-tools.com\n");
+fwrite(STDOUT, "This piece of free, open-source software relies on user feedback for development. It is highly important that if you have ANY problems or suggestions, you report them using the Bug Report link at www.php-ems-tools.com\n");
 fwrite(STDOUT, "\n\n");
 
-fwrite(STDOUT, "Do you understand this? yes or no\n");
-$command = trim(fgets(STDIN));
-if($command == "yes")
+fwrite(STDOUT, "Please press enter to continue with the installation.\n");
+$command = fgets(STDIN);
+if($command != "")
 {
-    fwrite(STDOUT, "Thank You.\n");
+    fwrite(STDOUT, "Moving on...\n");
 }
 else
 {
@@ -141,13 +149,13 @@ else
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-fwrite(STDOUT, "Before we do anything, let's check to see that custom.php is configured correctly.\n");
-fwrite(STDOUT, "You can run the custom.php check from the command line or via the web, using checkCustomConfig.php\n");
-fwrite(STDOUT, "It is recommended that you do this every time you change custom.php\n");
+fwrite(STDOUT, "Before we do anything, let's check to see that config.php is configured correctly.\n");
+fwrite(STDOUT, "You can run the config.php check from the command line or via the web, using admin/checkCustomConfig.php\n");
+fwrite(STDOUT, "It is recommended that you do this every time you change config.php\n");
 fwrite(STDOUT, "This script only checks for MAJOR errors that will being everything to a grinding halt. Minor errors may effect functionality but slip by me right now...\n\n\n\n");
-fwrite(STDOUT, "Checking custom.php...\n");
+fwrite(STDOUT, "Checking config.php...\n");
 
-$checked = checkCustom();
+$checked = checkCustom(); // run checkCustom from ./admin/checkCustomConfig.php
 
 if($checked == true)
 {
@@ -176,6 +184,7 @@ else
 {
     // Windoze or Mac. die.
     fwrite(STDOUT, "This script is not for Windows or Mac. Sorry. \n Please contact the developer for more information.\n");
+    fwrite(STDOUT, "The installation procedure is actually quite simple. Please read through the documentation (either included or online at our web site). It generally just consists of setting up a database in MySQL and setting up the tables, which can be done easily.\n");
     die();
 }
 
@@ -190,8 +199,8 @@ fwrite(STDOUT, "Root permissions are only needed to initially setup the database
 $euid = posix_geteuid();
 if($euid != 0)
 {
-    fwrite(STDOUT, "Your user id (uid) does not appear to be 0, that of root. This script must be run as root. \n");
-    fwrite(STDOUT, "If you are ABSOLUTELY sure that you ARE root (and you have root set to a uid other than 0??? \n");
+    fwrite(STDOUT, "Your user id (euid) does not appear to be 0, that of root. This script must be run as root. \n");
+    fwrite(STDOUT, "If you are ABSOLUTELY sure that you ARE root (or you have root set to a uid other than 0???) or have already intialized the database and granted privileges to the user that you're running as, \n");
     fwrite(STDOUT, "Type YES to continue, otherwise press any key. \n");
     $command = trim(fgets(STDIN));
     if($command != "YES")
@@ -207,13 +216,13 @@ else
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-// has custom.php been edited?
-fwrite(STDOUT, "Before we go any farther, please be sure that you have edited custom.php to the correct values, especially the dbName value. \n\n");
+// has config.php been edited?
+fwrite(STDOUT, "Before we go any farther, please be sure that you have edited config.php to the correct values, especially the dbName value and your server information. \n\n");
 fwrite(STDOUT, "Have you done so? yes or no.\n");
 $command = trim(fgets(STDIN));
 if($command != "yes")
 {
-    die("Please edit custom.php and then re-run this script.");
+    die("Please edit config.php and then re-run this script.");
 }
 
 fwrite(STDOUT, "\n\n");
@@ -240,7 +249,8 @@ $command = trim(fgets(STDIN));
 if($command == "yes")
 {
     fwrite(STDOUT, "Good choice. \n");
-    fwrite(STDOUT, "Let's see if it's running... \n");
+    fwrite(STDOUT, "Let's see if it's running... (we'll do ps -A | grep httpd)\n");
+    // a bit of a kludge...
     $httpd = shell_exec("ps -A | grep httpd");
     if(stristr($httpd, "httpd") != false)
     {
@@ -367,7 +377,7 @@ if($failed || ($num < 1))
 }
 elseif($num == 1)
 {
-    fwrite(STDOUT, "It looks to me like you have setup the tables already, but never vieded the schedule.\n");
+    fwrite(STDOUT, "It looks to me like you have setup the tables already, but never viewed the schedule.\n");
     fwrite(STDOUT, "You should point a web browser to the schedule and view it, to populate a table for this month.\n");
     $setupTables = false;
 }
@@ -596,7 +606,7 @@ mysql_close($conn);
 fwrite(STDOUT, "\n\n");
 fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-fwrite(STDOUT, "Do you have a wbe browser (lynx is OK) on this machine? yes or no\n");
+fwrite(STDOUT, "Do you have a web browser (lynx is OK) on this machine? yes or no\n");
 $command = trim(fgets(STDIN));
 if($command == "yes")
 {
@@ -616,10 +626,25 @@ if($command == "yes")
 	{
 	    fwrite(STDOUT, "GREAT! We're done. Thanks for using PHP EMS Tools.\n");
 	    fwrite(STDOUT, "\n");
-	    finishText();
 	    exit(0);
 	}
 
+    }
+}
+else
+{
+    fwrite(STDOUT, "That's ok. Please try using another machine that should be able to view documents served by the web server on this machine. You will want to point your browser to this directory (php-ems-tools). It seems from your configuration file that the full URL should be ".$URL.$dir." If this is not right, please correct your config.php file.\n\n\n");
+    fwrite(STDOUT, "Please take a moment to try to view this URL. If it doesn't seem to load correctly, I will give you some simple troubleshooting hints. If none of them work, please visit the online documentation at http://www.php-ems-tools.com and also attempt troubleshooting specific to your web server and system.\n");
+    fwrite(STDOUT, "Can you view this page? yes or no\n");
+    $command = trim(fgets(STDIN));
+    if($command = "yes")
+    {
+	fwrite(STDOUT, "GREAT! Installation has finished successfully...");
+	exit(0);
+    }
+    else
+    {
+	fwrite(STDOUT, "Ok. Well, troubleshooting time!\n");
     }
 }
 
@@ -631,11 +656,9 @@ fwrite(STDOUT, "I'm sorry that you are having some problems.\n");
 fwrite(STDOUT, "First, please make sure that Apache (or whatever web server you're using) is properly configured and serving pages.\n");
 fwrite(STDOUT, "If that was not the problem, you have a few choices for support:\n");
 fwrite(STDOUT, "\n");
-fwrite(STDOUT, "You can look on our wbe page at\n");
+fwrite(STDOUT, "You can look at our web page at\n");
 fwrite(STDOUT, "http://www.php-ems-tools.com\n");
-fwrite(STDOUT, "Or check out our SourceForge page at:\n");
-fwrite(STDOUT, "http://sourceforge.net/projects/php-ems-tools/\n");
-fwrite(STDOUT, "where you can look through previous known bugs.\n");
+fwrite(STDOUT, "for documentation and also a list of previous bugs and support requests.\n");
 fwrite(STDOUT, "\n");
 fwrite(STDOUT, "As a last resort, feel free to e-mail the developer at:\n");
 fwrite(STDOUT, "jason@php-ems-tools.com\n");
@@ -646,157 +669,44 @@ fwrite(STDOUT, "\n");
 
 fwrite(STDOUT, "Please make note of these options, and press ENTER to continue...\n");
 $command = trim(fgets(STDIN));
-finishText();
 exit(0);
-
-function finishText()
-{
-	    fwrite(STDOUT, "If you have not yet done so, please fill out the user survey at:\n");
-	    fwrite(STDOUT, "http://www.php-ems-tools.com/survey.php \n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "If you have any questions or comments, please feel free to e-mail the developer at:\n");
-	    fwrite(STDOUT, "jason@php-ems-tools.com\n");
-	    fwrite(STDOUT, "All feedback is always appreciated.\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "But reports can be submitted via SourceForge at:\n");
-	    fwrite(STDOUT, "http://sourceforge.net/projects/php-ems-tools/ \n");
-	    fwrite(STDOUT, "Clock on 'Tracker' near the top, and then 'Bugs'\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "If you think that this project is worth a donation, you may send one to:\n");
-	    fwrite(STDOUT, "Midland Park Ambulance Corps\n");
-	    fwrite(STDOUT, "PO Box 38\n");
-	    fwrite(STDOUT, "Midland Park, NJ\n");
-	    fwrite(STDOUT, "07432\n");
-	    fwrite(STDOUT, "MPAC is a 501(c)(3) non-profit, and donations are tax-deductable.\n");
-	    fwrite(STDOUT, "Be sure to include a note that this donation was suggested by PHP EMS Tools\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "Please be sure to check www.php-ems-tools.com occasionally\n");
-	    fwrite(STDOUT, "for new releases, patches, and other information\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "\n");
-	    fwrite(STDOUT, "Thank You for choosing PHP EMS Tools - software by volunteers for volunteers.\n");
-}
 
 function doTableSetup()
 {
     global $conn;
-  
-    // define the queries
-$addBk = "CREATE TABLE `addBk` (`pKey` int(10) NOT NULL auto_increment, `company` tinytext, `description` tinytext, `contact` tinytext, `address` tinytext, `phone1` tinytext, `phone2` tinytext, `fax` tinytext, `email` tinytext, `notes` blob, `web` tinytext, PRIMARY KEY  (`pKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+    require_once('./admin/dbTableSchema.php'); // db table schema
+    // this file has $dbTableSchemaA which is the array that holds all queries to setup the table
 
-$rigCheck = "CREATE TABLE `rigCheck` ( `pKey` int(11) NOT NULL auto_increment, `timeStamp` int(11) default NULL, `crew1` tinytext, `crew2` tinytext, `crew3` tinytext, `crew4` tinytext, `rig` tinytext, `comments` text, `stillBroken` text, `sigID` tinytext, `OK` text, `NG` text, `mileage` int(6) default NULL, PRIMARY KEY  (`pKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
-$roster = "CREATE TABLE `roster` ( `EMTid` tinytext NOT NULL, `LastName` tinytext NOT NULL, `FirstName` tinytext NOT NULL, `password` tinytext, `rightsLevel` tinyint(4) NOT NULL default '0', `status` text NOT NULL, `driver` tinyint(1) NOT NULL default '1', `Address` text, `HomePhone` tinytext, `CellPhone` tinytext, `Email` tinytext, `CPR` int(11) default NULL, `EMT` int(11) default NULL, `HazMat` int(11) default NULL, `BBP` int(11) default NULL, `ICS100` int(11) default NULL, `ICS200` int(11) default NULL, `NIMS` int(11) default NULL, `Pkey` int(11) NOT NULL default '0', `SpouseName` varchar(30) character set latin1 collate latin1_bin default NULL, `pwdMD5` tinytext, `shownAs` varchar(15) default NULL, `unitID` tinytext, `textEmail` tinytext, `position` tinytext, `comm1` tinytext, `comm1pos` tinytext, `comm2` tinytext, `comm2pos` tinytext, `officer` tinytext, `PHTLS` int(11) default NULL, `NREMT` int(11) default NULL, `FR` int(11) default NULL, `trustee` tinytext, `comm3` tinytext, `comm3pos` tinytext) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-$sched_change_temp = "CREATE TABLE `schedule_change_template` ( `pKey` int(11) NOT NULL auto_increment, `timestamp` int(11) default NULL, `query` text, `EMTid` tinytext, `host` tinytext, `address` tinytext, `form` tinytext, PRIMARY KEY  (`pKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-$schedule = "CREATE TABLE `schedule_template` ( `PKey` int(11) NOT NULL auto_increment, `Date` tinyint(4) NOT NULL default '0', `1ID` varchar(6) default NULL, `1Start` time default NULL, `1End` time default NULL, `2ID` varchar(6) default NULL, `2Start` time default NULL, `2End` time default NULL, `3ID` varchar(6) default NULL, `3Start` time default NULL, `3End` time default NULL, `4ID` varchar(6) default NULL, `4Start` time default NULL, `4End` time default NULL, `5ID` varchar(6) default NULL, `5Start` time default NULL, `5End` time default NULL, `6ID` varchar(6) default NULL, `6Start` time default NULL, `6End` time default NULL, `message` varchar(50) default NULL, PRIMARY KEY  (`PKey`)) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
-
-$schedule_data = "INSERT INTO `schedule_template` VALUES (1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(7,7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(8,8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(9,9,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(10,10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(11,11,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(12,12,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(13,13,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,14,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,15,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,16,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,17,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,18,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(19,19,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,20,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,21,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,23,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,24,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(27,27,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,29,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(30,30,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(31,31,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(32,32,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);";
-
-
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
-
-    // addBk
-    fwrite(STDOUT, "Creating the addBk table...\n");
-    mysql_query($addBk) or die("I'm sorry, but there was an error in creating the addBk table: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE addBk;");
-    if(mysql_num_rows($result) > 0)
+    // begin table creation loop
+    foreach($dbTableSchemaA as $val)
     {
-	fwrite(STDOUT, "Ok.\n");
+	$tblName = $val['name'];
+	$tblDesc = $val['description'];
+	$query = $val['query'];
+	fwrite(STDOUT, "Creating the ".$tblName." table...\n");
+	mysql_query($query) or die("I'm sorry, but there was an error in creating the ".$tblName." table: ".mysql_error());
+	fwrite(STDOUT, "Done.\n");
+	fwrite(STDOUT, "Checking that it worked...\n");
+	$result = mysql_query("SHOW TABLES LIKE ".$tblName.";");
+	if(mysql_num_rows($result) > 0)
+	{
+	    fwrite(STDOUT, "Ok.\n");
+	}
+	else
+	{
+	    fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
+	}
     }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // rigCheck
-    fwrite(STDOUT, "Creating the rigCheck table...\n");
-    mysql_query($rigCheck) or die("I'm sorry, but there was an error in creating the rigCheck table: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE rigCheck;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-  
-    // roster
-    fwrite(STDOUT, "Creating the roster table...\n");
-    mysql_query($roster) or die("I'm sorry, but there was an error in creating the roster table: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE roster;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // schedule template
-    fwrite(STDOUT, "Creating the schedule_template table...\n");
-    mysql_query($schedule) or die("I'm sorry, but there was an error in creating the table schedule_template: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE schedule_template;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // schedule data
-    fwrite(STDOUT, "Adding the default data into the schedule_template table...\n");
-    mysql_query($schedule_data) or die("I'm sorry, but there was an error in adding the schedule template data: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SELECT * FROM schedule_template;");
-    $row = mysql_fetch_array($result);
-
-    if($row['Date'] == 1 || $row['Date'] == "1")
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table data isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
-    // schedule change template
-    fwrite(STDOUT, "Creating the schedule_change_template table...\n");
-    mysql_query($sched_change_temp) or die("I'm sorry, but there was an error in creating the table schedule_change_template: ".mysql_error());
-    fwrite(STDOUT, "Done.\n");
-    fwrite(STDOUT, "Checking that it worked...\n");
-    $result = mysql_query("SHOW TABLES LIKE schedule_change_template;");
-    if(mysql_num_rows($result) > 0)
-    {
-	fwrite(STDOUT, "Ok.\n");
-    }
-    else
-    {
-	fwrite(STDOUT, "I'm sorry, but the table isn't there. I'll continue, but you will not be able to access some of the features.\n");
-    }
-
+    // end table creation loop
 
     fwrite(STDOUT, "Table creation complete.\n");
     fwrite(STDOUT, "\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "Now, we have to setup an initial administrative user for you, so that you can make changes and modify other users.\n");
     fwrite(STDOUT, "We will give you a rightsLevel of 2 - the highest.\n");
@@ -910,7 +820,7 @@ fwrite(STDOUT, "----------------------------------------------------------------
     $correct = false;
     while($correct == false)
     {
-	fwrite(STDOUT, "You can now select your status/member type from the options set in custom.php.\n");
+	fwrite(STDOUT, "You can now select your status/member type from the options set in config.php.\n");
 	fwrite(STDOUT, "Please type one of the following numbers...\n");
 
 	global $memberTypes;
@@ -946,8 +856,8 @@ fwrite(STDOUT, "----------------------------------------------------------------
 
     fwrite(STDOUT, "Ok, we're done collecting your information. You can enter the rest with the web interface.\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "\n\n");
     fwrite(STDOUT, "Our MySQL query is as follows:\n");
@@ -968,8 +878,8 @@ fwrite(STDOUT, "----------------------------------------------------------------
     mysql_query($userInfo)or die("I'm sorry, but there was an error in creating the table schedule_change_template: ".mysql_error());
     fwrite(STDOUT, "Done.\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "Confirming that it was input correctly...\n");
     $result = mysql_query('SELECT * FROM roster WHERE EMTid="'.$EMTid.'";');
@@ -983,8 +893,8 @@ fwrite(STDOUT, "----------------------------------------------------------------
 
     fwrite(STDOUT, "Tables and user data successfully added.\n");
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
 
 }
@@ -993,11 +903,11 @@ function setupDatabase()
 {
     global $conn;
     global $dbName;
-    $grants = "CREATE, DELETE, INSERT, SHOW DATABASES, SELECT, UPDATE";
-    $query = "FLUSH PRIVILEGES; USE \`php-ems-tools-GVAC\`; GRANT ".$grants." ON \`php-ems-tools-GVAC\`.* TO ''@'localhost'; FLUSH PRIVILEGES;";
+    $grants = "CREATE, DELETE, INSERT, SELECT, UPDATE";
+    $query = "FLUSH PRIVILEGES; USE \`".$dbName."\`; GRANT ".$grants." ON \`".$dbName."\`.* TO ''@'localhost'; FLUSH PRIVILEGES;";
 
-fwrite(STDOUT, "\n\n");
-fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
+    fwrite(STDOUT, "\n\n");
+    fwrite(STDOUT, "----------------------------------------------------------------------------------- \n\n");
 
     fwrite(STDOUT, "Creating the database using the command-line utilities through a shell escape...\n");
     fwrite(STDOUT, "sending 'mysqladmin CREATE ".$dbName."'...\n");

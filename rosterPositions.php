@@ -2,17 +2,38 @@
 //
 // rosterPositions.php
 //
-// Version 0.1 as of Time-stamp: "2006-12-13 21:07:03 jantman"
+// This page views the roster of members, positions, and committees
 //
-// This file is part of the php-ems-tools package
-// available at 
-//
-// (C) 2006 Jason Antman.
-// This package is licensed under the terms of the
-// GNU General Public License (GPL)
-//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
-require_once('custom.php');
+require_once('./config/config.php'); // main configuration
+require_once('./config/rosterConfig.php'); // roster configuration
 
 // this script views the roster from the DB
 if(! empty($_GET['adminView']))
@@ -44,6 +65,13 @@ echo '<table class="roster">';
 
 //Finish setting up the table
 $colspan = 11;
+
+// extended positions option
+if($useExtdTypes)
+{
+    $colspan = $colspan + 1;
+}
+
 echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Roster - Positions</b><br> (as of '.date("M d Y").')';
 if($adminView==1)
@@ -88,6 +116,10 @@ echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm1pos">P
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm2">Committee 2</a></td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm2pos">Position</a></td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=trustee">Trustee</a></td>';
+if($useExtdTypes)
+{
+    echo '<td>Other Types</td>'; // extended member types
+}
 echo '</tr>';
 
 //loop through the members and call the showMember function
@@ -101,6 +133,7 @@ mysql_free_result($result);
 function showMember($r)
 {
     global $adminView;
+    global $useExtdTypes;
     echo '<tr>';
     //get the roster view of the status/memberType
     if($r['unitID']<>"")
@@ -187,6 +220,18 @@ function showMember($r)
     else
     {
 	echo '<td>Yes</td>';
+    }
+    // extended member types
+    if($useExtdTypes)
+    {
+	if(isEmpty($r['OtherPositions']))
+	{
+	    echo '<td>&nbsp;</td>';
+	}
+	else
+	{
+	    echo '<td>'.$r['OtherPositions'].'</td>';
+	}
     }
 
     echo '</tr>';
