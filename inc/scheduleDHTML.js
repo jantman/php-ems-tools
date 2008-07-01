@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-07-01 16:48:25 jantman"
+// Time-stamp: "2008-07-01 17:12:01 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -53,23 +53,22 @@ function createRequestObject()
 // SCHEDULE-SPECIFIC FUNCTIONS
 //
 
-function showSignonForm($ts, $monthTS)
+function showSignonForm($ts, $shift)
 {
   // shows the form to add a new signon
-  alert("showSignonForm ts="+$ts+" monthTS="+$monthTS);
-  newSignonFormRequest($ts, $monthTS);
+  newSignonFormRequest($ts, $shift);
 }
 
-function showMessageForm($ts, $monthTS)
+function showMessageForm($ts, $shift)
 {
   // shows the form to edit a daily message
-  alert("showMessageForm ts="+$ts+" monthTS="+$monthTS);
+  messageFormRequest($ts, $shift);
 }
 
-function showEditForm($year, $month, $shift, $date, $key)
+function showEditForm($year, $month, $shift, $date, $key, $ts)
 {
   // shows the form to edit or remove a signon
-  alert("showEditForm year="+$year+" month="+$month+" shift="+$shift+" date="+$date+" key="+$key);
+  editSignonFormRequest($year, $month, $shift, $date, $key, $ts);
 }
 
 
@@ -77,9 +76,14 @@ function showEditForm($year, $month, $shift, $date, $key)
 // HTTPrequest senders and handlers
 //
 
-function newSignonFormRequest($ts, $monthTS)
+// TODO: are ts AND monthTS needed here? where is monthTS needed?
+// TODO: only pass the minimum variables needed
+// TODO: in PHP, have a central tsToYearMonthDateShift() that returns a string
+// TODO: move all of these forms to inc/ named like form{type}.php
+
+function newSignonFormRequest($ts, $monthTS, $shift)
 {
-	http.open('get', 'signOn.php?ts=' + $ts);
+	http.open('get', 'signOn.php?ts=' + $ts + '&shift=' + $shift);
 	// TODO: add an error var to reload the form if we have errors
 	http.onreadystatechange =  handleNewSignonFormRequest; 
 	http.send(null);
@@ -91,7 +95,44 @@ function handleNewSignonFormRequest()
 	{
 	  var response = http.responseText;
 	  document.getElementById('popupbody').innerHTML = response;
-	  showPopup("popup");
+	  showPopup();
+	}
+}
+
+function editSignonFormRequest($year, $month, $shift, $date, $key, $ts)
+{
+	http.open('get', 'signOn.php?action=edit&ts=' + $ts + '&shift=' + $shift);
+	// TODO: add an error var to reload the form if we have errors
+	http.onreadystatechange =  handleEditSignonFormRequest; 
+	http.send(null);
+}
+
+function handleEditSignonFormRequest()
+{
+	if(http.readyState == 4)
+	{
+	  var response = http.responseText;
+	  document.getElementById('popupbody').innerHTML = response;
+	  showPopup();
+	}
+}
+
+function messageFormRequest($ts, $shift)
+{
+  // request the HTML for the message form
+  http.open('get', 'dailyMessage.php?ts=' + $ts + '&shift=' + $shift);
+  // TODO: add an error var to reload the form if we have errors
+  http.onreadystatechange =  handleMessageFormRequest; 
+  http.send(null);
+}
+
+function handleMessageFormRequest()
+{
+	if(http.readyState == 4)
+	{
+	  var response = http.responseText;
+	  document.getElementById('popupbody').innerHTML = response;
+	  showPopup();
 	}
 }
 
@@ -99,14 +140,14 @@ function handleNewSignonFormRequest()
 // POPUP STUFF
 //
 
-function showPopup(p)
+function showPopup()
 {
         grayOut(true);
-        document.getElementById(p).style.display = 'block';
+        document.getElementById("popup").style.display = 'block';
 }
 
-function hidePopup(p)
+function hidePopup()
 {
         grayOut(false);
-        document.getElementById(p).style.display = 'none';
+        document.getElementById("popup").style.display = 'none';
 }
