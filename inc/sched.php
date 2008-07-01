@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-07-01 16:15:16 jantman"
+// Time-stamp: "2008-07-01 17:15:17 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -147,13 +147,13 @@ function getCellHeader($ts, $monthTS)
     elseif(date("Y-m-d", $ts) == date("Y-m-d"))
     {
 	// TODAY
-	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.','.$monthTS.')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.','.$monthTS.')">'."\n";
+	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\')">'."\n";
     }
     else
     {
-	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.','.$monthTS.')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.','.$monthTS.')">'."\n";
+	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\')">'."\n";
     }
     return $final;
 }
@@ -197,12 +197,12 @@ function getCellContent($ts, $monthTS)
 	    {
 		// another month, don't show link to edit
 		$linkLoc = "";
-		$final.= '<div class="calSignon">"'.memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc).'</div>'."\n";
+		$final.= '<div class="calSignon">"'.memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc, $ts, $monthTS).'</div>'."\n";
 	    }
 	    else
 	    {
 		$final .= '<div class="calSignon">';
-		$linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$i.')';
+		$linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$i.', '.$ts.')';
 		$final .= memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc);
 		$final .= '</a></div>'."\n";
 	    }
@@ -269,7 +269,7 @@ function getSortedCellContent($ts, $monthTS)
 	else
 	{
 	    $final.= '<div class="calSignon"> ';
-	    $linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$key.')';
+	    $linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$key.', '.$ts.')';
 	    $final .= memberString($membIDs[$key], date("H:i:s", $start[$key]), date("H:i:s", $end[$key]), $linkLoc);
 	    $final .= '</a></div>'."\n";
 	}
@@ -288,7 +288,7 @@ function getSortedCellContent($ts, $monthTS)
 	else
 	{
 	    $final.= '<div class="calSignon"> ';
-	    $linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$key.')';
+	    $linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$key.', '.$ts.')';
 	    $final .= memberString($PmembIDs[$key], date("H:i:s", $Pstart[$key]), date("H:i:s", $Pend[$key]), $linkLoc);
 	    $final .= '</a></div>'."\n";
 	}
