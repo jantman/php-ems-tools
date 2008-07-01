@@ -5,6 +5,7 @@
 //
 // Functions to generate the schedule
 //
+// Time-stamp: "2008-07-01 16:15:16 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -125,6 +126,8 @@ function getCellHeader($ts, $monthTS)
     // this function outputs the table cell contents for a day
     // $ts is the timestamp for that day, $monthTS is the timestamp for a day in the current month
 
+    global $shift;
+
     // generate the opening DIV code
     $final = "";
     $final .= "<td id='date_".$ts."'>";
@@ -134,6 +137,7 @@ function getCellHeader($ts, $monthTS)
     {
 	$displayStr = substr($displayStr, 1);
     }
+    $displayStr .= getDayMessage($ts, $shift);
     if(date("Y-m", $ts) != date("Y-m", $monthTS))
     {
 	// not in the currently viewed month
@@ -143,13 +147,13 @@ function getCellHeader($ts, $monthTS)
     elseif(date("Y-m-d", $ts) == date("Y-m-d"))
     {
 	// TODAY
-	$final .= '<div class="todayDate">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showNewForm('.$ts.','.$monthTS.')">'."\n";
+	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.','.$monthTS.')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.','.$monthTS.')">'."\n";
     }
     else
     {
-	$final .= '<div class="date">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="day" id="day_'.$ts.'" onClick="showNewForm('.$ts.','.$monthTS.')">'."\n";
+	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.','.$monthTS.')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.','.$monthTS.')">'."\n";
     }
     return $final;
 }
@@ -185,41 +189,24 @@ function getCellContent($ts, $monthTS)
     // TODO - JS popup - year, month, shift, date, signonSlot (1-6)
 
     $final = "";
-    if($row['1ID'] != null)
+    for($i = 1; $i < 7; $i++)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 1)" ';
-	    $final .= memberString($row['1ID'], $row['1Start'], $row['1End']);
-	    $final .= '</a></div>'."\n";
-    }
-    if($row['2ID'] != null)
-    {
-	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 2)" ';
-	    $final .= memberString($row['2ID'], $row['2Start'], $row['2End']);
-	    $final .= '</a></div>'."\n";
-    }
-    if($row['3ID'] != null)
-    {
-	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 3)" ';
-	    $final .= memberString($row['3ID'], $row['3Start'], $row['3End']);
-	    $final .= '</a></div>'."\n";
-    }
-    if($row['4ID'] != null)
-    {
-	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 4)" ';
-	    $final .= memberString($row['4ID'], $row['4Start'], $row['4End']);
-	    $final .= '</a></div>'."\n";
-    }
-    if($row['5ID'] != null)
-    {
-	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 5)" ';
-	    $final .= memberString($row['5ID'], $row['5Start'], $row['5End']);
-	    $final .= '</a></div>'."\n";
-    }
-    if($row['6ID'] != null)
-    {
-	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 6)" ';
-	    $final .= memberString($row['6ID'], $row['6Start'], $row['6End']);
-	    $final .= '</a></div>'."\n";
+	if($row['1ID'] != null)
+	{
+	    if(date("Y-m", $ts) != date("Y-m"))
+	    {
+		// another month, don't show link to edit
+		$linkLoc = "";
+		$final.= '<div class="calSignon">"'.memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc).'</div>'."\n";
+	    }
+	    else
+	    {
+		$final .= '<div class="calSignon">';
+		$linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$i.')';
+		$final .= memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc);
+		$final .= '</a></div>'."\n";
+	    }
+	}
     }
     return $final;
 }
@@ -256,18 +243,11 @@ function getSortedCellContent($ts, $monthTS)
     $Pend = array(); // array of end times like {1-6} => endTime(ts) ({1-6}start)
     $PmembIDs = array(); // array of EMTids like {1-6} => EMTid ({1-6}end)
 
-    if($row['1ID'] != null && isProbie($row['1ID'])){ $Pstart[1] = schedTimeToTS($year, $month, $date, $row['1Start']); $Pend[1] = schedTimeToTS($year, $month, $date, $row['1End']); $PmembIDs[1] = $row['1ID'];}
-    elseif($row['1ID'] != null){ $start[1] = schedTimeToTS($year, $month, $date, $row['1Start']); $end[1] = schedTimeToTS($year, $month, $date, $row['1End']); $membIDs[1] = $row['1ID'];}
-    if($row['2ID'] != null && isProbie($row['2ID'])){ $Pstart[2] = schedTimeToTS($year, $month, $date, $row['2Start']); $Pend[2] = schedTimeToTS($year, $month, $date, $row['2End']); $PmembIDs[2] = $row['2ID'];}
-    elseif($row['2ID'] != null){ $start[2] = schedTimeToTS($year, $month, $date, $row['2Start']); $end[2] = schedTimeToTS($year, $month, $date, $row['2End']); $membIDs[2] = $row['2ID'];}
-    if($row['3ID'] != null && isProbie($row['3ID'])){ $Pstart[3] = schedTimeToTS($year, $month, $date, $row['3Start']); $Pend[3] = schedTimeToTS($year, $month, $date, $row['3End']); $PmembIDs[3] = $row['3ID'];}
-    elseif($row['3ID'] != null){ $start[3] = schedTimeToTS($year, $month, $date, $row['3Start']); $end[3] = schedTimeToTS($year, $month, $date, $row['3End']); $membIDs[3] = $row['3ID'];}
-    if($row['4ID'] != null && isProbie($row['4ID'])){ $Pstart[4] = schedTimeToTS($year, $month, $date, $row['4Start']); $Pend[4] = schedTimeToTS($year, $month, $date, $row['4End']); $PmembIDs[4] = $row['4ID'];}
-    elseif($row['4ID'] != null){ $start[4] = schedTimeToTS($year, $month, $date, $row['4Start']); $end[4] = schedTimeToTS($year, $month, $date, $row['4End']); $membIDs[4] = $row['4ID'];}
-    if($row['5ID'] != null && isProbie($row['5ID'])){ $Pstart[5] = schedTimeToTS($year, $month, $date, $row['5Start']); $Pend[5] = schedTimeToTS($year, $month, $date, $row['5End']); $PmembIDs[5] = $row['5ID'];}
-    elseif($row['5ID'] != null){ $start[5] = schedTimeToTS($year, $month, $date, $row['5Start']); $end[5] = schedTimeToTS($year, $month, $date, $row['5End']); $membIDs[5] = $row['5ID'];}
-    if($row['6ID'] != null && isProbie($row['6ID'])){ $Pstart[6] = schedTimeToTS($year, $month, $date, $row['6Start']); $Pend[6] = schedTimeToTS($year, $month, $date, $row['6End']); $PmembIDs[6] = $row['6ID'];}
-    elseif($row['6ID'] != null){ $start[6] = schedTimeToTS($year, $month, $date, $row['6Start']); $end[6] = schedTimeToTS($year, $month, $date, $row['6End']); $membIDs[6] = $row['6ID'];}
+    for($i = 1; $i < 7; $i++)
+    {
+	if($row[$i.'ID'] != null && isProbie($row[$i.'ID'])){ $Pstart[$i] = schedTimeToTS($year, $month, $date, $row[$i.'Start']); $Pend[$i] = schedTimeToTS($year, $month, $date, $row[$i.'End']); $PmembIDs[$i] = $row[$i.'ID'];}
+	elseif($row[$i.'ID'] != null){ $start[$i] = schedTimeToTS($year, $month, $date, $row[$i.'Start']); $end[$i] = schedTimeToTS($year, $month, $date, $row[$i.'End']); $membIDs[$i] = $row[$i.'ID'];}
+    }
 
     asort($start, SORT_NUMERIC);
     asort($Pstart, SORT_NUMERIC);
@@ -278,48 +258,57 @@ function getSortedCellContent($ts, $monthTS)
 
     foreach($start as $key => $val)
     {
-	// DEBUG
-	//$final .= $membIDs[$key]." ".date("Y-m-dTH:i", $start[$key])."-".date("Y-m-dTH:i", $end[$key]).'<br />';
-	$final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', '.$key.')" ';
-	$final .= memberString($membIDs[$key], date("H:i:s", $start[$key]), date("H:i:s", $end[$key]));
-	$final .= '</a></div>'."\n";
+	if(date("Y-m", $ts) != date("Y-m"))
+	{
+	    // another month, don't show link to edit
+	    $final.= '<div class="calSignon"> ';
+	    $linkLoc = "";
+	    $final .= memberString($membIDs[$key], date("H:i:s", $start[$key]), date("H:i:s", $end[$key]), $linkLoc);
+	    $final .= '</div>'."\n";
+	}
+	else
+	{
+	    $final.= '<div class="calSignon"> ';
+	    $linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$key.')';
+	    $final .= memberString($membIDs[$key], date("H:i:s", $start[$key]), date("H:i:s", $end[$key]), $linkLoc);
+	    $final .= '</a></div>'."\n";
+	}
     }
 
     foreach($Pstart as $key => $val)
     {
-	// DEBUG
-	//$final .= $PmembIDs[$key]." ".date("Y-m-dTH:i", $Pstart[$key])."-".date("Y-m-dTH:i", $Pend[$key]).'<br />';
-	$final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', '.$key.')" ';
-	$final .= memberString($PmembIDs[$key], date("H:i:s", $Pstart[$key]), date("H:i:s", $Pend[$key]));
-	$final .= '</a></div>'."\n";
+	if(date("Y-m", $ts) != date("Y-m"))
+	{
+	    // another month, don't show link to edit
+	    $final.= '<div class="calSignon"> ';
+	    $linkLoc = "";
+	    $final .= memberString($PmembIDs[$key], date("H:i:s", $Pstart[$key]), date("H:i:s", $Pend[$key]), $linkLoc);
+	    $final .= '</div>'."\n";
+	}
+	else
+	{
+	    $final.= '<div class="calSignon"> ';
+	    $linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$key.')';
+	    $final .= memberString($PmembIDs[$key], date("H:i:s", $Pstart[$key]), date("H:i:s", $Pend[$key]), $linkLoc);
+	    $final .= '</a></div>'."\n";
+	}
     }
-
-
-    /*
-    // DEBUG
-    $final .= '<strong>start: '.print_r($start, true).'</strong><br />';
-    $final .= '<strong>end: '.print_r($end, true).'</strong><br />';
-    $final .= '<strong>membIDs: '.print_r($membIDs, true).'</strong><br />';
-    $final .= '<strong>Pstart: '.print_r($Pstart, true).'</strong><br />';
-    $final .= '<strong>Pend: '.print_r($Pend, true).'</strong><br />';
-    $final .= '<strong>PmembIDs: '.print_r($PmembIDs, true).'</strong><br />';
-    // END DEBUG
-    */
-
 
     return $final;
 }
 
-function memberString($IDstr, $startTime, $endTime)
+function memberString($IDstr, $startTime, $endTime, $linkLocation)
 {
     global $showNames;
+
+
     // this will generate the string for the day's table
     if($IDstr == null)
     {
-	return '>&nbsp;';
+	// if we're not given an IDstr string, do nothing.
+	return '&nbsp;';
     }
-    else
-    {
+
     global $dbName;
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
     mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
@@ -328,7 +317,21 @@ function memberString($IDstr, $startTime, $endTime)
     mysql_close($conn); 
     $row = mysql_fetch_array($result);
     mysql_free_result($result); 
-    $string = '';
+
+    $string = ""; // the string we're going to return
+
+    if($linkLocation != "")
+    {
+	// we need this to be a hyperlink to linkLoc
+	$string .= '<a href="'.$linkLocation.'"';
+	if($row['status'] == 'Probie')
+	{
+	    // the member is a probie, so the link needs to be a special class
+	    $string .= ' class="probieSignon"';
+	}
+	$string .= '>';
+    }
+
     if($showNames==1)
     {
 	$string .= $row['shownAs'];
@@ -342,16 +345,14 @@ function memberString($IDstr, $startTime, $endTime)
 	$string .= '(P)';
     }
     $string .= " ".parseTime($startTime, $endTime);
-    if($row['status'] == 'Probie')
+
+    if($linkLocation != "")
     {
-	$string = ' class="probieSignon">'.$string;
+	// close the link
+	$string .= '</a>';
     }
-    else
-    {
-	$string = '>'.$string;
-    }
+
     return $string;
-    }
 }
 
 function isProbie($EMTid)
@@ -480,6 +481,29 @@ function schedTimeToTS($y, $m, $d, $timeStr)
     }
     $ts = strtotime($y."-".$m."-".$d." ".$timeStr);
     return $ts;
+}
+
+function getDayMessage($ts, $shift)
+{
+    // gets the daily message for the specified day and shift.
+    global $dbName;
+
+    $year = date("Y", $ts);
+    $month = date("m", $ts);
+    $date = date("d", $ts);
+    $shift = strtolower($shift);
+
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
+    mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
+    $query =  'SELECT message FROM schedule_'.$year.'_'.$month.'_'.$shift.' WHERE Date='.$date.';';
+    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
+    $row = mysql_fetch_array($result);    
+    mysql_close($conn); 
+    if($row['message'] != null)
+    {
+	return '  <span class="dateMessage">'.$row['message'].'</span>';
+    }
+    return "";
 }
 
 ?>

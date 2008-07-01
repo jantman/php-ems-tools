@@ -4,6 +4,7 @@
 //
 // this is the main schedule page
 //
+// Time-stamp: "2008-07-01 16:14:22 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -80,6 +81,7 @@ else
 
 <link rel="stylesheet" type="text/css" href="schedule.css" />
 <link rel="stylesheet" type="text/css" href="scheduleForm.css" />
+<script language="javascript" type="text/javascript" src="inc/scheduleDHTML.js"></script>
 <!--
 <script language="javascript" type="text/javascript" src="inc/popup.js"></script>
 <script language="javascript" type="text/javascript" src="inc/forms.js"></script>
@@ -122,6 +124,11 @@ showMonthCalendarTable($mainDate);
 <div id="popupbody">
 </div>
 </div>
+
+<!-- JS-GRAY-TEST -->
+<input type="hidden" id="JS-GRAY-TEST" value="0" />
+<a href="javascript:grayout()">GrayOut</a>
+<!-- END JS-GRAY-TEST -->
 
 </body>
 
