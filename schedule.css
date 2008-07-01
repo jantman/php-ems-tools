@@ -1,0 +1,200 @@
+/* Time-stamp: "2008-06-30 21:08:58 jantman" */
+
+body
+{
+	padding:0;
+	margin-top: 0;
+	width = 98%;
+	/* background-color: #F2F2F2; */
+	background-color: #F7F8E0;
+}
+
+#clearing
+{
+	clear: both;
+}
+
+#header
+{
+	height: 50px;
+	width: 100%;
+}
+
+#logoutLink
+{
+	float: right;
+}
+
+#header h1
+{
+	text-align: center;
+	margin: 0;
+}
+
+.headerPart
+{
+	float: left;
+	text-align: center;
+	width: 20%;
+}
+
+#calhead
+{
+	background-color: #F7F8E0;
+	border-top: thin solid black;
+	/* border-right: thin solid black; */
+	width: 100%;
+	height: 25px;
+}
+
+#caldiv
+{
+	width: 100%;
+}
+
+.monthControlLeft
+{
+	text-align: left;
+	padding-left: 2em;
+	padding-top: .5em;
+	float: left;
+	font-size: 1.3em;
+}
+
+.monthControlRight
+{
+	text-align: right;
+	padding-right: 2em;
+	padding-top: .5em;
+	float: right;
+	font-size: 1.3em;
+}
+
+/* CALENDAR TABLE BELOW HERE */
+
+.cal
+{
+	margin-left: 1px;
+	width: 100%;
+	border-width: 1px 1px 1px 1px;
+	border-spacing: 0px;
+	border-style: solid solid solid solid;
+	border-color: gray gray gray gray;
+	border-collapse: collapse;
+}
+
+.cal th
+{
+	width: 14%;
+	height: 20px;
+	border-width: 1px 1px 1px 1px;
+	padding: 0px 0px 0px 0px;
+	border-style: solid solid solid solid;
+	border-color: gray gray gray gray;
+	-moz-border-radius: 0px 0px 0px 0px;
+	background-color: #F2F5A9;
+}
+
+.cal td
+{
+	width: 14%;
+	border-width: 1px 1px 1px 1px;
+	padding: 0px 0px 0px 0px;
+	border-style: solid solid solid solid;
+	border-color: gray gray gray gray;
+	-moz-border-radius: 0px 0px 0px 0px;
+	vertical-align: top;
+}
+
+
+/* CAL TABLE CELL CONTENT (DAYS) BELOW HERE */
+.date
+{
+	min-height: 20px;
+	background-color: #A9D0F5;
+	padding-left: .5em;
+}
+
+.day
+{
+	min-height: 80px;
+	background-color: #CEF6F5;
+	cursor: pointer;
+}
+
+.otherDate
+{
+	background-color: #D8D8D8;
+	font-style: italic;
+	min-height: 20px;
+	padding-left: .5em;
+}
+
+.otherDay
+{
+	min-height: 80px;
+	background-color: #E6E6E6;
+}
+
+.todayDate
+{
+	font-weight: bold;
+	height: 20px;
+	background-color: #FA5858;
+	padding-left: .5em;
+}
+
+.todayDay
+{
+	min-height: 80px;
+	background-color: #F6CECE;
+	cursor: pointer;
+}
+
+.calSignon
+{
+	padding-left: .5em;
+	font-size: .8em;
+	z-index: 50;
+}
+
+.day.calSignon
+{
+	color: red;
+}
+
+.todayDay .calSignon
+{
+	color: blue;
+}
+
+/* POPUP STUFF */
+
+.popup
+{
+	border: solid 1px #333;
+        font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        display: none;
+        position: absolute;
+        width: 350px;
+        z-index: 60;
+}
+
+#popuptitle
+{
+        background: blue;
+        color: white;
+        font-weight: bold;
+        height: 15px;
+        padding: 5px;
+}
+     
+#popupbody
+{
+        background: #ddd;
+        padding: 5px;
+        text-align: center;
+}
+
+#popup { top: 200px; left: 300px; }
