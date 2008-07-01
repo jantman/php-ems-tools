@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-07-01 16:14:22 jantman"
+// Time-stamp: "2008-07-01 16:40:15 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -82,9 +82,45 @@ else
 <link rel="stylesheet" type="text/css" href="schedule.css" />
 <link rel="stylesheet" type="text/css" href="scheduleForm.css" />
 <script language="javascript" type="text/javascript" src="inc/scheduleDHTML.js"></script>
+<!-- members array for form validation -->
+<script language="javascript" type="text/javascript">
+<?php
+// generate the JS code for the members array
+echo 'var memberIDs = new Array();'."\n";
+
+// find out which member types can pull duty
+require_once('config/rosterConfig.php'); // for member types
+$typesThatCanPullDuty = array();
+for($i=0; $i < count($memberTypes); $i++)
+{
+    if($memberTypes[$i]['canPullDuty'])
+    {
+	$typesThatCanPullDuty[] = $memberTypes[$i]['name'];
+    }
+}
+
+// now find out which members can pull duty
+$conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.");
+mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!");
+$query = 'SELECT EMTid,status FROM roster;';
+$result = mysql_query($query) or die ("Auth Query Error");
+$JSarrayCount = 0;
+while($row = mysql_fetch_array($result))
+{
+    if(in_array($row['status'], $typesThatCanPullDuty))
+    {
+	echo 'memberIDs['.$JSarrayCount.'] = "'.$row['EMTid'].'";'."\n";
+	$JSarrayCount++;
+    }
+}
+mysql_free_result($result);
+mysql_close($conn);
+?>
+</script>
+<!-- end members array -->
+<script language="javascript" type="text/javascript" src="inc/schedForms.js"></script>
+<script language="javascript" type="text/javascript" src="inc/grayout.js"></script>
 <!--
-<script language="javascript" type="text/javascript" src="inc/popup.js"></script>
-<script language="javascript" type="text/javascript" src="inc/forms.js"></script>
 <script language="javascript" type="text/javascript" src="inc/eventForm.js"></script>
 -->
 
@@ -122,13 +158,8 @@ showMonthCalendarTable($mainDate);
 <div id="popup" class="popup">
 <div id="popuptitle"></div>
 <div id="popupbody">
-</div>
-</div>
-
-<!-- JS-GRAY-TEST -->
-<input type="hidden" id="JS-GRAY-TEST" value="0" />
-<a href="javascript:grayout()">GrayOut</a>
-<!-- END JS-GRAY-TEST -->
+</div> <!-- END popupbody DIV -->
+</div> <!-- END popup DIV -->
 
 </body>
 

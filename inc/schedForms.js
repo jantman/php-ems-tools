@@ -1,9 +1,9 @@
 //
-// inc/scheduleDHTML.js
+// inc/schedForms.js
 //
-// JavaScript Functions for DHTML/Ajax functionality
+// JavaScript Functions for schedule forms validation and submission
 //
-// Time-stamp: "2008-07-01 16:48:25 jantman"
+// Time-stamp: "2008-07-01 16:33:11 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -32,81 +32,11 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-var http = createRequestObject(); 
-
-function createRequestObject()
+function memberCanSignOn(EMTid)
 {
-	var request_o;
-	var browser = navigator.appName;
-	if(browser == "Microsoft Internet Explorer")
-	{
-		request_o = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	else
-	{
-		request_o = new XMLHttpRequest();
-	}
-	return request_o;
-}
-
-//
-// SCHEDULE-SPECIFIC FUNCTIONS
-//
-
-function showSignonForm($ts, $monthTS)
-{
-  // shows the form to add a new signon
-  alert("showSignonForm ts="+$ts+" monthTS="+$monthTS);
-  newSignonFormRequest($ts, $monthTS);
-}
-
-function showMessageForm($ts, $monthTS)
-{
-  // shows the form to edit a daily message
-  alert("showMessageForm ts="+$ts+" monthTS="+$monthTS);
-}
-
-function showEditForm($year, $month, $shift, $date, $key)
-{
-  // shows the form to edit or remove a signon
-  alert("showEditForm year="+$year+" month="+$month+" shift="+$shift+" date="+$date+" key="+$key);
-}
-
-
-//
-// HTTPrequest senders and handlers
-//
-
-function newSignonFormRequest($ts, $monthTS)
-{
-	http.open('get', 'signOn.php?ts=' + $ts);
-	// TODO: add an error var to reload the form if we have errors
-	http.onreadystatechange =  handleNewSignonFormRequest; 
-	http.send(null);
-}
-
-function handleNewSignonFormRequest()
-{
-	if(http.readyState == 4)
-	{
-	  var response = http.responseText;
-	  document.getElementById('popupbody').innerHTML = response;
-	  showPopup("popup");
-	}
-}
-
-//
-// POPUP STUFF
-//
-
-function showPopup(p)
-{
-        grayOut(true);
-        document.getElementById(p).style.display = 'block';
-}
-
-function hidePopup(p)
-{
-        grayOut(false);
-        document.getElementById(p).style.display = 'none';
+  if(memberIDs.indexOf(EMTid) > -1)
+  {
+    return true;
+  }
+  return false;
 }
