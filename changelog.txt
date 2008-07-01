@@ -1,7 +1,45 @@
-PHP EMS Tools
-
-Changelog
+PHP EMS Tools		http://www.php-ems-tools.com
 ------------------------------------------------------------
+Author: Jason Antman <jason@jasonantman.com>
+------------------------------------------------------------
+Please report bugs, etc. at the site above.
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+
+CHANGELOG
+------------------------------------------------------------
+
+Release 3.0 -
+- MAJOR RELEASE - this is not compatible with previous versions as the table
+structure has changed and config files have changed. If you wish to upgrade,
+please contact the developer for a migration script.
+- Added code to allow rig names and check data to be defined by user. Moved
+this information to rigCheckData.php and added a require_once for this file in
+custom.php. 
+- Added rigCheckHandler.php to handle selection of different rigs and take the
+user to the right page
+- Changed link in index.php to point to rigCheckHandler.php
+- Changed rigCheck.php and blankRigCheck.php to use a URL variable for the rig
+number
+- Moved all site-specific configuration to config/ directory. Kept custom.php
+in place for reverse-compatibility. For old versions, move your existing
+custom.php to config/config.php and then just bring everything else in and
+change as needed.
+- Change *all* includes which pointed to custom.php to now point to config/config.php
+- Corrected stylesheet links in most of the roster pages, they had been
+pointing to a deprecated "style.css", all should point to "php_ems.css".
+- moved some files to the admin/ directory to clean things up - files were
+checkMD5.php, makeMD5.php, makeShowAs.php
+- moved some files to the inc/ directory to clean things up - files were
+global.php, notify.php, antman.php
+- Added columns to roster table in database - OtherPositions and OtherCerts -
+both TEXT.
+- Removed the external/auth folder as it had gotten messy.
+- Fixed some bugs in install.php
+
+Release 2 - 
+- many sweeping changes, see CVS
 
 Release 1.1 - 2006-11-16
 - Fixed database bugs in authorization/login in rosterEdit.php and schedule.php
@@ -13,3 +51,6 @@ Release 1.1 - 2006-11-16
 
 Release 1 - 2006-11-13
 **Initial Release**
+
+------------------------------------------------------------
+#	$Id$	

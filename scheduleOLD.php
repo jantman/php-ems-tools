@@ -1,7 +1,8 @@
 <?php
-// massSignOns.php
 //
-// Simple form to allow members to sign on for multiple shifts at once.
+// schedule.php
+//
+// this is the main schedule page
 //
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
@@ -31,7 +32,6 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-
 // this file will import the user's customization
 require_once('./config/config.php');
 
@@ -48,9 +48,21 @@ else
 {
     $year = date('Y');
 }
+if(! empty($_GET['usingAnchor']))
+{
+    $usingAnchor = true;
+}
+else
+{
+    $usingAnchor = false;
+}
 if(! empty($_GET['month']))
 {
     $month = $_GET['month'];
+    if(strlen($month) == 1)
+    {
+	$month = "0".$month;
+    }
 }
 else
 {
@@ -62,7 +74,7 @@ if(! empty($_GET['shift']))
 }
 else
 {
-    if((date('H')<6) || (date('H')>18))
+    if((date('H')<6) || (date('H')>=18))
     {
 	$shift = "night";
     }
@@ -75,6 +87,29 @@ else
 // find the relative URL for this page
 $uri = $_SERVER['REQUEST_URI'];
 $pageURL = substr($uri, strrpos($uri, "/") + 1, strlen($uri) - (strrpos($uri, "/") + 1));
+
+if(! strstr($uri, "?usingAnchor=true#bottom"))
+{
+    // URL to bottom of page:
+    if(strstr($pageURL, "?"))
+    {
+	$bottom = $pageURL."&usingAnchor=true#bottom";
+    }
+    else
+    {
+	$bottom = $pageURL."?usingAnchor=true#bottom";
+    }
+} 
+else
+{
+    $bottom = $pageURL;
+}
+
+// attempt to jump to the correct place in the page
+if((date("d") > 15) && ($month == date('m')) && (! $usingAnchor)) // if the day is after the 15th, we're looking at this month, and not at an anchor 
+{
+    header("Location: ".$bottom);
+}
 
 // make the textual shift name
 if($shift=="day")
@@ -99,43 +134,45 @@ echo '<html>';
 echo '<head>';
 echo '<meta http-equiv="refresh" content="180">';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
-echo '<title>'.$orgName." Schedule Mass Signons- ".$monthName." ".$year." ".$shiftName.'</title>';
+echo '<title>'.$orgName." Schedule - ".$monthName." ".$year." ".$shiftName.'</title>';
 echo '<script type="text/javascript" src="php-ems-tools.js"> </script>';
 echo '</head>';
 echo '<body>';
 
 
 // output the header
-echo '<h3 align=center>'.$shortName.' Mass Signon for '.$monthName.' '.$year.' - '.$shiftName.'</h3>';
+echo '<h3 align=center><u>'.date("F Y", $timestamp)." ".$shiftName.'</u> - '.$shortName.'&nbsp;-&nbsp;as of '.date("Y-m-d H:i:m").'</h3>';
 
 // navigation links
 echo '<p align=center>';
 if($month==1)
 {
-    echo '<a href="massSignOns.php?year='.($year-1).'&month=12&shift='.$shift.'"> << Month </a>';
+    echo '<a href="schedule.php?year='.($year-1).'&month=12&shift='.$shift.'"> << Month </a>';
 }
 else
 {
-    echo '<a href="massSignOns.php?year='.$year.'&month='.($month-1).'&shift='.$shift.'"> << Month </a>';
+    echo '<a href="schedule.php?year='.$year.'&month='.($month-1).'&shift='.$shift.'"> << Month </a>';
 }
 echo '&nbsp;&nbsp;';
-echo '<a href="massSignOns.php?year='.$year.'&month='.$month.'&shift='.$otherShift.'"> '.$otherShiftName.' </a>';
+echo '<b><a href="schedule.php?year='.$year.'&month='.$month.'&shift='.$otherShift.'">'.$otherShiftName.'</b></a>';
 echo '&nbsp;&nbsp;';
-echo '<a href="massSignOns.php"> Current Shift </a>';
+echo '<b><a href="massSignOns.php?year='.$year.'&month='.$month.'&shift='.$shift.'">Mass Signon</b></a>';
 echo '&nbsp;&nbsp;';
-echo '<a href="javascript:helpPopUp('."'docs/massSignOns_help.html'".')">HELP</a>';
+echo '<a href="countHours.php?year='.$year.'&month='.$month.'">Count Hours</a>';
+echo '&nbsp;&nbsp;';
+echo '<a href="schedule.php"> Current Shift </a>';
+echo '&nbsp;&nbsp;';
+echo '<a href="javascript:helpPopUp('."'docs/schedule_help.html'".')">HELP</a>';
 echo '&nbsp;&nbsp;';
 if($month==12)
 {
-    echo '<a href="massSignOns.php?year='.($year+1).'&month=1&shift='.$shift.'">Month >> </a>';
+    echo '<a href="schedule.php?year='.($year+1).'&month=1&shift='.$shift.'">Month >> </a>';
 }
 else
 {
-    echo '<a href="massSignOns.php?year='.$year.'&month='.($month+1).'&shift='.$shift.'">Month >> </a>';
+    echo '<a href="schedule.php?year='.$year.'&month='.($month+1).'&shift='.$shift.'">Month >> </a>';
 }
 echo '</p>';
-
-echo '<form method="post" action="doMassSignon.php">';
 
 echo '<table width="100%" class="roster">';
 
@@ -151,8 +188,8 @@ function showCurrentMonth()
     global $dbName;
     global $shift;
     // make sure the table exists
-    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
-    mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed. ".mysql_error());
+    mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".mysql_error());
     $query = 'SHOW TABLES LIKE "schedule_'.$year.'_'.$month.'_'.$shift.'";';
     $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
     if(mysql_num_rows($result)<1)
@@ -160,17 +197,14 @@ function showCurrentMonth()
 	$query =  'CREATE TABLE IF NOT EXISTS schedule_'.$year.'_'.$month.'_'.$shift.' SELECT * FROM schedule_template;';
 	$result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
     }
+    $query =  'CREATE TABLE IF NOT EXISTS schedule_'.$year.'_'.$month.'_change LIKE schedule_change_template;';
+    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
     mysql_close($conn); 
     // find out the day number of the first of the month
     // 1 is sunday 7 is saturday
     $startDay = date("w" , strtotime($year.'-'.$month.'-01')) + 1; 
     // find out the number of days in the month
     $numDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-
-    echo '<input name="numDays" type="hidden" value="'.$numDays.'" />';
-    echo '<input name="month" type="hidden" value="'.$month.'" />';
-    echo '<input name="year" type="hidden" value="'.$year.'" />';
-    echo '<input name="shift" type="hidden" value="'.$shift.'" />';
 
     dayNames(); // prints a table row with all of the day names
 
@@ -203,7 +237,7 @@ function showWeek($startDay, $startDate, $numDays)
 
 	if(($i >= $startDay) && ($currentDate <= $numDays))
 	{
-	    if($currentDate == date("d")) 
+	    if($currentDate == date("d") && $month == date('m') && $year == date('Y')) 
 	    {
 		if($shift == 'day') // today's day shift
 		{
@@ -213,8 +247,12 @@ function showWeek($startDay, $startDate, $numDays)
 		{
 		    echo '<td style="cursor: hand; cursor: pointer; background-color: gray;" onclick="popUp('."'".$popURL."'".')">';
 		}
+		else // tomorrow's night shift
+		{
+		    echo '<td style="cursor: hand; cursor: pointer;" onclick="popUp('."'".$popURL."'".')">';
+		}
 	    }
-	       elseif(($shift == 'night') && ($currentDate == date('d') - 1) && (date('G') < 6)) // still last day's shift
+	       elseif(($shift == 'night') && ($currentDate == date('d') - 1) && (date('G') < 6) && $month == date('m') && $year == date('Y')) // still last day's shift
 	    {
 		echo '<td style="cursor: hand; cursor: pointer; background-color: gray;" onclick="popUp('."'".$popURL."'".')">';
 	    }
@@ -277,33 +315,12 @@ function showDay($date)
     mysql_free_result($result); 
     echo '<table width="100%" class="day" >';
     $popURL="signOn.php?year=".$year."&month=".$month."&date=".$date."&shift=".$shift."&slot=";
-    if($row['1ID'] <> null)
-    {
     echo '<tr><td align=center class="signon" onclick="popUp('."'".$popURL.'1'."'".')">'.memberString($row['1ID'], $row['1Start'], $row['1End']).'</td></tr>';
-    }
-    if($row['2ID'] <> null)
-    {
     echo '<tr><td align=center class="signon" onclick="popUp('."'".$popURL.'2'."'".')">'.memberString($row['2ID'], $row['2Start'], $row['2End']).'</td></tr>';
-    }
-    if($row['3ID'] <> null)
-    {
     echo '<tr><td align=center class="signon" onclick="popUp('."'".$popURL.'3'."'".')">'.memberString($row['3ID'], $row['3Start'], $row['3End']).'</td></tr>';
-    }
-    if($row['4ID'] <> null)
-    {
     echo '<tr><td align=center class="signon" onclick="popUp('."'".$popURL.'4'."'".')">'.memberString($row['4ID'], $row['4Start'], $row['4End']).'</td></tr>';
-    }
-    if($row['5ID'] <> null)
-    {
     echo '<tr><td align=center class="signon" onclick="popUp('."'".$popURL.'5'."'".')">'.memberString($row['5ID'], $row['5Start'], $row['5End']).'</td></tr>';
-    }
-    if($row['6ID'] <> null)
-    {
     echo '<tr><td align=center class="signon" onclick="popUp('."'".$popURL.'6'."'".')">'.memberString($row['6ID'], $row['6Start'], $row['6End']).'</td></tr>';
-    }
-
-    // SIGNIN CHECK BOX
-    echo '<tr><td align=center class="nocurs">Sign On <input type="checkbox" name="'.$date.'"></td></tr>';
     echo '</table>';
 }
 
@@ -341,7 +358,7 @@ function memberString($IDstr, $startTime, $endTime)
     $string .= " ".parseTime($startTime, $endTime);
     if($row['status'] == 'Probie')
     {
-	$string = '<font color="blue">'.$string.'</font>';
+	$string = '<font color="blue"><b>'.$string.'</b></font>';
     }
     return $string;
     }
@@ -409,85 +426,6 @@ function dayNames()
 }
 
 ?>
-<br>
-<p><b>ID #: </b><input size="10" maxlength="5" name="EMTid" type="text" /> <b>Start:</b> <select name="start">
-<?php
-if($shift=='day')
-{
-    echo '<option value="06:00:00" selected="selected">06:00:00</option>';
-    echo '<option value="07:00:00">07:00:00</option>';
-    echo '<option value="08:00:00">08:00:00</option>';
-    echo '<option value="09:00:00">09:00:00</option>';
-    echo '<option value="10:00:00">10:00:00</option>';
-    echo '<option value="11:00:00">11:00:00</option>';
-    echo '<option value="12:00:00">12:00:00</option>';
-    echo '<option value="13:00:00">13:00:00</option>';
-    echo '<option value="14:00:00">14:00:00</option>';
-    echo '<option value="15:00:00">15:00:00</option>';
-    echo '<option value="16:00:00">16:00:00</option>';
-    echo '<option value="17:00:00">17:00:00</option>';
-}
-else
-{
-    //night
-    echo '<option value="18:00:00" selected="selected">18:00:00</option>';
-    echo '<option value="19:00:00">19:00:00</option>';
-    echo '<option value="20:00:00">20:00:00</option>';
-    echo '<option value="21:00:00">21:00:00</option>';
-    echo '<option value="22:00:00">22:00:00</option>';
-    echo '<option value="23:00:00">23:00:00</option>';
-    echo '<option value="00:00:00">00:00:00</option>';
-    echo '<option value="01:00:00">01:00:00</option>';
-    echo '<option value="02:00:00">02:00:00</option>';
-    echo '<option value="03:00:00">03:00:00</option>';
-    echo '<option value="04:00:00">04:00:00</option>';
-    echo '<option value="05:00:00">05:00:00</option>';
-}
-?>
-
-</select>
-<b> End: </b>
-<select name="end">
-<?php
-if($shift=='day')
-{
-    echo '<option value="07:00:00">07:00:00</option>';
-    echo '<option value="08:00:00">08:00:00</option>';
-    echo '<option value="09:00:00">09:00:00</option>';
-    echo '<option value="10:00:00">10:00:00</option>';
-    echo '<option value="11:00:00">11:00:00</option>';
-    echo '<option value="12:00:00">12:00:00</option>';
-    echo '<option value="13:00:00">13:00:00</option>';
-    echo '<option value="14:00:00">14:00:00</option>';
-    echo '<option value="15:00:00">15:00:00</option>';
-    echo '<option value="16:00:00">16:00:00</option>';
-    echo '<option value="17:00:00">17:00:00</option>';
-    echo '<option value="18:00:00" selected="selected">18:00:00</option>';
-}
-else
-{
-    //night
-    echo '<option value="19:00:00">19:00:00</option>';
-    echo '<option value="20:00:00">20:00:00</option>';
-    echo '<option value="21:00:00">21:00:00</option>';
-    echo '<option value="22:00:00">22:00:00</option>';
-    echo '<option value="23:00:00">23:00:00</option>';
-    echo '<option value="00:00:00">00:00:00</option>';
-    echo '<option value="01:00:00">01:00:00</option>';
-    echo '<option value="02:00:00">02:00:00</option>';
-    echo '<option value="03:00:00">03:00:00</option>';
-    echo '<option value="04:00:00">04:00:00</option>';
-    echo '<option value="05:00:00">05:00:00</option>';
-    echo '<option value="06:00:00" selected="selected">06:00:00</option>';
-}
-?>
-</select>
-</p>
-<p>
-<input type="submit" />
-<input type="reset" />
-</p>
-</form>
 <a name="bottom"></a>
 </body>
 </html>

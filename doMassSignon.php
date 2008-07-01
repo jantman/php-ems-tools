@@ -1,10 +1,46 @@
+<?php
+// doMassSignon.php
+//
+// Script to handle the output from the massSignon page, and put it in the DB.
+//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
+?>
 <html>
-<!-- Time-stamp: "2006-12-20 20:35:39 jantman" -->
+<!-- Time-stamp: "2007-09-13 18:16:49 jantman" -->
 <!-- php-ems-tools index -->
 <head>
 
 <?php
-require('custom.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/scheduleConfig.php'); // schedule configuration
+
 echo '<title>Schedule Mass Signon Results</title>';
 echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 //figure out the month and year
@@ -15,7 +51,7 @@ echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css
 <?php
 
 // import values
-require('global.php');
+require_once('./inc/global.php');
 global $dbName;
 
 // get the preliminary stuff
@@ -37,11 +73,6 @@ else
 
 echo '<p align="center"><h3>Schedule Mass Signon For: '.GetMonthString($month).' '.$year.' '.$shiftName.'</h3></p>';
 echo '<p align="center"><h3>Results:</h3></p>';
-
-// DEBUG
-//echo 'dbName='.$dbName.' year='.$year.' month='.$month.' shift='.$shift.'<br>';
-//echo 'EMTid='.$EMTid.' start='.$start.' end='.$end.'<br>';
-// END DEBUG
 
 // check validity of ID
 if(! canPullDuty($EMTid))
@@ -106,10 +137,6 @@ for($i = 1; $i <= $_REQUEST['numDays']; $i++)
             $chQuery = 'INSERT INTO schedule_'.$year.'_'.$month.'_change SET timestamp='.time().',EMTid="'.$adminID.'",query="'.make_safe($query).'",host="'.$host.'",address="'.$address.'",form="mass sign on";';
             mysql_query($chQuery) or die ("Query Error".mysql_error()." in query ".$chQuery);
 	}
-
-        // DEBUG
-	//echo $query;
-	// END DEBUG
 
 	// issue a confirmation message
 	$query = 'SELECT * FROM schedule_'.$year.'_'.$month.'_'.$shift.' WHERE Date='.$i.';';

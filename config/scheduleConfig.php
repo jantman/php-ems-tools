@@ -51,7 +51,7 @@ $showTimeCompleteShift = false;
 // 2: name 0600-1800
 // 3: name 06:00-18:00
 // default is 3
-$schedTimeFormat = 3;
+$schedTimeFormat = 2;
 
 //AUTHENTICATION
 // what actions does the user need to enter their ID and password for?

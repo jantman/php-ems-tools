@@ -1,0 +1,15 @@
+#formSpanMultDays
+{
+	display: none;
+}
+
+#formRepeat
+{
+	display: none;
+}
+
+.formError
+{
+	color: red;
+	font-style: italic;
+}

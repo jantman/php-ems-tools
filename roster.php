@@ -1,18 +1,39 @@
 <?php
-//
 // roster.php
 //
-// Version 0.1 as of Time-stamp: "2006-12-14 12:59:40 jantman"
+// Main page to view roster
 //
-// This file is part of the php-ems-tools package
-// available at 
-//
-// (C) 2006 Jason Antman.
-// This package is licensed under the terms of the
-// GNU General Public License (GPL)
-//
+// +----------------------------------------------------------------------+
+// | PHP EMS Tools      http://www.php-ems-tools.com                      |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2006, 2007 Jason Antman.                               |
+// |                                                                      |
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 3 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to:                           |
+// |                                                                      |
+// | Free Software Foundation, Inc.                                       |
+// | 59 Temple Place - Suite 330                                          |
+// | Boston, MA 02111-1307, USA.                                          |
+// +----------------------------------------------------------------------+
+// |Please use the above URL for bug reports and feature/support requests.|
+// +----------------------------------------------------------------------+
+// | Authors: Jason Antman <jason@jasonantman.com>                        |
+// +----------------------------------------------------------------------+
+//      $Id$
 
-require_once('custom.php');
+require_once('./config/config.php'); // main configuration
+
+require_once('./config/rosterConfig.php'); // roster configuration
 
 // this script views the roster from the DB
 
@@ -222,7 +243,7 @@ function showMember($r)
 
     if($adminView<>1 && $r['unitID']<>"")
     {
-	echo '<td>'.$r['unitID'].'</td>';
+	echo '<td>'.$r['unitID']." (".$r['EMTid'].')</td>';
     }
     else
     {
@@ -335,7 +356,7 @@ function showMemberShort($r)
 
     if($adminView<>1 && $r['unitID']<>"")
     {
-	echo '<td>'.$r['unitID'].'</td>';
+	echo '<td>'.$r['unitID']." (".$r['EMTid'].')</td>';
     }
     else
     {
