@@ -187,37 +187,37 @@ function getCellContent($ts, $monthTS)
     $final = "";
     if($row['1ID'] != null)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 1)" ';
+	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 1)" ';
 	    $final .= memberString($row['1ID'], $row['1Start'], $row['1End']);
 	    $final .= '</a></div>'."\n";
     }
     if($row['2ID'] != null)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 2)" ';
+	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 2)" ';
 	    $final .= memberString($row['2ID'], $row['2Start'], $row['2End']);
 	    $final .= '</a></div>'."\n";
     }
     if($row['3ID'] != null)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 3)" ';
+	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 3)" ';
 	    $final .= memberString($row['3ID'], $row['3Start'], $row['3End']);
 	    $final .= '</a></div>'."\n";
     }
     if($row['4ID'] != null)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 4)" ';
+	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 4)" ';
 	    $final .= memberString($row['4ID'], $row['4Start'], $row['4End']);
 	    $final .= '</a></div>'."\n";
     }
     if($row['5ID'] != null)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 5)" ';
+	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 5)" ';
 	    $final .= memberString($row['5ID'], $row['5Start'], $row['5End']);
 	    $final .= '</a></div>'."\n";
     }
     if($row['6ID'] != null)
     {
-	    $final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 6)" ';
+	    $final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', 6)" ';
 	    $final .= memberString($row['6ID'], $row['6Start'], $row['6End']);
 	    $final .= '</a></div>'."\n";
     }
@@ -280,7 +280,7 @@ function getSortedCellContent($ts, $monthTS)
     {
 	// DEBUG
 	//$final .= $membIDs[$key]." ".date("Y-m-dTH:i", $start[$key])."-".date("Y-m-dTH:i", $end[$key]).'<br />';
-	$final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 1)" ';
+	$final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', '.$key.')" ';
 	$final .= memberString($membIDs[$key], date("H:i:s", $start[$key]), date("H:i:s", $end[$key]));
 	$final .= '</a></div>'."\n";
     }
@@ -289,7 +289,7 @@ function getSortedCellContent($ts, $monthTS)
     {
 	// DEBUG
 	//$final .= $PmembIDs[$key]." ".date("Y-m-dTH:i", $Pstart[$key])."-".date("Y-m-dTH:i", $Pend[$key]).'<br />';
-	$final.= '<div class="calSignon"> <a href="javascript:showMemberForm('.$year.', '.$month.', '.$shift.', '.$date.', 1)" ';
+	$final.= '<div class="calSignon"> <a href="javascript:showEditForm('.$year.', '.$month.', '.$shift.', '.$date.', '.$key.')" ';
 	$final .= memberString($PmembIDs[$key], date("H:i:s", $Pstart[$key]), date("H:i:s", $Pend[$key]));
 	$final .= '</a></div>'."\n";
     }
