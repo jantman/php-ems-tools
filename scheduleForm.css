@@ -13,3 +13,20 @@
 	color: red;
 	font-style: italic;
 }
+
+.formElementSet
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#formAdminDiv
+{
+	display: none;
+}
+
+#formButtons
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}

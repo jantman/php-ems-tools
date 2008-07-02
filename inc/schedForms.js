@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for schedule forms validation and submission
 //
-// Time-stamp: "2008-07-01 16:33:11 jantman"
+// Time-stamp: "2008-07-02 17:29:02 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -37,6 +37,167 @@ function memberCanSignOn(EMTid)
   if(memberIDs.indexOf(EMTid) > -1)
   {
     return true;
+  }
+  return false;
+}
+
+function showAdminLogin()
+{
+  if(document.getElementById("formAdminDiv").style.display == 'block')
+  {
+    document.getElementById("formAdminDiv").style.display = 'none';
+  }
+  else
+  {
+    document.getElementById("formAdminDiv").style.display = 'block';
+  }
+}
+
+function resetSignonForm()
+{
+  document.getElementById("formAdminDiv").style.display = 'none';
+  clearSignonErrors();
+}
+
+//
+// SUBMISSION FUNCTIONS
+//
+
+function submitSignonForm(ts)
+{
+  // clear the error fields
+  clearSignonErrors();
+  
+  if(validateSignonForm() == true)
+  {
+    // show the new info and hide the popup
+    var formURL = makeSignonFormUrl(ts);
+    submitURL(formURL);
+  }
+  // else do nothing, just show the errors
+}
+
+function submitSignonURL(url)
+{
+  http.open('get', url);
+  http.onreadystatechange = handleSubmitSignonURL; 
+  http.send(null);
+}
+
+function handleSubmitSignonURL()
+{
+  if(http.readyState == 4)
+  {
+    var response = http.responseText;
+    if(response.substr(0, 6) == "ERROR:")
+    {
+      // TODO: handle error condition by triggering a popup or changing content of existing one
+      var errorMessage = response.substr(6, (response.length - 6));
+      document.getElementById("popuptitle").innerHTML = "ERROR";
+      document.getElementById("popup").innerHTML = errorMessage;
+    }
+    else
+    {  
+      var ts = document.getElementById('temp_ts').value;
+      reloadDay('inc/getDay.php?ts=' + ts + '&monthTS=' + ts);
+    }
+  }
+}
+
+function clearSignonErrors()
+{
+  document.getElementById("form_EMTid_error").innerHTML = "";
+  document.getElementById("form_time_error").innerHTML = "";
+}
+
+function reloadDay(url)
+{
+  http.open('get', url);
+  http.onreadystatechange = handleReloadDay; 
+  http.send(null);
+}
+
+function handleReloadDay()
+{
+  if(http.readyState == 4)
+  {
+    
+    var response = http.responseText;
+    var ts = document.getElementById('temp_ts').value;
+    var elemID = 'day_' + ts;
+    document.getElementById(elemID).innerHTML = response;
+    hidePopup("popup");
+  }
+}
+
+function validateSignonForm()
+{
+  var valid = true;
+  if(! isValidMember(document.getElementById("form_EMTid").value))
+  {
+    document.getElementById("form_EMTid_error").innerHTML = "This EMTid is not valid.<br />";
+    valid = false;
+  }
+
+  var start = document.getElementById("form_start").value;
+  var startH = start.substring(0, start.indexOf(":")) * 1;
+  var end = document.getElementById("form_end").value;
+  var endH = end.substring(0, end.indexOf(":")) * 1;
+
+  if(document.getElementById("form_shift").value == "day")
+  {
+    if(startH > endH)
+    {
+      document.getElementById("form_time_error").innerHTML = "The start time must be before the end time <br />.";
+      valid = false;
+    }
+  }
+  else
+  {
+    // this is a night shift
+    if(endH < startH && endH > 18 && startH < 18)
+    {
+      // this is an error, endH is between (18,23) and startH is between (0,6)
+      document.getElementById("form_time_error").innerHTML = "The start time must be before the end time.<br /> Perhaps you wanted to sign on a daytime shift? <br />.";
+      valid = false;
+    }
+    else if(endH < startH && endH > 18 && startH > 18)
+    {
+      // this is an error
+      document.getElementById("form_time_error").innerHTML = "The start time must be before the end time.<br /> Perhaps you wanted to sign on a daytime shift? <br />.";
+      valid = false;
+    }
+    else if(endH < startH && endH < 18 && startH < 18)
+    {
+      // this is an error.
+      document.getElementById("form_time_error").innerHTML = "The start time must be before the end time.<br /> Perhaps you wanted to sign on a daytime shift? <br />.";
+      valid = false;
+    }
+    // else OK 
+  }
+
+  if(startH == endH)
+  {
+    document.getElementById("form_time_error").innerHTML = "The start time must be before the end time.<br />.";
+    valid = false;      
+  }
+  
+  return valid;
+}
+
+function makeSignonFormURL()
+{
+  
+}
+
+function isValidMember(membID)
+{
+  for (x in memberIDs)
+  {
+    if( memberIDs[x].toString() == membID.toString() )
+    {
+      return true;
+    }
   }
   return false;
 }

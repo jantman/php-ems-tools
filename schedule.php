@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-07-01 16:40:15 jantman"
+// Time-stamp: "2008-07-02 16:01:18 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -81,6 +81,7 @@ else
 
 <link rel="stylesheet" type="text/css" href="schedule.css" />
 <link rel="stylesheet" type="text/css" href="scheduleForm.css" />
+<!-- TODO: print stylesheet, force landscape? -->
 <script language="javascript" type="text/javascript" src="inc/scheduleDHTML.js"></script>
 <!-- members array for form validation -->
 <script language="javascript" type="text/javascript">
