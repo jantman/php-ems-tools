@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-07-01 17:15:17 jantman"
+// Time-stamp: "2008-07-02 15:02:05 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -150,8 +150,15 @@ function getCellHeader($ts, $monthTS)
 	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\')">'.$displayStr.'</div>'."\n";
 	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\')">'."\n";
     }
+    elseif(strtotime(date("Y-m-d", $ts)) < time())
+    {
+	// this month, in past
+	$final .= '<div class="pastDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="pastDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\')">'."\n";
+    }
     else
     {
+	// this month, in future
 	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\')">'.$displayStr.'</div>'."\n";
 	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\')">'."\n";
     }

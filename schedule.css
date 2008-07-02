@@ -2,7 +2,7 @@
 /*               */
 /* this is the main schedule page CSS file, along with CSS for all pop-ups and their HTML*/
 /*     */
-/* Time-stamp: "2008-07-01 16:14:06 jantman" */
+/* Time-stamp: "2008-07-02 15:00:24 jantman" */
 /* +----------------------------------------------------------------------+ */
 /* | PHP EMS Tools      http://www.php-ems-tools.com                      | */
 /* +----------------------------------------------------------------------+ */
@@ -151,6 +151,19 @@ body
 {
 	min-height: 80px;
 	background-color: #CEF6F5;
+}
+
+.pastDate
+{
+	min-height: 20px;
+	background-color: #88AFD4;
+	padding-left: .5em;
+}
+
+.pastDay
+{
+	min-height: 80px;
+	background-color: #A2C8C7;
 }
 
 .otherDate
