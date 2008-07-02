@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-07-01 17:12:01 jantman"
+// Time-stamp: "2008-07-02 15:19:13 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -56,6 +56,15 @@ function createRequestObject()
 function showSignonForm($ts, $shift)
 {
   // shows the form to add a new signon
+
+  // DEBUG
+  var ffxVer = getFirefoxVersion();
+  if(ffxVer > 0 && ffxVer < 3)
+  {
+    alert("These functions will throw an unhandled JS exception in Firefox " + ffxVer);
+  }
+  // END DEBUG
+  
   newSignonFormRequest($ts, $shift);
 }
 
@@ -83,57 +92,63 @@ function showEditForm($year, $month, $shift, $date, $key, $ts)
 
 function newSignonFormRequest($ts, $monthTS, $shift)
 {
-	http.open('get', 'signOn.php?ts=' + $ts + '&shift=' + $shift);
+  doHTTPrequest(('signOn.php?ts=' + $ts + '&shift=' + $shift), handleNewSignonFormRequest);
 	// TODO: add an error var to reload the form if we have errors
-	http.onreadystatechange =  handleNewSignonFormRequest; 
-	http.send(null);
 }
 
 function handleNewSignonFormRequest()
 {
-	if(http.readyState == 4)
-	{
-	  var response = http.responseText;
-	  document.getElementById('popupbody').innerHTML = response;
-	  showPopup();
-	}
+  if(http.readyState == 4)
+  {
+    var response = http.responseText;
+    document.getElementById('popupbody').innerHTML = response;
+    showPopup();
+  }
 }
 
 function editSignonFormRequest($year, $month, $shift, $date, $key, $ts)
 {
-	http.open('get', 'signOn.php?action=edit&ts=' + $ts + '&shift=' + $shift);
-	// TODO: add an error var to reload the form if we have errors
-	http.onreadystatechange =  handleEditSignonFormRequest; 
-	http.send(null);
+  doHTTPrequest(('signOn.php?action=edit&year=' + $year + '&month=' + $month + '&shift=' + $shift + '&date=' + $date + '&key=' + $key + '&ts=' + $ts), handleEditSignonFormRequest);
+  // TODO: add an error var to reload the form if we have errors
 }
 
 function handleEditSignonFormRequest()
 {
-	if(http.readyState == 4)
-	{
-	  var response = http.responseText;
-	  document.getElementById('popupbody').innerHTML = response;
-	  showPopup();
-	}
+  if(http.readyState == 4)
+  {
+    var response = http.responseText;
+    document.getElementById('popupbody').innerHTML = response;
+    showPopup();
+  }
 }
 
 function messageFormRequest($ts, $shift)
 {
   // request the HTML for the message form
-  http.open('get', 'dailyMessage.php?ts=' + $ts + '&shift=' + $shift);
+  doHTTPrequest(('dailyMessage.php?ts=' + $ts + '&shift=' + $shift), handleMessageFormRequest);
   // TODO: add an error var to reload the form if we have errors
-  http.onreadystatechange =  handleMessageFormRequest; 
-  http.send(null);
 }
 
 function handleMessageFormRequest()
 {
-	if(http.readyState == 4)
-	{
-	  var response = http.responseText;
-	  document.getElementById('popupbody').innerHTML = response;
-	  showPopup();
-	}
+  if(http.readyState == 4)
+  {
+    var response = http.responseText;
+    document.getElementById('popupbody').innerHTML = response;
+    showPopup();
+  }
+}
+
+//
+// HTTPrequest stuff
+//
+
+function doHTTPrequest($url, $handler)
+{
+  // TODO - get this working with older Firefox, using abort()
+  http.open('get', $url);
+  http.onreadystatechange = $handler;
+  http.send(null);
 }
 
 //
@@ -150,4 +165,26 @@ function hidePopup()
 {
         grayOut(false);
         document.getElementById("popup").style.display = 'none';
+}
+
+// UTIITY FUNCTIONS
+
+// DEVELOPMENT ONLY???
+function getFirefoxVersion()
+{
+  var userAgentStr = navigator.userAgent;
+  // returns the version number for firefox (as an integer)
+  var startIndex = userAgentStr.indexOf("Firefox/");
+  if(startIndex < 0)
+  {
+    // not Firefox
+    return 0;    
+  }
+  
+  var version = userAgentStr.substring(startIndex); // start from / next
+  version = userAgentStr.substring(userAgentStr.lastIndexOf("/")+1);
+  version = parseFloat(version);
+  
+  return version;
+  
 }

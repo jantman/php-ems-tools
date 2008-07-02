@@ -31,6 +31,14 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
+// DEBUG
+echo '<strong>dailyMessage.php</strong><br />';
+echo '<pre>';
+echo var_dump($_GET);
+echo '</pre>';
+die();
+// END DEBUG
+
 //required for HTML_QuickForm PEAR Extension
 if(file_exists('../HTML/QuickForm.php'))
 {
