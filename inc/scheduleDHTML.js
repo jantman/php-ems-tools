@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-07-02 15:19:13 jantman"
+// Time-stamp: "2008-07-02 15:56:03 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -64,6 +64,9 @@ function showSignonForm($ts, $shift)
     alert("These functions will throw an unhandled JS exception in Firefox " + ffxVer);
   }
   // END DEBUG
+
+  var myDate = new Date($ts*1000);
+  document.getElementById("popuptitle").innerHTML = "Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
   
   newSignonFormRequest($ts, $shift);
 }
@@ -71,12 +74,20 @@ function showSignonForm($ts, $shift)
 function showMessageForm($ts, $shift)
 {
   // shows the form to edit a daily message
+
+  var myDate = new Date($ts*1000);
+  document.getElementById("popuptitle").innerHTML = "Edit Daily Message - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
+  
   messageFormRequest($ts, $shift);
 }
 
 function showEditForm($year, $month, $shift, $date, $key, $ts)
 {
   // shows the form to edit or remove a signon
+
+  var myDate = new Date($ts*1000);
+  document.getElementById("popuptitle").innerHTML = "Edit Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
+  
   editSignonFormRequest($year, $month, $shift, $date, $key, $ts);
 }
 
@@ -90,7 +101,7 @@ function showEditForm($year, $month, $shift, $date, $key, $ts)
 // TODO: in PHP, have a central tsToYearMonthDateShift() that returns a string
 // TODO: move all of these forms to inc/ named like form{type}.php
 
-function newSignonFormRequest($ts, $monthTS, $shift)
+function newSignonFormRequest($ts, $shift)
 {
   doHTTPrequest(('signOn.php?ts=' + $ts + '&shift=' + $shift), handleNewSignonFormRequest);
 	// TODO: add an error var to reload the form if we have errors
