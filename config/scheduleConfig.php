@@ -51,10 +51,7 @@ $showTimeCompleteShift = false;
 // 2: name 0600-1800
 // 3: name 06:00-18:00
 // default is 3
-$schedTimeFormat = 2;
-
-// do we display the entries on the schedule in the order they signed on in (false) or sorted by time and membership status (true)?
-$config_sorted_entries = true;
+$schedTimeFormat = 3;
 
 //AUTHENTICATION
 // what actions does the user need to enter their ID and password for?

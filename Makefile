@@ -1,11 +1,11 @@
 # makefile to update CVS and do anything else needed
-# Time-stamp: "2008-07-01 20:46:50 jantman"
+# Time-stamp: "2008-11-02 18:09:11 jantman"
 # $Id$
 
-ifdef LOG
-        LOGSTR = $(LOG)
+ifdef LOGSTR
+        LOG = $(LOGSTR)
 else
-        LOGSTR = just working on things (issue: 148)
+        LOG = just working on things (issue: 161)
 endif
 
 ifdef TAG
@@ -18,4 +18,4 @@ cvsupdate:
 	-rm *~
 	-cd inc/ && rm *~
 	-cd config/ && rm *~
-	cvs import -m "$(LOGSTR) (issue: 148)" php-ems-tools-trunk jantman "$(TAGSTR)"
+	cvs import -m "$(LOG)" php-ems-tools-trunk jantman "$(TAGSTR)"

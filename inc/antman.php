@@ -3,7 +3,6 @@
 //
 // A few simple functions commonly used by the developer.
 //
-// Time-stamp: "2008-07-01 16:15:29 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools	http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+

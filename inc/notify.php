@@ -3,7 +3,6 @@
 //
 // Handles email/SMS notification for schedule changes.
 //
-// Time-stamp: "2008-07-01 16:15:20 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools	http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
