@@ -2,7 +2,7 @@
 /*               */
 /* this is the main schedule page CSS file, along with CSS for all pop-ups and their HTML*/
 /*     */
-/* Time-stamp: "2008-07-02 15:00:24 jantman" */
+/* Time-stamp: "2008-11-03 13:48:27 jantman" */
 /* +----------------------------------------------------------------------+ */
 /* | PHP EMS Tools      http://www.php-ems-tools.com                      | */
 /* +----------------------------------------------------------------------+ */
@@ -36,7 +36,7 @@ body
 {
 	padding:0;
 	margin-top: 0;
-	width = 98%;
+	width: 98%;
 	/* background-color: #F2F2F2; */
 	background-color: #F7F8E0;
 }

@@ -74,7 +74,6 @@ table.day td {
     border-style: dashed dashed dashed dashed;
     border-color: #C0C0C0 #C0C0C0 #C0C0C0 #C0C0C0;
     border-width: 0px 0px 1px 0px;
-    cursor: hand;
     cursor: pointer;
 }
 
