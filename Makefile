@@ -1,5 +1,5 @@
 # makefile to update CVS and do anything else needed
-# Time-stamp: "2008-11-02 18:09:11 jantman"
+# Time-stamp: "2008-11-02 23:48:30 jantman"
 # $Id$
 
 ifdef LOGSTR
