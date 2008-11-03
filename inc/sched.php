@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-07-02 16:36:23 jantman"
+// Time-stamp: "2008-11-03 14:42:53 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -215,6 +215,18 @@ function getCellContent($ts, $monthTS)
 	    }
 	}
     }
+
+    if($final == "")
+    {
+	// empty cell - throw in the 6 empty DIVs to keep the background correct
+	$final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+	$final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+	$final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+	$final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+	$final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+	$final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+    }
+
     return $final;
 }
 
