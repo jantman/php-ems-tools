@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-07-02 16:01:18 jantman"
+// Time-stamp: "2008-11-03 15:07:42 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -79,7 +79,8 @@ else
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $orgName." Schedule - ".date("M Y", $mainDate)." ".$shift;?></title>
 
-<link rel="stylesheet" type="text/css" href="schedule.css" />
+<link rel="stylesheet" type="text/css" href="schedule.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="schedule_print.css" media="print" />
 <link rel="stylesheet" type="text/css" href="scheduleForm.css" />
 <!-- TODO: print stylesheet, force landscape? -->
 <script language="javascript" type="text/javascript" src="inc/scheduleDHTML.js"></script>
@@ -144,6 +145,12 @@ echo '<div class="headerPart"><a href="#">Mass Signon</a></div>'; // TODO: imple
 echo '<div class="headerPart"><a href="countHours.php">Count Hours</a></div>';
 echo '<div class="headerPart"><strong><a href="schedule.php">Current Shift</a></strong></div>';
 echo '<div class="headerPart"><a href="#">Help</a></div>'; // TODO: implement this
+?>
+</div> <!-- END calhead DIV -->
+
+<div id="calheadPrint">
+<?php
+echo 'as of '.date("D, M Y j H:i:s");
 ?>
 </div> <!-- END calhead DIV -->
 

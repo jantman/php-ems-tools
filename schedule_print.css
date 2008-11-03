@@ -1,8 +1,8 @@
-/* schedule.css  */
+/* schedule_print.css  */
 /*               */
-/* this is the main schedule page CSS file, along with CSS for all pop-ups and their HTML*/
+/* this is the main schedule page CSS file for print media*/
 /*     */
-/* Time-stamp: "2008-11-03 15:05:51 jantman" */
+/* Time-stamp: "2008-11-03 15:10:33 jantman" */
 /* +----------------------------------------------------------------------+ */
 /* | PHP EMS Tools      http://www.php-ems-tools.com                      | */
 /* +----------------------------------------------------------------------+ */
@@ -31,14 +31,17 @@
 /* +----------------------------------------------------------------------+ */
 /*      $Id$        */
 
+a
+{
+	color: black;
+	text-decoration: none;
+}
 
 body
 {
 	padding:0;
 	margin-top: 0;
 	width: 98%;
-	/* background-color: #F2F2F2; */
-	background-color: #F7F8E0;
 }
 
 #clearing
@@ -72,16 +75,15 @@ body
 
 #calhead
 {
-	background-color: #F7F8E0;
-	border-top: thin solid black;
-	/* border-right: thin solid black; */
-	width: 100%;
-	height: 25px;
+	display: none;
 }
 
 #calheadPrint
 {
-	display: none;
+	border-top: thin solid black;
+	width: 100%;
+	height: 25px;
+	text-align: center;
 }
 
 #caldiv
@@ -91,20 +93,12 @@ body
 
 .monthControlLeft
 {
-	text-align: left;
-	padding-left: 2em;
-	padding-top: .5em;
-	float: left;
-	font-size: 1.3em;
+	display: none;
 }
 
 .monthControlRight
 {
-	text-align: right;
-	padding-right: 2em;
-	padding-top: .5em;
-	float: right;
-	font-size: 1.3em;
+	display: none;
 }
 
 /* CALENDAR TABLE BELOW HERE */
@@ -129,13 +123,12 @@ body
 	border-style: solid solid solid solid;
 	border-color: gray gray gray gray;
 	-moz-border-radius: 0px 0px 0px 0px;
-	background-color: #F2F5A9;
 }
 
 .cal td
 {
 	width: 14%;
-	border-width: 1px 1px 1px 1px;
+	border-width: 2px 2px 2px 2px;
 	padding: 0px 0px 0px 0px;
 	border-style: solid solid solid solid;
 	border-color: gray gray gray gray;
@@ -148,32 +141,30 @@ body
 .date
 {
 	min-height: 20px;
-	background-color: #A9D0F5;
 	padding-left: .5em;
 }
 
 .day
 {
 	min-height: 80px;
-	background-color: #CEF6F5;
+	border-top: 1px solid gray;
 }
 
 .pastDate
 {
 	min-height: 20px;
-	background-color: #88AFD4;
 	padding-left: .5em;
 }
 
 .pastDay
 {
 	min-height: 80px;
-	background-color: #A2C8C7;
+	background-color: #E6E6E6;
+	border-top: 1px solid gray;
 }
 
 .otherDate
 {
-	background-color: #D8D8D8;
 	font-style: italic;
 	min-height: 20px;
 	padding-left: .5em;
@@ -183,20 +174,20 @@ body
 {
 	min-height: 80px;
 	background-color: #E6E6E6;
+	border-top: 1px solid gray;
 }
 
 .todayDate
 {
 	font-weight: bold;
 	height: 20px;
-	background-color: #FA5858;
 	padding-left: .5em;
 }
 
 .todayDay
 {
 	min-height: 80px;
-	background-color: #F6CECE;
+	border-top: 1px solid gray;
 }
 
 /* the signon DIVs */
@@ -217,41 +208,24 @@ body
 .probieSignon
 {
 	font-variant: small-caps;
-	color: red;
-}
-
-.todayDay .calSignon
-{
-	color: blue;
+	font-style: italic;
 }
 
 /* POPUP STUFF */
 
 .popup
 {
-	border: solid 1px #333;
-        font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-        font-size: 12px;
-        display: none;
-        position: absolute;
-        width: 350px;
-        z-index: 60;
+	display: none;
 }
 
 #popuptitle
 {
-        background: blue;
-        color: white;
-        font-weight: bold;
-        height: 15px;
-        padding: 5px;
+	display: none;
 }
      
 #popupbody
 {
-        background: #ddd;
-        padding: 5px;
-        text-align: center;
+	display: none;
 }
 
 #popup { top: 200px; left: 300px; }
