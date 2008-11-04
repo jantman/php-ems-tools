@@ -34,7 +34,10 @@
 // FOR THE SCHEDULE:
 
 // schedule table name
-$config_sched_table = "newschedule";
+$config_sched_table = "schedule";
+
+// schedule daily message table name
+$config_sched_message_table = "schedule_dailyMessage";
 
 // this is the default number of crews per day. It can be either 1 or 2
 // 1 crew will allow 6 members

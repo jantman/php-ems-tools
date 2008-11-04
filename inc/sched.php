@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-04 14:35:34 jantman"
+// Time-stamp: "2008-11-04 15:08:16 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -36,6 +36,8 @@
 
 require_once('config/config.php');
 require_once('config/scheduleConfig.php');
+
+// TODO - schedule_dailyMessage entries allow a sched_shift_id == 0 for all shifts on that date
 
 function showMonthCalendarTable($mainDate)
 {
@@ -138,6 +140,7 @@ function getCellHeader($ts, $monthTS)
 	$displayStr = substr($displayStr, 1);
     }
     $displayStr .= getDayMessage($ts, $shift);
+    // TODO: daily message form should have better arguments
     if(date("Y-m", $ts) != date("Y-m", $monthTS))
     {
 	// not in the currently viewed month
@@ -190,7 +193,7 @@ function getCellContent($ts, $monthTS)
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.");
     mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!");
     // TODO - using the shift name in this schedule is a hack to retain compatibility with old pages
-    $query = 'SELECT s.* FROM '.$config_sched_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND ss.shiftTitle="'.$shift.'" ORDER BY s.start_ts;';
+    $query = 'SELECT s.* FROM '.$config_sched_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND ss.shiftTitle="'.$shift.'" AND s.deprecated=0 ORDER BY s.start_ts;';
     $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br><br>" . mysql_error());
 
     //echo "\n<!--".$query."-->\n"; // DEBUG
@@ -342,7 +345,7 @@ function memberString($IDstr, $start_ts, $end_ts, $linkLocation)
 	return '&nbsp;';
     }
 
-    echo "\n<!-- IDstr=".$IDstr." start_ts=".$start_ts." end_ts=".$end_ts." linkLocation=".$linkLocation." -->\n"; // DEBUG
+    // echo "\n<!-- IDstr=".$IDstr." start_ts=".$start_ts." end_ts=".$end_ts." linkLocation=".$linkLocation." -->\n"; // DEBUG
 
     global $dbName;
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
@@ -488,6 +491,7 @@ function getDayMessage($ts, $shift)
 {
     // gets the daily message for the specified day and shift.
     global $dbName;
+    global $config_sched_message_table;
 
     $year = date("Y", $ts);
     $month = date("m", $ts);
@@ -496,13 +500,16 @@ function getDayMessage($ts, $shift)
 
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
     mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
-    $query =  'SELECT message FROM schedule_'.$year.'_'.$month.'_'.$shift.' WHERE Date='.$date.';';
+
+    $query = 'SELECT s.* FROM '.$config_sched_message_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND (ss.shiftTitle="'.$shift.'" OR s.sched_shift_id=0) AND s.deprecated=0;';
+
     $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
+
     $row = mysql_fetch_array($result);    
     mysql_close($conn); 
-    if($row['message'] != null)
+    if($row['message_text'] != null)
     {
-	return '  <span class="dateMessage">'.$row['message'].'</span>';
+	return '  <span class="dateMessage">'.$row['message_text'].'</span>';
     }
     return "";
 }
