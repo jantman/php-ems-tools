@@ -33,6 +33,9 @@
 
 // FOR THE SCHEDULE:
 
+// schedule table name
+$config_sched_table = "newschedule";
+
 // this is the default number of crews per day. It can be either 1 or 2
 // 1 crew will allow 6 members
 // 2 crews will allow 3 members per crew
@@ -46,12 +49,8 @@ $showNames = 1; // integer
 // whether or not to show times after name if signed on for complete shift
 $showTimeCompleteShift = false;
 
-//time format displayed after names/IDs on schedule
-// 1: name 6-18
-// 2: name 0600-1800
-// 3: name 06:00-18:00
-// default is 3
-$schedTimeFormat = 3;
+//time format displayed after names/IDs on schedule in PHP date() format
+$config_sched_time_fmt = "Hi";
 
 //AUTHENTICATION
 // what actions does the user need to enter their ID and password for?

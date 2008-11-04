@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-03 14:42:53 jantman"
+// Time-stamp: "2008-11-04 14:35:34 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -170,13 +170,15 @@ function getCellContent($ts, $monthTS)
     global $config_sorted_entries;
     if($config_sorted_entries == true)
     {
-	return getSortedCellContent($ts, $monthTS);
+	// TODO - this needs to be re-implemented
+	//return getSortedCellContent($ts, $monthTS);
     }
 
     // this function outputs the table cell contents for a day
     // $ts is the timestamp for that day, $monthTS is the timestamp for a day in the current month
 
     global $dbName;
+    global $config_sched_table;
 
     // figure out the month, year, date, and shift we want
     global $shift;
@@ -187,34 +189,46 @@ function getCellContent($ts, $monthTS)
     // get the info from the DB
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.");
     mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!");
-    $query =  'SELECT * FROM schedule_'.$year.'_'.$month.'_'.strtolower($shift).' WHERE Date='.$date.';';
+    // TODO - using the shift name in this schedule is a hack to retain compatibility with old pages
+    $query = 'SELECT s.* FROM '.$config_sched_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND ss.shiftTitle="'.$shift.'" ORDER BY s.start_ts;';
     $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br><br>" . mysql_error());
-    mysql_close($conn); 
-    $row = mysql_fetch_array($result);
-    mysql_free_result($result); 
+
+    //echo "\n<!--".$query."-->\n"; // DEBUG
+
+    $final = "";
+    while($row = mysql_fetch_array($result))
+    {
+	// figure out if this signon is this month or not
+	if($month != date('m', $monthTS))
+	{
+	    // this isn't the month being shown, don'tallow an edit link
+	    $linkLoc = "";
+	    $final.= '<div class="calSignon">'.memberString($row['EMTid'], $row['start_ts'], $row['end_ts'], $linkLoc, $ts, $monthTS).'</div>'."\n";
+	}
+	else
+	{
+	    // show an edit link
+	    $final .= '<div class="calSignon">';
+	    $linkLoc = 'javascript:showEditForm('.$row['sched_entry_id'].')';
+	    $final .= memberString($row['EMTid'], $row['start_ts'], $row['end_ts'], $linkLoc);
+	    $final .= '</a></div>'."\n";
+	}
+    }
+
+    // we need to have 6 DIVs to fill the box
+    $remainingDIVs = 6 - mysql_num_rows($result);
+    if($remainingDIVs > 0)
+    {
+	for($i = 1; $i <= ($remainingDIVs); $i++)
+	{
+	    $final .= '<div class="calSignon">&nbsp;</a></div>'."\n";
+	}
+    }
 
     // TODO - JS popup - year, month, shift, date, signonSlot (1-6)
 
-    $final = "";
-    for($i = 1; $i < 7; $i++)
-    {
-	if($row['1ID'] != null)
-	{
-	    if(date("Y-m", $ts) != date("Y-m"))
-	    {
-		// another month, don't show link to edit
-		$linkLoc = "";
-		$final.= '<div class="calSignon">"'.memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc, $ts, $monthTS).'</div>'."\n";
-	    }
-	    else
-	    {
-		$final .= '<div class="calSignon">';
-		$linkLoc = 'javascript:showEditForm('.$year.','.$month.',\''.$shift.'\','.$date.','.$i.', '.$ts.',monthTS='.$monthTS.')';
-		$final .= memberString($row[$i.'ID'], $row[$i.'Start'], $row[$i.'End'], $linkLoc);
-		$final .= '</a></div>'."\n";
-	    }
-	}
-    }
+    mysql_free_result($result); 
+    mysql_close($conn); 
 
     if($final == "")
     {
@@ -316,7 +330,7 @@ function getSortedCellContent($ts, $monthTS)
     return $final;
 }
 
-function memberString($IDstr, $startTime, $endTime, $linkLocation)
+function memberString($IDstr, $start_ts, $end_ts, $linkLocation)
 {
     global $showNames;
 
@@ -327,6 +341,8 @@ function memberString($IDstr, $startTime, $endTime, $linkLocation)
 	// if we're not given an IDstr string, do nothing.
 	return '&nbsp;';
     }
+
+    echo "\n<!-- IDstr=".$IDstr." start_ts=".$start_ts." end_ts=".$end_ts." linkLocation=".$linkLocation." -->\n"; // DEBUG
 
     global $dbName;
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
@@ -363,7 +379,7 @@ function memberString($IDstr, $startTime, $endTime, $linkLocation)
     {
 	$string .= '(P)';
     }
-    $string .= " ".parseTime($startTime, $endTime);
+    $string .= " ".parseTime($start_ts, $end_ts);
 
     if($linkLocation != "")
     {
@@ -433,7 +449,7 @@ function parseTime($startTime, $endTime)
     // this determines the time string to be added to the member string
     global $shift;
     global $showTimeCompleteShift;
-    global $schedTimeFormat;
+    global $config_sched_time_fmt;
 
     if($showTimeCompleteShift == false)
     {
@@ -447,41 +463,7 @@ function parseTime($startTime, $endTime)
 	}
     }
 
-    //time format displayed after names/IDs on schedule
-    // 1: name 6-18
-    // 2: name 0600-1800
-    // 3: name 06:00-18:00
-    // default is 3
-    if($schedTimeFormat==1)
-    {
-	$start = explode(":", $startTime);
-	$start = $start[0];
-	if((strlen($start)==2) && substr($start, 0, 1) == "0")
-	{
-	    $start = substr($start, 1, 1);
-	}
-	$end = explode(":", $endTime);
-	$end = $end[0];
-	if((strlen($end)==2) && substr($end, 0, 1) == "0")
-	{
-	    $end = substr($end, 1, 1);
-	}
-    }
-    elseif($schedTimeFormat==2)
-    {
-	$start = explode(":", $startTime);
-	$start = $start[0].$start[1];
-	$end = explode(":", $endTime);
-	$end = $end[0].$end[1];
-    }
-    elseif($schedTimeFormat==3)
-    {
-	$start = explode(":", $startTime);
-	$start = $start[0].":".$start[1];
-	$end = explode(":", $endTime);
-	$end = $end[0].":".$end[1];
-    }
-    return $start."-".$end;
+    return date($config_sched_time_fmt, $startTime)."-".date($config_sched_time_fmt, $endTime);
 }
 
 function schedTimeToTS($y, $m, $d, $timeStr)

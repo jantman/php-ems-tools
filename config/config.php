@@ -49,6 +49,6 @@ $shortName = "AC"; // string
 $serverWebRoot = "http://jantman.dyndns.org:10011/cvswork/php-ems-tools-trunk/"; // string
 // this is the name of the database on the server used by php-ems-tools
 // the default is php-ems-tools
-$dbName = "php_ems_tools_demo";
+$dbName = "php_ems_tools_devel";
 
 ?>
