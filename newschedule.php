@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-11-03 15:07:42 jantman"
+// Time-stamp: "2008-11-04 11:10:24 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -164,7 +164,11 @@ showMonthCalendarTable($mainDate);
 </div> <!-- END caldiv DIV -->
 
 <div id="popup" class="popup">
+<div id="popuptitleArea">
 <div id="popuptitle"></div>
+<div id="popupCloseBox" onClick="hidePopup()">X</div>
+<div id="clearing"></div>
+</div> <!-- END popuptitleArea DIV -->
 <div id="popupbody">
 </div> <!-- END popupbody DIV -->
 </div> <!-- END popup DIV -->
