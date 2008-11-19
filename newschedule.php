@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-11-04 14:08:40 jantman"
+// Time-stamp: "2008-11-19 16:53:16 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -38,6 +38,8 @@ require_once('./config/config.php');
 require_once('./config/scheduleConfig.php'); // schedule configuration
 require_once('inc/sched.php');
 
+// TODO - how much of this is actually needed?
+
 // figure out what today is, and calculate what else is needed - what month do we show?
 if(isset($_GET['date']))
 {
@@ -68,6 +70,21 @@ else
 	}
     }
 }
+
+// TODO - this is a hack, it should be implemented in the date GET variable
+if($shift == "Day")
+{
+    $temp = date("Y-m-d", $mainDate);
+    $mainDate = strtotime($temp." ".$dayFirstHour.":00:00");
+}
+else
+{
+    $temp = date("Y-m-d", $mainDate);
+    $mainDate = strtotime($temp." ".$nightFirstHour.":00:00");
+}
+// TODO - end hack
+
+// END TODO - how much of this is actually needed?
 
 ?>
 
@@ -130,8 +147,8 @@ mysql_close($conn);
 
 <body>
 
-<?php echo '<div class="monthControlLeft"><a href="schedule.php?date='.lastMonthDate($mainDate).'&shift='.$shift.'">&lt;&lt; '.date("F", lastMonthDate($mainDate)).'</a></div>'."\n"; ?>
-<?php echo '<div class="monthControlRight"><a href="schedule.php?date='.nextMonthDate($mainDate).'&shift='.$shift.'">'.date("F", nextMonthDate($mainDate)).' &gt;&gt;</a></div>'."\n"; ?>
+<?php echo '<div class="monthControlLeft"><a href="newschedule.php?date='.lastMonthDate($mainDate).'&shift='.$shift.'">&lt;&lt; '.date("F", lastMonthDate($mainDate)).'</a></div>'."\n"; ?>
+<?php echo '<div class="monthControlRight"><a href="newschedule.php?date='.nextMonthDate($mainDate).'&shift='.$shift.'">'.date("F", nextMonthDate($mainDate)).' &gt;&gt;</a></div>'."\n"; ?>
 <div id="header">
 <h1><?php echo $orgName." Schedule - ".date("M Y", $mainDate)." ".$shift;?></h1>
 </div> <!-- END header DIV -->
@@ -139,7 +156,7 @@ mysql_close($conn);
 <div id="calhead">
 <?php
 echo '<div class="headerPart">';
-if($shift == "Day"){ echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Night">Nights</a></strong>';} else { echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Day">Days</a></strong>';}
+if($shift == "Day"){ echo '<strong><a href="newschedule.php?date='.$mainDate.'&shift=Night">Nights</a></strong>';} else { echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Day">Days</a></strong>';}
 echo '</div>';
 echo '<div class="headerPart"><a href="#">Mass Signon</a></div>'; // TODO: implement this
 echo '<div class="headerPart"><a href="countHours.php">Count Hours</a></div>';

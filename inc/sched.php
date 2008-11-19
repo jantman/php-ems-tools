@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-04 15:08:16 jantman"
+// Time-stamp: "2008-11-19 17:04:47 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -44,6 +44,9 @@ function showMonthCalendarTable($mainDate)
     // the master function to handle calendar generation
     // it generates a calendar table with one cell per day
     // and calls showDayCell() with the timestamp of the day to fill in the cell.
+    global $shift;
+    global $dayFirstHour;
+    global $nightFirstHour;
     $month = date("m", $mainDate);
     $year = date("Y", $mainDate);
 
@@ -69,6 +72,19 @@ function showMonthCalendarTable($mainDate)
     echo "<tr>"."\n";
     $daysleft = 6 - $weekday--;
 
+    // TODO - BEGIN shift timestamp hack
+    // TODO - this is a hack, it should be implemented in the date GET variable
+    if($shift == "Day")
+    {
+	$startTimeStr = $dayFirstHour.":00:00";
+    }
+    else
+    {
+	$startTimeStr = $nightFirstHour.":00:00";
+    }
+    // TODO - end hack
+    // TODO - END shift timestamp hack
+
     // BEGIN CALENDAR
 
     // last days of last month that are in same week as the first of this month
@@ -76,14 +92,14 @@ function showMonthCalendarTable($mainDate)
     $firstDate = strtotime(date("Y-m-", $lastday).(date("d", $lastday)-$weekday));
     for($f=0;$f<=$weekday;$f++)
     {
-	$mydate = strtotime(date("Y-m-", $firstDate).(date("d", $firstDate)+$f));
+	$mydate = strtotime(date("Y-m-", $firstDate).(date("d", $firstDate)+$f)." ".$startTimeStr);
 	showDayCell($mydate, $mainDate);
     }
 
     // first week of this month
     for($f=0;$f<=$daysleft;$f++)
     {
-	$thisdate = mktime(0, 0, 0, $month, $counter, $year);
+	$thisdate = mktime(substr($startTimeStr, 0, 2), 0, 0, $month, $counter, $year);
 	showDayCell($thisdate, $mainDate);
 	$counter++;
     }
@@ -96,7 +112,7 @@ function showMonthCalendarTable($mainDate)
 	echo "<tr>\n";
 	for($a=0;$a<=($cols-1);$a++)
 	{
-	    $thisdate = mktime(0, 0, 0, $month, $counter, $year);
+	    $thisdate = mktime(substr($startTimeStr, 0, 2), 0, 0, $month, $counter, $year);
 	    showDayCell($thisdate, $mainDate);
 	    $counter++;
 	}
@@ -111,6 +127,7 @@ function showDayCell($ts, $monthTS)
     echo getFullCell($ts, $monthTS);
 }
 
+// ts is the timestamp of the shift to show, monthTS is the timestamp of the current month that determines whether day div is grayed out or not.
 function getFullCell($ts, $monthTS)
 {
     $final = "";
@@ -139,6 +156,8 @@ function getCellHeader($ts, $monthTS)
     {
 	$displayStr = substr($displayStr, 1);
     }
+    // TODO - DEBUG - NEXT LINE shows the two timestamps for each day
+    //$displayStr .= "<br />".date("Y-m-d H:i", $ts)."<br />".date("Y-m-d H:i", $monthTS);
     $displayStr .= getDayMessage($ts, $shift);
     // TODO: daily message form should have better arguments
     if(date("Y-m", $ts) != date("Y-m", $monthTS))
@@ -150,20 +169,20 @@ function getCellHeader($ts, $monthTS)
     elseif(date("Y-m-d", $ts) == date("Y-m-d"))
     {
 	// TODAY
-	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\',monthTS='.$monthTS.')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\',monthTS='.$monthTS.')">'."\n";
+	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.', \''.$shift.'\')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', \''.$shift.'\')">'."\n";
     }
     elseif(strtotime(date("Y-m-d", $ts)) < time())
     {
 	// this month, in past
-	$final .= '<div class="pastDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\',monthTS='.$monthTS.')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="pastDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\',monthTS='.$monthTS.')">'."\n";
+	$final .= '<div class="pastDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.', \''.$shift.'\')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="pastDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', \''.$shift.'\')">'."\n";
     }
     else
     {
 	// this month, in future
-	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.',\''.$shift.'\',monthTS='.$monthTS.')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.',\''.$shift.'\',monthTS='.$monthTS.')">'."\n";
+	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.', \''.$shift.'\')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', \''.$shift.'\')">'."\n";
     }
     return $final;
 }

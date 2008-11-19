@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-11-04 11:05:10 jantman"
+// Time-stamp: "2008-11-19 17:05:56 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -68,7 +68,7 @@ function showSignonForm($ts, $shift)
   var myDate = new Date($ts*1000);
   document.getElementById("popuptitle").innerHTML = "Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
   
-  newSignonFormRequest($ts, $shift);
+  newSignonFormRequest($ts);
 }
 
 function showMessageForm($ts, $shift)
@@ -78,7 +78,7 @@ function showMessageForm($ts, $shift)
   var myDate = new Date($ts*1000);
   document.getElementById("popuptitle").innerHTML = "Edit Daily Message - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
   
-  messageFormRequest($ts, $shift);
+  messageFormRequest($ts);
 }
 
 function showEditForm($year, $month, $shift, $date, $key, $ts)
@@ -101,9 +101,9 @@ function showEditForm($year, $month, $shift, $date, $key, $ts)
 // TODO: in PHP, have a central tsToYearMonthDateShift() that returns a string
 // TODO: move all of these forms to inc/ named like form{type}.php
 
-function newSignonFormRequest($ts, $shift)
+function newSignonFormRequest($ts)
 {
-  doHTTPrequest(('signOn.php?ts=' + $ts + '&shift=' + $shift), handleNewSignonFormRequest);
+  doHTTPrequest(('signOn.php?ts=' + $ts), handleNewSignonFormRequest);
 	// TODO: add an error var to reload the form if we have errors
 }
 
@@ -133,10 +133,10 @@ function handleEditSignonFormRequest()
   }
 }
 
-function messageFormRequest($ts, $shift)
+function messageFormRequest($ts)
 {
   // request the HTML for the message form
-  doHTTPrequest(('dailyMessage.php?ts=' + $ts + '&shift=' + $shift), handleMessageFormRequest);
+  doHTTPrequest(('dailyMessage.php?ts=' + $ts), handleMessageFormRequest);
   // TODO: add an error var to reload the form if we have errors
 }
 

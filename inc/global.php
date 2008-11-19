@@ -131,5 +131,18 @@ function make_safe($str)
     return $str;
 }
 
+function tsToShiftName($ts)
+{
+    global $dayFirstHour;
+    global $nightFirstHour;
+    $temp = date("Y-m-d", $ts);
+    $day = strtotime($temp.$dayFirstHour.":00:00");
+    $night = strtotime($temp.$nightFirstHour.":00:00");
+    if($ts >= $night)
+    {
+	return "Night";
+    }
+    return "Day";
+}
 
 ?>
