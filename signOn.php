@@ -32,6 +32,21 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
+
+/*
+TODO:
+seems to be working, for days at least, for add remove and edit.
+The one remaining problem is that after successful submission, the browser
+displays signOn.php fullscreen - leaves the schedule and doesn't just close the popup.
+
+Can we fix this somehow with editing the signOn.php code or looking at the JS handler (is signOn.php
+doing something to the browser?)
+
+Or do we have to go away from HTML_QuickForm and implement the form ourselves?
+
+*/
+
+
 //required for HTML_QuickForm PEAR Extension
 if(file_exists('../HTML/QuickForm.php'))
 {
@@ -59,6 +74,7 @@ require_once('./config/scheduleConfig.php');
 // for email notifications:
 require_once('./inc/notify.php');
 require_once('./inc/global.php');
+require_once('./inc/logging.php');
 
 //instantiate the form
 $form = new HTML_QuickForm('firstForm');
@@ -75,6 +91,15 @@ else
     $ts = HTML_QuickForm_element::getValue($form->getElement('ts'));
 }
 
+if(! empty($_GET['id']))
+{
+    $signonID = ((int)$_GET['id']);
+    $form->addElement('hidden','signonID',$signonID);
+}
+else
+{
+    $signonID = HTML_QuickForm_element::getValue($form->getElement('signonID'));
+}
 
 
 // parse out the year, month, date, and shift
@@ -92,7 +117,7 @@ $defaults = array();
 addFormElements(); 
 
 // DEBUG - TODO - do we need this anymore, since we're using IDs not slots?
-if(! empty($_GET['slot']))
+if(! empty($_GET['id']))
 {
     populateMe();
 }
@@ -109,34 +134,40 @@ if ($form->validate())
 
 ?>
 
-<SCRIPT LANGUAGE="JavaScript">
-<!--hide
-     opener.location.reload(true);
-	self.close();
-//-->
-</SCRIPT>
-
 <?php
 
 }
+
 function processForm($formItems)
 {
     global $action;
     global $minRightsEdit;
     global $minRightsChangePast;
     global $dbName;
+    global $config_sched_table;
+    global $nightLastHour;
+    global $dayLastHour;
+
 
     $action = $formItems['action'];
+    if(isset($formItems['signonID'])){ $signonID = $formItems['signonID'];}
     $adminID = addslashes($formItems['adminID']);
     $adminPW = md5($formItems['adminPW']);
-    $year = addslashes($formItems['year']);
-    $month = addslashes($formItems['month']);
-    $date = addslashes($formItems['date']);
-    $shift = addslashes($formItems['shift']);
-    $slot = addslashes($formItems['slot']);
     $EMTid = addslashes($formItems['EMTid']);
-    $start = addslashes($formItems['start']);
-    $end = addslashes($formItems['end']);
+    $start = $formItems['start'];
+    $end = $formItems['end'];
+    $ts = $formItems['ts'];
+
+    $temp_ts_ary = makeTimestampsFromTimes($ts, $start, $end);
+    $start_ts = $temp_ts_ary['start'];
+    $end_ts = $temp_ts_ary['end'];
+    $year = date("Y", $start_ts);
+    $month = date("m", $start_ts);
+    $date = date("d", $start_ts);
+    $shift = tsToShiftName($start_ts);
+
+    // DEBUG
+    //error_log("COM_JASONANTMAN_DEBUG - signOn.php - action= $action signonID= $signonID adminID= $adminID EMTid= $EMTid start= $start end= $end year= $year month= $month date= $date shift= $shift");
 
     // start MySQL connection
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
@@ -160,22 +191,23 @@ function processForm($formItems)
 
     if($requireAuthToSignOn && ($action=="signOn") && (! $auth))
     {
-	die("Either your ID/password is incorrect or you are not authorized to perform this action.");
+	die("Either your ID/password is incorrect or you are not authorized to perform this action (signing on).");
     }
     if($requireAuthToEdit && ($action=="edit") && ((! $auth) || ($rightsLevel < $minRightsEdit)))
     {
-	die("Either your ID/password is incorrect or you are not authorized to perform this action.");
+	die("Either your ID/password is incorrect or you are not authorized to perform this action (editing a signon).");
     }
     if($requireAuthToRemove && ($action=="remove") && ((! $auth) || ($rightsLevel < $minRightsEdit)))
     {
-	die("Either your ID/password is incorrect or you are not authorized to perform this action.");
+	die("Either your ID/password is incorrect or you are not authorized to perform this action (removing a signon).");
     }
     if($requireAuthToChangePast && ((! $auth) || ($rightsLevel < $minRightsChangePast)))
     {
-	$changeDay = strtotime($year."-".$month."-".$date);
+	$changeDay = $start_ts;
 	$difference = time() - $changeDay;
+	$sameShift = false;
 	// TODO - get rid of this day and night stuff
-	if($shift=="night")
+	if(strtolower($shift)=="night")
 	{
 	    global $nightLastHour;
 	    $lastHr = $nightLastHour;
@@ -192,7 +224,7 @@ function processForm($formItems)
 	if($difference > 86400 && (! $sameShift))
 	{
 	    //we are more than a day in the past; fail.
-	    die("Either your ID/password is incorrect or you are not authorized to perform this action.");
+	    die("Your user is not authorized to change a signon from the past. You must login with a username and password, or contact an administrator.");
 	}
     }
 
@@ -204,6 +236,7 @@ function processForm($formItems)
     global $memberTypes;
     for($i=0; $i < count($memberTypes); $i++)
     {
+	// TODO: move which member types can pull duty (and the rest of the memberTypes config) to the database and use a JOIN
 	if($memberTypes[$i]['name']==$type)
 	{
 	    if(! $memberTypes[$i]['canPullDuty'])
@@ -216,101 +249,69 @@ function processForm($formItems)
     if($formItems['action']=='remove')
     {
 	//remove 
-	$query = 'UPDATE schedule_'.$year.'_'.$month.'_'.$shift.' SET '.$slot.'ID=null,'.$slot.'Start="0000-00-00 00:00:00",'.$slot.'End="0000-00-00 00:00:00" WHERE date='.$date.';';
-	schedule_remove_mail($year, $month, $date, $shift, $formItems['EMTid']);
-
-	
-
+	$query = 'UPDATE '.$config_sched_table.' SET deprecated=1 WHERE sched_entry_id='.$signonID.';';
+	$result = mysql_query($query) or die ("Query Error");
+	// TODO - reimplement mails
+	//schedule_remove_mail($year, $month, $date, $shift, $formItems['EMTid'], $signonID);
+	logEditForm($signonID, null, $adminID, $auth, "signOn.php", $query);
     }
     else
     {
 	//let's validate the times
 	// TODO - get rid of this day and night stuff
-	if($shift=="day")
+	if($start_ts >= $end_ts)
 	{
-	    if(substr($formItems['start'],0,2) > substr($formItems['end'],0,2))
-	    {
-		$failed = true;
-	    }
-	}
-	if($shift=="night")
-	{
-	    $sS = substr($formItems['start'],0,2);
-	    $eS = substr($formItems['end'],0,2);
-	    if($sS < 24 && $sS > 17 && $eS < 24 && $eS > 17) // both between 18-23
-	    {
-		if($sS > $eS)
-		{
-		    $failed = true;
-		}
-	    }
-	    if($sS < 7 && $eS < 7) // both between 0-6
-	    {
-		if($sS > $eS)
-		{
-		    $failed = true;
-		}
-	    }
-	    if($eS >= 0 && $eS < 7 && $sS > 17 && $sS < 24) // end 0-6 start 18-23
-	    {
-		$failed = false;
-	    }
-	    if($sS >=0 && $sS < 7 && $eS > 17 && $eS < 24) // start 0-6 end 18-23
-	    {
-		$failed = true;
-	    }
-	    if($failed)
-	    {
-		die("I'm sorry, but the times you selected are invalid.");
-	    }
+	    die("I'm sorry, but the times you selected are invalid.");
 	}
 
+	if($action == "edit")
+	{
+	    $query = 'UPDATE '.$config_sched_table.' SET deprecated=1 WHERE sched_entry_id='.$signonID.';';
+	    $result = mysql_query($query) or die ("Query Error");
+	    $query2 = 'INSERT INTO '.$config_sched_table.' SET EMTid="'.mysql_real_escape_string($EMTid).'",start_ts='.$start_ts.',end_ts='.$end_ts.',sched_year='.$year.',sched_month='.$month.',sched_date='.$date.',sched_shift_id='.shiftNameToID($shift).' ;';
+	    $result = mysql_query($query2) or die ("Query Error");
+	    $newID = mysql_insert_id();
+	    logEditForm($signonID, $newID, $adminID, $auth, "signOn.php", ($query." ".$query2));
+	}
+	else
+	{
+	    // new signon
+	    $query2 = 'INSERT INTO '.$config_sched_table.' SET EMTid="'.mysql_real_escape_string($EMTid).'",start_ts='.$start_ts.',end_ts='.$end_ts.',sched_year='.$year.',sched_month='.$month.',sched_date='.$date.',sched_shift_id='.shiftNameToID($shift).' ;';
+	    $result = mysql_query($query2) or die ("Query Error");
+	    $newID = mysql_insert_id();
+	    logEditForm(null, $newID, $adminID, $auth, "signOn.php", ($query." ".$query2));
+	}
 
-	$query = 'UPDATE schedule_'.$year.'_'.$month.'_'.$shift.' SET '.$slot.'ID="'.$EMTid.'",'.$slot.'Start="'.$start.'",'.$slot.'End="'.$end.'" WHERE date='.$date.';';
-	schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end); // for edit and add
-
+	// TODO - re-code email stuff
+	//schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end, $signonID); // for edit and add
     }
-    $result = mysql_query($query) or die ("Query Error");
-
-    // change logging
-    $chQuery =  'CREATE TABLE IF NOT EXISTS schedule_'.$year.'_'.$month.'_change LIKE schedule_change_template;';
-    $result = mysql_query($chQuery) or die ("Query Error");
-    $address = $_SERVER['REMOTE_ADDR'];
-    $host = gethostbyaddr($address);
-    $chQuery = 'INSERT INTO schedule_'.$year.'_'.$month.'_change SET timestamp='.time().',EMTid="'.$adminID.'",query="'.make_safe($query).'",host="'.$host.'",address="'.$address.'",form="signOn";';
-    mysql_query($chQuery) or die ("Query Error".mysql_error()." in query ".$chQuery);
 }
   
 function populateMe() 
 {
-	global $form; 
-	global $defaults;
-	global $date;
-	global $year;
-	global $month;
-	global $shift;
-	global $slot;
-	global $dbName;
+    global $form; 
+    global $defaults;
+    global $dbName;
+    global $signonID;
+    global $ts;
+    global $config_sched_table;
 
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
     mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
-    $query = 'SELECT * FROM schedule_'.$year.'_'.$month.'_'.$shift.' WHERE date='.$date.';';
+    // TODO - remove this commented out query
+    //$query = 'SELECT s.* FROM '.$config_sched_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND ss.shiftTitle="'.$shift.'" AND s.deprecated=0 ORDER BY s.start_ts;';
+    $query = 'SELECT * FROM '.$config_sched_table.' WHERE sched_entry_id='.$signonID.';';
     $result = mysql_query($query);
+    if(mysql_num_rows($result) < 1){ $defaults['action'] = "signOn"; return null;}
     $row = mysql_fetch_array($result) or die("Error fetching result for defaults.");
-    if($row[$slot."ID"]<>"")
-    {
-	//we have someone
-	$defaults['action'] = "edit";
-	$defaults['EMTid'] = $row[$slot.'ID'];
-	$defaults['start'] = $row[$slot.'Start'];
-	$defaults['end'] = $row[$slot.'End'];
-    }
-    else
-    {
-	$defaults['action'] = "signOn";
-    }
-
+    $defaults['action'] = "edit";
+    $defaults['EMTid'] = $row['EMTid'];
+    $defaults['start'] = date("H:i:s", $row['start_ts']);
+    $defaults['end'] = date("H:i:s", $row['end_ts']);
+    $defaults['start_ts'] = $row['start_ts'];
+    $defaults['end_ts'] = $row['end_ts'];
 }
+
 // removed putToDB - was an empty function
 function addFormElements() 
 {
@@ -325,13 +326,17 @@ function addFormElements()
 	// DEBUG - new timestamp-based start and end time calculation, based on 12-hour shifts
 	$startTimes = array();
 	$endTimes = array();
+	$minStart = "";
+	$maxEnd = "";
 	for($i = $ts; $i < ($ts + 43200); $i += 1800)
 	{
 	    $startTimes[date("H:i:s", $i)] = date("H:i:s", $i);
+	    if($minStart == ""){ $minStart = date("H:i:s", $i); }
 	}
 	for($i = $ts + 1800; $i < ($ts + 45000); $i += 1800)
 	{
 	    $endTimes[date("H:i:s", $i)] = date("H:i:s", $i);
+	    $maxEnd = date("H:i:s", $i);
 	}
 	// END DEBUG new timestamp-based start and end time calculation
 
@@ -343,8 +348,9 @@ function addFormElements()
 	$form->addElement('radio','action','Action:','Sign On','signOn');
 	$form->addElement('radio','action',null,'Edit','edit');
 	$form->addElement('radio','action',null,'Remove','remove');
-
 	$form->addElement('text', 'EMTid', 'ID#', array('size' => 10, 'maxlength' => 5)); 
+	$defaults["start"] = $minStart;
+	$defaults["end"] = $maxEnd;
 	$startElement =& $form->createElement('select', 'start', 'Start Time:'); 
 	$endElement =& $form->createElement('select', 'end', 'End Time:'); 
 
@@ -357,6 +363,9 @@ function addFormElements()
 	$buttonGroup[] =& HTML_QuickForm::createElement('reset', 'btnReset', 'Reset');
 	$buttonGroup[] =& HTML_QuickForm::createElement('submit', 'btnSubmit', 'Submit');
 	$form->addGroup($buttonGroup, 'buttonGroup', null, "    ");
+
+	$form->addElement('hidden','end_ts',"");
+	$form->addElement('hidden','start_ts',"");
 
 	$form->addElement('static',null,'<br><br>');
 	$form->addElement('header',null, 'For changing past only:');
