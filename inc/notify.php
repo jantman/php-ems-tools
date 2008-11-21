@@ -35,7 +35,7 @@ require_once('./config/config.php'); // main configuration
 
 require_once('./config/scheduleConfig.php'); // schedule configuration
 
-function schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end)
+function schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end, $signonID)
 {
     global $sched_emailOnEdit;
     global $sched_smsOnEdit;
@@ -133,7 +133,7 @@ function schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end)
     }
 }
 
-function schedule_remove_mail($year, $month, $date, $shift, $EMTid)
+function schedule_remove_mail($year, $month, $date, $shift, $EMTid, $signonID)
 {
     global $sched_emailOnRemove;
     global $sched_smsOnRemove;

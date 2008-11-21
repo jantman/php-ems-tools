@@ -124,15 +124,17 @@ function schedAuth($EMTid, $passMD5)
 
 function make_safe($str)
 {
+    // removes SQL keywords and escapes string for putting queries in a db field
     $str = trim($str, ";");
     $str = str_replace("UPDATE", "UPD", $str);
     $str = str_replace("SET", "ST", $str);
-    $str = mysql_escape_string($str);
+    $str = mysql_real_escape_string($str);
     return $str;
 }
 
 function tsToShiftName($ts)
 {
+    // finds the shift name for a timestamp
     global $dayFirstHour;
     global $nightFirstHour;
     $temp = date("Y-m-d", $ts);
@@ -143,6 +145,34 @@ function tsToShiftName($ts)
 	return "Night";
     }
     return "Day";
+}
+
+function shiftNameToID($name)
+{
+    // gets the shiftID for a string shift name
+    $query = "SELECT sched_shift_id FROM schedule_shifts WHERE shiftName='".mysql_real_escape_string(strtolower($name))."';";
+    $result = mysql_query($query) or die ("Query Error");
+    if(mysql_num_rows($result) > 0){ $row = mysql_fetch_assoc($result); return $row['sched_shift_id'];}
+    return false;
+}
+
+function makeTimestampsFromTimes($ts, $start, $end)
+{
+    global $dayFirstHour;
+    // takes the ts argument to signOn.php, and start and end strings (H:m:s) and returns an array with stard and end timestamps
+    $dateStr = date("Y-m-d", $ts);
+    $startH = (int)substr($start, 0, 2);
+    $endH = (int)substr($start, 0, 2);
+    if($endH < $dayFirstHour)
+    {
+	$end_ts = strtotime(date("Y-m-d", ($ts-86400))." ".$end);
+    }
+    else
+    {
+	$end_ts = strtotime(date("Y-m-d", ($ts))." ".$end);
+    }
+    $start_ts = strtotime(date("Y-m-d", $ts)." ".$start);
+    return array("start" => $start_ts, "end" => $end_ts);
 }
 
 ?>

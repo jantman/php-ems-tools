@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-19 17:04:47 jantman"
+// Time-stamp: "2008-11-21 16:54:13 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -231,7 +231,7 @@ function getCellContent($ts, $monthTS)
 	{
 	    // show an edit link
 	    $final .= '<div class="calSignon">';
-	    $linkLoc = 'javascript:showEditForm('.$row['sched_entry_id'].')';
+	    $linkLoc = 'javascript:showEditForm('.$row['sched_entry_id'].', '.$ts.')';
 	    $final .= memberString($row['EMTid'], $row['start_ts'], $row['end_ts'], $linkLoc);
 	    $final .= '</a></div>'."\n";
 	}
@@ -250,7 +250,6 @@ function getCellContent($ts, $monthTS)
     // TODO - JS popup - year, month, shift, date, signonSlot (1-6)
 
     mysql_free_result($result); 
-    mysql_close($conn); 
 
     if($final == "")
     {

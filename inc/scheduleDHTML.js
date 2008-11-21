@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-11-19 17:05:56 jantman"
+// Time-stamp: "2008-11-21 15:11:15 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -81,14 +81,14 @@ function showMessageForm($ts, $shift)
   messageFormRequest($ts);
 }
 
-function showEditForm($year, $month, $shift, $date, $key, $ts)
+function showEditForm($id, $ts)
 {
   // shows the form to edit or remove a signon
 
   var myDate = new Date($ts*1000);
-  document.getElementById("popuptitle").innerHTML = "Edit Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
+  document.getElementById("popuptitle").innerHTML = "Edit Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y");
   
-  editSignonFormRequest($year, $month, $shift, $date, $key, $ts);
+  editSignonFormRequest($id, $ts);
 }
 
 
@@ -117,9 +117,9 @@ function handleNewSignonFormRequest()
   }
 }
 
-function editSignonFormRequest($year, $month, $shift, $date, $key, $ts)
+function editSignonFormRequest($id, $ts)
 {
-  doHTTPrequest(('signOn.php?action=edit&year=' + $year + '&month=' + $month + '&shift=' + $shift + '&date=' + $date + '&key=' + $key + '&ts=' + $ts), handleEditSignonFormRequest);
+  doHTTPrequest(('signOn.php?action=edit&id=' + $id + "&ts=" + $ts), handleEditSignonFormRequest);
   // TODO: add an error var to reload the form if we have errors
 }
 
