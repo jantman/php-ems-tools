@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-11-21 15:11:15 jantman"
+// Time-stamp: "2008-11-22 17:07:20 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -198,4 +198,76 @@ function getFirefoxVersion()
   
   return version;
   
+}
+
+//
+// FORM SUBMISSION
+//
+
+function submitForm()
+{
+  // radio buttons
+  var action = "";
+  if(document.signon_form.action[0].checked == true)
+  {
+    action = "signOn";
+  }
+  else if(document.signon_form[1].checked == true)
+  {
+    action = "edit";
+  }
+  else
+  {
+    action = "remove";
+  }
+
+  var postData = "ts="+document.getElementById("ts").value+"&action="+action+"&EMTid="+document.getElementById("EMTid").value+"&start="+document.getElementById("start").value+"&end="+document.getElementById("end").value+"&adminID="+document.getElementById("adminID").value+"&adminPW="+document.getElementById("adminPW").value;
+  var url = "handlers/signOn.php";
+  http.open("POST", url, true);
+  
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  http.setRequestHeader("Content-length", postData.length);
+  http.setRequestHeader("Connection", "close");  
+  http.onreadystatechange = handleSubmitURL; 
+  http.send(postData);
+}
+
+function handleSubmitURL()
+{
+	if(http.readyState == 4)
+	{
+		var response = http.responseText;
+		if(response.substr(0, 6) == "ERROR:")
+		{
+			// TODO: handle error condition by triggering a popup or changing content of existing one
+			var errorMessage = response.substr(6, (response.length - 6));
+			document.getElementById("popuptitle").innerHTML = "ERROR";
+			document.getElementById("popup").innerHTML = errorMessage;
+		}
+		else
+		{
+			var ts = document.getElementById('ts').value;
+			reloadDay('inc/getDay.php?ts=' + ts);
+		}
+	}
+}
+
+function reloadDay(url)
+{
+	http.open('get', url);
+	http.onreadystatechange = handleReloadDay; 
+	http.send(null);
+}
+
+function handleReloadDay()
+{
+	if(http.readyState == 4)
+	{
+		var response = http.responseText;
+		var ts = document.getElementById('ts').value;
+		var elemID = 'day_' + ts;
+		document.getElementById(elemID).innerHTML = response;
+		hidePopup("popup");
+	}
 }

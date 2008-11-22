@@ -7,8 +7,7 @@
 <title>Schedule SignOn</title>
 </head>
 <body>
-<form action="handlers/signOn.php" method="post" name="signOnForm" id="signOnForm">
-
+<form name="signon_form">
 
 <?php 
 //
@@ -66,19 +65,22 @@ require_once('./inc/notify.php');
 require_once('./inc/global.php');
 require_once('./inc/logging.php');
 
+// for i18n
+require_once('./inc/'.$config_i18n_filename);
+
 $hiddenItems = ""; // variable to hols the hidden items
 
 // get the URL variables
 if(! empty($_GET['ts']))
 {
     $ts = ((int)$_GET['ts']);
-    $hiddenItems .= '<input name="ts" type="hidden" value="'.$ts.'" />';
+    $hiddenItems .= '<input name="ts" type="hidden" value="'.$ts.'" id="ts" />';
 }
 
 if(! empty($_GET['id']))
 {
     $signonID = ((int)$_GET['id']);
-    $hiddenItems .= '<input name="id" type="hidden" value="'.$id.'" />';
+    $hiddenItems .= '<input name="id" type="hidden" value="'.$id.'" id="id" />';
 }
 
 
@@ -153,11 +155,11 @@ echo '	<tr>
 //
 if(isset($row) && isset($row['EMTid']))
 {
-    echo '		<td valign="top" align="left"><input size="10" maxlength="5" name="EMTid" type="text" value="'.$row['EMTid'].'" /></td>';
+    echo '		<td valign="top" align="left"><input size="10" maxlength="5" name="EMTid" type="text" value="'.$row['EMTid'].'" id="EMTid" /></td>';
 }
 else
 {
-    echo '		<td valign="top" align="left"><input size="10" maxlength="5" name="EMTid" type="text" /></td>';
+    echo '		<td valign="top" align="left"><input size="10" maxlength="5" name="EMTid" type="text" id="EMTid" /></td>';
 }
 
 //
@@ -166,7 +168,7 @@ else
 echo '	</tr>
 	<tr>
 		<td align="right" valign="top"><b>'.$i18n_strings["signOn"]["Start Time"].':</b></td>
-		<td valign="top" align="left"><select name="start">';
+		<td valign="top" align="left"><select name="start" id="start" >';
 
 for($i = $ts; $i < ($ts + 43200); $i += 1800)
 {
@@ -185,7 +187,7 @@ echo '</select></td>
 	</tr>
 	<tr>
 		<td align="right" valign="top"><b>'.$i18n_strings["signOn"]["End Time"].':</b></td>
-		<td valign="top" align="left"><select name="end">';
+		<td valign="top" align="left"><select name="end" id="end">';
 
 for($i = $ts + 1800; $i < ($ts + 43200); $i += 1800)
 {
@@ -200,7 +202,7 @@ echo '</select></td>
 		<td align="right" valign="top"><b></b></td>';
 
 // BUTTONS
-echo '		<td valign="top" align="left"><input name="buttonGroup[btnReset]" value="'.$i18n_strings["signOn"]["Reset"].'" type="reset" />    <input name="buttonGroup[btnSubmit]" value="'.$i18n_strings["signOn"]["Submit"].'" type="submit" /></td>';
+echo '		<td valign="top" align="left"><input name="buttonGroup[btnReset]" value="'.$i18n_strings["signOn"]["Reset"].'" type="reset" />    <input name="buttonGroup[btnCancel]" value="'.$i18n_strings["signOn"]["Cancel"].'" onClick="hidePopup(\'popup\')" type="button" />    <input name="buttonGroup[btnSubmit]" value="'.$i18n_strings["signOn"]["Submit"].'" type="button" onClick="submitForm()" />    </td>';
 
 
 echo '	</tr>
@@ -213,17 +215,16 @@ echo '	</tr>
 	</tr>
 	<tr>
 		<td align="right" valign="top"><b>'.$i18n_strings["signOn"]["adminID"].'</b></td>
-		<td valign="top" align="left"><input size="10" maxlength="5" name="adminID" type="text" /></td>
+		<td valign="top" align="left"><input size="10" maxlength="5" name="adminID" type="text" id="adminID" /></td>
 	</tr>
 	<tr>
 		<td align="right" valign="top"><b>'.$i18n_strings["signOn"]["adminPW"].'</b></td>
-		<td valign="top" align="left"><input size="10" maxlength="10" name="adminPW" type="password" /></td>
+		<td valign="top" align="left"><input size="10" maxlength="10" name="adminPW" type="password" id="adminPW" /></td>
 	</tr>
 </table>
 </div>';
 
 ?>
-
-</form> 
+</form>
 </body>
 </html>

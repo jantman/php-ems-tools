@@ -32,10 +32,6 @@
 //	$Id$
 
 
-require_once('./config/config.php');
-
-
-
 function GetMonthString($n)
 {
     $timestamp = mktime(0, 0, 0, $n, 1, 2005);  

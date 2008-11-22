@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-21 16:54:13 jantman"
+// Time-stamp: "2008-11-22 16:51:35 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -34,8 +34,6 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-require_once('config/config.php');
-require_once('config/scheduleConfig.php');
 
 // TODO - schedule_dailyMessage entries allow a sched_shift_id == 0 for all shifts on that date
 

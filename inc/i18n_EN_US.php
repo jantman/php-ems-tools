@@ -45,6 +45,7 @@ $i18n_strings["signOn"]["ID Num"] = "ID#";
 $i18n_strings["signOn"]["Start Time"] = "Start Time";
 $i18n_strings["signOn"]["End Time"] = "End Time";
 $i18n_strings["signOn"]["Reset"] = "Reset";
+$i18n_strings["signOn"]["Cancel"] = "Cancel";
 $i18n_strings["signOn"]["Submit"] = "Submit";
 $i18n_strings["signOn"]["changingPast"] = "For changing past only";
 $i18n_strings["signOn"]["adminID"] = "Administrator ID#";

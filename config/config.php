@@ -52,6 +52,6 @@ $serverWebRoot = "http://jantman.dyndns.org:10011/cvswork/php-ems-tools-trunk/";
 $dbName = "php_ems_tools_devel";
 
 // INTERNATIONALIZATION (i18n)
-require_once('inc/i18n_EN_US.php');
+$config_i18n_filename = 'i18n_EN_US.php';
 
 ?>
