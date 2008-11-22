@@ -162,10 +162,10 @@ function makeTimestampsFromTimes($ts, $start, $end)
     // takes the ts argument to signOn.php, and start and end strings (H:m:s) and returns an array with stard and end timestamps
     $dateStr = date("Y-m-d", $ts);
     $startH = (int)substr($start, 0, 2);
-    $endH = (int)substr($start, 0, 2);
-    if($endH < $dayFirstHour)
+    $endH = (int)substr($end, 0, 2);
+    if($endH <= $dayFirstHour)
     {
-	$end_ts = strtotime(date("Y-m-d", ($ts-86400))." ".$end);
+	$end_ts = strtotime(date("Y-m-d", ($ts+86400))." ".$end);
     }
     else
     {
