@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-22 16:51:35 jantman"
+// Time-stamp: "2008-11-22 18:12:46 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -201,7 +201,7 @@ function getCellContent($ts, $monthTS)
     global $config_sched_table;
 
     // figure out the month, year, date, and shift we want
-    global $shift;
+    $shift = tsToShiftName($ts);
     $year = date('Y', $ts);
     $month = date('m', $ts);
     $date = date('d', $ts);
@@ -211,7 +211,7 @@ function getCellContent($ts, $monthTS)
     mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!");
     // TODO - using the shift name in this schedule is a hack to retain compatibility with old pages
     $query = 'SELECT s.* FROM '.$config_sched_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND ss.shiftTitle="'.$shift.'" AND s.deprecated=0 ORDER BY s.start_ts;';
-    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br><br>" . mysql_error());
+    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br><br>" . mysql_error()."<br />".$query);
 
     //echo "\n<!--".$query."-->\n"; // DEBUG
 

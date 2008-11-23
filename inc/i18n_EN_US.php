@@ -38,6 +38,7 @@
 // master array to hold all strings, which will be printed literally in the HTML
 $i18n_strings = array();
 
+$i18n_strings["signOn"]["Action"] = "Action";
 $i18n_strings["signOn"]["Sign On"] = "Sign On";
 $i18n_strings["signOn"]["Edit"] = "Edit";
 $i18n_strings["signOn"]["Remove"] = "Remove";

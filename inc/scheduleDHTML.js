@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-11-22 17:07:20 jantman"
+// Time-stamp: "2008-11-22 19:50:33 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -208,20 +208,24 @@ function submitForm()
 {
   // radio buttons
   var action = "";
-  if(document.signon_form.action[0].checked == true)
+  var postData = "";
+  if(document.signon_form.action[2].checked == true)
   {
-    action = "signOn";
+    action = "remove";
+    postData = "id="+document.getElementById("id").value+"&";
   }
-  else if(document.signon_form[1].checked == true)
+  else if(document.signon_form.action[1].checked == true)
   {
     action = "edit";
+    postData = "id="+document.getElementById("id").value+"&";
   }
   else
   {
-    action = "remove";
+    action = "signOn";
   }
 
-  var postData = "ts="+document.getElementById("ts").value+"&action="+action+"&EMTid="+document.getElementById("EMTid").value+"&start="+document.getElementById("start").value+"&end="+document.getElementById("end").value+"&adminID="+document.getElementById("adminID").value+"&adminPW="+document.getElementById("adminPW").value;
+  postData = postData+"ts="+document.getElementById("ts").value+"&action="+action+"&EMTid="+document.getElementById("EMTid").value+"&start="+document.getElementById("start").value+"&end="+document.getElementById("end").value+"&adminID="+document.getElementById("adminID").value+"&adminPW="+document.getElementById("adminPW").value;
+
   var url = "handlers/signOn.php";
   http.open("POST", url, true);
   
@@ -242,8 +246,10 @@ function handleSubmitURL()
 		{
 			// TODO: handle error condition by triggering a popup or changing content of existing one
 			var errorMessage = response.substr(6, (response.length - 6));
-			document.getElementById("popuptitle").innerHTML = "ERROR";
-			document.getElementById("popup").innerHTML = errorMessage;
+			hidePopup();
+			document.getElementById("popuptitle").innerHTML = "ERROR: ";
+			document.getElementById("popupbody").innerHTML = errorMessage;
+			showPopup();
 		}
 		else
 		{
@@ -268,6 +274,6 @@ function handleReloadDay()
 		var ts = document.getElementById('ts').value;
 		var elemID = 'day_' + ts;
 		document.getElementById(elemID).innerHTML = response;
-		hidePopup("popup");
+		hidePopup();
 	}
 }
