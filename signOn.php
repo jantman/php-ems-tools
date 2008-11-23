@@ -80,7 +80,7 @@ if(! empty($_GET['ts']))
 if(! empty($_GET['id']))
 {
     $signonID = ((int)$_GET['id']);
-    $hiddenItems .= '<input name="id" type="hidden" value="'.$id.'" id="id" />';
+    $hiddenItems .= '<input name="id" type="hidden" value="'.$signonID.'" id="id" />';
 }
 
 

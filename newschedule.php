@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-11-19 16:53:16 jantman"
+// Time-stamp: "2008-11-22 18:15:28 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -37,6 +37,7 @@
 require_once('./config/config.php');
 require_once('./config/scheduleConfig.php'); // schedule configuration
 require_once('inc/sched.php');
+require_once('inc/global.php');
 
 // TODO - how much of this is actually needed?
 
@@ -137,7 +138,6 @@ mysql_close($conn);
 ?>
 </script>
 <!-- end members array -->
-<script language="javascript" type="text/javascript" src="inc/schedForms.js"></script>
 <script language="javascript" type="text/javascript" src="inc/grayout.js"></script>
 <!--
 <script language="javascript" type="text/javascript" src="inc/eventForm.js"></script>

@@ -52,6 +52,18 @@ $i18n_strings["signOn"]["changingPast"] = "For changing past only";
 $i18n_strings["signOn"]["adminID"] = "Administrator ID#";
 $i18n_strings["signOn"]["adminPW"] = "Password";
 
+$i18n_strings["signOnWarnings"]["noDBconnect"] = "I'm sorry, the MySQL connection failed at mysql_connect.";
+$i18n_strings["signOnWarnings"]["noDBselect"] = "I'm sorry, I was unable to select the database!";
+$i18n_strings["signOnWarnings"]["authQueryError"] = "Auth Query Error";
+$i18n_strings["signOnWarnings"]["errorSignOn"] = "Either your ID/password is incorrect or you are not authorized to perform this action (signing on).";
+$i18n_strings["signOnWarnings"]["errorEdit"] = "Either your ID/password is incorrect or you are not authorized to perform this action (editing a signon).";
+$i18n_strings["signOnWarnings"]["errorRemove"] = "Either your ID/password is incorrect or you are not authorized to perform this action (removing a signon).";
+$i18n_strings["signOnWarnings"]["errorChangePast"] = "Your user is not authorized to change a signon from the past. You must login with a username and password, or contact an administrator.";
+$i18n_strings["signOnWarnings"]["errorMemberType1"] = "I'm sorry, but a member of type";
+$i18n_strings["signOnWarnings"]["errorMemberType2"] = "cannot sign up for duty.";
+$i18n_strings["signOnWarnings"]["errorTimeInvalid"] = "I'm sorry, but the times you selected are invalid.";
+$i18n_strings["signOnWarnings"]["errorOverlap"] = "Your are already signed on for a portion of this time. You cannot have two signons that overlap.";
+//$i18n_strings["signOnWarnings"][""] = "";
 
 
 ?>

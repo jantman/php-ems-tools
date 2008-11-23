@@ -46,6 +46,9 @@ require_once('../inc/notify.php');
 require_once('../inc/global.php');
 require_once('../inc/logging.php');
 
+// for i18n
+require_once('../inc/'.$config_i18n_filename);
+
 $action = $_POST['action'];
 if(isset($_POST['signonID'])){ $signonID = $_POST['signonID'];}
 $adminID = addslashes($_POST['adminID']);
@@ -54,6 +57,7 @@ $EMTid = addslashes($_POST['EMTid']);
 $start = $_POST['start'];
 $end = $_POST['end'];
 $ts = $_POST['ts'];
+$signonID = $_POST['id'];
 
 $temp_ts_ary = makeTimestampsFromTimes($ts, $start, $end);
 $start_ts = $temp_ts_ary['start'];
@@ -63,16 +67,16 @@ $month = date("m", $start_ts);
 $date = date("d", $start_ts);
 $shift = tsToShiftName($start_ts);
 
-// DEBUG
-//error_log("COM_JASONANTMAN_DEBUG - signOn.php - action= $action signonID= $signonID adminID= $adminID EMTid= $EMTid start= $start end= $end year= $year month= $month date= $date shift= $shift");
+// to append to all error messages - cancel button to close popup
+$errorCancel = '<div style="text-align: center;"><input name="buttonGroup[btnCancel]" value="'.$i18n_strings["signOn"]["Cancel"].'" onClick="hidePopup(\'popup\')" type="button" /></div>';
 
 // start MySQL connection
-$conn = mysql_connect()   or die("ERROR: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
-mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
+$conn = mysql_connect()   or die("ERROR: ".$i18n_strings["signOnWarnings"]["noDBconnect"].$errorCancel);
+mysql_select_db($dbName) or die ("ERROR: ".$i18n_strings["signOnWarnings"]["noDBselect"].$errorCancel);
 
 //AUTHENTICATION
 $query = 'SELECT pwdMD5,rightsLevel FROM roster WHERE EMTid="'.$adminID.'";';
-$result = mysql_query($query) or die ("ERROR: Auth Query Error");
+$result = mysql_query($query) or die ("ERROR: ".$i18n_strings["signOnWarnings"]["authQueryError"].$errorCancel);
 $row = mysql_fetch_array($result);
 $auth = false;
 $rightsLevel = $row['rightsLevel'];
@@ -88,15 +92,15 @@ global $requireAuthToChangePast;
 
 if($requireAuthToSignOn && ($action=="signOn") && (! $auth))
 {
-    die("ERROR: Either your ID/password is incorrect or you are not authorized to perform this action (signing on).");
+    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorSignOn"].$errorCancel);
 }
 if($requireAuthToEdit && ($action=="edit") && ((! $auth) || ($rightsLevel < $minRightsEdit)))
 {
-    die("ERROR: Either your ID/password is incorrect or you are not authorized to perform this action (editing a signon).");
+    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorEdit"].$errorCancel);
 }
 if($requireAuthToRemove && ($action=="remove") && ((! $auth) || ($rightsLevel < $minRightsEdit)))
 {
-    die("ERROR: Either your ID/password is incorrect or you are not authorized to perform this action (removing a signon).");
+    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorRemove"].$errorCancel);
 }
 if($requireAuthToChangePast && ((! $auth) || ($rightsLevel < $minRightsChangePast)))
 {
@@ -121,12 +125,12 @@ if($requireAuthToChangePast && ((! $auth) || ($rightsLevel < $minRightsChangePas
     if($difference > 86400 && (! $sameShift))
     {
 	//we are more than a day in the past; fail.
-	die("ERROR: Your user is not authorized to change a signon from the past. You must login with a username and password, or contact an administrator.");
+	die("ERROR: ".$i18n_strings["signOnWarnings"]["errorChangePast"].$errorCancel);
     }
 }
 
 //figure out whether this member is eligable to pull duty
-$query = 'SELECT status FROM roster WHERE EMTid="'.$formItems['EMTid'].'";';
+$query = 'SELECT status FROM roster WHERE EMTid="'.$EMTid.'";';
 $result = mysql_query($query) or die ("ERROR: Duty Eligibility Query Error");
 $row = mysql_fetch_array($result);
 $type = $row['status'];
@@ -138,19 +142,19 @@ for($i=0; $i < count($memberTypes); $i++)
     {
 	if(! $memberTypes[$i]['canPullDuty'])
 	{
-	    die("ERROR: I'm sorry, but a member of type ".$type." cannot sign up for duty.");
+	    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorMemberType1"]." ".$type." ".$i18n_strings["signOnWarnings"]["errorMemberType2"]." ".$errorCancel);
 	}
     }
 }
 
-if($formItems['action']=='remove')
+if($action=='remove')
 {
     //remove 
     $query = 'UPDATE '.$config_sched_table.' SET deprecated=1 WHERE sched_entry_id='.$signonID.';';
     $result = mysql_query($query) or die ("ERROR: 'Update Deprecated' Query Error");
     // TODO - reimplement mails
     //schedule_remove_mail($year, $month, $date, $shift, $formItems['EMTid'], $signonID);
-    logEditForm($signonID, null, $adminID, $auth, "signOn.php", $query);
+    logEditForm($signonID, null, $adminID, $auth, "signOn.php", $action, $query);
 }
 else
 {
@@ -158,7 +162,7 @@ else
     // TODO - get rid of this day and night stuff
     if($start_ts >= $end_ts)
     {
-	die("ERROR: I'm sorry, but the times you selected are invalid.");
+	die("ERROR: ".$i18n_strings["signOnWarnings"]["errorTimeInvalid"].$errorCancel);
     }
     
     if($action == "edit")
@@ -168,21 +172,31 @@ else
 	$query2 = 'INSERT INTO '.$config_sched_table.' SET EMTid="'.mysql_real_escape_string($EMTid).'",start_ts='.$start_ts.',end_ts='.$end_ts.',sched_year='.$year.',sched_month='.$month.',sched_date='.$date.',sched_shift_id='.shiftNameToID($shift).' ;';
 	$result = mysql_query($query2) or die ("ERROR: INSERT Query Error");
 	$newID = mysql_insert_id();
-	logEditForm($signonID, $newID, $adminID, $auth, "signOn.php", ($query." ".$query2));
+	logEditForm($signonID, $newID, $adminID, $auth, "signOn.php", $action, ($query." ".$query2));
     }
     else
     {
 	// new signon
+
+	// first, make sure nothing is duplicated.
+	$checkQuery = "SELECT EMTid,start_ts,end_ts FROM ".$config_sched_table." WHERE EMTid='".$EMTid."' AND deprecated=0 AND ((start_ts <= ".$start_ts." AND end_ts >= ".$start_ts.") OR (start_ts <= ".$end_ts." AND end_ts >= ".$end_ts."));";
+	$checkResult = mysql_query($checkQuery) or die ("ERROR: checkQuery Error");
+	if(mysql_num_rows($checkResult) > 0)
+	{
+	    die('ERROR: '.$i18n_strings["signOnWarnings"]["errorOverlap"].$errorCancel);
+	}
+
+	// allow the signin
 	$query2 = 'INSERT INTO '.$config_sched_table.' SET EMTid="'.mysql_real_escape_string($EMTid).'",start_ts='.$start_ts.',end_ts='.$end_ts.',sched_year='.$year.',sched_month='.$month.',sched_date='.$date.',sched_shift_id='.shiftNameToID($shift).' ;';
 	$result = mysql_query($query2) or die ("ERROR: INSERT Query Error");
 	$newID = mysql_insert_id();
-	logEditForm(null, $newID, $adminID, $auth, "signOn.php", ($query." ".$query2));
+	logEditForm(null, $newID, $adminID, $auth, "signOn.php", $action, $query2);
     }
     
     // TODO - re-code email stuff
     //schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end, $signonID); // for edit and add
 }
 
-echo "OK";
+echo "OK.";
 
 ?>
