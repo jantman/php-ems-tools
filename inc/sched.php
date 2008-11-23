@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-22 18:12:46 jantman"
+// Time-stamp: "2008-11-23 00:00:36 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -144,6 +144,7 @@ function getCellHeader($ts, $monthTS)
     // $ts is the timestamp for that day, $monthTS is the timestamp for a day in the current month
 
     global $shift;
+    $shiftID = shiftNameToID(strtolower(tsToShiftName($ts)));
 
     // generate the opening DIV code
     $final = "";
@@ -154,9 +155,13 @@ function getCellHeader($ts, $monthTS)
     {
 	$displayStr = substr($displayStr, 1);
     }
-    // TODO - DEBUG - NEXT LINE shows the two timestamps for each day
-    //$displayStr .= "<br />".date("Y-m-d H:i", $ts)."<br />".date("Y-m-d H:i", $monthTS);
-    $displayStr .= getDayMessage($ts, $shift);
+    $message = getDayMessage($ts, $shiftID); // returns an array with "message" and "id"
+    $messageID = -1; // send -1 to JS function if we don't have a message
+    if(isset($message['message']))
+    {
+	$displayStr .= $message['message'];
+	$messageID = $message['id'];
+    }
     // TODO: daily message form should have better arguments
     if(date("Y-m", $ts) != date("Y-m", $monthTS))
     {
@@ -167,20 +172,20 @@ function getCellHeader($ts, $monthTS)
     elseif(date("Y-m-d", $ts) == date("Y-m-d"))
     {
 	// TODAY
-	$final .= '<div class="todayDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.', \''.$shift.'\')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', \''.$shift.'\')">'."\n";
+	$final .= '<div class="todayDate" id="message_'.$ts.'" onClick="showMessageForm('.$ts.', '.$messageID.')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="todayDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', '.$messageID.')">'."\n";
     }
     elseif(strtotime(date("Y-m-d", $ts)) < time())
     {
 	// this month, in past
-	$final .= '<div class="pastDate" id="date_'.$ts.'" onClick="showMessageForm('.$ts.', \''.$shift.'\')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="pastDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', \''.$shift.'\')">'."\n";
+	$final .= '<div class="pastDate" id="message_'.$ts.'" onClick="showMessageForm('.$ts.', '.$messageID.')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="pastDay" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', '.$messageID.')">'."\n";
     }
     else
     {
 	// this month, in future
-	$final .= '<div class="date" id="date_'.$ts.'" onClick="showMessageForm('.$ts.', \''.$shift.'\')">'.$displayStr.'</div>'."\n";
-	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', \''.$shift.'\')">'."\n";
+	$final .= '<div class="date" id="message_'.$ts.'" onClick="showMessageForm('.$ts.', '.$messageID.')">'.$displayStr.'</div>'."\n";
+	$final .= '<div class="day" id="day_'.$ts.'" onClick="showSignonForm('.$ts.', '.$messageID.')">'."\n";
     }
     return $final;
 }
@@ -503,31 +508,28 @@ function schedTimeToTS($y, $m, $d, $timeStr)
     return $ts;
 }
 
-function getDayMessage($ts, $shift)
+function getDayMessage($ts, $shiftID)
 {
-    // gets the daily message for the specified day and shift.
+    // gets the daily message for the specified shift start timestamp and shiftID
     global $dbName;
     global $config_sched_message_table;
-
-    $year = date("Y", $ts);
-    $month = date("m", $ts);
-    $date = date("d", $ts);
-    $shift = strtolower($shift);
 
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed.".$errorMsg);
     mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
 
-    $query = 'SELECT s.* FROM '.$config_sched_message_table.' AS s LEFT JOIN schedule_shifts AS ss ON s.sched_shift_id=ss.sched_shift_id WHERE sched_year='.$year.' AND sched_month='.$month.' AND sched_date='.$date.' AND (ss.shiftTitle="'.$shift.'" OR s.sched_shift_id=0) AND s.deprecated=0;';
+    $firstTS = strtotime(date("Y-m-d", $ts));
+    $lastTS = $firstTS + 86400;
+    $query = 'SELECT sched_message_id,message_text FROM '.$config_sched_message_table.' WHERE ((shift_start_ts='.$ts.' AND sched_shift_id='.$shiftID.') OR (sched_shift_id=0 AND shift_start_ts > '.$firstTS.' AND shift_start_ts < '.$lastTS.')) AND deprecated=0;';
 
-    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br>".$query."<br>" . mysql_error().'<br><br>'.$errorMsg);
+    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.".$query."<br />".mysql_error());
 
     $row = mysql_fetch_array($result);    
     mysql_close($conn); 
     if($row['message_text'] != null)
     {
-	return '  <span class="dateMessage">'.$row['message_text'].'</span>';
+	return array('message' => '  <span class="dateMessage">'.$row['message_text'].'</span>', 'id' => $row['sched_message_id']);
     }
-    return "";
+    return array();
 }
 
 ?>

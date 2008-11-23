@@ -1,3 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" href="php_ems.css" type="text/css">
+<title>Schedule Daily Message</title>
+</head>
+<body>
+<form name="message_form">
+
 <?php 
 // dailyMessage.php
 //
@@ -31,190 +42,92 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
-//required for HTML_QuickForm PEAR Extension
-if(file_exists('../HTML/QuickForm.php'))
-{
-    require_once '../HTML/QuickForm.php';
-}
-else
-{
-    require_once 'HTML/QuickForm.php';
-}
-if(file_exists('../HTML/QuickForm/element.php'))
-{
-    require_once '../HTML/QuickForm/element.php';
-}
-else
-{
-    require_once 'HTML/QuickForm/element.php';
-}
 
 require_once ('./config/config.php'); // main configuration
 
 require_once('./config/scheduleConfig.php'); // schedule configuration
 
-//instantiate the form
-$form = new HTML_QuickForm('firstForm');
-
+// for i18n
+require_once('./inc/'.$config_i18n_filename);
 
 // get the URL variables
-if(! empty($_GET['year']))
+$hiddenItems = ""; // variable to hols the hidden items
+
+// get the URL variables
+if(! empty($_GET['ts']))
 {
-    $year = $_GET['year'];
-    $form->addElement('hidden','year',$year);
-}
-if(! empty($_GET['month']))
-{
-    $month = $_GET['month'];
-    $form->addElement('hidden','month',$month);
-}
-if(! empty($_GET['date']))
-{
-    $date = $_GET['date'];
-    $form->addElement('hidden','date',$date);
-}
-if(! empty($_GET['shift']))
-{
-    $shift = $_GET['shift'];
-    $form->addElement('hidden','shift',$shift);
+    $ts = ((int)$_GET['ts']);
+    echo '<input name="ts" type="hidden" value="'.$ts.'" id="ts" />';
 }
 
-
-// define an error message
-$errorMsg = "<br>Please try again. If you recieve this message more than once while trying to perform the same action, please notify the administrator of this system.";
-
-//start working with the form
-$form->addElement('header', null, 'PHP-EMS-Tools: Edit Daily Message (Admin Only)');
-$defaults = array();
-addFormElements(); 
-$buttonGroup[] =& HTML_QuickForm::createElement('reset', 'btnReset', 'Reset');
-$buttonGroup[] =& HTML_QuickForm::createElement('submit', 'btnSubmit', 'Submit');
-$form->addGroup($buttonGroup, 'buttonGroup', null, "    ");
-if(! empty($_GET['shift']))
+$message = "";
+$shiftID = "";
+if(! empty($_GET['id']) && ((int)$_GET['id']) != -1)
 {
-    populateMe();
-}
-$form->setDefaults($defaults);
-
-//try to validate form 
-if ($form->validate())
-{
-	# If the form validates, freeze and process the data
-	//post-validation filters here 
-	$form->applyFilter('__ALL__', 'trim');
-	$form->process('processForm', false);   
-	// exit the script, on successful insertion
-
-?>
-
-<SCRIPT LANGUAGE="JavaScript">
-<!--hide
-	window.opener.location=window.opener.location;
-	window.close();
-//-->
-</SCRIPT>
-
-<?php
-
-}
-function processForm($formItems)
-{
-    global $action;
-    global $requireAuthDailyMessage;
-    global $minRightsDailyMessage;
-    global $dbName;
-
-    $action = $formItems['action'];
-    $year = addslashes($formItems['year']);
-    $month = addslashes($formItems['month']);
-    $date = addslashes($formItems['date']);
-    $shift = addslashes($formItems['shift']);
-    $message = addslashes($formItems['message']);
-    $adminID = addslashes($formItems['adminID']);
-    $adminPW = md5($formItems['adminPW']);
-
-    // start MySQL connection
-    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
-    mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
-
-    //AUTHENTICATION
-    if($requireAuthDailyMessage)
-    {
-	$query = 'SELECT pwdMD5,rightsLevel FROM roster WHERE EMTid="'.$adminID.'";';
-	$result = mysql_query($query) or die ("Auth Query Error");
-	$row = mysql_fetch_array($result);
-	$rightsLevel = $row['rightsLevel'];
-	if(($adminPW <> $row['pwdMD5']) || ($rightsLevel < $minRightsDailyMessage))
-	{
-	    die("Invalid Admin Username or Password. This action requires authentication.");
-	}
-    }
-
-    if($formItems['action']=='remove')
-    {
-	//remove 
-	$query = 'UPDATE schedule_'.$year.'_'.$month.'_'.$shift.' SET message=null WHERE date='.$date.';';
-    }
-    else
-    {
-	$query = 'UPDATE schedule_'.$year.'_'.$month.'_'.$shift.' SET message="'.$message.'" WHERE date='.$date.';';
-    }
-    $result = mysql_query($query) or die ("Query Error");
-}
-  
-function populateMe() 
-{
-	global $form; 
-	global $defaults;
-	global $date;
-	global $year;
-	global $month;
-	global $shift;
-	global $message;
-	global $dbName;
-
-    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
-    mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
-    $query = 'SELECT message FROM schedule_'.$year.'_'.$month.'_'.$shift.' WHERE date='.$date.';';
+    $id = ((int)$_GET['id']);
+    echo '<input name="id" type="hidden" value="'.$id.'" id="id" />';
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.");
+    mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!");
+    $query = 'SELECT message_text FROM '.$config_sched_message_table.' WHERE sched_message_id='.$id.';';
     $result = mysql_query($query);
     $row = mysql_fetch_array($result) or die("Error fetching result for defaults.");
-    $defaults['action'] = "edit";
-    $defaults['message'] = $row['message'];
 
+    $message = 'value="'.$row['message_text'].'"';
+    if(mysql_num_rows($result) > 0 && $row['sched_shift_id'] == 0){ $shiftID = 'checked="checked"';}
 }
-function addFormElements() 
+else
 {
-	global $form; 
-	global $year;
-	global $month;
-	global $date;
-	global $shift;
-	global $defaults;
-	
-	// create elements
-	$form->addElement('text', 'adminID', 'Administrator ID#', array('size' => 10, 'maxlength' => 5));
-	$form->addElement('password', 'adminPW', 'Password', array('size' => 10, 'maxlength' => 10));
-	$form->addElement('header', null, "PLEASE remember to keep this small!!");
-
-	$form->addElement('radio','action',null,'Edit','edit');
-	$form->addElement('radio','action',null,'Remove','remove');
-
-	$form->addElement('text', 'message', 'Daily Message', array('size' => 30, 'maxlength' => 50)); 
-
+    echo '<input name="id" type="hidden" value="-1" id="id" />';
 }
 
 ?>
  
-<HTML> 
-<HEAD> 
-	<TITLE>Schedule Sign On</TITLE>
-	<BASEFONT face="Arial" size="2" >
-	<link rel="stylesheet" href="php_ems.css" type="text/css">
-</HEAD>
-<BODY>	
+<div>
+<table border="0">
+
+	<tr>
+		<td style="white-space: nowrap; background-color: #CCCCCC;" align="left" valign="top" colspan="2"><b>PHP-EMS-Tools: Edit Daily Message (Admin Only)</b></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Administrator ID#</b></td>
+		<td valign="top" align="left"><input size="10" maxlength="5" name="adminID" type="text" id="adminID" /></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Password</b></td>
+		<td valign="top" align="left"><input size="10" maxlength="10" name="adminPW" type="password" id="adminPW" /></td>
+	</tr>
+	<tr>
+		<td style="white-space: nowrap; background-color: #CCCCCC;" align="left" valign="top" colspan="2"><b>PLEASE remember to keep this small!!</b></td>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b></b></td>
 <?php
-	// display the form
-	$form->display();
+echo '		<td valign="top" align="left"><input name="action" value="edit" type="radio" id="action" checked="checked" /><label for="action">'.$i18n_strings["signOn"]["Edit"].'</label></td>'."\n";
 ?>
-</BODY>
-</HTML>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b></b></td>
+<?php
+echo '		<td valign="top" align="left"><input name="action" value="remove" type="radio" id="action" /><label for="action">'.$i18n_strings["signOn"]["Remove"].'</label></td>'."\n";
+?>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b>Daily Message</b></td>
+<?php
+echo '		<td valign="top" align="left"><input size="30" maxlength="50" name="message_text" type="text" '.$message.' id="message_text" /></td>'."\n";
+echo '</tr>'."\n";
+echo '<tr>'."\n";
+echo '<td align="right" valign="top">&nbsp;</td>'."\n";
+echo '		<td valign="top" align="left"><input type="checkbox" name="showAllShifts" value="yes" '.$shiftID.' id="showAllShifts" /> Show message for all shitfs this day.</td>'."\n";
+?>
+	</tr>
+	<tr>
+		<td align="right" valign="top"><b></b></td>
+<?php
+echo '		<td valign="top" align="left"><input name="buttonGroup[btnReset]" value="'.$i18n_strings["signOn"]["Reset"].'" type="reset" />    <input name="buttonGroup[btnCancel]" value="'.$i18n_strings["signOn"]["Cancel"].'" onClick="hidePopup(\'popup\')" type="button" />    <input name="buttonGroup[btnSubmit]" value="'.$i18n_strings["signOn"]["Submit"].'" type="button" onClick="submitMessageForm()" />    </td>';
+?>
+	</tr>
+</table>
+
+</div>
+</form>

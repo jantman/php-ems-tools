@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for DHTML/Ajax functionality
 //
-// Time-stamp: "2008-11-22 19:50:33 jantman"
+// Time-stamp: "2008-11-23 01:05:07 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -71,14 +71,13 @@ function showSignonForm($ts, $shift)
   newSignonFormRequest($ts);
 }
 
-function showMessageForm($ts, $shift)
+function showMessageForm($ts, $id)
 {
   // shows the form to edit a daily message
 
   var myDate = new Date($ts*1000);
-  document.getElementById("popuptitle").innerHTML = "Edit Daily Message - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
-  
-  messageFormRequest($ts);
+  document.getElementById("popuptitle").innerHTML = "Edit Daily Message - " + myDate.toLocaleFormat("%a, %b %e %Y");
+  messageFormRequest($ts, $id);
 }
 
 function showEditForm($id, $ts)
@@ -133,10 +132,10 @@ function handleEditSignonFormRequest()
   }
 }
 
-function messageFormRequest($ts)
+function messageFormRequest($ts, $id)
 {
   // request the HTML for the message form
-  doHTTPrequest(('dailyMessage.php?ts=' + $ts), handleMessageFormRequest);
+  doHTTPrequest(('dailyMessage.php?ts=' + $ts+'&id='+$id), handleMessageFormRequest);
   // TODO: add an error var to reload the form if we have errors
 }
 
@@ -277,3 +276,80 @@ function handleReloadDay()
 		hidePopup();
 	}
 }
+
+function submitMessageForm()
+{
+  // radio buttons
+  var postData = "";
+  if(document.message_form.action[1].checked == true)
+  {
+    var action = "remove";
+  }
+  else
+  {
+    var action = "edit";
+  }
+  
+  postData = "ts="+document.getElementById("ts").value+"&action="+action+"&adminID="+document.getElementById("adminID").value+"&adminPW="+document.getElementById("adminPW").value+"&message_text="+document.getElementById("message_text").value;
+  if(document.message_form.showAllShifts.checked == true)
+  {
+    postData = postData+"&showAllShifts=1";
+  }
+
+  if(document.getElementById("id").value != null)
+  {
+    postData = postData + "&id=" + document.getElementById("id").value;
+  }
+  
+  var url = "handlers/messageForm.php";
+  http.open("POST", url, true);
+  
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  http.setRequestHeader("Content-length", postData.length);
+  http.setRequestHeader("Connection", "close");  
+  http.onreadystatechange = handleSubmitMessageURL; 
+  http.send(postData);
+}
+
+function handleSubmitMessageURL()
+{
+	if(http.readyState == 4)
+	{
+		var response = http.responseText;
+		if(response.substr(0, 6) == "ERROR:")
+		{
+			// TODO: handle error condition by triggering a popup or changing content of existing one
+			var errorMessage = response.substr(6, (response.length - 6));
+			hidePopup();
+			document.getElementById("popuptitle").innerHTML = "ERROR: ";
+			document.getElementById("popupbody").innerHTML = errorMessage;
+			showPopup();
+		}
+		else
+		{
+			var ts = document.getElementById('ts').value;
+			reloadDate('inc/getDayHeader.php?ts=' + ts);
+		}
+	}
+}
+
+function reloadDate(url)
+{
+	http.open('get', url);
+	http.onreadystatechange = handleReloadDate; 
+	http.send(null);
+}
+
+function handleReloadDate()
+{
+	if(http.readyState == 4)
+	{
+		var response = http.responseText;
+		var ts = document.getElementById('ts').value;
+		var elemID = 'message_' + ts;
+		document.getElementById(elemID).innerHTML = response;
+		hidePopup();
+	}
+}
+

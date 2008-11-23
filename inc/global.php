@@ -146,8 +146,17 @@ function tsToShiftName($ts)
 function shiftNameToID($name)
 {
     // gets the shiftID for a string shift name
+
+    global $dbName;
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
+    mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
     $query = "SELECT sched_shift_id FROM schedule_shifts WHERE shiftName='".mysql_real_escape_string(strtolower($name))."';";
-    $result = mysql_query($query) or die ("Query Error");
+    $result = mysql_query($query);
+    if(! $result)
+    {
+	error_log("PHP-EMS-TOOLS:inc/global.php:shiftNameToID(".$name.") - Query Error - Query: ".$query." - Error: ".mysql_error());
+	die();
+    }
     if(mysql_num_rows($result) > 0){ $row = mysql_fetch_assoc($result); return $row['sched_shift_id'];}
     return false;
 }
