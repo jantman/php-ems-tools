@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-11-22 18:15:28 jantman"
+// Time-stamp: "2008-11-24 09:47:17 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -147,8 +147,8 @@ mysql_close($conn);
 
 <body>
 
-<?php echo '<div class="monthControlLeft"><a href="newschedule.php?date='.lastMonthDate($mainDate).'&shift='.$shift.'">&lt;&lt; '.date("F", lastMonthDate($mainDate)).'</a></div>'."\n"; ?>
-<?php echo '<div class="monthControlRight"><a href="newschedule.php?date='.nextMonthDate($mainDate).'&shift='.$shift.'">'.date("F", nextMonthDate($mainDate)).' &gt;&gt;</a></div>'."\n"; ?>
+<?php echo '<div class="monthControlLeft"><a href="schedule.php?date='.lastMonthDate($mainDate).'&shift='.$shift.'">&lt;&lt; '.date("F", lastMonthDate($mainDate)).'</a></div>'."\n"; ?>
+<?php echo '<div class="monthControlRight"><a href="schedule.php?date='.nextMonthDate($mainDate).'&shift='.$shift.'">'.date("F", nextMonthDate($mainDate)).' &gt;&gt;</a></div>'."\n"; ?>
 <div id="header">
 <h1><?php echo $orgName." Schedule - ".date("M Y", $mainDate)." ".$shift;?></h1>
 </div> <!-- END header DIV -->
@@ -156,7 +156,7 @@ mysql_close($conn);
 <div id="calhead">
 <?php
 echo '<div class="headerPart">';
-if($shift == "Day"){ echo '<strong><a href="newschedule.php?date='.$mainDate.'&shift=Night">Nights</a></strong>';} else { echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Day">Days</a></strong>';}
+if($shift == "Day"){ echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Night">Nights</a></strong>';} else { echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Day">Days</a></strong>';}
 echo '</div>';
 echo '<div class="headerPart"><a href="#">Mass Signon</a></div>'; // TODO: implement this
 echo '<div class="headerPart"><a href="countHours.php">Count Hours</a></div>';
