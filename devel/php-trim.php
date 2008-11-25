@@ -14,34 +14,49 @@
  */
 if (!defined('T_ML_COMMENT')){ define('T_ML_COMMENT', T_COMMENT); } else { define('T_DOC_COMMENT', T_ML_COMMENT); }
 
-$source = file_get_contents('test.php');
-$tokens = token_get_all($source);
+doFile("test.php");
 
-$tokentypes = array(); // DEBUG
-
-foreach ($tokens as $token)
+function doFile($fileName)
 {
-    if(is_string($token)){ continue;} // a string - a simple 1-character token, don't worry about it
-    list($id, $text) = $token;
-    $type = token_name($id);
-    //echo $id." - ".$type."\n"; // DEBUG
-    $tokentypes[$type] = $type; // DEBUG
-    switch ($type)
+    $lines = file($fileName); // NOTE - array starts at 0, so index is (lineNumber - 1)
+    $source = file_get_contents($fileName);
+    $tokens = token_get_all($source);
+    
+    $tokentypes = array(); // DEBUG
+    
+    foreach ($tokens as $token)
     {
-	case "T_FUNCTION":
-	    echo "Function: \n";
-	    echo var_dump($token);
-	    break;
-	default:
-	    // do nothing
+	if(is_string($token)){ continue;} // a string - a simple 1-character token, don't worry about it
+	list($id, $text) = $token;
+	$type = token_name($id);
+	//echo $id." - ".$type."\n"; // DEBUG
+	$tokentypes[$type] = $type; // DEBUG
+	$lineNum = $token[2];
+
+	// DEBUG
+	if($lineNum == 6)
+	{
+	    echo "LINE 6: ".var_dump($token)."\n";
+	}
+	// END DEBUG
+
+	switch ($type)
+	{
+	    case "T_FUNCTION":
+		echo "Function on Line".$lineNum.": ".trim($lines[$lineNum-1])."\n";
+		break;
+	    case "T_VARIABLE":
+		echo "Variable on Line".$lineNum.": ".trim($lines[$lineNum-1])."\n";
+	    default:
+		// do nothing
+	}
     }
+    
+    // DEBUG
+    foreach($tokentypes as $type)
+    {
+	echo $type."\n";
+    }
+    // END DEBUG
 }
-
-// DEBUG
-foreach($tokentypes as $type)
-{
-    echo $type."\n";
-}
-// END DEBUG
-
 ?>
