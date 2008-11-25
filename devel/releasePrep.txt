@@ -1,0 +1,9 @@
+Release Prep Activities:
+
+1) Grep for all "TODO" and "DEBUG" comments, see what they're talking about.
+2) Document everything
+3) Update changelog.txt
+4) Search for and remove unused PHP and JavaScript functions and variables.
+5) Run XDebug profiler on sample run of project.
+6) Remove any old files that aren't used anymore.
+
