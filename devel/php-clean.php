@@ -1,7 +1,7 @@
 <?php
   // this ONLY deals with files that end in ".php"
 
-$path = "/srv/www/htdocs/admin/cvswork/php-ems-tools-trunk/devel/test"; // must be a directory
+$path = "/home/jantman/cvs-temp/php-ems-tools-trunk/devel/test"; // must be a directory
 $functions = getFuncs($path);
 $whiteList = array();
 $blackList = array();
@@ -11,15 +11,16 @@ $blackList = array();
 $builtins = getBuiltins();
 
 $myglobals = getGobals($path);
-echo var_dump($myglobals);
-die();
 
+$myIncludes = getImports($path);
+
+die(); // DEBUG
 
 showHeader();
 showFuncErrorTable($functions);
 showFuncTable($functions);
+showGlobals($myglobals);
 
-// TODO: table of all globals and number of times used
 // Table of all variables defined in files under "config/" and how many times they are used in files not under config/
 // Table of ALL imports/requires and how many times they are used (logic like globals)
 
@@ -35,7 +36,36 @@ function showHeader()
     echo "<p>";
     echo '<a href="#funcprob">Function Problems</a><br />';
     echo '<a href="#functions">All Functions</a><br />';
+    echo '<a href="#globals">All Globals</a><br />';
     echo "</p>";
+}
+
+function showGlobals($myglobals)
+{
+    echo '<hr />';
+    echo '<a name="globals"><h2>All Global Variables</h2></a>'."\n";
+    echo '<table border="1">'."\n".'<tr><th>Variable</th><th>Referenced</th><th>Defined<br />in Files</th></tr>';
+    foreach ($myglobals as $name => $arr)
+    {
+	echo "<tr>";
+	$referenced = count($arr);
+	$files = array();
+	foreach($arr as $temp)
+	{
+	    if(! array_key_exists($temp["file"], $files))
+	    {
+		$files[$temp["file"]] = 1;
+	    }
+	    else
+	    {
+		$files[$temp["file"]] = $files[$temp["file"]] + 1;
+	    }
+	}
+	$files = count($files);
+	echo "<td>".$name."</td><td>".$referenced."</td><td>".$files."</td>";
+	echo "</tr>\n";
+    }
+    print "</table>";
 }
 
 function showFuncErrorTable($functions)
@@ -142,7 +172,6 @@ function getGobals($path)
 	// parse the variable name (between $ and ; or ,)
 	$matches = array();
 	preg_match_all('/\$[a-zA-Z0-9]+/', $line, $matches);
-	echo "File: ".$file."\t".$lineNum."\t=".$line."\n";
 	if(count($matches[0]) > 0)
 	{
 	    foreach($matches[0] as $varname)
@@ -157,6 +186,38 @@ function getGobals($path)
 	}
     }
     return $myglobals;
+}
+
+function getImports($path)
+{
+    // finds all imports/requires in all php files in a path
+    $myimports = array();
+
+    $cmd = 'grep -Rn -e "include(" -e "require(" -e "include_once(" -e "require_once(" '.$path."/*.php";
+    $output = shell_exec($cmd);
+    $lines = explode("\n", $output);
+    $inComment = false; // tell if we're in a multiline comment
+    foreach($lines as $line)
+    {
+	$file = substr($line, 0, strpos($line, ":"));
+	$lineNum = substr($line, strpos($line, ":")+1);
+	$line = trim(substr($lineNum, strpos($lineNum, ":")+1)); // make $line the program source line
+	$lineNum = (int)substr($lineNum, 0, strpos($lineNum, ":"));
+	// ignore anything that's a comment
+	if($line == "/*"){ $inComment = true; continue;} // begin a multiline comment
+	if($line == "*/"){ $inComment = false;} // end a multiline comment
+	if($inComment){ continue;} // inside a multiline comment
+	if(substr($line, 0, 2) == "//" || substr($line, 0, 1) == "#"){continue;} // a comment
+	// parse the included file name
+	$importType = substr($line, 0, strpos($line, "("));
+	$importFile = substr($line, strpos($line, "(")+1);
+	$importFile = substr($importFile, 0, strpos($importFile, ")"));
+	$importFile = trim($importFile, '\'"');
+	echo $file."\t".$lineNum."\t\t".$importType."=".$importFile."\n";
+	if(! array_key_exists($importFile, $myimports)){ $myimports[$importFile] = array();}
+	$myimports[$importFile][] = array("file" => $file, "line" => $lineNum);
+    }
+    return $myimports;
 }
 
 function getFuncs($path)
@@ -231,6 +292,30 @@ function getRealtivePath($path, $file)
     $temp = str_replace($path, "", $file);
     if(substr($temp, 0, 1) == "/"){ $temp = substr($temp, 1);}
     return $temp;
+}
+
+function getImportPath($file, $importpath)
+{
+    $base = substr($file, 0, strpos($file, "/"));
+    if(strpos($importpath, "/"))
+    {
+	// import file isn't in same directory as the file it's in.
+	if(substr($importpath, 0, 2) == "./")
+	{
+	    // same directory as file
+	    $final = 
+	}
+	else if(substr($importpath, 0, 3) == "../")
+	{
+	    // one directory above
+	}
+    }
+    else
+    {
+	$final = $base.$importpath;
+    }
+    echo "GETIMPORTPATH: file=".$file." import=".$import." final=".$final."\n";
+    return $final;
 }
 
 function getBuiltins()
