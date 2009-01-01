@@ -10,7 +10,23 @@ Please report bugs, etc. at the site above.
 CHANGELOG
 ------------------------------------------------------------
 
-Release 3.0 -
+Release 4.1 - 2009-01-??
+- Changed committees to be in the database  - added 'committees',
+'committee_positions' and 'member_committees'. Added committees.php and
+modified rosterPositions.php.
+- Added docs/schema_notes.txt to keep track of the DB schema.
+
+
+Release 4.0 - ???DATE???
+- MAJOR RELEASE - this is not compatible with previous versions as the table
+structure has changed and config files have changed. If you wish to upgrade,
+please contact the developer for a migration script.
+- Major overhaul of the scheduling system to move everything to one table,
+based on unix timestamps, and scheduling in half-hour increments.
+- Also majoe overwrite of schedule.php and associated forms (signon, etc.) to
+make it Ajax-y (DHTML) and colorful.
+
+Release 3.0 - ???DATE???
 - MAJOR RELEASE - this is not compatible with previous versions as the table
 structure has changed and config files have changed. If you wish to upgrade,
 please contact the developer for a migration script.

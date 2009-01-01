@@ -76,7 +76,7 @@ echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Roster - Positions</b><br> (as of '.date("M d Y").')';
 if($adminView==1)
 {
-    echo '<br><a href="javascript:rosterPopUp('."'rosterEdit.php?action=new'".')">Add New Member</a>';
+    echo '<br><a href="committees.php">List of Committee Membership</a>';
     echo '&nbsp; &nbsp; &nbsp; <a href="rosterPositions.php?adminView=0&sort='.$sort.'">Standard View</a>';
 }
 echo '&nbsp; &nbsp; &nbsp; <a href="javascript:helpPopUp('."'docs/roster_help.php'".')">HELP</a>';
@@ -111,10 +111,7 @@ echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=LastName">L
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=FirstName">First Name</a></td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=officer">Officer</a></td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=position">Position</a></td>';
-echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm1">Committee 1</a></td>';
-echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm1pos">Position</a></td>';
-echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm2">Committee 2</a></td>';
-echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=comm2pos">Position</a></td>';
+echo '<td>Committees</td>';
 echo '<td><a href="rosterPositions.php?adminView='.$adminView.'&sort=trustee">Trustee</a></td>';
 if($useExtdTypes)
 {
@@ -181,37 +178,14 @@ function showMember($r)
     {
 	echo '<td>'.$r['position'].'</td>';
     }
-    if(isEmpty($r['comm1']))
+    $membStr = getCommitteeString($r['EMTid']);
+    if($membStr == "")
     {
 	echo '<td>&nbsp;</td>';
     }
     else
     {
-	echo '<td>'.$r['comm1'].'</td>';
-    }
-    if(isEmpty($r['comm1pos']))
-    {
-	echo '<td>&nbsp;</td>';
-    }
-    else
-    {
-	echo '<td>'.$r['comm1pos'].'</td>';
-    }
-    if(isEMpty($r['comm2']))
-    {
-	echo '<td>&nbsp;</td>';
-    }
-    else
-    {
-	echo '<td>'.$r['comm2'].'</td>';
-    }
-    if(isEmpty($r['comm2pos']))
-    {
-	echo '<td>&nbsp;</td>';
-    }
-    else
-    {
-	echo '<td>'.$r['comm2pos'].'</td>';
+	echo '<td>'.$membStr.'</td>';
     }
     if(isEmpty($r['trustee']))
     {
@@ -256,6 +230,24 @@ function isEmpty($string)
     return false;
 
 }
+
+function getCommitteeString($EMTid)
+{
+    global $dbName;
+    mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
+    // for a given EMTid, returns a string listing the committees the person is on and their position on the committees.
+    $query = "SELECT mc.EMTid,mc.appointed_ts,c.comm_name,p.comm_pos_name FROM members_committees AS mc LEFT JOIN committees AS c ON mc.comm_id=c.comm_id LEFT JOIN committee_positions AS p ON mc.pos_id=p.comm_pos_id WHERE removed_ts IS NULL AND mc.EMTid='".$EMTid."';";
+    $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query: ".$query."<br><br>" . mysql_error().'<br><br>'.$errorMsg);
+    $final = "";
+    while($row = mysql_fetch_assoc($result))
+    {
+	$final .= $row['comm_name'].' ('.$row['comm_pos_name'].'), ';
+    }
+    $final = trim($final); // trim any trailing whitespace
+    $final = trim($final, ","); // trim trailing comma
+    return $final;
+}
+
 ?>  
 </table>
 </body>
