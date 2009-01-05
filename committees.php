@@ -34,6 +34,15 @@
 // +----------------------------------------------------------------------+
 //      $Id$
 
+if(isset($_GET['adminView']))
+{
+    $adminView = true;
+}
+else
+{
+    $adminView = false;
+}
+
 require_once('./config/config.php'); // main configuration
 require_once('./config/rosterConfig.php'); // roster configuration
 
@@ -52,7 +61,7 @@ echo '<tr><th>Committee</th><th>Position</th><th>Member</th></tr>'."\n";
 
 $connection = mysql_connect() or die ("I'm sorry, but I was unable to connect! (MySQL error: unable to connect).".$errorMsg);
 mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
-$query = "SELECT mc.EMTid,mc.appointed_ts,c.comm_name,p.comm_pos_name,r.FirstName,r.LastName FROM committees AS c LEFT JOIN members_committees AS mc ON mc.comm_id=c.comm_id LEFT JOIN committee_positions AS p ON mc.pos_id=p.comm_pos_id LEFT JOIN roster AS r ON mc.EMTid=r.EMTid WHERE removed_ts IS NULL ORDER BY  c.comm_id,p.comm_pos_id;";
+$query = "SELECT mc.EMTid,mc.appointed_ts,c.comm_name,c.comm_id,p.comm_pos_name,r.FirstName,r.LastName FROM committees AS c LEFT JOIN members_committees AS mc ON mc.comm_id=c.comm_id LEFT JOIN committee_positions AS p ON mc.pos_id=p.comm_pos_id LEFT JOIN roster AS r ON mc.EMTid=r.EMTid WHERE removed_ts IS NULL ORDER BY  c.comm_id,p.comm_pos_id;";
 $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query: ".$query."<br><br>" . mysql_error().'<br><br>'.$errorMsg);
 $lastCommittee = "";
 while($row = mysql_fetch_assoc($result))
@@ -64,7 +73,14 @@ while($row = mysql_fetch_assoc($result))
     }
     else
     {
-	echo '<td>'.$row['comm_name'].'</td>';
+	if($adminView)
+	{
+	    echo '<td><a href="javascript:rosterPopUp('."'committeeEdit.php?id=".$row['comm_id']."&action=edit'".')">'.$row['comm_name'].'</a></td>';
+	}
+	else
+	{
+	    echo '<td>'.$row['comm_name'].'</td>';
+	}
 	$lastCommittee = $row['comm_name'];
     }
     if($row['comm_pos_name'] != "")

@@ -76,8 +76,12 @@ echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Roster - Positions</b><br> (as of '.date("M d Y").')';
 if($adminView==1)
 {
-    echo '<br><a href="committees.php">List of Committee Membership</a>';
+    echo '<br><a href="committees.php?adminView=1">List of Committee Membership</a>';
     echo '&nbsp; &nbsp; &nbsp; <a href="rosterPositions.php?adminView=0&sort='.$sort.'">Standard View</a>';
+}
+else
+{
+    echo '<br><a href="committees.php">List of Committee Membership</a>';
 }
 echo '&nbsp; &nbsp; &nbsp; <a href="javascript:helpPopUp('."'docs/roster_help.php'".')">HELP</a>';
 echo '</td>';
