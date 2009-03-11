@@ -29,7 +29,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/addBkEdit.php  $ |
+// +----------------------------------------------------------------------+
 
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';

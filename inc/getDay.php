@@ -3,6 +3,10 @@
 //
 // script to get the content of one day, for refreshing when signing on
 //
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/getDay.php $ |
+// +----------------------------------------------------------------------+
+
 
 $ts = (int)$_GET['ts'];
 

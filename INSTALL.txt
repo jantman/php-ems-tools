@@ -2,7 +2,8 @@ PHP EMS Tools
 Version 3.0 INSTALL.txt
 http://www.php-ems-tools.com
 
-$Id$
+$LastChangedRevision$
+$HeadURL: http://svn.jasonantman.com/php-ems-tools/INSTALL.txt $
 
 -----------------------------------------------------------------
 PHP EMS Tools Installation

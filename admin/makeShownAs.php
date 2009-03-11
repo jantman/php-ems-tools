@@ -29,8 +29,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
-
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/admin/makeShow#$ |
+// +----------------------------------------------------------------------+
 
 require_once("./config/config.php");
 

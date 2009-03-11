@@ -29,7 +29,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterCertsEdi#$ |
+// +----------------------------------------------------------------------+
 
 
 //required for HTML_QuickForm PEAR Extension

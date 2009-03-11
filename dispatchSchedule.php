@@ -30,7 +30,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/dispatchSchedu#$ |
+// +----------------------------------------------------------------------+
+
 
 // this turns debugging mode on and off
 $debug = false;

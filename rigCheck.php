@@ -31,7 +31,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rigCheck.php   $ |
+// +----------------------------------------------------------------------+
 
 // for good EMTs only: if you add &OK=true to the url, all fields will default to OK.
 if(! empty($_GET['OK']))

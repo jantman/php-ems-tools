@@ -15,8 +15,9 @@
 // +----------------------------------------------------------------------+
 // | Author: Adam Daniel <adaniel1@eesus.jnj.com>                         |
 // +----------------------------------------------------------------------+
-//
-// $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/Common.php     $ |
+// +----------------------------------------------------------------------+
 
 /**
  * Base class for all HTML classes

@@ -42,7 +42,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/signOn.php     $ |
+// +----------------------------------------------------------------------+
 
 
 // TODO - Note - Removed all QuickForm stuff

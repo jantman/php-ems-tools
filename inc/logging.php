@@ -29,7 +29,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//	$Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/logging.ph#$ |
+// +----------------------------------------------------------------------+
+
 
 
 function logEditForm($original_entry_id, $new_entry_id, $admin_username, $is_authenticated, $form, $action, $queries)

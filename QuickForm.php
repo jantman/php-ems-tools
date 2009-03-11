@@ -17,7 +17,6 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id$
 
 require_once('PEAR.php');
 require_once('HTML/Common.php');

@@ -5,7 +5,7 @@
 //
 // Functions to generate the schedule
 //
-// Time-stamp: "2008-11-23 00:00:36 jantman"
+// Time-stamp: "2009-03-11 12:06:10 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -32,7 +32,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/sched.php  $ |
+// +----------------------------------------------------------------------+
+
 
 
 // TODO - schedule_dailyMessage entries allow a sched_shift_id == 0 for all shifts on that date

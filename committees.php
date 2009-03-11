@@ -32,7 +32,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/committees.php $ |
+// +----------------------------------------------------------------------+
 
 if(isset($_GET['adminView']))
 {

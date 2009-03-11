@@ -3,6 +3,10 @@
 //
 // script to get the content of one day's header, for refreshing when changing the message
 //
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/getDayHead#$ |
+// +----------------------------------------------------------------------+
+
 
 $ts = (int)$_GET['ts'];
 

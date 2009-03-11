@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2008-11-24 09:47:17 jantman"
+// Time-stamp: "2009-03-11 11:50:06 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -31,7 +31,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/schedule.php   $ |
+// +----------------------------------------------------------------------+
 
 // this file will import the user's customization
 require_once('./config/config.php');

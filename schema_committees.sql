@@ -3,6 +3,9 @@
 -- Host: localhost    Database: php_ems_tools_devel
 -- ------------------------------------------------------
 -- Server version	5.0.26
+-- 
+-- $LastChangedRevision$
+-- $HeadURL: http://svn.jasonantman.com/php-ems-tools/schema_committees.sql $
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

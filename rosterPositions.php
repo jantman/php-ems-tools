@@ -30,7 +30,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterPosition#$ |
+// +----------------------------------------------------------------------+
 
 require_once('./config/config.php'); // main configuration
 require_once('./config/rosterConfig.php'); // roster configuration

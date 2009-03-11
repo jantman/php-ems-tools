@@ -5,6 +5,8 @@ Author: Jason Antman <jason@jasonantman.com>
 Please report bugs, etc. at the site above.
 ------------------------------------------------------------
 ------------------------------------------------------------
+$LastChangedRevision$
+$HeadURL: http://svn.jasonantman.com/php-ems-tools/changelog.txt $
 ------------------------------------------------------------
 
 CHANGELOG

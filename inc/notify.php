@@ -29,7 +29,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//	$Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/notify.php $ |
+// +----------------------------------------------------------------------+
+
 
 
 function schedule_edit_mail($year, $month, $date, $shift, $EMTid, $start, $end, $signonID)

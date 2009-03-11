@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for schedule forms validation and submission
 //
-// Time-stamp: "2008-07-02 17:29:02 jantman"
+// Time-stamp: "2009-03-11 12:07:51 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -30,7 +30,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/schedForms#$ |
+// +----------------------------------------------------------------------+
+
 
 function memberCanSignOn(EMTid)
 {

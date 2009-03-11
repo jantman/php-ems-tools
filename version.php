@@ -31,7 +31,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/version.php    $ |
+// +----------------------------------------------------------------------+
 
 
 // This file is REQUIRED in order to run PHP EMS Tools

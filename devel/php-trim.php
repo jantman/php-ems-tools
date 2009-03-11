@@ -2,7 +2,10 @@
 // devel/php-trim.php
 // a quick little script to find unused functions and variables in code
 // TESTING ONLY
-// $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/devel/php-trim#$ |
+// +----------------------------------------------------------------------+
+
 
 /*
  * T_ML_COMMENT does not exist in PHP 5.

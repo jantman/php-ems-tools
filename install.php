@@ -31,7 +31,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/install.php    $ |
+// +----------------------------------------------------------------------+
 
 // this file will import the user's customization
 require_once('./config/config.php');

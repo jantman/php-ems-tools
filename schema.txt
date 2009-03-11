@@ -1,6 +1,7 @@
 -- Database Schema for PHP EMS Tools 4.0
--- Time-stamp: "2008-11-02 23:45:16 jantman"
--- $Id$ 
+-- Time-stamp: "2009-03-11 11:43:51 jantman"
+-- $LastChangedRevision$
+-- $HeadURL: http://svn.jasonantman.com/php-ems-tools/schema.txt $
 
 --
 -- Table structure for table `addBk`

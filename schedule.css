@@ -2,7 +2,7 @@
 /*               */
 /* this is the main schedule page CSS file, along with CSS for all pop-ups and their HTML*/
 /*     */
-/* Time-stamp: "2008-11-04 11:08:13 jantman" */
+/* Time-stamp: "2009-03-11 11:48:04 jantman" */
 /* +----------------------------------------------------------------------+ */
 /* | PHP EMS Tools      http://www.php-ems-tools.com                      | */
 /* +----------------------------------------------------------------------+ */
@@ -29,8 +29,9 @@
 /* +----------------------------------------------------------------------+ */
 /* | Authors: Jason Antman <jason@jasonantman.com>                        | */
 /* +----------------------------------------------------------------------+ */
-/*      $Id$        */
-
+/* | $LastChangedRevision::                                             $ | */
+/* | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/schedule.css   $ | */
+/* +----------------------------------------------------------------------+ */
 
 body
 {

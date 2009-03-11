@@ -29,7 +29,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/admin/checkCus#$ |
+// +----------------------------------------------------------------------+
 
 // this file will import the user's customization
 include('./config/config.php');

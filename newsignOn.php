@@ -30,7 +30,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/newsignOn.php  $ |
+// +----------------------------------------------------------------------+
 
 
 // DEBUG - TODO - do we still need this file?

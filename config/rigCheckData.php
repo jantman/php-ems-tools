@@ -29,7 +29,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/config/rigChec#$ |
+// +----------------------------------------------------------------------+
 
 // if true, show an alert on index.php if any rig has not been checked for rigCheckAlertTime seconds
 $rigCheckAgeAlert = true; 

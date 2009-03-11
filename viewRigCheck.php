@@ -32,7 +32,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/viewRigCheck.p#$ |
+// +----------------------------------------------------------------------+
 
 require_once('./config/config.php'); // main configuration
 require_once('./config/rigCheckData.php'); // rig check configration

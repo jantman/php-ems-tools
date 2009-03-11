@@ -1,6 +1,7 @@
 # makefile to update CVS and do anything else needed
-# Time-stamp: "2008-11-02 23:48:30 jantman"
-# $Id$
+# Time-stamp: "2009-03-11 11:43:19 jantman"
+# $LastChangedRevision$
+# $HeadURL: http://svn.jasonantman.com/php-ems-tools/Makefile $
 
 ifdef LOGSTR
         LOG = $(LOGSTR)

@@ -3,7 +3,7 @@
 //
 // JavaScript Functions for graying out the page (to put a popup over it)
 //
-// Time-stamp: "2008-07-01 16:42:25 jantman"
+// Time-stamp: "2009-03-11 12:07:56 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -30,7 +30,10 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/grayout.js $ |
+// +----------------------------------------------------------------------+
+
 
 function grayOut(vis)
 {

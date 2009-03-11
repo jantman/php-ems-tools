@@ -29,7 +29,9 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//	$Id$
+// | $LastChangedRevision::                                             $ |
+// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/admin/migrate_#$ |
+// +----------------------------------------------------------------------+
 
 // DEBUG
 $dbName = "php_ems_tools_devel";
