@@ -1,8 +1,10 @@
 <?php 
+/*
+ * Form to edit the organization's address book.
+ * @package php-ems-tools
+ */
+
 // addBkEdit.php
-//
-// Form to edit the organization's address book.
-//
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -33,28 +35,43 @@
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/addBkEdit.php  $ |
 // +----------------------------------------------------------------------+
 
-//required for HTML_QuickForm PEAR Extension
+/*
+ * required for HTML_QuickForm PEAR Extension
+ */
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
 
-require_once('./config/config.php'); // main configuration
+/*
+ * Main configuration file.
+ */
+require_once('./config/config.php');
 
-
-// tell PHP to ignore any errors less than E_ERROR
+/*
+ * tell PHP to ignore any errors less than E_ERROR
+ */
 error_reporting(1);
 
 //if the variables are specified in the URL, get them. 
 if(! empty($_GET['action']))
 {
-	$action = $_GET['action'];
-	// possible values are 'new', 'edit', 'remove'
+    /*
+     * @global string $action form action - 'new', 'edit' or 'remove'
+     */
+    $action = $_GET['action'];
+    // possible values are 'new', 'edit', 'remove'
 }
 if(! empty($_GET['pKey']))
 {
-	$pKey = $_GET['pKey'];
+    /*
+     * @global int $pKey the database primary key for the record
+     */
+    $pKey = $_GET['pKey'];
 } 
 
-//instantiate the form 
+/*
+ * Instantiate the HTML_QuickForm
+ * @global HTML_QuickForm $form
+ */
 $form = new HTML_QuickForm('firstForm');
 
 // mysql connection
@@ -163,9 +180,14 @@ if ($form->validate())
 
 }
 
+/*
+ * Process the form input. Automagically called via HTML_QuickForm on submit.
+ * @param array $formItems automagically passed by HTML_QuickForm
+ * @global int database primary key
+ * @global string form action
+ */
 function processForm($formItems)
 {
-	//this processes the forum when it is submitted. 
 	global $pKey;
 	global $action;
 
@@ -187,6 +209,15 @@ function processForm($formItems)
 	    putToDB($formItems, $action);
 	}
 }
+
+/*
+ * Put form information in DB - should only be called by processForm()
+ * @see processForm()
+ * @param array $formItems as gotten from HTML_QuickForm
+ * @param string $action form action
+ * @global int database primary key
+ * @global string database name
+ */
 function putToDB($formItems, $action)
 {
 	global $pKey;
@@ -204,6 +235,10 @@ function putToDB($formItems, $action)
 	}
 
 	$conn = mysql_connect() or die ('ERROR: Unable to connect to MySQL!');
+	/*
+	 * @global string $dbName the database name
+	 * @see config/config.php
+	 */
 	global $dbName;
 	mysql_select_db($dbName) or die ('ERROR: Unable to select database!');
 	// global $pKey;
@@ -237,6 +272,11 @@ function putToDB($formItems, $action)
 	mysql_close($conn);
 } 
 
+/*
+ * Populate the form from the database.
+ * @param int $pKey database record primary key
+ * @global string form action
+ */
 function populateMe($pKey) 
 {
 	global $action; 
@@ -258,9 +298,16 @@ function populateMe($pKey)
 	return $defaults; 
 }
 
+/*
+ * Validate whether the given credentials have admin rights or not.
+ * @global $minRightsRoster minimum rights level to edit roster
+ * @param string $adminID the admin EMTid
+ * @param string $adminPW the admin password
+ * @return boolean
+ * @todo this needs to be removed and replaced with a central function
+ */
 function validateAdmin($adminID, $adminPW)
 {
-    // this function checks with mySQL to see if the admin is valid
     global $minRightsRoster;
     $query  = "SELECT EMTid,rightsLevel,pwdMD5 FROM roster WHERE EMTid=".$adminID.";";
     $result = mysql_query($query) or die ("Error in query: $query. " . mysql_error());
@@ -287,7 +334,12 @@ function validateAdmin($adminID, $adminPW)
     return true; 
 }
 
-
+/*
+ * Call another escaping function to handle quotes
+ * @todo replace this with explicit calls to mysql_real_escape_string
+ * @param string $s string to escape
+ * @return string
+ */
 function doQuotes($s) 
 {
     return addslashes($s);
