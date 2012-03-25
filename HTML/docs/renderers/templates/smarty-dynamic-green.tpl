@@ -1,4 +1,4 @@
-<!--  $Id$ -->
+<!--  $Id: smarty-dynamic-green.tpl 119 2008-11-02 23:09:37Z jantman $ -->
 
 <tr>
     <td align="right" valign="top" class="green"><b>{$element.label}:</b></td>

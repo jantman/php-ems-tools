@@ -3,7 +3,7 @@
 //
 // script to get the content of one day's header, for refreshing when changing the message
 //
-// | $LastChangedRevision::                                             $ |
+// | $LastChangedRevision:: 155                                         $ |
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/inc/getDayHead#$ |
 // +----------------------------------------------------------------------+
 

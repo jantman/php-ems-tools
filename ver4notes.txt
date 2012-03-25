@@ -1,6 +1,6 @@
 PHP EMS Tools Version 4.0 Major Notes:
 Time-stamp: "2009-03-11 11:43:40 jantman"
-$LastChangedRevision$
+$LastChangedRevision: 155 $
 $HeadURL: http://svn.jasonantman.com/php-ems-tools/ver4notes.txt $
 
 === Schedule URL variables and time-telling

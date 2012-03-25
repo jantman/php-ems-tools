@@ -3,5 +3,5 @@ http://www.php-ems-tools.com
 ----------------------------------------------------------
 Version 4.0
 Time-stamp: "2009-03-11 11:43:28 jantman"
-$LastChangedRevision$
+$LastChangedRevision: 155 $
 $HeadURL: http://svn.jasonantman.com/php-ems-tools/version.txt $

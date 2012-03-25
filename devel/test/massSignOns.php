@@ -29,7 +29,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: massSignOns.php 149 2008-11-26 02:45:38Z jantman $
 
 
 // this file will import the user's customization

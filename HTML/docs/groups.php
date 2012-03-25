@@ -2,7 +2,7 @@
 /**
 * Examples of usage for grouped elements in HTML_QuickForm
 *
-* $Id$
+* $Id: groups.php 119 2008-11-02 23:09:37Z jantman $
 * 
 * @author      Bertrand Mansion <bmansion@mamasam.com>
 * @author      Alexey Borzov <avb@php.net>

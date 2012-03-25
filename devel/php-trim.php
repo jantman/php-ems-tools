@@ -2,7 +2,7 @@
 // devel/php-trim.php
 // a quick little script to find unused functions and variables in code
 // TESTING ONLY
-// | $LastChangedRevision::                                             $ |
+// | $LastChangedRevision:: 155                                         $ |
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/devel/php-trim#$ |
 // +----------------------------------------------------------------------+
 

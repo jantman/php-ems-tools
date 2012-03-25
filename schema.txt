@@ -1,6 +1,6 @@
 -- Database Schema for PHP EMS Tools 4.0
 -- Time-stamp: "2009-03-11 11:43:51 jantman"
--- $LastChangedRevision$
+-- $LastChangedRevision: 155 $
 -- $HeadURL: http://svn.jasonantman.com/php-ems-tools/schema.txt $
 
 --

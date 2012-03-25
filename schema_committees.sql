@@ -4,7 +4,7 @@
 -- ------------------------------------------------------
 -- Server version	5.0.26
 -- 
--- $LastChangedRevision$
+-- $LastChangedRevision: 155 $
 -- $HeadURL: http://svn.jasonantman.com/php-ems-tools/schema_committees.sql $
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;

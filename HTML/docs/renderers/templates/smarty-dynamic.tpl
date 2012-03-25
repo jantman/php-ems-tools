@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<!--  $Id$ -->
+<!--  $Id: smarty-dynamic.tpl 119 2008-11-02 23:09:37Z jantman $ -->
 <html>
 <head>
     <title>Smarty template for Array renderer</title>

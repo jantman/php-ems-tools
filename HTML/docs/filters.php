@@ -5,7 +5,7 @@
 *
 * @version 3.2
 *
-* $Id$ 
+* $Id: filters.php 119 2008-11-02 23:09:37Z jantman $ 
 */
 
 require_once 'HTML/QuickForm.php';

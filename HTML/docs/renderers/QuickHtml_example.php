@@ -1,4 +1,4 @@
-<?php /** $Id$ */ ?>
+<?php /** $Id: QuickHtml_example.php 119 2008-11-02 23:09:37Z jantman $ */ ?>
 <html>
   <title>QuickForm Using QuickHtml Renderer</title>
 <body>

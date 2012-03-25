@@ -29,7 +29,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: roster.php 149 2008-11-26 02:45:38Z jantman $
 
 require_once('./config/config.php'); // main configuration
 

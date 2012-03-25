@@ -32,7 +32,7 @@ PHP:
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-// | $LastChangedRevision::                                             $ |
+// | $LastChangedRevision:: 155                                         $ |
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/devel/header.t#$ |
 // +----------------------------------------------------------------------+
 
@@ -70,7 +70,7 @@ Text config:
 # +----------------------------------------------------------------------+
 # | Authors: Jason Antman <jason@jasonantman.com>                        |
 # +----------------------------------------------------------------------+
-# | $LastChangedRevision::                                             $ |
+# | $LastChangedRevision:: 155                                         $ |
 # | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/devel/header.t#$ |
 # +----------------------------------------------------------------------+
 
@@ -107,6 +107,6 @@ HTML:
 <!-- +----------------------------------------------------------------------+ -->
 <!-- | Authors: Jason Antman <jason@jasonantman.com>                        | -->
 <!-- +----------------------------------------------------------------------+ -->
-<!-- | $LastChangedRevision::                                             $ | -->
+<!-- | $LastChangedRevision:: 155                                         $ | -->
 <!-- | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/devel/header.t#$ | -->
 <!-- +----------------------------------------------------------------------+ -->

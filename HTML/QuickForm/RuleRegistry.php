@@ -18,7 +18,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id$
+// $Id: RuleRegistry.php 119 2008-11-02 23:09:37Z jantman $
 
 /**
 * Registers rule objects and uses them for validation

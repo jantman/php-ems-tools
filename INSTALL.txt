@@ -2,7 +2,7 @@ PHP EMS Tools
 Version 3.0 INSTALL.txt
 http://www.php-ems-tools.com
 
-$LastChangedRevision$
+$LastChangedRevision: 155 $
 $HeadURL: http://svn.jasonantman.com/php-ems-tools/INSTALL.txt $
 
 -----------------------------------------------------------------

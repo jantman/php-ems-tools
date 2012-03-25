@@ -1,6 +1,6 @@
 # makefile to update CVS and do anything else needed
 # Time-stamp: "2009-03-11 11:43:19 jantman"
-# $LastChangedRevision$
+# $LastChangedRevision: 155 $
 # $HeadURL: http://svn.jasonantman.com/php-ems-tools/Makefile $
 
 ifdef LOGSTR
