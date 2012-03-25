@@ -3,4 +3,4 @@ http://www.php-ems-tools.com
 ----------------------------------------------------------
 Version 3.0
 Time-stamp: "2007-09-28 00:57:33 jantman"
-$Id$
+$Id: version.txt 101 2008-07-01 01:34:35Z jantman $

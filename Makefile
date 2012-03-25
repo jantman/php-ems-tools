@@ -1,6 +1,6 @@
 # makefile to update CVS and do anything else needed
 # Time-stamp: "2008-11-02 18:09:11 jantman"
-# $Id$
+# $Id: Makefile 118 2008-11-02 23:09:37Z jantman $
 
 ifdef LOGSTR
         LOG = $(LOGSTR)

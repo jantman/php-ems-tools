@@ -32,7 +32,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: sched.php 118 2008-11-02 23:09:37Z jantman $
 
 require_once('config/config.php');
 require_once('config/scheduleConfig.php');

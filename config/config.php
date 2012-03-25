@@ -29,7 +29,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: config.php 101 2008-07-01 01:34:35Z jantman $
 
 // INSTRUCTIONS:
 // set the variables in the file to the appropriate values for your squad.

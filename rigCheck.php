@@ -31,7 +31,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: rigCheck.php 101 2008-07-01 01:34:35Z jantman $
 
 // for good EMTs only: if you add &OK=true to the url, all fields will default to OK.
 if(! empty($_GET['OK']))

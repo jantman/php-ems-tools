@@ -29,7 +29,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: custom.php 101 2008-07-01 01:34:35Z jantman $
 
 
 // this is simply kept here for backward-compatibility

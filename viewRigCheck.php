@@ -32,7 +32,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: viewRigCheck.php 101 2008-07-01 01:34:35Z jantman $
 
 require_once('./config/config.php'); // main configuration
 require_once('./config/rigCheckData.php'); // rig check configration

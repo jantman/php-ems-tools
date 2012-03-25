@@ -30,7 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: dispatchSchedule.php 101 2008-07-01 01:34:35Z jantman $
 
 // this turns debugging mode on and off
 $debug = false;

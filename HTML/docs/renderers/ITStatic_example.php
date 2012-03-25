@@ -6,7 +6,7 @@
 * @version     2.0
 */
 
-// $Id$
+// $Id: ITStatic_example.php 118 2008-11-02 23:09:37Z jantman $
 
 require_once('HTML/QuickForm.php');
 require_once('HTML/QuickForm/Renderer/ITStatic.php');

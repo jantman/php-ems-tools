@@ -29,7 +29,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: rigCheckHandler.php 101 2008-07-01 01:34:35Z jantman $
 
 
 require_once('./config/config.php'); // main configuration

@@ -2,7 +2,7 @@
 /**
 * Examples of usage for HTML_QuickForm: fancy validation with addFormRule()
 *
-* $Id$
+* $Id: formrule.php 118 2008-11-02 23:09:37Z jantman $
 * 
 * @author      Alexey Borzov <avb@php.net>
 * @version     3.2

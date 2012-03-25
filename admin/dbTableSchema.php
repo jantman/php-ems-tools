@@ -30,7 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: dbTableSchema.php 101 2008-07-01 01:34:35Z jantman $
 
 
 $dbTableSchemaA = array(); // the array that holds all queries to setup the table

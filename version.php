@@ -31,7 +31,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: version.php 101 2008-07-01 01:34:35Z jantman $
 
 
 // This file is REQUIRED in order to run PHP EMS Tools

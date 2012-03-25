@@ -16,7 +16,7 @@
 // | Author: Alexey Borzov <borz_off@cs.msu.su>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id$
+// $Id: ITDynamic.php 118 2008-11-02 23:09:37Z jantman $
 
 require_once 'HTML/QuickForm/Renderer.php';
 

@@ -17,7 +17,7 @@
 // |          Bertrand Mansion <bmansion@mamasam.com>                     |
 // +----------------------------------------------------------------------+
 //
-// $Id$
+// $Id: QuickForm.php 118 2008-11-02 23:09:37Z jantman $
 
 require_once('PEAR.php');
 require_once('HTML/Common.php');

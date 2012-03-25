@@ -2,7 +2,7 @@ PHP EMS Tools
 Version 3.0 INSTALL.txt
 http://www.php-ems-tools.com
 
-$Id$
+$Id: INSTALL.txt 101 2008-07-01 01:34:35Z jantman $
 
 -----------------------------------------------------------------
 PHP EMS Tools Installation

@@ -30,7 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: scheduleDHTML.js 118 2008-11-02 23:09:37Z jantman $
 
 var http = createRequestObject(); 
 

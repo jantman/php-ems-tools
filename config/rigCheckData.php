@@ -29,7 +29,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: rigCheckData.php 101 2008-07-01 01:34:35Z jantman $
 
 // if true, show an alert on index.php if any rig has not been checked for rigCheckAlertTime seconds
 $rigCheckAgeAlert = true; 

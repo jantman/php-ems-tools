@@ -4,7 +4,7 @@
  *
  * @author Alexey Borzov <avb@php.net>
  *
- * $Id$ 
+ * $Id: rules-custom.php 118 2008-11-02 23:09:37Z jantman $ 
  */
 
 require_once 'HTML/QuickForm.php';

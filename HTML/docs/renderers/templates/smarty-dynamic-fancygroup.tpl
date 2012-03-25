@@ -1,4 +1,4 @@
-<!--  $Id$ -->
+<!--  $Id: smarty-dynamic-fancygroup.tpl 118 2008-11-02 23:09:37Z jantman $ -->
 
 <tr>
     <td valign="top" align="right">

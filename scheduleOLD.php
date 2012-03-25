@@ -30,7 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: scheduleOLD.php 118 2008-11-02 23:09:37Z jantman $
 
 // this file will import the user's customization
 require_once('./config/config.php');

@@ -30,7 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-//      $Id$
+//      $Id: signOn.php 118 2008-11-02 23:09:37Z jantman $
 
 //required for HTML_QuickForm PEAR Extension
 if(file_exists('../HTML/QuickForm.php'))
