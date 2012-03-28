@@ -2,8 +2,6 @@ PHP EMS Tools
 Version 3.0 README
 http://www.php-ems-tools.com
 
-$LastChangedRevision: 155 $
-$HeadURL: http://svn.jasonantman.com/php-ems-tools/README.txt $
 
 
 This software is licensed under GNU GPLv3. The full text of this license can
