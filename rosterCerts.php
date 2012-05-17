@@ -1,43 +1,20 @@
 <?php
-// rosterCerts.php
 //
-// Page to view roster certification data
+// roster.php
 //
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterCerts.ph#$ |
-// +----------------------------------------------------------------------+
+// Version 0.1 as of Time-stamp: "2009-06-02 14:15:14 jantman"
+//
+// This file is part of the php-ems-tools package
+// available at 
+//
+// (C) 2006 Jason Antman.
+// This package is licensed under the terms of the
+// GNU General Public License (GPL)
+//
 
-require_once('./config/config.php'); // main configuration
+require_once('custom.php');
 
-require_once('./config/rosterConfig.php'); // roster configuration
-
-global $extdCerts; // the extended certifications array
+// this script views the roster from the DB
 
 if(! empty($_GET['sort']))
 {
@@ -57,9 +34,19 @@ else
     $adminView = 0;
 }
 
+// shortView determines whether we show type/ID/Names only, or everything
+if((! empty($_GET['shortView'])) && $_GET['shortView'] == 1)
+{
+    $shortView = true;
+}
+else
+{
+    $shortView = false;
+}
+
 echo '<head>';
 echo '<meta http-equiv="refresh" content="180">';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 echo '<title>'.$shortName.' - View Certifications Roster</title>';
 echo '<script type="text/javascript" src="php-ems-tools.js"> </script>';
 echo '</head>';
@@ -69,16 +56,20 @@ echo '<table class="roster">';
 
 //Finish setting up the table
 if($adminView==1)
-{ $colspan = 12;}
+{ $colspan = 15;}
 else
-{ $colspan = 11;}
-
-// compensate colspan for the extended certs array
-$colspan = $colspan + sizeof($extdCerts);
-
+{ $colspan = 14;}
 echo "\n"; // linefeed
 echo '<td align=center colspan="'.$colspan.'"><b>'.$orgName.' Certifications Roster</b><br> (as of '.date("M d Y").')';
 echo '<a href="javascript:helpPopUp('."'docs/roster_help.php'".')">HELP</a>';
+if(!$shortView)
+{
+    echo '&nbsp;&nbsp;<a href="rosterCerts.php?sort='.$sort.'&shortView=1">Short View</a>';
+}
+else
+{
+    echo '&nbsp;&nbsp;<a href="rosterCerts.php?sort='.$sort.'&shortView=0">Normal View</a>';
+}
 if($adminView==1)
 {
     echo '<br><a href="javascript:rosterPopUp('."'rosterCertsEdit.php?action=new'".')">Add New Member</a>';
@@ -134,16 +125,21 @@ mysql_close($connection);
     echo '<td><a href="rosterCerts.php?sort=BBP';
     if($adminView==1){ echo '&adminView=1';}
     echo '">BBP</a></td>';
+    echo '<td><a href="rosterCerts.php?sort=ICS100';
+    if($adminView==1){ echo '&adminView=1';}
+    echo '">ICS100</a></td>';
+    echo '<td><a href="rosterCerts.php?sort=ICS200';
+    if($adminView==1){ echo '&adminView=1';}
+    echo '">ICS200</a></td>';
+    echo '<td><a href="rosterCerts.php?sort=NIMS';
+    if($adminView==1){ echo '&adminView=1';}
+    echo '">NIMS</a></td>';
     echo '<td><a href="rosterCerts.php?sort=PHTLS';
     if($adminView==1){ echo '&adminView=1';}
     echo '">PHTLS</a></td>';
     echo '<td><a href="rosterCerts.php?sort=NREMT';
     if($adminView==1){ echo '&adminView=1';}
     echo '">NREMT</a></td>';
-    foreach($extdCerts as $certName)
-    {
-	echo '<td>'.$certName.'</td>';
-    }
     echo '</tr>';
 
 //loop through the members and call the showMember function
@@ -179,7 +175,6 @@ mysql_free_result($result);
 function showMember($r)
 {
     global $adminView;
-    global $extdCerts; // extended certifications info
     
     // figure out the member type
     $memberType = "";
@@ -269,6 +264,63 @@ function showMember($r)
     {
 	echo '<td>&nbsp;</td>';
     }
+    if(! empty($r['ICS100']))
+    {
+	if($r['ICS100'] == 1922331600)
+	{
+	    echo '<td>VALID</td>';
+	}
+	elseif($r['ICS100'] == 1)
+	{
+	    echo '<td>no cert</td>';
+	}
+	else
+	{
+	    echo '<td>&nbsp;</td>';
+	}
+    }
+    else
+    {
+	echo '<td>&nbsp;</td>';
+    }
+    if(! empty($r['ICS200']))
+    {
+	if($r['ICS200'] == 1922331600)
+	{
+	    echo '<td>VALID</td>';
+	}
+	elseif($r['ICS200'] == 1)
+	{
+	    echo '<td>no cert</td>';
+	}
+	else
+	{
+	    echo '<td>&nbsp;</td>';
+	}
+    }
+    else
+    {
+	echo '<td>&nbsp;</td>';
+    }
+    if(! empty($r['NIMS']))
+    {
+	if($r['NIMS'] == 1922331600)
+	{
+	    echo '<td>VALID</td>';
+	}
+	elseif($r['NIMS'] == 1)
+	{
+	    echo '<td>no cert</td>';
+	}
+	else
+	{
+	    echo '<td>&nbsp;</td>';
+	}
+    }
+    else
+    {
+	echo '<td>&nbsp;</td>';
+    }
     if(! empty($r['PHTLS']))
     {
 	echo '<td>'.certDate($r['PHTLS']).'</td>';
@@ -286,22 +338,59 @@ function showMember($r)
 	echo '<td>&nbsp;</td>';
     }
 
-    // get the information for the extended certs from the database
-    $otherCerts = $r['OtherCerts']; // other certs CSV list from database
-    $otherCertsAry = explode(",", $otherCerts); // make an array of the certs
-    foreach($extdCerts as $val)
+    echo '</tr>';
+}
+
+//this function will display a row for a member
+function showMemberShort($r)
+{
+    global $adminView;
+
+    // figure out the member type
+    $memberType = "";
+    global $memberTypes;
+    for($i = 0; $i < count($memberTypes); $i++)
     {
-	if(in_array($val, $otherCertsAry))
+	if($memberTypes[$i]['name'] == $r['status'])
 	{
-	    // if true, this extd cert (val) is in the member's list (otherCertsA)
-	    echo '<td>Yes</td>';
-	}
-	else
-	{
-	    echo '<td>&nbsp;</td>';
+	    $memberType = $memberTypes[$i]['rosterName'];
 	}
     }
 
+    echo '<tr>';
+    //get the roster view of the status/memberType
+    
+    if($memberType=="")
+    {
+	$memberType = "&nbsp;";
+    }
+    echo '<td>'.$memberType.'</td>';
+
+    if($adminView<>1 && $r['unitID']<>"")
+    {
+	echo '<td>'.$r['unitID'].'</td>';
+    }
+    else
+    {
+	echo '<td>'.$r['EMTid'].'</td>';
+    }
+
+    if(! empty($r['LastName']))
+    {
+	echo '<td>'.$r['LastName'].'</td>';
+    }
+    else
+    {
+	echo '<td>&nbsp;</td>';
+    }
+    if(! empty($r['FirstName']))
+    {
+	echo '<td>'.$r['FirstName'].'</td>';
+    }
+    else
+    {
+	echo '<td>&nbsp;</td>';
+    }
     echo '</tr>';
 }
 

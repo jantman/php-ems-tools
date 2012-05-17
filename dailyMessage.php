@@ -125,6 +125,26 @@ echo '		<td valign="top" align="left"><input type="checkbox" name="showAllShifts
 ?>
 	</tr>
 	<tr>
+	<td colspan="2" style="text-align: left;">
+	<strong>Formatting for Message:</strong><br />
+	Text Time @Place<br />
+	<strong>Text</strong> is the name of the event<br />
+	<strong>Time</strong> is the time of the event <em>(optional)</em><br />
+	&nbsp;&nbsp;Like: 6PM or 18:00 or 6P / 8AM or 8A or 08:00<br />
+	&nbsp;&nbsp;Or a range of times separated by a dash<br />
+	<strong>Place</strong> is the location <em>(optional)</em><br />
+	&nbsp;&nbsp;Like: @MPAC or @MPFD<br />
+	<strong>Examples:</strong><br />
+	Memorial Day<br />
+	Monthly Meeting 8PM<br />
+	Monthly Drill 19:30<br />
+	Bldg Cleanup 8-10A<br />
+	BBP Class 10A-11A @MPFD<br />
+	BBP Class 7PM @MPFD<br />
+	Coin Toss 08:00-12:00
+	</td>
+	</tr>
+	<tr>
 		<td align="right" valign="top"><b></b></td>
 <?php
 echo '		<td valign="top" align="left"><input name="buttonGroup[btnReset]" value="'.$i18n_strings["signOn"]["Reset"].'" type="reset" />    <input name="buttonGroup[btnCancel]" value="'.$i18n_strings["signOn"]["Cancel"].'" onClick="hidePopup(\'popup\')" type="button" />    <input name="buttonGroup[btnSubmit]" value="'.$i18n_strings["signOn"]["Submit"].'" type="button" onClick="submitMessageForm()" />    </td>';

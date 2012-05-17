@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<a name="top"></a>
+<h2>Full index</h2>
+<h3>Package indexes</h3>
+<ul>
+	<li><a href="elementindex_MPAC-NewCall.html">MPAC-NewCall</a></li>
+</ul>
+<br />
+<div class="index-letter-menu">
+	<a class="index-letter" href="elementindex.html#a">a</a>
+	<a class="index-letter" href="elementindex.html#c">c</a>
+	<a class="index-letter" href="elementindex.html#d">d</a>
+	<a class="index-letter" href="elementindex.html#f">f</a>
+	<a class="index-letter" href="elementindex.html#g">g</a>
+	<a class="index-letter" href="elementindex.html#i">i</a>
+	<a class="index-letter" href="elementindex.html#j">j</a>
+	<a class="index-letter" href="elementindex.html#k">k</a>
+	<a class="index-letter" href="elementindex.html#l">l</a>
+	<a class="index-letter" href="elementindex.html#m">m</a>
+	<a class="index-letter" href="elementindex.html#n">n</a>
+	<a class="index-letter" href="elementindex.html#p">p</a>
+	<a class="index-letter" href="elementindex.html#r">r</a>
+	<a class="index-letter" href="elementindex.html#s">s</a>
+	<a class="index-letter" href="elementindex.html#t">t</a>
+	<a class="index-letter" href="elementindex.html#u">u</a>
+	<a class="index-letter" href="elementindex.html#v">v</a>
+</div>
+
+	<a name="a"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">a</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">add_error</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html#functionadd_error">add_error()</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">add_warning</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html#functionadd_warning">add_warning()</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">antman.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_antman.php.html">antman.php</a> in antman.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">authByLDAP</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_ldap.php.html#functionauthByLDAP">authByLDAP()</a> in ldap.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">authWrapper</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_ldap.php.html#functionauthWrapper">authWrapper()</a> in ldap.php</div>
+					</dd>
+		</dl>
+	<a name="c"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">c</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">call_ALS</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncall_ALS">call_ALS()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">call_has_patient</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncall_has_patient">call_has_patient()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">call_NoHosp</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncall_NoHosp">call_NoHosp()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">call_NoRig</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncall_NoRig">call_NoRig()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">call_transport</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncall_transport">call_transport()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">call_type_other</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncall_type_other">call_type_other()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">checkCrew</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncheckCrew">checkCrew()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">checkMileage</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_mileage.php.html#functioncheckMileage">checkMileage()</a> in mileage.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">check_signature</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functioncheck_signature">check_signature()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">crew.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_crew.php.html">crew.php</a> in crew.php</div>
+					</dd>
+		</dl>
+	<a name="d"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">d</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">db_error</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functiondb_error">db_error()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">doTime</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functiondoTime">doTime()</a> in PCRvalidation.php</div>
+					</dd>
+		</dl>
+	<a name="f"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">f</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">findAgeFromDOB</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functionfindAgeFromDOB">findAgeFromDOB()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">formatRunNum</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_runNum.php.html#functionformatRunNum">formatRunNum()</a> in runNum.php</div>
+							<div class="index-item-description">Format a run number as a string with a hyphen.</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">formFuncs.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html">formFuncs.php</a> in formFuncs.php</div>
+					</dd>
+		</dl>
+	<a name="g"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">g</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">genCityDiv</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functiongenCityDiv">genCityDiv()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">genCrewTable</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functiongenCrewTable">genCrewTable()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">genNavControls</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_nav.php.html#functiongenNavControls">genNavControls()</a> in nav.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">genStateDiv</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functiongenStateDiv">genStateDiv()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">gen_MAdiv</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functiongen_MAdiv">gen_MAdiv()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getCurrentDBname</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_crew.php.html#functiongetCurrentDBname">getCurrentDBname()</a> in crew.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getDutyCrewByTS</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_crew.php.html#functiongetDutyCrewByTS">getDutyCrewByTS()</a> in crew.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getGroupMembers</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_ldap.php.html#functiongetGroupMembers">getGroupMembers()</a> in ldap.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getMembersOnCall</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_stats.php.html#functiongetMembersOnCall">getMembersOnCall()</a> in stats.php</div>
+							<div class="index-item-description">Return array of members (EMTid) on a specified call.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getMPstreets</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functiongetMPstreets">getMPstreets()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getNewRunNumber</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_runNum.php.html#functiongetNewRunNumber">getNewRunNumber()</a> in runNum.php</div>
+							<div class="index-item-description">Get the next run number for a given year</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getProbiesByEMTid</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_crew.php.html#functiongetProbiesByEMTid">getProbiesByEMTid()</a> in crew.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getRunFromDB</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRpopulate.php.html#functiongetRunFromDB">getRunFromDB()</a> in PCRpopulate.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getTransToOptions</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functiongetTransToOptions">getTransToOptions()</a> in formFuncs.php</div>
+					</dd>
+		</dl>
+	<a name="i"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">i</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">is_valid_session</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#functionis_valid_session">is_valid_session()</a> in session.php</div>
+					</dd>
+		</dl>
+	<a name="j"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">j</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">JAforms.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html">JAforms.php</a> in JAforms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ja_check</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html#functionja_check">ja_check()</a> in JAforms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ja_hidden</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html#functionja_hidden">ja_hidden()</a> in JAforms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ja_radio</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html#functionja_radio">ja_radio()</a> in JAforms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ja_select</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html#functionja_select">ja_select()</a> in JAforms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ja_text</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html#functionja_text">ja_text()</a> in JAforms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ja_textarea</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_JAforms.php.html#functionja_textarea">ja_textarea()</a> in JAforms.php</div>
+					</dd>
+		</dl>
+	<a name="k"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">k</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">kill_session</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#functionkill_session">kill_session()</a> in session.php</div>
+					</dd>
+		</dl>
+	<a name="l"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">l</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">ldap.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_ldap.php.html">ldap.php</a> in ldap.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ldapSetup</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_ldap.php.html#functionldapSetup">ldapSetup()</a> in ldap.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">ldap_auth_handler</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#functionldap_auth_handler">ldap_auth_handler()</a> in session.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">login_start_sess</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#functionlogin_start_sess">login_start_sess()</a> in session.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">log_edit</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functionlog_edit">log_edit()</a> in newcall.php.inc</div>
+					</dd>
+		</dl>
+	<a name="m"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">m</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">makeAddress</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functionmakeAddress">makeAddress()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">makeCallLocAddress</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functionmakeCallLocAddress">makeCallLocAddress()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">makeIntsctAddress</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functionmakeIntsctAddress">makeIntsctAddress()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">makeVitalsRow</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functionmakeVitalsRow">makeVitalsRow()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">mileage.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_mileage.php.html">mileage.php</a> in mileage.php</div>
+					</dd>
+		</dl>
+	<a name="n"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">n</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">nav.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_nav.php.html">nav.php</a> in nav.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">newcall.php.inc</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html">newcall.php.inc</a> in newcall.php.inc</div>
+					</dd>
+		</dl>
+	<a name="p"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">p</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">PCRedit.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRedit.php.html">PCRedit.php</a> in PCRedit.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">PCRpopulate.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRpopulate.php.html">PCRpopulate.php</a> in PCRpopulate.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">PCRprocess.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRprocess.php.html">PCRprocess.php</a> in PCRprocess.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">PCRvalidation.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html">PCRvalidation.php</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">PCR_arrays_differ</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRedit.php.html#functionPCR_arrays_differ">PCR_arrays_differ()</a> in PCRedit.php</div>
+							<div class="index-item-description">Tells if a row from the table is different from an array of new values.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">PCR_edit_auth</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRedit.php.html#functionPCR_edit_auth">PCR_edit_auth()</a> in PCRedit.php</div>
+							<div class="index-item-description">Determines whether the logged in user is allowed to edit this call.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">PCR_row_needs_update</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRedit.php.html#functionPCR_row_needs_update">PCR_row_needs_update()</a> in PCRedit.php</div>
+							<div class="index-item-description">determines whether or not to update a given row</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">processForm</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_formFuncs.php.html#functionprocessForm">processForm()</a> in formFuncs.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">process_edited_PCR_form</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRedit.php.html#functionprocess_edited_PCR_form">process_edited_PCR_form()</a> in PCRedit.php</div>
+							<div class="index-item-description">Puts the complete (edited) PCR to the database</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">process_new_PCR_form</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRprocess.php.html#functionprocess_new_PCR_form">process_new_PCR_form()</a> in PCRprocess.php</div>
+							<div class="index-item-description">Puts the complete PCR to the database</div>
+					</dd>
+		</dl>
+	<a name="r"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">r</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">runNum.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_runNum.php.html">runNum.php</a> in runNum.php</div>
+					</dd>
+		</dl>
+	<a name="s"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">s</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">session.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html">session.php</a> in session.php</div>
+					</dd>
+			<dt class="field">
+						<span class="const-title">SESS_LOAD_TIMEOUT</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#defineSESS_LOAD_TIMEOUT">SESS_LOAD_TIMEOUT</a> in session.php</div>
+					</dd>
+			<dt class="field">
+						<span class="const-title">SESS_TIMEOUT</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#defineSESS_TIMEOUT">SESS_TIMEOUT</a> in session.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">simpleFormCheckBox</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_simpleForms.php.html#functionsimpleFormCheckBox">simpleFormCheckBox()</a> in simpleForms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">simpleFormRadioButton</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_simpleForms.php.html#functionsimpleFormRadioButton">simpleFormRadioButton()</a> in simpleForms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">simpleForms.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_simpleForms.php.html">simpleForms.php</a> in simpleForms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">simpleFormText</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_simpleForms.php.html#functionsimpleFormText">simpleFormText()</a> in simpleForms.php</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">stats.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_stats.php.html">stats.php</a> in stats.php</div>
+					</dd>
+		</dl>
+	<a name="t"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">t</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">textMonth</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_antman.php.html#functiontextMonth">textMonth()</a> in antman.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">trans_commit</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functiontrans_commit">trans_commit()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">trans_rollback</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functiontrans_rollback">trans_rollback()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">trans_safe_query</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functiontrans_safe_query">trans_safe_query()</a> in newcall.php.inc</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">trans_start</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functiontrans_start">trans_start()</a> in newcall.php.inc</div>
+					</dd>
+		</dl>
+	<a name="u"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">u</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="method-title">update_session_time</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_session.php.html#functionupdate_session_time">update_session_time()</a> in session.php</div>
+					</dd>
+		</dl>
+	<a name="v"></a>
+	<div class="index-letter-section">
+		<div style="float: left" class="index-letter-title">v</div>
+		<div style="float: right"><a href="#top">top</a></div>
+		<div style="clear: both"></div>
+	</div>
+	<dl>
+			<dt class="field">
+						<span class="include-title">validatePCR.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html">validatePCR.php</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">validate_DOB</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html#functionvalidate_DOB">validate_DOB()</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">validate_form</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html#functionvalidate_form">validate_form()</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">validate_misc</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html#functionvalidate_misc">validate_misc()</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">validate_PCR_form</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_PCRvalidation.php.html#functionvalidate_PCR_form">validate_PCR_form()</a> in PCRvalidation.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">validate_times</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_validatePCR.php.html#functionvalidate_times">validate_times()</a> in validatePCR.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">var_dump_string</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="MPAC-NewCall/_newcall.php.inc.html#functionvar_dump_string">var_dump_string()</a> in newcall.php.inc</div>
+					</dd>
+		</dl>
+
+<div class="index-letter-menu">
+	<a class="index-letter" href="elementindex.html#a">a</a>
+	<a class="index-letter" href="elementindex.html#c">c</a>
+	<a class="index-letter" href="elementindex.html#d">d</a>
+	<a class="index-letter" href="elementindex.html#f">f</a>
+	<a class="index-letter" href="elementindex.html#g">g</a>
+	<a class="index-letter" href="elementindex.html#i">i</a>
+	<a class="index-letter" href="elementindex.html#j">j</a>
+	<a class="index-letter" href="elementindex.html#k">k</a>
+	<a class="index-letter" href="elementindex.html#l">l</a>
+	<a class="index-letter" href="elementindex.html#m">m</a>
+	<a class="index-letter" href="elementindex.html#n">n</a>
+	<a class="index-letter" href="elementindex.html#p">p</a>
+	<a class="index-letter" href="elementindex.html#r">r</a>
+	<a class="index-letter" href="elementindex.html#s">s</a>
+	<a class="index-letter" href="elementindex.html#t">t</a>
+	<a class="index-letter" href="elementindex.html#u">u</a>
+	<a class="index-letter" href="elementindex.html#v">v</a>
+</div>	</body>
+</html>

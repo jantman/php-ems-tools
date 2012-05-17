@@ -66,7 +66,6 @@ dumpTableSQL.php	Dumps the SQL code to initialize the tables
 --------------------------------------------------------------------------------------
 config/
 config.php		Main configuration file. Used to be custom.php
-rigCheckData.php	Data for the rig checks
 rosterConfig.php	Roster configuration
 scheduleConfig.php	Schedule configuration
 --------------------------------------------------------------------------------------

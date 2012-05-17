@@ -69,4 +69,21 @@ function logMessageForm($original_entry_id, $new_entry_id, $admin_username, $is_
     $result = mysql_query($query) or die ("Query Error");
 }
 
+function logMassSignonForm($original_entry_id, $new_entry_id, $admin_username, $is_authenticated, $form, $action, $queries)
+{
+    // logs a change to the schedule
+    $query = "INSERT INTO schedule_changes SET ";
+    if($original_entry_id != null){ $query .= "deprecated_sched_ID=".$original_entry_id.",";}
+    if($new_entry_id != null){ $query .= "deprecated_by_sched_ID=".$new_entry_id.",";}
+    if(trim($admin_username) != ""){ $query .= "admin_username='".mysql_real_escape_string($admin_username)."',";}
+    if($is_authenticated){ $query .= "admin_auth_success=1,";}
+    $query .= "form='".mysql_real_escape_string($form)."',action='.".$action.".',";
+    $query .= "queries='".make_safe($queries)."',";
+    $query .= "remote_host='".mysql_real_escape_string($_SERVER["REMOTE_ADDR"])."',";
+    if(trim($_SERVER['PHP_AUTH_USER']) != ""){ $query .= "php_auth_username='".mysql_real_escape_string($_SERVER['PHP_AUTH_USER'])."',";}
+    if(trim($_SERVER['AUTH_TYPE']) != ""){$query .= "auth_type='".mysql_real_escape_string($_SERVER['AUTH_TYPE'])."',";}
+    $query .= "change_ts=".time().";";
+    $result = mysql_query($query) or die ("Query Error");
+}
+
 ?>

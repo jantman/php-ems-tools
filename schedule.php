@@ -4,7 +4,7 @@
 //
 // this is the main schedule page
 //
-// Time-stamp: "2009-03-11 11:50:06 jantman"
+// Time-stamp: "2010-07-20 22:27:03 jantman"
 // +----------------------------------------------------------------------+
 // | PHP EMS Tools      http://www.php-ems-tools.com                      |
 // +----------------------------------------------------------------------+
@@ -31,9 +31,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/schedule.php   $ |
-// +----------------------------------------------------------------------+
+//      $Id: schedule.php,v 1.7 2008/11/24 14:47:51 jantman Exp $
 
 // this file will import the user's customization
 require_once('./config/config.php');
@@ -145,14 +143,27 @@ mysql_close($conn);
 <script language="javascript" type="text/javascript" src="inc/eventForm.js"></script>
 -->
 
+<script language="javascript" type="text/javascript">
+var browser = navigator.appName;
+if(browser == "Microsoft Internet Explorer")
+{
+    alert("Please Note: There are known issues with this page and Internet Explorer that would take many many hours to fix. If you don't already have Mozilla Firefox on your computer, you can download it by clicking on the button at the top right of the main page.");
+}
+</script>
+
 </head>
 
 <body>
-
+<?php
+if(substr($_SERVER['REMOTE_ADDR'], 0, strlen($CONFIG_LOCAL_SUBNET)) != $CONFIG_LOCAL_SUBNET)
+{
+    echo '<p><span style="color: red; text-align: center; font-size: 1.2em; font-variant: small-caps;">WARNING: If you are at a PUBLIC COMPUTER, please restart or close your browser after you finish (passwords may be saved).</span></p>';
+}
+?>
 <?php echo '<div class="monthControlLeft"><a href="schedule.php?date='.lastMonthDate($mainDate).'&shift='.$shift.'">&lt;&lt; '.date("F", lastMonthDate($mainDate)).'</a></div>'."\n"; ?>
 <?php echo '<div class="monthControlRight"><a href="schedule.php?date='.nextMonthDate($mainDate).'&shift='.$shift.'">'.date("F", nextMonthDate($mainDate)).' &gt;&gt;</a></div>'."\n"; ?>
 <div id="header">
-<h1><?php echo $orgName." Schedule - ".date("M Y", $mainDate)." ".$shift;?></h1>
+<h1><nobr><?php echo $orgName." Schedule - ".date("M Y", $mainDate)." ".$shift;?></nobr></h1>
 </div> <!-- END header DIV -->
 
 <div id="calhead">
@@ -160,10 +171,11 @@ mysql_close($conn);
 echo '<div class="headerPart">';
 if($shift == "Day"){ echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Night">Nights</a></strong>';} else { echo '<strong><a href="schedule.php?date='.$mainDate.'&shift=Day">Days</a></strong>';}
 echo '</div>';
-echo '<div class="headerPart"><a href="#">Mass Signon</a></div>'; // TODO: implement this
-echo '<div class="headerPart"><a href="countHours.php">Count Hours</a></div>';
+echo '<div class="headerPart"><a href="index.php">HOME</a></div>';
+echo '<div class="headerPart"><a href="countHours.php?start='.strtotime(date("Y-m", $mainDate)."-01 ".$dayFirstHour.":00:00").'&end='.(strtotime(date("Y-m-d", nextMonthDate($mainDate))." ".$dayFirstHour.":00:00")).'">Count Hours</a></div>';
 echo '<div class="headerPart"><strong><a href="schedule.php">Current Shift</a></strong></div>';
-echo '<div class="headerPart"><a href="#">Help</a></div>'; // TODO: implement this
+echo '<div class="headerPart"><strong><a href="massSignOns.php?'."year=$year&month=$month&shift=$shift".'">Mass Sign-On</a></strong></div>';
+echo '<div class="headerPart"><a href="sched-help.php">Help</a></div>';
 ?>
 </div> <!-- END calhead DIV -->
 

@@ -48,7 +48,7 @@ else
 require_once('./config/config.php'); // main configuration
 require_once('./config/rosterConfig.php'); // roster configuration
 
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'."\n"; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'."\n"; // the location of the CSS file for the schedule
 echo '<title>'.$shortName.' - Committees</title>'."\n";
 echo '<script type="text/javascript" src="php-ems-tools.js"> </script>'."\n";
 echo '</head>'."\n";
@@ -63,7 +63,7 @@ echo '<tr><th>Committee</th><th>Position</th><th>Member</th></tr>'."\n";
 
 $connection = mysql_connect() or die ("I'm sorry, but I was unable to connect! (MySQL error: unable to connect).".$errorMsg);
 mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the database!".$errorMsg);
-$query = "SELECT mc.EMTid,mc.appointed_ts,c.comm_name,c.comm_id,p.comm_pos_name,r.FirstName,r.LastName FROM committees AS c LEFT JOIN members_committees AS mc ON mc.comm_id=c.comm_id LEFT JOIN committee_positions AS p ON mc.pos_id=p.comm_pos_id LEFT JOIN roster AS r ON mc.EMTid=r.EMTid WHERE removed_ts IS NULL ORDER BY  c.comm_id,p.comm_pos_id;";
+$query = "SELECT mc.EMTid,mc.appointed_ts,c.comm_name,c.comm_id,p.comm_pos_name,r.FirstName,r.LastName,r.status FROM committees AS c LEFT JOIN members_committees AS mc ON mc.comm_id=c.comm_id LEFT JOIN committee_positions AS p ON mc.pos_id=p.comm_pos_id LEFT JOIN roster AS r ON mc.EMTid=r.EMTid WHERE mc.removed_ts IS NULL ORDER BY c.comm_id,p.comm_pos_id;";
 $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query: ".$query."<br><br>" . mysql_error().'<br><br>'.$errorMsg);
 $lastCommittee = "";
 while($row = mysql_fetch_assoc($result))

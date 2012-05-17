@@ -1,49 +1,17 @@
-<?php
-// index.php
-//
-// Main page with navigation links for all components.
-//
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/index.php      $ |
-// +----------------------------------------------------------------------+
-
-?>
 <html>
-<!-- Time-stamp: "2007-09-13 16:21:06 jantman" -->
+<!-- Time-stamp: "2012-01-24 21:22:43 jantman" -->
 <!-- php-ems-tools index -->
 <head>
 
 <?php
-require_once('./config/config.php'); // main configuration
+require_once('custom.php');
+require_once('inc/web_session.php.inc');
+require_once('inc/common.php');
+$connection = mysql_connect() or die ('ERROR: Unable to connect to MySQL!');
+mysql_select_db($dbName) or die ('ERROR: Unable to select database!');
 
-echo '<title>'.$shortName.' - PHP EMS Tools Index</title>';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<title>'.$shortName.' - PHP EMS Tools Index</title>'."\n";
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'."\n"; // the location of the CSS file for the schedule
 //figure out the month and year
 $month = date("m", time());
 $year = date("Y", time());
@@ -52,183 +20,195 @@ $year = date("Y", time());
 </head>
 <body>
 
+<div style="float: right;"> <!-- BEGIN firefox button right-float div -->
+<a href="http://affiliates.mozilla.org/link/banner/6335"><img src="http://affiliates.mozilla.org/media/uploads/banners/download-small-blue-EN.png" alt="Firefox" /></a>
+<!-- <a href="http://www.spreadfirefox.com/node&amp;id=238326&amp;t=308"><img alt="Firefox 3" title="Firefox 3" src="http://sfx-images.mozilla.org/affiliates/Buttons/Firefox3.5/200x32_all_orange.png" border="0"></a> -->
+</div> <!-- END firefox button right-float div -->
+
 <?php
+if($config_show_login_links)
+{
+    echo '<div class="loginlink">'."\n";
+    if(php_ems_validSession())
+    {
+	// we have a valid session
+	echo '<a href="handlers/login.php?action=logout">Logout '.$_SESSION['membername'].'</a>';
+    }
+    else
+    {
+	echo '<a href="login.php?action=login&request='.urlencode("../index.php").'">Login</a>';
+    }
+    echo '</div> <!-- closes LOGINLINK div -->'."\n";
+}
 echo '<h3>'.$shortName.' - PHP EMS Tools Index</h3>';
 ?>
 
-<p>
-<a href="schedule.php">Schedule</a>
+<p class="respLink">
+<?php echoLink("responding.php", "Responding Members &amp; Current Crew"); echo '&nbsp;&nbsp;&nbsp;&nbsp;'; echoLink("responding-WAP.php", "(WAP)"); echo '&nbsp;&nbsp;&nbsp;&nbsp;'; echoLink("respondingHx.php", "(History)"); ?>
 </p>
 
-<p>
-<a href="massSignOns.php">Mass Signon</a>
-</p>
-
+<ul>
+<li><strong><?php echoLink("newcall/", "Call Reports"); ?></strong>(only available at MPAC)</li>
+<li><strong><?php echoLink("schedule.php", "Schedule"); ?></strong>
 <?php
-if($shortName == "MPAC")
+if($_SERVER["REQUEST_URI"] == "/auth/index.php" || $_SERVER["REQUEST_URI"] == "/auth/")
 {
-    echo '<p><a href="dispatchSchedule.php">Dispatch Schedule</a></p>';
+    echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+    echoLink('WAP/index.php', '(WAP)');
 }
 ?>
-
-<p>
-<a href="roster.php">Roster</a>
-</p>
-
-<p>
-<a href="rosterPositions.php">Roster - Officers, Positions, and Committee</a>
-</p>
-
-<p>
-<a href="rosterCerts.php">Roster - Certifications</a>
-</p>
-
-<p>
-<?php
-echo '<a href="countHours.php?year='.$year.'&month='.$month.'">Monthly Hour Totals</a>';
-?>
-</p>
-
-<p>
-
-<?php
-echo '<a href="countHours.php?year='.$year.'&style=yearly">Yearly Hour Totals</a>';
-?>
-
-</p>
-
-<p>
-<a href="addBk.php">Address Book</a>
-</p>
-
-<p>
-<a href="rigCheckHandler.php">Rig Check</a>
-</p>
-
-<?php
-include('localLinks.php');
-?> 
-
-<p>
-<b>Administrative Views / Edit:</b>
-</p>
-<p>
-<a href="roster.php?adminView=1">Roster Administrative View</a>
-</p>
-<p>
-<a href="rosterPositions.php?adminView=1">Roster - Officers, Positions, and Committee - Administrative View</a>
-</p>
-<p>
-<a href="rosterCerts.php?adminView=1">Roster Certifications - Administrative View</a>
-</p>
-<p>
-<a href="addBk.php?adminView=1">Address Book - Administrative View</a>
-</p>
-
-<p>
-<a href="viewRigChecks.php">View Rig Checks</a>
-</p>
-
-<!-- BEGIN RIG CHECK ALERT CODE -->
-
-<hr>
+  <ul>
+    <li><?php echoLink("saturdaySchedule.php", 'Saturday Night Schedule'); ?></li>
+  </ul>
+</li>
+<li><strong>Roster</strong>
+  <ul>
+    <li><?php echoLink("roster.php", 'Roster'); ?></li>
+    <li><?php echoLink("rosterPositions.php", 'Roster - Officers, Positions, and Committee'); ?></li>
+    <li><?php echoLink("committees.php", 'Committee List'); ?></li>
+    <li><?php echoLink("rosterCerts.php", 'Roster - Certifications');?></li>
+  </ul>
+</li>
+<li><strong>Statistics</strong>
+  <ul>
+    <li><?php echoLink("newcall-stats/", 'Call Stats');?> (<?php echoLink("stats.php", 'Call Stats prior to 1/1/2010');?>) </li>
+    <li><?php echoLink("newcall-stats/countGenerals.php", 'Generals Count'); ?></li>
+    <li><?php echoLink("newcall-stats/mutual_aid_log.php", 'Mutual Aid Log (yearly)'); ?></li>
+    <li><?php echoLink("grantStats.php", 'Grant Statistics'); ?></li>
+  </ul>
+</li>
+<li><strong>Rig Checks</strong>
+  <ul>
+    <li><strong>Fill In</strong> Rig Check: <?php echoLink("rigCheck.php?unit=588", '588'); echo '&nbsp;&nbsp;&nbsp;'; echoLink("rigCheck.php?unit=589", '589'); ?></li>
+    <li><strong>Print Blank</strong> Rig Check: <?php echoLink("blankRigCheck.php?unit=588", '588'); echo '&nbsp;&nbsp;&nbsp;'; echoLink("blankRigCheck.php?unit=589", '589'); ?></li>
+    <li><?php echoLink("viewRigChecks.php", 'View Rig Checks'); ?></li>
+  </ul>
+</li>
+<li><strong>Misc.</strong>
+  <ul>
+    <li><?php echoLink("addBk.php", 'Address Book'); ?></li>
+    <li><?php echoLink("bylaws-out.pdf", 'By-Laws (PDF)'); echo '&nbsp;&nbsp;&nbsp;'; echoLink("rules-out.pdf", 'Rules of Operations (PDF)'); ?></li>
+    <li>Light Permit Applications: <?php echoLink("BLC-54.pdf", 'Blue (PDF)'); echo '&nbsp;&nbsp;&nbsp;'; echoLink("BLC-56.pdf", 'Red and Siren (PDF)'); ?> (as of 2009-12-19)</li>
+    <li><?php echoLink("checkRequest.pdf", 'Check Request Form'); ?></li>
+    <li><?php echoLink("help/newMembers.php", 'Information for New Members'); ?></li>
+  </ul>
+</li>
+<li><strong>Administration</strong>
+  <ul>
+    <li><?php echoLink("roster.php?adminView=1", 'Roster Administrative View'); ?></li>
+    <li><?php echoLink("rosterPositions.php?adminView=1", 'Roster - Officers, Positions, and Committee - Administrative View'); ?></li>
+    <li><?php echoLink("rosterCerts.php?adminView=1", 'Roster Certifications - Administrative View'); ?></li>
+    <li><?php echoLink("rosterJoined.php", 'Roster by Date Joined'); ?></li>
+    <li><?php echoLink("addBk.php?adminView=1", 'Address Book - Administrative View'); ?></li>
+    <li><?php echoLink("admin/", 'Administrative Tools'); ?></li>
+  </ul>
+</li>
+<li><strong>Computers</strong>
+  <ul>
+    <li> <?php echoLink("help/computerPolicy.php", "Computer Use Guidelines"); ?></li>
+    <li> <?php echoLink("help/linuxHelp.php", "Linux Help"); ?></li>
+    <li> <?php echoLink("help/usernameLookup.php", "Username Lookup"); ?></li>
+    <li> <?php echoLink("help/changePass.php", "Password Change"); ?></li>
+    <li> <?php echoLink("help/wirelessTools.php", "Wireless Help/Tools"); ?></li>
+    <li> <?php echoLink("help/scanner.php", "Scanner/Copier"); ?></li>
+    <li> <?php echoLink("help/calendar.php", "MPAC Calendar"); ?></li>
+  </ul>
+</li>
+    <li><strong><?php echoLink('systemStatus.php', 'System Status'); ?> </strong></li>
+</ul>
+<hr />
 <p>
 <?php
-global $rigCheckAlertTime;
-global $rigCheckAgeAlert;
-
-if($rigCheckAgeAlert)
+// alerts for rig checks
+$connection = mysql_connect() or die ('ERROR: Unable to connect to MySQL!');
+mysql_select_db($dbName) or die ('ERROR: Unable to select database!');
+$query = 'SELECT * FROM rigCheck ORDER BY timeStamp ASC;';
+$result = mysql_query($query) or die('Error in query in countMonthDays '.$query." ERROR ".mysql_error());
+$last89 = 0;
+$last88 = 0;
+while($row = mysql_fetch_array($result))
 {
-    // if rigCheckAgeAlert is true, calculate alerts
- 
-    // alerts for last rig check
-    $connection = mysql_connect() or die ('ERROR: Unable to connect to MySQL!');
-    mysql_select_db($dbName) or die ('ERROR: Unable to select database!');
-    $query = 'SELECT * FROM rigCheck ORDER BY timeStamp ASC;';
-    $result = mysql_query($query) or die('Error in query in countMonthDays '.$query." ERROR ".mysql_error());
-
-    // get the rig names
-    global $rigChecks;
-    $lastRigCheck = array();
-    foreach($rigChecks as $valArray)
+    if($row['rig'] == "588")
     {
-	$lastRigCheck[$valArray['name']] = 0;
-    }
-
-    while($row = mysql_fetch_array($result))
-    {
-	if($row['timeStamp'] > $lastRigCheck[$row['rig']])
+	if($row['timeStamp'] > $last88)
 	{
-	    $lastRigCheck[$row['rig']] = $row['timeStamp'];
+	    $last88 = $row['timeStamp'];
 	}
     }
-
-    $now = time();
-
-    foreach($lastRigCheck as $key => $value)
+    elseif($row['rig'] == "589")
     {
-	if(($now - $value) >= $rigCheckAlertTime)
+	if($row['timeStamp'] > $last89)
 	{
-	    if($value == 0)
-	    {
-		echo '<font color="red">'.$key.' rig check never entered!</font><br>';
-	    }
-	    else
-	    {
-		echo '<font color="red">'.$key.' last rig check: '.date("D n-d-Y", $value).'</font><br>';
-	    }
+	    $last89 = $row['timeStamp'];
 	}
     }
 }
+
+$now = time();
+
+if(($now - $last88) >= 691200)
+{
+    echo '<font color="red">588 last rig check: '.date("D n-d-Y", $last88).'</font><br>';
+}
+
+if(($now - $last89) >= 691200)
+{
+    echo '<font color="red">589 last rig check: '.date("D n-d-Y", $last89).'</font><br>';
+}
+
 ?>
 
 </p>
 <hr>
+<p>
+<?php
+// DB Connection
+$query  = "SELECT RunNumber,date_date FROM calls WHERE YEAR(date_date)=".date("Y").";";
+$result = mysql_query($query) or die ("Error in query: $query. " . mysql_error());
+$count = 0;
+while($row = mysql_fetch_array($result))
+{
+	$count++;
+}
+mysql_free_result($result);
+echo "<b>Calls for ".date("Y")." : ".$count."</b><br>";
 
-<!-- END RIG CHECK CODE -->
+$query  = "SELECT RunNumber,date_date FROM calls WHERE YEAR(date_date)=".date("Y")." && MONTH(date_date)=".date("n").";";
+$result = mysql_query($query) or die ("Error in query: $query. " . mysql_error());
+$count = 0;
+while($row = mysql_fetch_array($result))
+{
+	$count++;
+}
+mysql_free_result($result);
+echo "</p><p>";
+echo "<b>Calls for ".date("F Y")." : ".$count."</b><br>";
 
+// LOG THE USER AUTH INFO TO ERROR LOG
+error_log("EXTERNAL-AUTH"." ".$_SERVER['REQUEST_TIME']." "." ".$_SERVER['REMOTE_ADDR']." ".$_SERVER['REMOTE_USER']." ".$_SERVER['AUTH_TYPE']." ".$_SERVER["PHP_SELF"], E_NOTICE);
+
+?>
+</p>
+<hr />
 <p>
 For documentation, see <a href="docs/index.html">The documentation</a> or <a href="http://www.php-ems-tools.com">the project homepage</a>.
 </p>
 
 <?php
-// this code will notify you of new updates at the bottom of the index page.
 
-// this has been re-worked as of version 2.0 to provide a secure method of performing this action
+require('version.php');
 
-require_once('version.php'); // so we know the current version number
+// PHP EMS Tools News
 
-global $verNum; // the current version number
-
-$url = "http://www.php-ems-tools.com/news.php?verNum=".$verNum; // the URL to check for update notices
-$head = get_headers($url); // get the HTTP headers returned by the server. current version number is in them.
-
-// if we had an error trying to get the headers, just skip this part
-if($head)
-{
-    $newestVer = ""; // this will store the latest version number
-
-    // parse the version number from the HTTP headers
-    foreach($head as $val)
-    {
-	if(strstr($val, "PHP-EMS-Tools-Current-Version:")) // find the header which has the version info
-	{
-	    $newestVer = explode(" ", $val); // turn the header string into a space-separated array
-	    $newestVer = $newestVer[1]; // get the second element, i.e. the version number
-	}
-    }
-
-    // if the local version (this program) is a lower number than the latest, show a message
-    if($verNum < $newestVer)
-    {
-	echo '<p><font color="red">An updated version of PHP EMS Tools has been released. It has added features and possibly bug fixes, some of which may be very important. Please see <a href="http://www.php-ems-tools.com">php-ems-tools.com</a> for more information. Please be sure to notify whoever setup this program for you, and ask them to upgrade. If you have any questions, please contact the project developers via the email link at <a href="http://www.php-ems-tools.com">php-ems-tools.com</a>.</font></p>';
-    }
-}
+include("http://www.php-ems-tools.com/news.php?verNum=".$verNum);
 
 ?>
 <hr>
 <p>This is free, open-source software. Please help support free software.
 </p>
+
+<?php echo '<p>'.$_SERVER['REQUEST_URI'].'</p>'; ?>
+
 <p>
 Thank you for choosing <a href="http://www.php-ems-tools.com">PHP EMS Tools</a>, the *free* suite of tools for Emergency Medical Services.
 </p>

@@ -69,7 +69,8 @@ function showSignonForm($ts, $shift)
   // END DEBUG
 
   var myDate = new Date($ts*1000);
-  document.getElementById("popuptitle").innerHTML = "Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
+  var foo = document.getElementById("popuptitle");
+  foo.innerHTML = "Sign On - " + myDate.toLocaleFormat("%a, %b %e %Y") + " " + $shift;
   
   newSignonFormRequest($ts);
 }

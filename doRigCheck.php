@@ -35,16 +35,19 @@
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/doRigCheck.php $ |
 // +----------------------------------------------------------------------+
 
+//This software may not be copied, altered, or distributed in any way, shape, form, or means.
+// version: 2.0 as of 2006-10-3
 
-require_once('./config/config.php'); // main configuration
+// doRigCheck.php
+// page to do rig checks
+// see custom.php for more information - specifically rigCheckData variable
 
-require_once('./inc/global.php'); // global functions
-
-require_once('./config/rigCheckData.php'); // rig check configuration
+require('custom.php');
+require('global.php');
 
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 
 global $dbName;
 $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
@@ -82,23 +85,24 @@ echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
 
 $time = time();
 
-// code introduced to handle different items for different rigs
-$rigNum = $_REQUEST['rig']; // get the rig number
-$rigIndex = '';
-global $rigChecks;
+$unit = $_REQUEST['rig'];
 
-foreach($rigChecks as $idx => $arr)
+if($unit == 589)
 {
-    if($arr['name'] == $rigNum)
-    {
-	$rigIndex = $idx;
-    }
+    global $rigCheckData;
+    global $table2start;
+    global $table3start;
 }
 
-$rigCheckData = $rigChecks[$rigIndex]['data'];
-$table2start = $rigChecks[$rigIndex]['table2start'];
-$table3start = $rigChecks[$rigIndex]['table3start'];
-// DONE with implementing the multi-rig stuff
+else
+{
+    global $rigCheckData88;
+    $rigCheckData = $rigCheckData88;
+    global $table2start88;
+    $table2start = $table2start88;
+    global $table3start88;
+    $table3start = $table3start88;
+}
 
 putToDB();
 

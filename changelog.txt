@@ -12,6 +12,12 @@ $HeadURL: http://svn.jasonantman.com/php-ems-tools/changelog.txt $
 CHANGELOG
 ------------------------------------------------------------
 
+Release 5.0 - 2012-
+- This should really be 1.0, but I'm stuck with this version numbering.
+- Major overhaul of code, migration from CVS to SVN to Git.
+- Merged in volumnious features and fixed that were coded locally
+for the original organization.
+
 Release 4.1 - 2009-01-??
 - Changed committees to be in the database  - added 'committees',
 'committee_positions' and 'member_committees'. Added committees.php and

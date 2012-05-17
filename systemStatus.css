@@ -1,0 +1,109 @@
+.nagiosInfo
+{
+	text-align: center;
+}
+
+.description
+{
+	margin-left: 6%;
+}
+
+h1
+{
+	font-size: 1.6em;
+	font-weight: bold;
+	text-align: center;
+}
+
+h2
+{
+	font-size: 1.2em;
+	text-align: center;
+}
+
+table.status {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+table.status th {
+    border-width: 1px 1px 1px 1px;
+ padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.status td {
+    border-width: 1px 1px 1px 1px;
+ padding: 3px 3px 3px 3px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+table.nagiosStatus {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+table.nagiosStatus th {
+    border-width: 1px 1px 1px 1px;
+ padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.nagiosStatus td {
+    text-align: center;
+    border-width: 1px 1px 1px 1px;
+ padding: 3px 3px 3px 3px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+.statusOK
+{
+	background-color: #00FF00 !important;
+	text-align: center;
+}
+
+.statusWARN
+{
+	background-color: yellow !important;
+	text-align: center;
+}
+
+.statusCRIT
+{
+	background-color: #FF0000 !important;
+	text-align: center;
+}
+
+.hostRow
+{
+	border-top: 3px solid black !important;
+}
+
+.manualCheckLink
+{
+	text-align: center;
+	border-top: 2px soild black;
+	margin-top: 1em;
+	width = 100%;
+}

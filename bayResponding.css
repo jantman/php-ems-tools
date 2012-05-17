@@ -1,0 +1,282 @@
+.maintWarning
+{
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 2px solid red;
+	text-align: center;
+}
+.maintWarning h1
+{
+	font-weight: bold;
+	font-variant: small-caps;
+	color: red;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+.maintWarning h2
+{
+	font-weight: bold;
+	color: #77502B;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+.maintWarning h3
+{
+	font-weight: bold;
+	color: #77502B;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+.maintWarning p
+{
+	color: #77502B;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.mainTitle
+{
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2em;
+    font-weight: bold;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+.timeDiv
+{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 2em;
+}
+
+.callInNumber
+{
+	background-color: #88AFD4 !important;
+}
+
+.tonesDiv
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+	text-align: center;
+	font-size: 2em;
+}
+
+.currentToneType
+{
+	text-align: center;
+	border: 1px solid red;
+	font-size: 1.5em;
+	font-variant: small-caps;
+	font-weight: bold;
+	color: red;
+	padding-left: 1em;
+	padding-right: 1em;
+	background-color: #F6CECE;
+}
+
+.crewTitle
+{
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-bottom: .5em;
+}
+
+.schedTitle
+{
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-bottom: .5em;
+}
+
+table.responding
+{
+	     border-width: 1px 1px 1px 1px;
+	     border-spacing: 2px;
+	     border-style: solid solid solid solid;
+	     border-color: gray gray gray gray;
+	     border-collapse: collapse;
+	     background-color: #F2F5A9;
+	     margin-left: auto;
+	     margin-right: auto;
+	     width: 80%;
+}
+table.responding th
+{
+	     border-width: 1px 1px 1px 1px;
+	     padding: 2px 2px 2px 2px;
+	     border-style: solid solid solid solid;
+	     border-color: gray gray gray gray;
+	     background-color: #F2F5A9;
+	     -moz-border-radius: 0px 0px 0px 0px;
+}
+table.responding td
+{
+	     border-width: 1px 1px 1px 1px;
+	     padding: 3px 3px 3px 3px;
+	     border-style: solid solid solid solid;
+	     border-color: gray gray gray gray;
+	     background-color: #F2F5A9;
+	     -moz-border-radius: 0px 0px 0px 0px;
+	     text-align: center;
+	     font-size: 2.8em;
+}
+
+.reminderDiv
+{
+	text-align: center;
+	font-style: italic;
+	color: red;
+	margin-top: 1em;
+}
+
+table.allSignons {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: collapse;
+    background-color: #CEF6F5;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .25em;
+}
+table.allSignons th {
+    border-width: 1px 1px 1px 1px;
+ padding: 3px 3px 3px 3px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: #CEF6F5;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.allSignons td {
+    border-width: 1px 1px 1px 1px;
+    padding: 3px 3px 3px 3px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: #CEF6F5;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+table.signonTable {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: collapse;
+    background-color: #F2F5A9;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+table.signonTable th {
+    border-width: 1px 1px 1px 1px;
+ padding: 3px 3px 3px 3px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: #F2F5A9;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.signonTable td {
+    border-width: 1px 1px 1px 1px;
+    padding: 3px 3px 3px 3px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: #F2F5A9;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+.respTitle
+{
+	text-align: center;
+	font-weight: bold;
+	text-decoration: underline;
+	float: left;
+	width: 50%;
+	margin-bottom: 0.5em;
+}
+
+.clearResp
+{
+	text-align: right;
+	float: left;
+	width: 15%;
+	margin-right: 10%;
+}
+
+.spacer
+{
+	float: left;
+	width: 25%;
+}
+
+.helpLink
+{
+	position: absolute;
+	top: 1%;
+	right: 10%;
+}
+
+.signonLink
+{
+	position: absolute;
+	top: 1%;
+	left: 5%;
+	font-weight: bold;
+}
+
+.clearing
+{
+	clear: both;
+}
+
+.respDiv
+{
+	margin-bottom: 1.5em;
+}
+
+.crewDiv
+{
+	margin-bottom: 1.5em;
+}
+
+.footer
+{
+	margin-top: 3em;
+	border-top: 1px solid #666666;
+	color: #333333;
+	text-align: center;
+	font-style: italic;
+	font-size: .8em;
+}
+
+.bayMessage
+{
+	font-size: 2em;
+}
+
+.respondingWarn
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-bottom: 1em;
+	border: 2px solid red;
+	color: red;
+	font-size: 1.8em;
+}
+
+/* added 2010-03-13 */
+.nextRig
+{
+	text-align: center;
+	font-size: 2.5em;
+	color: red;
+}
+/* end added 2010-03-13 */

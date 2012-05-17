@@ -1,0 +1,91 @@
+/* CALENDAR TABLE BELOW HERE */
+
+.cal
+{
+	margin-left: 1px;
+	width: 100%;
+	border-width: 1px 1px 1px 1px;
+	border-spacing: 0px;
+	border-style: solid solid solid solid;
+	border-color: gray gray gray gray;
+	border-collapse: collapse;
+}
+
+.cal th
+{
+	width: 14%;
+	height: 20px;
+	border-width: 1px 1px 1px 1px;
+	padding: 0px 0px 0px 0px;
+	border-style: solid solid solid solid;
+	border-color: gray gray gray gray;
+	-moz-border-radius: 0px 0px 0px 0px;
+	background-color: #F2F5A9;
+}
+
+.cal td
+{
+	width: 14%;
+	border-width: 1px 1px 1px 1px;
+	padding: 0px 0px 0px 0px;
+	border-style: solid solid solid solid;
+	border-color: gray gray gray gray;
+	-moz-border-radius: 0px 0px 0px 0px;
+	vertical-align: top;
+}
+
+
+/* CAL TABLE CELL CONTENT (DAYS) BELOW HERE */
+.date
+{
+	min-height: 20px;
+	background-color: #A9D0F5;
+	padding-left: .5em;
+}
+
+.day
+{
+	min-height: 80px;
+	background-color: #CEF6F5;
+}
+
+.pastDate
+{
+	min-height: 20px;
+	background-color: #88AFD4;
+	padding-left: .5em;
+}
+
+.pastDay
+{
+	min-height: 80px;
+	background-color: #A2C8C7;
+}
+
+.otherDate
+{
+	background-color: #D8D8D8;
+	font-style: italic;
+	min-height: 20px;
+	padding-left: .5em;
+}
+
+.otherDay
+{
+	min-height: 80px;
+	background-color: #E6E6E6;
+}
+
+.todayDate
+{
+	font-weight: bold;
+	height: 20px;
+	background-color: #FA5858;
+	padding-left: .5em;
+}
+
+.todayDay
+{
+	min-height: 80px;
+	background-color: #F6CECE;
+}

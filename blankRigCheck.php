@@ -35,40 +35,66 @@
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/blankRigCheck.#$ |
 // +----------------------------------------------------------------------+
 
-require_once('./config/config.php'); // main configuration
+//This software may not be copied, altered, or distributed in any way, shape, form, or means.
+// version: 2.0 as of 2006-10-3
 
-require_once('./config/rigCheckData.php'); // rig check configuration
+// rigCheck.php
+// page to do rig checks
+// see custom.php for more information - specifically rigCheckData variable
+if(! empty($_GET['unit']))
+{
+    //default to OK
+    $unit = $_GET['unit'];
+}
+else
+{
+    die("YOU MUST SPECIFY A UNIT NUMBER!");
+}
 
+require('custom.php');
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 ?>
 </head>
 <body>
 
 <?php
-if(! empty($_GET['index']))
+echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
+echo '<h3 align=center>This is for PRINTING A BLANK ONLY.<br />To actually fill in the right check and submit it to the computer (which you must do), go to the <a href="index.php">Web Tools Index page</a> and click on "Rig Check", not "Print Blank Rig Check".</h3>'."\n";
+
+if($unit == 589)
 {
-    $rigIndex = $_GET['index'];
+    global $rigCheckData;
+    global $table2start;
+    global $table3start;
+}
+else
+{
+    global $rigCheckData88;
+    $rigCheckData = $rigCheckData88;
+    global $table2start88;
+    $table2start = $table2start88;
+    global $table3start88;
+    $table3start = $table3start88;
 }
 
-global $rigChecks;
-$rigCheckData = $rigChecks[$rigIndex]['data'];
-$table2start = $rigChecks[$rigIndex]['table2start'];
-$table3start = $rigChecks[$rigIndex]['table3start'];
-$rigNum = $rigChecks[$rigIndex]['name'];
+showTable($rigCheckData, $table2start, $table3start);
 
-echo '<h3 align=center>'.$shortName.' Rig Check - '.$rigNum.'</h3>';
-
-
-showTable($rigCheckData, $table2start, $table3start, $rigNum);
-
-function showTable($rigCheckData, $table2start, $table3start, $rigNum)
+function showTable($rigCheckData, $table2start, $table3start)
 {
+    global $unit;
     echo '<form method="post" action="doRigCheck.php">';
     echo '<DIV align="center"><b>Crew: </b>____&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;____';
     echo '<b>&nbsp;&nbsp;Rig:&nbsp;</b>';
-    echo $rigNum.'&nbsp;&nbsp;&nbsp;&nbsp;';
+    if($unit == 588)
+    {
+	echo '<b>588</b>';
+    }
+    else
+    {
+	echo '<b>589</b>';
+    }
     echo '<b>&nbsp;&nbsp;Mileage:&nbsp;</b>';
     echo '__________';
     echo '</DIV><br>';

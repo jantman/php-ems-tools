@@ -39,7 +39,6 @@
 require_once('./config/config.php');
 
 // import ALL of the config files for checking
-require_once('./config/rigCheckData.php');
 require_once('./config/rosterConfig.php');
 require_once('./config/scheduleConfig.php');
 

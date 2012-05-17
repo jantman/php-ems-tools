@@ -42,9 +42,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/signOn.php     $ |
-// +----------------------------------------------------------------------+
+//      $Id: signOn.php,v 1.11 2008/11/23 01:09:51 jantman Exp $
 
 
 // TODO - Note - Removed all QuickForm stuff
@@ -174,9 +172,19 @@ echo '	</tr>
 
 for($i = $ts; $i < ($ts + 43200); $i += 1800)
 {
-    if($i == $ts)
+    // default to start of shift if future shift
+    if($i == $ts && !isset($row['start_ts']) && ($ts > time()))
     {
 	// first one is default
+	echo '	<option value="'.date("H:i:s", $i).'" selected="selected">'.date("H:i:s", $i).'</option>'."\n";
+    }
+    // elseif current shift (or shift start not in future)
+    elseif(!isset($row['start_ts']) && (($i - time()) >= 1) && ($i - time() <= 1800))
+    {
+	echo '	<option value="'.date("H:i:s", $i).'" selected="selected">'.date("H:i:s", $i).'</option>'."\n";
+    }
+    elseif(isset($row['start_ts']) && $i == $row['start_ts'])
+    {
 	echo '	<option value="'.date("H:i:s", $i).'" selected="selected">'.date("H:i:s", $i).'</option>'."\n";
     }
     else
@@ -191,12 +199,33 @@ echo '</select></td>
 		<td align="right" valign="top"><b>'.$i18n_strings["signOn"]["End Time"].':</b></td>
 		<td valign="top" align="left"><select name="end" id="end">';
 
-for($i = $ts + 1800; $i < ($ts + 43200); $i += 1800)
+if(isset($_GET['id']))
 {
-    echo '	<option value="'.date("H:i:s", $i).'">'.date("H:i:s", $i).'</option>'."\n";
+    // edit
+    $end = 45000;
+}
+else
+{
+    // sigon / add
+    $end = 43200;
+}
+
+for($i = $ts + 1800; $i < ($ts + $end); $i += 1800)
+{
+    if(isset($row['end_ts']) && $i == $row['end_ts'])
+    {
+	echo '	<option value="'.date("H:i:s", $lastTS).'" selected="selected">'.date("H:i:s", $lastTS).'</option>'."\n";
+    }
+    else
+    {
+	echo '	<option value="'.date("H:i:s", $i).'">'.date("H:i:s", $i).'</option>'."\n";
+    }
     $lastTS = $i + 1800;
 }
-echo '	<option value="'.date("H:i:s", $lastTS).'" selected="selected">'.date("H:i:s", $lastTS).'</option>'."\n";
+if(! isset($row['end_ts']) || $lastTS == $row['end_ts'])
+{
+    echo '	<option value="'.date("H:i:s", $lastTS).'" selected="selected">'.date("H:i:s", $lastTS).'</option>'."\n";
+}
 
 echo '</select></td>
 	</tr>

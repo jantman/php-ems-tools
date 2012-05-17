@@ -1,44 +1,24 @@
 <?php 
+//
 // rosterPosEdit.php
 //
-// Form to edit position and committee data for roster
+// Version 0.1 as of Time-stamp: "2006-12-13 21:01:33 jantman"
 //
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterPosEdit.#$ |
-// +----------------------------------------------------------------------+
+// This file is part of the php-ems-tools package
+// available at 
+//
+// (C) 2006 Jason Antman.
+// This package is licensed under the terms of the
+// GNU General Public License (GPL)
+//
+
+//comments needing attention are tagged with TODO or DEBUG or TEST depending on their purpose 
+//code to be removed is prefaced by '//DEP' for deprecated code 
 
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
-
-require_once('./config/config.php'); // main configuration
-require_once('./config/rosterConfig.php'); // roster configuration
+require('custom.php');
 
 
 // tell PHP to ignore any errors less than E_ERROR
@@ -125,17 +105,6 @@ $comm2posE =& $form->createElement('select', 'comm2pos', 'Committee 2 Position:'
 $comm2posE -> loadArray($commPosA);
 $form->addElement($comm2posE);
 
-// extended types code
-if($useExtdTypes)
-{
-    foreach($extdTypes as $val)
-    {
-	// create a checkbox for each extended type
-	$form->addElement('checkbox', $val, $val);
-    }
-}
-// end extended types code
-
 $form->addElement('header', null, '  ');
 
 //HIDDEN FIELDS to keep values between refreshing the form	
@@ -191,8 +160,6 @@ function processForm($formItems)
 }
 function putToDB($formItems)
 {
-    global $useExtdTypes; // whether or not to use extended types
-    global $extdTypes; // extended types array
     $id = $formItems['EMTid'];
 	$EMTid = $id;
 
@@ -211,32 +178,9 @@ function putToDB($formItems)
 
 	$statementBody = 'EMTid="'.$formItems['EMTid'].'",officer="'.$formItems['officer'].'",position="'.$formItems['position'].'",comm1="'.$formItems['comm1'].'",comm1pos="'.$formItems['comm1pos'].'",comm2="'.$formItems['comm2'].'",comm2pos="'.$formItems['comm2pos'].'"';
 
-	// extended types code
-	if($useExtdTypes)
-	{
-	    $extdTypeStr = ""; // string to hold the CSV list
-	    foreach($extdTypes as $val)
-	    {
-		if($formItems[$val] == "1")
-		{
-		    $extdTypeStr .= $val .",";
-		}
-	    }
-	    // extdTypeStr is now a CSV list of selected extended types
-	    $extdTypeStr = trim($extdTypeStr, ","); // get rid of the trailing comma
-	    if($extdTypeStr != "")
-	    {
-		$statementBody .= ',OtherPositions="'.$extdTypeStr.'"';
-	    }
-	}
-	// else if this is false, just ignore extended types
-
-
-	// end extended types code
-
 	if($formItems['trustee']=="1")
 	{
-	    $statementBody .= ',trustee="1"';
+	    $statementBody .= ',trustee="'.$formItems['trustee'].'"';
 	    //$query .= ',trustee="Yes"';
 	}
 	else
@@ -262,8 +206,6 @@ function putToDB($formItems)
 
 function populateMe($EMTid) 
 {
-        global $useExtdTypes; // whether or not to use extended types
-        global $extdTypes; // array of extended type information
 	//populate from the DB 
 	$defaults = array(); 
 	$query  = "SELECT * FROM roster WHERE EMTid='".$EMTid."';";
@@ -281,22 +223,6 @@ function populateMe($EMTid)
 		{
 		    $defaults['trustee'] = "1";
 		}
-		// extended types code
-		if($useExtdTypes)
-		{
-		    $membExtdTypes = $row['OtherPositions']; // CSV string from DB
-		    if($membExtdTypes != "")
-		    {
-			// if we have any extd types selected, show them on the form
-			$membExtdTypesA = explode(",",$membExtdTypes); // array of this member's types
-			foreach($membExtdTypesA as $val)
-			{
-			    $defaults[$val] = "1";
-			}
-		    }
-		    // else: move along now, nothing to see here.
-		}
-		// else if this is false, just ignore extended types
 	}
 
 	mysql_free_result($result); 
@@ -370,7 +296,7 @@ mysql_close($connection);
 <?php
 echo '<TITLE>'.$shortName.' Roster - Administrative Tool</TITLE>';
 ?>
-	<link rel="stylesheet" href="php_ems.css" type="text/css">
+	<link rel="stylesheet" href="style.css" type="text/css">
 </HEAD>
 <BODY>
 <?php

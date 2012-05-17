@@ -48,12 +48,19 @@ $orgName = "Ambulance Corps"; // string
 $shortName = "AC"; // string
 // this is the base URL of the folder which php_ems resides in
 // with a trailing /, as seen from the rest of the world.
-$serverWebRoot = "http://jantman.dyndns.org:10011/cvswork/php-ems-tools-trunk/"; // string
+$serverWebRoot = "http://192.168.1.107/"; // string
 // this is the name of the database on the server used by php-ems-tools
 // the default is php-ems-tools
-$dbName = "php_ems_tools_devel";
+$dbName = "pcr";
+
+// our LOCAL SUBNET, for warning messages to remote users
+$CONFIG_LOCAL_SUBNET = "192.168.1.";
 
 // INTERNATIONALIZATION (i18n)
 $config_i18n_filename = 'i18n_EN_US.php';
+
+// SESSIONS (login)
+$config_show_login_links = false; // whether or not to show login links
+$session_timeout_seconds = 1200; // 1200 seconds - timeout after 20 minutes.
 
 ?>

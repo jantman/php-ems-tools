@@ -122,8 +122,8 @@ You should now be finished.
 POST-INSTALLATION:
 
 Once installation is finished, go back and edit the other relevant
-configuration files in config/. These files are rigCheckData.php,
-rosterConfig.php, and scheduleConfig.php. Instructions are included as
+configuration files in config/. These files are rosterConfig.php,
+and scheduleConfig.php. Instructions are included as
 comments in the files. Their names give away which components they are
 responsible for.
 

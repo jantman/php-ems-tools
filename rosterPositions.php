@@ -30,9 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterPosition#$ |
-// +----------------------------------------------------------------------+
+//      $Id: rosterPositions.php,v 1.7 2009/01/05 16:19:09 jantman Exp $
 
 require_once('./config/config.php'); // main configuration
 require_once('./config/rosterConfig.php'); // roster configuration
@@ -57,7 +55,7 @@ else
 
 echo '<head>';
 echo '<meta http-equiv="refresh" content="180">';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 echo '<title>'.$shortName.' - Roster - Positions</title>';
 echo '<script type="text/javascript" src="php-ems-tools.js"> </script>';
 echo '</head>';
@@ -96,11 +94,11 @@ mysql_select_db($dbName) or die ("I'm sorry, but I was unable to select the data
 //QUERY
 if($sort=="EMTid")
 {
-    $query =  "SELECT * FROM roster ORDER BY lpad(EMTid,10,'0');";
+    $query =  "SELECT * FROM roster WHERE status!='Resigned' ORDER BY lpad(EMTid,10,'0');";
 }
 else
 {
-    $query  = "SELECT * FROM roster ORDER BY case when ".$sort." = 'None' then 'ZZZZZZZZZZZZZZZZZZZZZZZZ' else ".$sort." end;";
+    $query  = "SELECT * FROM roster WHERE status!='Resigned' ORDER BY case when ".$sort." = 'None' then 'ZZZZZZZZZZZZZZZZZZZZZZZZ' else ".$sort." end;";
 
 }
 $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query: ".$query."<br><br>" . mysql_error().'<br><br>'.$errorMsg);

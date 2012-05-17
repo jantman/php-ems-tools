@@ -71,7 +71,7 @@ global $serverExtRoot;
 
 echo '<head>';
 echo '<meta http-equiv="refresh" content="180">';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 echo '<title>'.$shortName.' - View Roster</title>';
 echo '<script type="text/javascript" src="php-ems-tools.js"> </script>';
 echo '</head>';
@@ -306,7 +306,7 @@ function showMember($r)
     }
     if(! empty($r['HomePhone']))
     {
-	echo '<td>'.$r['HomePhone'].'</td>';
+	echo '<td><a href="tel:'.$r['HomePhone'].'">'.$r['HomePhone'].'</a></td>';
     }
     else
     {
@@ -314,7 +314,7 @@ function showMember($r)
     }
     if(! empty($r['CellPhone']))
     {
-	echo '<td>'.$r['CellPhone'].'</td>';
+	echo '<td><a href="tel:'.$r['CellPhone'].'">'.$r['CellPhone'].'</a></td>';
     }
     else
     {

@@ -47,15 +47,27 @@ function canPullDuty($EMTid)
     global $dbName;
     $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
     mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
-    $query = 'SELECT status FROM roster WHERE EMTid="'.$formItems['EMTid'].'";';
+    $query = 'SELECT status FROM roster WHERE EMTid="'.$EMTid.'";';
     $result = mysql_query($query) or die ("Auth Query Error");
+    if(mysql_num_rows($result) < 1){ return false;}
     $row = mysql_fetch_array($result);
     $type = $row['status'];
     global $memberTypes;
+    foreach($memberTypes as $idx => $arr)
+    {
+	if(trim($arr['name']) == trim($type))
+	{
+	    if(! $arr['canPullDuty'])
+	    {
+		return false;
+	    }
+	}
+    }
     for($i=0; $i < count($memberTypes); $i++)
     {
-	if($memberTypes[$i]['name']==$type)
+	if(trim($memberTypes[$i]['name']) == trim($type))
 	{
+	    error_log("memberTypes[$i] - type=$type");
 	    if(! $memberTypes[$i]['canPullDuty'])
 	    {
 		return false;
@@ -139,7 +151,8 @@ function tsToShiftName($ts)
     $temp = date("Y-m-d", $ts);
     $day = strtotime($temp.$dayFirstHour.":00:00");
     $night = strtotime($temp.$nightFirstHour.":00:00");
-    if($ts >= $night)
+    $night2 = strtotime($temp.$dayFirstHour.":00:00");
+    if($ts >= $night || $ts < $night2)
     {
 	return "Night";
     }
@@ -179,8 +192,55 @@ function makeTimestampsFromTimes($ts, $start, $end)
     {
 	$end_ts = strtotime(date("Y-m-d", ($ts))." ".$end);
     }
-    $start_ts = strtotime(date("Y-m-d", $ts)." ".$start);
+    if($startH < $dayFirstHour)
+    {
+	$start_ts = strtotime(date("Y-m-d", $ts+86400)." ".$start);
+    }
+    else
+    {
+	$start_ts = strtotime(date("Y-m-d", $ts)." ".$start);
+    }
     return array("start" => $start_ts, "end" => $end_ts);
+}
+
+function memberIsOnDutyInInterval($EMTid, $start_ts, $end_ts)
+{
+    global $dbName;
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
+    mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
+    $query = "SELECT * FROM schedule WHERE EMTid='".mysql_real_escape_string($EMTid)."' AND (";
+    $query .= "(start_ts <= $start_ts AND end_ts >= $end_ts) OR ";
+    $query .= "(start_ts >= $start_ts AND start_ts <= $end_ts) OR ";
+    $query .= "(end_ts >= $start_ts AND end_ts <= $end_ts)";
+    $query .= ") AND deprecated=0;";
+    $result = mysql_query($query) or die("ERROR: Error in query: $query ERROR: ".mysql_error());
+    if(mysql_num_rows($result) > 0){ return true;}
+    return false;
+}
+
+function probieIsOnDutyInInterval($start_ts, $end_ts)
+{
+    global $dbName;
+    $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
+    mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
+    $query = "SELECT r.EMTid FROM schedule AS s LEFT JOIN roster AS r ON s.EMTid=r.EMTid WHERE r.status='Probie' AND (";
+    $query .= "(start_ts <= $start_ts AND end_ts >= $end_ts) OR ";
+    $query .= "(start_ts >= $start_ts AND start_ts <= $end_ts) OR ";
+    $query .= "(end_ts >= $start_ts AND end_ts <= $end_ts)";
+    $query .= ") AND deprecated=0;";
+    $result = mysql_query($query) or die("ERROR: Error in query: $query ERROR: ".mysql_error());
+    if(mysql_num_rows($result) > 0){ return true;}
+    return false;
+}
+
+function getNameByEMTid($EMTid)
+{
+    $query = "SELECT FirstName,LastName FROM roster WHERE EMTid='".mysql_real_escape_string($EMTid)."';";
+    $result = mysql_query($query) or die("ERROR: Error in query: $query ERROR: ".mysql_error());
+    if(mysql_num_rows($result) < 1){ return "";}
+    $row = mysql_fetch_assoc($result);
+    $foo = $row['LastName'].", ".$row['FirstName'];
+    return $foo;
 }
 
 ?>

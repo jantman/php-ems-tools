@@ -30,9 +30,7 @@
 // +----------------------------------------------------------------------+
 // | Authors: Jason Antman <jason@jasonantman.com>                        |
 // +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/admin/dumpTabl#$ |
-// +----------------------------------------------------------------------+
+//      $Id: dumpTableSQL.php,v 1.1 2007/09/20 15:36:48 jantman Exp $
 
 $dumpFile = ""; // FULL path to the file to dump to, if called with -f
 

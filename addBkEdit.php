@@ -35,43 +35,27 @@
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/addBkEdit.php  $ |
 // +----------------------------------------------------------------------+
 
-/*
- * required for HTML_QuickForm PEAR Extension
- */
+//required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
 
-/*
- * Main configuration file.
- */
-require_once('./config/config.php');
+require_once('./config/config.php'); // main configuration
 
-/*
- * tell PHP to ignore any errors less than E_ERROR
- */
+// tell PHP to ignore any errors less than E_ERROR
 error_reporting(1);
 
 //if the variables are specified in the URL, get them. 
 if(! empty($_GET['action']))
 {
-    /*
-     * @global string $action form action - 'new', 'edit' or 'remove'
-     */
-    $action = $_GET['action'];
-    // possible values are 'new', 'edit', 'remove'
+	$action = $_GET['action'];
+	// possible values are 'new', 'edit', 'remove'
 }
 if(! empty($_GET['pKey']))
 {
-    /*
-     * @global int $pKey the database primary key for the record
-     */
-    $pKey = $_GET['pKey'];
+	$pKey = $_GET['pKey'];
 } 
 
-/*
- * Instantiate the HTML_QuickForm
- * @global HTML_QuickForm $form
- */
+//instantiate the form 
 $form = new HTML_QuickForm('firstForm');
 
 // mysql connection
@@ -188,6 +172,7 @@ if ($form->validate())
  */
 function processForm($formItems)
 {
+	//this processes the forum when it is submitted. 
 	global $pKey;
 	global $action;
 
@@ -308,6 +293,7 @@ function populateMe($pKey)
  */
 function validateAdmin($adminID, $adminPW)
 {
+    // this function checks with mySQL to see if the admin is valid
     global $minRightsRoster;
     $query  = "SELECT EMTid,rightsLevel,pwdMD5 FROM roster WHERE EMTid=".$adminID.";";
     $result = mysql_query($query) or die ("Error in query: $query. " . mysql_error());

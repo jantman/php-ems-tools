@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="48"
+   name=""
+   committed-date="2010-01-10T21:43:14.031322Z"
+   url="http://svn.jasonantman.com/newcall/js"
+   last-author="jantman"
+   kind="dir"
+   uuid="561a0531-3f7b-0410-9702-c3ad31a58c1b"
+   repos="http://svn.jasonantman.com/newcall"
+   revision="66"/>
+<entry
+   committed-rev="38"
+   name="patient.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-03T21:52:01.371439Z"
+   checksum="4cc67e55f1792ab07194ca50f5419088"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="12"
+   name="scheduleDHTML.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2009-12-29T16:44:34.028098Z"
+   checksum="ae1bc5d9570fec76c410eae4832d68cf"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="48"
+   name="PCRajax.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-10T21:43:14.031322Z"
+   checksum="c4384b6ca9874f1df267b3a89b337bee"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="21"
+   name="callLoc.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-01T04:01:45.286107Z"
+   checksum="f9d6f4e4c75213e9c84e102d9e8f5634"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="12"
+   name="grayout.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2009-12-29T16:44:34.028098Z"
+   checksum="e00daf27f9c41971e41d39d21bdfcc10"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="12"
+   name="json2.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2009-12-29T16:44:34.028098Z"
+   checksum="e0134a802633dfbfb76c82d65cfb8377"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="12"
+   name="i18n.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2009-12-29T16:44:34.028098Z"
+   checksum="ce44c1bc879baaf7fa1d57c7842a5176"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="46"
+   name="crew.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-08T22:46:37.824563Z"
+   checksum="018582077abcf2c9ceaec5358042253e"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="45"
+   name="oc.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-05T14:27:34.507597Z"
+   checksum="70349b5ae743283c62a946201d0edfe6"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="12"
+   name="PCRlayout.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2009-12-29T16:44:34.028098Z"
+   checksum="26df47a4cb83fd0341fb2b58964f9907"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="12"
+   name="ajax.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2009-12-29T16:44:34.028098Z"
+   checksum="bcf4d72a061add4613d81647812fa8c2"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="45"
+   name="mileage.js"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-05T14:27:34.507597Z"
+   checksum="a8c380012ce351f3bc87cf1e556d6907"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+</wc-entries>

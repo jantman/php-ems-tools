@@ -1,48 +1,25 @@
 <?php 
+//
 // rosterEdit.php
 //
-// Form to edit/input roster information
+// Version 0.1 as of Time-stamp: "2010-04-06 15:29:20 jantman"
 //
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterEdit.php $ |
-// +----------------------------------------------------------------------+
+// This file is part of the php-ems-tools package
+// available at 
+//
+// (C) 2006 Jason Antman.
+// This package is licensed under the terms of the
+// GNU General Public License (GPL)
+//
 
-
+//comments needing attention are tagged with TODO or DEBUG or TEST depending on their purpose 
+//code to be removed is prefaced by '//DEP' for deprecated code 
 
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
-
-require_once('./config/config.php'); // main configuration
-
-require_once('./config/rosterConfig.php'); // roster configuration
-
+require_once('custom.php');
+require_once('inc/common.php');
 
 // tell PHP to ignore any errors less than E_ERROR
 error_reporting(1);
@@ -97,7 +74,7 @@ $form->addElement('header', null, 'Personal Information:');
 $form->addElement('text', 'FirstName', 'First Name', array('size' => 30, 'maxlength' => 30, 'id' => 'FirstName'));
 $form->addElement('text', 'LastName', 'Last Name', array('size' => 30, 'maxlength' => 30, 'id' => 'LastName'));
 $form->addElement('text', 'shownAs', 'Shown As', array('size' => 30, 'maxlength' => 30, 'id' => 'shownAs'));
-$form->addElement('text', 'SpouseName', 'Spouse Name', array('size' => 30, 'maxlength' => 30, 'id' => 'SpouseName'));
+$form->addElement('text', 'SpouseName', 'Spouse Name (optional)', array('size' => 30, 'maxlength' => 30, 'id' => 'SpouseName'));
 $form->addElement('text', 'Address', 'Address', array('size' => 30, 'maxlength' => 30, 'id' => 'Address'));
 // rule for validating phone
 //$form->registerRule('phone','regex','/^\(\d{3}\)\d{3}-\d{4}|\d{3}-\d{3}-\d{4}$/');
@@ -106,11 +83,34 @@ $form->addElement('text', 'HomePhone', 'Home Phone', array('size' => 15, 'maxlen
 $form->addRule('HomePhone','Please enter a valid Phone number.','phone');
 $form->addElement('text', 'CellPhone', 'Cell Phone', array('size' => 15, 'maxlength' => 14, 'id' => 'CellPhone'));
 $form->addRule('CellPhone','Please enter a valid Phone number.','phone');
+
+$form->addElement('text', 'Phone3', 'Phone3 (optional)', array('size' => 15, 'maxlength' => 14, 'id' => 'Phone3'));
+$form->addRule('Phone3','Please enter a valid Phone number.','phone');
+$form->addElement('text', 'Phone4', 'Phone4 (optional)', array('size' => 15, 'maxlength' => 14, 'id' => 'Phone4'));
+$form->addRule('Phone4','Please enter a valid Phone number.','phone');
+$form->addElement('text', 'Phone5', 'Phone5 (optional)', array('size' => 15, 'maxlength' => 14, 'id' => 'Phone5'));
+$form->addRule('Phone5','Please enter a valid Phone number.','phone');
+
 $form->addElement('static',null,' ','Format: 555-555-5555');
+
+// cell provider
+$cellProviders = array();
+$cellProviders[0] = "UNKNOWN";
+$query = "SELECT * FROM opt_cell_providers;";
+$result = mysql_query($query) or die("Error in query: ".$query."\n<br />".mysql_error());
+while($row = mysql_fetch_assoc($result))
+{
+    $cellProviders[$row['ocp_id']] = $row['ocp_name'];
+}
+$cpE =& $form->createElement('select', 'cellProvider', 'Cellular Provider:'); 
+$cpE -> loadArray($cellProviders);
+$form->addElement($cpE);
+
+
 $form->addElement('text', 'Email', 'Email', array('size' => 30, 'maxlength' => 255, 'id' => 'Email'));
 $form->addRule('emailorblank', 'This must be a valid EMail Address or it must be blank.', 'Email');
 
-$form->addElement('text', 'TextEmail', 'Text Email', array('size' => 30, 'maxlength' => 255, 'id' => 'TextEmail'));
+$form->addElement('text', 'TextEmail', 'Text Email', array('size' => 30, 'maxlength' => 255, 'id' => 'TextEmail', 'readonly' => 'readonly'));
 $form->addRule('emailorblank', 'This must be a valid EMail Address or it must be blank.', 'TextEmail');
 
 $form->addElement('password', 'password', 'Password', array('size' => 15, 'maxlength' => 14, 'id' => 'password'));
@@ -148,6 +148,9 @@ if ($_GET['action']=='remove')
 	$form->freeze('Address');
 	$form->freeze('HomePhone');
 	$form->freeze('CellPhone');
+	$form->freeze('Phone3');
+	$form->freeze('Phone4');
+	$form->freeze('Phone5');
 	$form->freeze('Email');
 	$form->freeze('type');
 	$form->freeze('password');
@@ -162,7 +165,10 @@ elseif ($_GET[action]=='edit')
 	$tempE = HTML_QuickForm::createElement('header', null, 'Edit EMT '.$EMTid);
 	$form->insertElementBefore($tempE, 'adminID');
 	$def = populateMe($EMTid);
-	$form->setDefaults($def);  
+	$form->setDefaults($def); 
+	echo "<!--\n";
+	echo var_dump($def);
+	echo "-->\n";
 	$form->freeze('EMTid');
 }
 else 
@@ -254,6 +260,24 @@ function putToDB($formItems, $action)
 	mysql_select_db($dbName) or die ('ERROR: Unable to select database!');
 	global $EMTid;
 
+
+	// BEGIN ARCHIVE
+	if(idInDB($EMTid))
+	{
+	    $query = "SELECT * FROM roster WHERE EMTid='".mysql_real_escape_string($EMTid)."';";
+	    $result = mysql_query($query) or die("Error in query: ".$query."\n<br />".mysql_error());
+	    $row = mysql_fetch_assoc($result);
+	    $q = mysql_make_array_insert("archive_roster", $row);
+	    $blam = mysql_query($q);
+	    if(! $blam)
+	    {
+		error_log("Error inserting row into archive database. QUERY: $q ERROR: ".mysql_error()."\n");
+		die("Error inserting row into archive database.\n");
+	    }
+	}
+	// END ARCHIVE
+
+
 	if($formItems['type'] == 'Resigned')
 	{
 	    $pwdMD5 = "RESIGNED";
@@ -263,9 +287,37 @@ function putToDB($formItems, $action)
 	    $pwdMD5 = md5($formItems['password']);
 	}
 
-	$statementBody = 'EMTid="'.$formItems['EMTid'].'",FirstName="'.$formItems['FirstName'].'",LastName="'.$formItems['LastName'].'",SpouseName="'.$formItems['SpouseName'].'",Address="'.$formItems['Address'].'",HomePhone="'.$formItems['HomePhone'].'",CellPhone="'.$formItems['CellPhone'].'",Email="'.$formItems['Email'].'",password="'.$formItems['password'].'",pwdMD5="'.$pwdMD5.'",status="'.$formItems['type'].'",rightsLevel="'.$formItems['rightsLevel'].'",textEmail="'.$formItems['TextEmail'].'"';
+	$statementBody = 'EMTid="'.$formItems['EMTid'].'",FirstName="'.$formItems['FirstName'].'",LastName="'.$formItems['LastName'].'",SpouseName="'.$formItems['SpouseName'].'",Address="'.$formItems['Address'].'",HomePhone="'.$formItems['HomePhone'].'",CellPhone="'.$formItems['CellPhone'].'",Email="'.$formItems['Email'].'",password="'.$formItems['password'].'",pwdMD5="'.$pwdMD5.'",status="'.$formItems['type'].'",rightsLevel="'.$formItems['rightsLevel'].'"';
 
-	if($formItems['shownAs']<>"")
+	if(trim($formItems['Phone3']) != "")
+	{
+	    $statementBody.= ',phone3="'.mysql_real_escape_string($formItems['Phone3']).'"';
+	}
+	if(trim($formItems['Phone4']) != "")
+	{
+	    $statementBody.= ',phone4="'.mysql_real_escape_string($formItems['Phone4']).'"';
+	}
+	if(trim($formItems['Phone5']) != "")
+	{
+	    $statementBody.= ',phone5="'.mysql_real_escape_string($formItems['Phone5']).'"';
+	}
+
+	if(trim($formItems['cellProvider']) != "" && ((int)$formItems['cellProvider']) != 0)
+	{
+	    $ocp_id = ((int)$formItems['cellProvider']);
+	    // get cell provider format
+	    $query = "SELECT * FROM opt_cell_providers WHERE ocp_id=$ocp_id;";
+	    $result = mysql_query($query) or die("Error in query: ".$query."\n<br />".mysql_error());
+	    $row = mysql_fetch_assoc($result);
+	    $providerFormat = $row['email_format'];
+
+	    $statementBody .= ',cellProvider='.((int)$formItems['cellProvider']);
+	    $num = str_replace('-', '', $formItems['CellPhone']);
+	    echo "num=$num";
+	    $statementBody .= ",textEmail='".str_replace('$$number$$', $num, $providerFormat)."'";
+	}
+
+	if($formItems['shownAs']!="")
 	{
 	    $statementBody.= ',shownAs="'.$formItems['shownAs'].'"';
 	}
@@ -273,11 +325,10 @@ function putToDB($formItems, $action)
 	{
 	    $statementBody.= ',shownAs="'.$formItems['LastName'].'"';
 	}
-
-	if($formItems['unitID']<>"")
-	{
+	//if($formItems['unitID']<>"")
+	//{
 	    $statementBody.= ',unitID="'.$formItems['unitID'].'"';
-	}
+	    //}
 
 	if($action=='edit')
 	{
@@ -295,6 +346,10 @@ function putToDB($formItems, $action)
 	    $query .= $statementBody;
 	    $query .= ';';
 	}
+
+	// DEBUG
+	error_log("QUERY: $query");
+
 	if(mysql_query($query))
 	{
 		// success
@@ -302,6 +357,7 @@ function putToDB($formItems, $action)
 	else
 	{
 		echo "MYSQL error: ".mysql_error();
+		error_log("MySQL Error. Query: $query ERROR: ".mysql_error());
 	}
 	mysql_close($conn);
 } 
@@ -322,10 +378,11 @@ function populateMe($EMTid)
 		$defaults = $row;
 		$defaults['EMTid'] = $EMTid;
 		$defaults['type'] = $row['status'];
+		$defaults['TextEmail'] = $row['textEmail'];
+		$defaults['Phone3'] = $row['phone3'];
+		$defaults['Phone4'] = $row['phone4'];
+		$defaults['Phone5'] = $row['phone5'];
 	}
-
-	//$defaults['unitID'] = $row['unitID'];
-	$defaults['TextEmail'] = $row['textEmail'];
 
 	mysql_free_result($result); 
 	return $defaults; 
@@ -398,7 +455,7 @@ mysql_close($connection);
 <?php
 echo '<TITLE>'.$shortName.' Roster - Administrative Tool</TITLE>';
 ?>
-	<link rel="stylesheet" href="php_ems.css" type="text/css">
+	<link rel="stylesheet" href="style.css" type="text/css">
 </HEAD>
 <BODY>
 <?php

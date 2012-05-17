@@ -28,9 +28,11 @@
 /* +----------------------------------------------------------------------+ */
 /* | Authors: Jason Antman <jason@jasonantman.com>                        | */
 /* +----------------------------------------------------------------------+ */
-/* | $LastChangedRevision:: 155                                         $ | */
-/* | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/php_ems.css    $ | */
-/* +----------------------------------------------------------------------+ */
+/*      $Id: php_ems.css,v 1.5 2008/11/23 03:14:00 jantman Exp $	    */
+
+body {
+     size: 1.4em;
+}
 
 table.roster {
     border-width: 1px 1px 1px 1px;
@@ -42,7 +44,7 @@ table.roster {
 }
 table.roster th {
     border-width: 1px 1px 1px 1px;
- padding: 2px 2px 2px 2px;
+    padding: 2px 2px 2px 2px;
     border-style: solid solid solid solid;
     border-color: black black black black;
     background-color: white;
@@ -50,7 +52,7 @@ table.roster th {
 }
 table.roster td {
     border-width: 1px 1px 1px 1px;
- padding: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
     border-style: solid solid solid solid;
     border-color: black black black black;
     background-color: white;
@@ -112,23 +114,63 @@ A {
 
 	font-family: Verdana;
 
-	font-size: 10px;
+	font-size: 14px;
 
 }
 
 
 
 TABLE, TD, TH, P, DIV, LI, INPUT, TEXTAREA {
-
-	font-size: 11px;
-
+	font-size: 14px;
 }
 
 A {
-
 	font-family: Verdana;
-
-	font-size: 10px;
-
+	font-size: 14px;
 }
 
+.loginlink
+{
+	width: 96%;
+	text-align: right;
+}
+
+.respLink A
+{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.errorText
+{
+	color: red;
+	font-style: italic;
+}
+
+.errorBold
+{
+	color: red;
+	font-weight: bold;
+}
+
+tr.lightGray td
+{
+	background-color: #D8D8D8;
+}
+
+tr.lightGray th
+{
+	background-color: #D8D8D8;
+}
+
+tr.revColor td
+{
+	background-color: #000000;
+	color: #ffffff;
+}
+
+tr.revColor th
+{
+	background-color: #000000;
+	color: #ffffff;
+}

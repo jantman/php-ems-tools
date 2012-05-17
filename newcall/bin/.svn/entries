@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="62"
+   name=""
+   committed-date="2010-08-24T02:57:56.935777Z"
+   url="http://svn.jasonantman.com/newcall/bin"
+   last-author="jantman"
+   kind="dir"
+   uuid="561a0531-3f7b-0410-9702-c3ad31a58c1b"
+   repos="http://svn.jasonantman.com/newcall"
+   revision="66"/>
+<entry
+   committed-rev="62"
+   name="makeRosterArray.php"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-08-24T02:57:56.935777Z"
+   checksum="135b2ffee3dd437b8462fd45c9b83e25"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+<entry
+   committed-rev="50"
+   name="updateAddresses.php"
+   text-time="2010-11-30T16:33:55.000000Z"
+   committed-date="2010-01-27T01:46:39.567531Z"
+   checksum="d5033dcfa4d388f3ad11dff539600708"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-11-30T16:33:55.000000Z"/>
+</wc-entries>

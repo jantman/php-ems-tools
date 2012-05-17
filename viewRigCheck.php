@@ -1,48 +1,25 @@
 <html>
 <head>
 <?php
+//(C) 2006 Jason Antman. All Rights Reserved.
+// with questions, go to www.jasonantman.com
+// or email jason AT jasonantman DOT com
+// Time-stamp: "2009-06-02 14:18:05 jantman"
 
-// viewRigCheck.php
-//
-// Page to view a specific completed rig check.
-//
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/viewRigCheck.p#$ |
-// +----------------------------------------------------------------------+
+//This software may not be copied, altered, or distributed in any way, shape, form, or means.
+// version: 2.0 as of 2006-10-3
 
-require_once('./config/config.php'); // main configuration
-require_once('./config/rigCheckData.php'); // rig check configration
-require_once('./inc/global.php'); // global functions
+// doRigCheck.php
+// page to do rig checks
+// see custom.php for more information - specifically rigCheckData variable
+
+
+require('custom.php');
+require('global.php');
 global $shortName;
 $key = $_GET['pKey'];
 echo '<title>'.$shortName.' Rig Check '.$key.'</title>';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 
 global $dbName;
 $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
@@ -58,27 +35,11 @@ mysql_close($conn);
 $OKa = explode(',', $row['OK']);
 $NGa = explode(',', $row['NG']);
 
-
-// code introduced to handle different items for different rigs
-$rigNum = $row['rig']; // get the rig number
-$rigIndex = '';
-global $rigChecks;
-
-foreach($rigChecks as $idx => $arr)
-{
-    if($arr['name'] == $rigNum)
-    {
-	$rigIndex = $idx;
-    }
-}
-
-$rigCheckData = $rigChecks[$rigIndex]['data'];
-$table2start = $rigChecks[$rigIndex]['table2start'];
-$table3start = $rigChecks[$rigIndex]['table3start'];
-// DONE with implementing the multi-rig stuff
-
-
 $check = makeArray($OKa, $NGa);
+
+//echo '<pre>';
+//echo var_dump($check);
+//echo '</pre>';
 
 echo '</head>';
 echo '<body>';
@@ -87,6 +48,9 @@ echo '<h3 align=center>'.$shortName.' Rig Check '.$key.'</h3>';
 
 $time = $row['time'];
 
+global $rigCheckData;
+global $table2start;
+global $table3start;
 
 showTable($rigCheckData, $table2start, $table3start, $check, $row);
 
@@ -223,6 +187,11 @@ function makeArray($OKa, $NGa)
 	    $i = substr($str, strpos($str, '[') + 1, (strpos($str, ']') - strpos($str, '[') - 1));
 	    $c = substr($str, strrpos($str, '[') + 1, (strrpos($str, ']') - strrpos($str, '[') - 1));
 
+	    // DEBUG
+	    //echo 'i='.$i.' c='.$c.'<br>';
+	    //echo $OKa[$n];
+	    // END DEBUG
+
 	    $check[$i][$c] = "OK";
 	}
     }
@@ -235,6 +204,11 @@ function makeArray($OKa, $NGa)
 	    // get the $i and $c from the string
 	    $i = substr($str, strpos($str, '[') + 1, (strpos($str, ']') - strpos($str, '[') - 1));
 	    $c = substr($str, strrpos($str, '[') + 1, (strrpos($str, ']') - strrpos($str, '[') - 1));
+
+	    // DEBUG
+	    //echo 'i='.$i.' c='.$c.'<br>';
+	    //echo $OKa[$n];
+	    // END DEBUG
 
 	    $check[$i][$c] = "NG";
 	}

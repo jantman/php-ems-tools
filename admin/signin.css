@@ -1,0 +1,47 @@
+body
+{
+	margin-left: 2.5em;
+	margin-right: 2.5em;
+}
+
+h1
+{
+	text-align: center;
+	font-size: 1.4em;
+}
+
+h2
+{
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: normal;
+}
+
+table.signinSheet {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+table.signinSheet th {
+    border-width: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.signinSheet td {
+    border-width: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+    height: 2.5em;
+}

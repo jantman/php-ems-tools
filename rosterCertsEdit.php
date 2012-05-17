@@ -1,46 +1,25 @@
 <?php 
-// rosterCertsEdit.php
 //
-// Form to edit certifications data in roster
+// rosterEdit.php
 //
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rosterCertsEdi#$ |
-// +----------------------------------------------------------------------+
+// Version 0.1 as of Time-stamp: "2006-12-13 21:06:57 jantman"
+//
+// This file is part of the php-ems-tools package
+// available at 
+//
+// (C) 2006 Jason Antman.
+// This package is licensed under the terms of the
+// GNU General Public License (GPL)
+//
 
+//comments needing attention are tagged with TODO or DEBUG or TEST depending on their purpose 
+//code to be removed is prefaced by '//DEP' for deprecated code 
 
 //required for HTML_QuickForm PEAR Extension
 require_once 'HTML/QuickForm.php';
 require_once 'HTML/QuickForm/element.php';
+require('custom.php');
 
-require_once('./config/config.php'); // main configuration
-
-require_once('./config/rosterConfig.php'); // roster configuration
 
 // tell PHP to ignore any errors less than E_ERROR
 error_reporting(1);
@@ -88,13 +67,9 @@ $form->addElement('checkbox', 'PHTLSchk', 'PHTLS');
 $form->addElement('date', 'PHTLS', null);
 $form->addElement('checkbox', 'NREMTchk', 'NREMT');
 $form->addElement('date', 'NREMT', null);
-
-// the following code will handle the extended certifications
-foreach($extdCerts as $val)
-{
-    // create a checkbox for each extended certification
-    $form->addElement('checkbox', $val, $val);
-}
+$form->addElement('checkbox', 'ICS100chk', 'ICS100');
+$form->addElement('checkbox', 'ICS200chk', 'ICS200');
+$form->addElement('checkbox', 'NIMSchk', 'IC700/NIMS');
 
 $form->addElement('header', null, '  ');
 
@@ -141,6 +116,8 @@ else
 	$tempE = HTML_QuickForm::createElement('header', null, 'New Member');
 	$form->insertElementBefore($tempE, 'adminID');
 	$defaults = array(); 
+	// TODO: here, we must find the next EMT ID# not assigned.
+	// this will be organization-dependent. we should assume the next integer.
 	
 	$form->setDefaults($defaults);
 }
@@ -160,12 +137,11 @@ if ($form->validate())
     // exit the script, on successful insertion
 
 ?>
-
 <SCRIPT LANGUAGE="JavaScript">
 <!--hide
      opener.location.reload(true);
 	self.close();
--->
+//-->
 </SCRIPT>
 
 <?php
@@ -198,7 +174,6 @@ function processForm($formItems)
 }
 function putToDB($formItems, $action)
 {
-    global $extdCerts; // global information for extended certifications info
 	global $EMTid;
 
 	$EMTid = $formItems['EMTid'];
@@ -277,30 +252,34 @@ function putToDB($formItems, $action)
 	{
 	    $NREMT = $max;
 	}
-
-	// handle the extended certs information:
-	$otherCerts = ""; // string to hold the info.
-	foreach($extdCerts as $val)
+	if($formItems['ICS100chk']=="1")
 	{
-	    // loop through the possible certs, check the status of each
-	    if($formItems[$val]=="1")
-	    {
-		// if true, add to the comma-separated list of other certs
-		$otherCerts .= $val.",";
-	    }
+	    $ICS100 = $max;
 	}
-	// we now have a comma-separated list of all other certs.
-	$otherCerts = trim($otherCerts, ","); // get rid of the trailing comma
+	else
+	{
+	    $ICS100 = 1;
+	}
+	if($formItems['ICS200chk']=="1")
+	{
+	    $ICS200 = $max;
+	}
+	else
+	{
+	    $ICS200 = 1;
+	}
+	if($formItems['NIMSchk']=="1")
+	{
+	    $NIMS = $max;
+	}
+	else
+	{
+	    $NIMS = 1;
+	}
 
 
 	
-	$statementBody = 'EMTid="'.$formItems['EMTid'].'",EMT='.$EMT.',CPR='.$CPR.',FR='.$FR.',HazMat='.$HazMat.',BBP='.$BBP.',PHTLS='.$PHTLS.',NREMT='.$NREMT;
-
-	// if we have any extended certs info, include it in the statement
-	if($otherCerts != "")
-	{
-	    $statementBody .= ',OtherCerts="'.$otherCerts.'"';
-	}
+	$statementBody = 'EMTid="'.$formItems['EMTid'].'",EMT='.$EMT.',CPR='.$CPR.',FR='.$FR.',HazMat='.$HazMat.',BBP='.$BBP.',ICS100='.$ICS100.',ICS200='.$ICS200.',NIMS='.$NIMS.',PHTLS='.$PHTLS.',NREMT='.$NREMT;
 
 	if($action=='edit')
 	{
@@ -321,11 +300,11 @@ function putToDB($formItems, $action)
 
 	if(mysql_query($query))
 	{
-	    // success
+		// success
 	}
 	else
 	{
-	    echo "MYSQL error: ".mysql_error();
+		echo "MYSQL error: ".mysql_error();
 	}
 	mysql_close($conn);
 } 
@@ -333,7 +312,6 @@ function putToDB($formItems, $action)
 function populateMe($EMTid) 
 {
 	global $action; 
-	global $extdCerts; // extended certs array
 	//populate from the DB 
 	$defaults = array(); 
 
@@ -379,45 +357,8 @@ function populateMe($EMTid)
 		{
 		    $defaults['HazMatchk'] = 1;
 		}
-		$defaults['BBP'] = date("Y-M-d", $row['BBP']);
-		if($row['BBP'] == 1)
-		{
-		    $defaults['BBPchk'] = 0;
-		}
-		else
-		{
-		    $defaults['BBPchk'] = 1;
-		}
-		$defaults['PHTLS'] = date("Y-M-d", $row['PHTLS']);
-		if($row['PHTLS'] == 1)
-		{
-		    $defaults['PHTLSchk'] = 0;
-		}
-		else
-		{
-		    $defaults['PHTLSchk'] = 1;
-		}
-		$defaults['NREMT'] = date("Y-M-d", $row['NREMT']);
-		if($row['NREMT'] == 1)
-		{
-		    $defaults['NREMTchk'] = 0;
-		}
-		else
-		{
-		    $defaults['NREMTchk'] = 1;
-		}
 		
-		// get the information for the extended certs from the database
-		$otherCerts = $row['OtherCerts']; // other certs CSV list from database
-		$otherCertsAry = explode(",", $otherCerts); // make an array of the certs
-		foreach($extdCerts as $val)
-		{
-		    if(in_array($val, $otherCertsAry))
-		    {
-			// if true, this extd cert (val) is in the member's list (otherCertsA)
-			$defaults[$val] = 1;
-		    }
-		}
+		// STOPPED HERE.
 
 
 	}
@@ -496,7 +437,7 @@ mysql_close($connection);
 <?php
 echo '<TITLE>'.$shortName.' Roster - Administrative Tool</TITLE>';
 ?>
-	<link rel="stylesheet" href="php_ems.css" type="text/css">
+	<link rel="stylesheet" href="style.css" type="text/css">
 </HEAD>
 <BODY>
 <?php

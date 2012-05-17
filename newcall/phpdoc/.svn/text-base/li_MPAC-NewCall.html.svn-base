@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<div class="package-title">MPAC-NewCall</div>
+<div class="package-details">
+
+	<dl class="tree">
+		
+		<dt class="folder-title">Description</dt>
+		<dd>
+			<a href='classtrees_MPAC-NewCall.html' target='right'>Class trees</a><br />
+			<a href='elementindex_MPAC-NewCall.html' target='right'>Index of elements</a><br />
+							<a href="todolist.html" target="right">Todo List</a><br />
+					</dd>
+	
+							
+							
+																					<dt class="folder-title">Functions</dt>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html#functionadd_error' target='right'>add_error</a></dd>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html#functionadd_warning' target='right'>add_warning</a></dd>
+											<dd><a href='MPAC-NewCall/_ldap.php.html#functionauthByLDAP' target='right'>authByLDAP</a></dd>
+											<dd><a href='MPAC-NewCall/_ldap.php.html#functionauthWrapper' target='right'>authWrapper</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncall_ALS' target='right'>call_ALS</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncall_has_patient' target='right'>call_has_patient</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncall_NoHosp' target='right'>call_NoHosp</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncall_NoRig' target='right'>call_NoRig</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncall_transport' target='right'>call_transport</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncall_type_other' target='right'>call_type_other</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncheckCrew' target='right'>checkCrew</a></dd>
+											<dd><a href='MPAC-NewCall/_mileage.php.html#functioncheckMileage' target='right'>checkMileage</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functioncheck_signature' target='right'>check_signature</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functiondb_error' target='right'>db_error</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functiondoTime' target='right'>doTime</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functionfindAgeFromDOB' target='right'>findAgeFromDOB</a></dd>
+											<dd><a href='MPAC-NewCall/_runNum.php.html#functionformatRunNum' target='right'>formatRunNum</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functiongenCityDiv' target='right'>genCityDiv</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functiongenCrewTable' target='right'>genCrewTable</a></dd>
+											<dd><a href='MPAC-NewCall/_nav.php.html#functiongenNavControls' target='right'>genNavControls</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functiongenStateDiv' target='right'>genStateDiv</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functiongen_MAdiv' target='right'>gen_MAdiv</a></dd>
+											<dd><a href='MPAC-NewCall/_crew.php.html#functiongetCurrentDBname' target='right'>getCurrentDBname</a></dd>
+											<dd><a href='MPAC-NewCall/_crew.php.html#functiongetDutyCrewByTS' target='right'>getDutyCrewByTS</a></dd>
+											<dd><a href='MPAC-NewCall/_ldap.php.html#functiongetGroupMembers' target='right'>getGroupMembers</a></dd>
+											<dd><a href='MPAC-NewCall/_stats.php.html#functiongetMembersOnCall' target='right'>getMembersOnCall</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functiongetMPstreets' target='right'>getMPstreets</a></dd>
+											<dd><a href='MPAC-NewCall/_runNum.php.html#functiongetNewRunNumber' target='right'>getNewRunNumber</a></dd>
+											<dd><a href='MPAC-NewCall/_crew.php.html#functiongetProbiesByEMTid' target='right'>getProbiesByEMTid</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRpopulate.php.html#functiongetRunFromDB' target='right'>getRunFromDB</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functiongetTransToOptions' target='right'>getTransToOptions</a></dd>
+											<dd><a href='MPAC-NewCall/_session.php.html#functionis_valid_session' target='right'>is_valid_session</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html#functionja_check' target='right'>ja_check</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html#functionja_hidden' target='right'>ja_hidden</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html#functionja_radio' target='right'>ja_radio</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html#functionja_select' target='right'>ja_select</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html#functionja_text' target='right'>ja_text</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html#functionja_textarea' target='right'>ja_textarea</a></dd>
+											<dd><a href='MPAC-NewCall/_session.php.html#functionkill_session' target='right'>kill_session</a></dd>
+											<dd><a href='MPAC-NewCall/_ldap.php.html#functionldapSetup' target='right'>ldapSetup</a></dd>
+											<dd><a href='MPAC-NewCall/_session.php.html#functionldap_auth_handler' target='right'>ldap_auth_handler</a></dd>
+											<dd><a href='MPAC-NewCall/_session.php.html#functionlogin_start_sess' target='right'>login_start_sess</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functionlog_edit' target='right'>log_edit</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functionmakeAddress' target='right'>makeAddress</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functionmakeCallLocAddress' target='right'>makeCallLocAddress</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functionmakeIntsctAddress' target='right'>makeIntsctAddress</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functionmakeVitalsRow' target='right'>makeVitalsRow</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRedit.php.html#functionPCR_arrays_differ' target='right'>PCR_arrays_differ</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRedit.php.html#functionPCR_edit_auth' target='right'>PCR_edit_auth</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRedit.php.html#functionPCR_row_needs_update' target='right'>PCR_row_needs_update</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html#functionprocessForm' target='right'>processForm</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRedit.php.html#functionprocess_edited_PCR_form' target='right'>process_edited_PCR_form</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRprocess.php.html#functionprocess_new_PCR_form' target='right'>process_new_PCR_form</a></dd>
+											<dd><a href='MPAC-NewCall/_simpleForms.php.html#functionsimpleFormCheckBox' target='right'>simpleFormCheckBox</a></dd>
+											<dd><a href='MPAC-NewCall/_simpleForms.php.html#functionsimpleFormRadioButton' target='right'>simpleFormRadioButton</a></dd>
+											<dd><a href='MPAC-NewCall/_simpleForms.php.html#functionsimpleFormText' target='right'>simpleFormText</a></dd>
+											<dd><a href='MPAC-NewCall/_antman.php.html#functiontextMonth' target='right'>textMonth</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functiontrans_commit' target='right'>trans_commit</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functiontrans_rollback' target='right'>trans_rollback</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functiontrans_safe_query' target='right'>trans_safe_query</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functiontrans_start' target='right'>trans_start</a></dd>
+											<dd><a href='MPAC-NewCall/_session.php.html#functionupdate_session_time' target='right'>update_session_time</a></dd>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html#functionvalidate_DOB' target='right'>validate_DOB</a></dd>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html#functionvalidate_form' target='right'>validate_form</a></dd>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html#functionvalidate_misc' target='right'>validate_misc</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html#functionvalidate_PCR_form' target='right'>validate_PCR_form</a></dd>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html#functionvalidate_times' target='right'>validate_times</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html#functionvar_dump_string' target='right'>var_dump_string</a></dd>
+																		<dt class="folder-title">Files</dt>
+											<dd><a href='MPAC-NewCall/_antman.php.html' target='right'>antman.php</a></dd>
+											<dd><a href='MPAC-NewCall/_crew.php.html' target='right'>crew.php</a></dd>
+											<dd><a href='MPAC-NewCall/_formFuncs.php.html' target='right'>formFuncs.php</a></dd>
+											<dd><a href='MPAC-NewCall/_JAforms.php.html' target='right'>JAforms.php</a></dd>
+											<dd><a href='MPAC-NewCall/_ldap.php.html' target='right'>ldap.php</a></dd>
+											<dd><a href='MPAC-NewCall/_mileage.php.html' target='right'>mileage.php</a></dd>
+											<dd><a href='MPAC-NewCall/_nav.php.html' target='right'>nav.php</a></dd>
+											<dd><a href='MPAC-NewCall/_newcall.php.inc.html' target='right'>newcall.php.inc</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRedit.php.html' target='right'>PCRedit.php</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRpopulate.php.html' target='right'>PCRpopulate.php</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRprocess.php.html' target='right'>PCRprocess.php</a></dd>
+											<dd><a href='MPAC-NewCall/_PCRvalidation.php.html' target='right'>PCRvalidation.php</a></dd>
+											<dd><a href='MPAC-NewCall/_runNum.php.html' target='right'>runNum.php</a></dd>
+											<dd><a href='MPAC-NewCall/_session.php.html' target='right'>session.php</a></dd>
+											<dd><a href='MPAC-NewCall/_simpleForms.php.html' target='right'>simpleForms.php</a></dd>
+											<dd><a href='MPAC-NewCall/_stats.php.html' target='right'>stats.php</a></dd>
+											<dd><a href='MPAC-NewCall/_validatePCR.php.html' target='right'>validatePCR.php</a></dd>
+																	
+						
+			</dl>
+</div>
+<p class="notes"><a href="http://www.phpdoc.org" target="_blank">phpDocumentor v <span class="field">1.4.3</span></a></p>
+</BODY>
+</HTML>

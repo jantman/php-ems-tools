@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   name=""
+   url="http://svn.jasonantman.com/newcall/foo"
+   kind="dir"
+   repos="http://svn.jasonantman.com/newcall"
+   schedule="add"
+   revision="0"/>
+</wc-entries>

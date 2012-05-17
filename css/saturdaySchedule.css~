@@ -1,0 +1,83 @@
+body
+{
+	margin-left: 1em;
+}
+
+h1
+{
+	text-align: center;
+	margin-bottom: 0em;
+}
+
+h2
+{
+	margin-top: .25em;
+	margin-bottom: 0em;
+	text-align: center;
+}	
+
+p.topCenterLinks
+{
+	margin-top: .25em;
+	text-align: center;
+}
+
+p.date
+{
+	margin-top: 0em;
+	margin-bottom: 0em;
+	font-weight: bold;
+	padding: 0;
+}
+
+ul.scheduleItem
+{
+	margin: 0;
+	padding: 0;
+}
+
+.scheduleItem li
+{
+	list-style-type:none;
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+
+.clearing
+{
+	clear: both;
+}
+
+.listColumn
+{
+	float: left;
+	padding-right: 2em;
+	padding-left: 1em;
+	margin: 0;
+	border: 1px solid black;
+}
+
+table.roster {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+}
+table.roster th {
+    border-width: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.roster td {
+    border-width: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}

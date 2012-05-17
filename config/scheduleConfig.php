@@ -87,6 +87,11 @@ $minRightsChangePast = 2;
 // minimum rights level to edit daily message
 $minRightsDailyMessage = 2;
 
+// how many seconds past the end of a shift to allow people to change signons
+// anything past this is considered the "past" in terms of the above variables
+//$CONFIG_signon_grace_period = 900;
+$CONFIG_signon_grace_period = 300;
+
 // at the moment, this program is hard-coded with 2 shifts per day
 // days - 0600-1800
 // nights - 1800-0600

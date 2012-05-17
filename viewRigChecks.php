@@ -1,48 +1,25 @@
 <html>
 <head>
 <?php
+//(C) 2006 Jason Antman. All Rights Reserved.
+// with questions, go to www.jasonantman.com
+// or email jason AT jasonantman DOT com
+// Time-stamp: "2009-06-02 14:18:16 jantman"
+
+//This software may not be copied, altered, or distributed in any way, shape, form, or means.
+// version: 2.0 as of 2006-10-3
+
 // viewRigChecks.php
-//
-// Page to view lost of completed rig checks
-//
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools	http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.	                          |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/viewRigChecks.#$ |
-// +----------------------------------------------------------------------+
+// page to do rig checks
+// see custom.php for more information - specifically rigCheckData variable
 
 
-require_once('./config/config.php'); // master configuration
-require_once('./config/rigCheckData.php'); // rig check configration
-require_once('./inc/global.php');
+require('custom.php');
+require('global.php');
 global $shortName;
 $key = $_GET['pKey'];
 echo '<title>'.$shortName.' Rig Checks</title>';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 
 global $dbName;
 
@@ -51,9 +28,14 @@ echo '<body>';
 
 echo '<h3 align=center>'.$shortName.' Rig Checks</h3>';
 
+global $rigCheckData;
+global $table2start;
+global $table3start;
+
+
 $conn = mysql_connect()   or die("Error: I'm sorry, the MySQL connection failed at mysql_connect.".$errorMsg);
 mysql_select_db($dbName) or die ("ERROR: I'm sorry, I was unable to select the database!".$errorMsg);
-$query = 'SELECT * FROM rigCheck;';
+$query = 'SELECT * FROM rigCheck ORDER BY timeStamp DESC;';
 $result = mysql_query($query) or die ("I'm sorry, but there was an error in your SQL query.<br><br>" . mysql_error().'<br><br>'.$errorMsg);
 
 // setup table

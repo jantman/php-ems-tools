@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="3"
+   name=""
+   committed-date="2009-10-27T19:02:42.795801Z"
+   url="http://svn.jasonantman.com/mpac-finance/css"
+   last-author="jantman"
+   kind="dir"
+   uuid="3cb99014-ef76-0410-9f3a-83317103fc2d"
+   repos="http://svn.jasonantman.com/mpac-finance"
+   revision="5"/>
+<entry
+   committed-rev="7"
+   name="tabs.css"
+   text-time="2010-02-06T02:28:52.000000Z"
+   committed-date="2010-02-06T02:28:28.624066Z"
+   checksum="ef2361d24eccb2ce3850fec673a6bd29"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-02-19T17:57:10.000000Z"
+   revision="7"/>
+<entry
+   committed-rev="3"
+   name="tables.css"
+   text-time="2009-10-27T19:08:31.000000Z"
+   committed-date="2009-10-27T19:02:42.795801Z"
+   checksum="dcdc38a322a83b1cc2cf306490e04521"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-02-19T17:57:10.000000Z"/>
+<entry
+   committed-rev="3"
+   name="autocomplete.css"
+   text-time="2009-10-27T19:08:31.000000Z"
+   committed-date="2009-10-27T19:02:42.795801Z"
+   checksum="1fe9072dcdb9bc5302c7b84d9d2711ec"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-02-19T17:57:10.000000Z"/>
+<entry
+   committed-rev="7"
+   name="finance.css"
+   text-time="2010-02-06T02:28:52.000000Z"
+   committed-date="2010-02-06T02:28:28.624066Z"
+   checksum="210930934752a231b80aa42ab3a2b0b6"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-02-19T17:57:10.000000Z"
+   revision="7"/>
+<entry
+   committed-rev="7"
+   name="popup.css"
+   text-time="2010-02-06T02:28:52.000000Z"
+   committed-date="2010-02-06T02:28:28.624066Z"
+   checksum="a476d74fd4c7465dbcc4988c151f2509"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-02-19T17:57:10.000000Z"
+   revision="7"/>
+</wc-entries>

@@ -1,0 +1,59 @@
+%FDF-1.2
+%????
+1 0 obj 
+<< /FDF << /Fields [
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeDisp[0]) /V (15:01) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeIn[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeBy[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeInRt[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeArrived[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeAvail[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].timeOut[0]) /V (15:04) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtDate[0]) /V (03/06/2012) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtRemarks[0]) /V (Dispatched for an MVA at Franklin and Adam.  Location does not exist in Midland Park wound up being a Wyckoff call. Dispatcher error.) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtUnit[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtPt[0]) /V (1) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtPtOf[0]) /V (1) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtMileage[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtHx[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtPtLoc[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtCallType[0]) /V (Motor Vehicle Crash) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtCC[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtRunN[0]) /V (2012-101) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtOnset[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtAid[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtAllergies[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtMeds[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vTime[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vBP[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vPulse[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vResp[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vLung[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vConsc[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vPupils[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].vSkin[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtTx[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtC1[0]) /V (72) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtC2[0]) /V (63) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtC3[0]) /V (89) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtALSunit[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtSigID[0]) /V (63) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtPassengers[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtEqLeft[0]) /V () >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].txtLocOtr[0]) /V (Intsct. Franklin Ave and Madison Ave, Midland Park, NJ) >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].cbxTransNone[0]) /V /1 >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].cbxOCcanc[0]) /V /1 >> 
+<< /T (form1[0].#subform[0].cbxALSnc[0]) /V /1 >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].cbxRMAatt[0]) /V /Off >> 
+<< /T (form1[0].#subform[0].cbxLocOtr[0]) /V /1 >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].cbxLOCno[0]) /V /1 >> 
+<< /T (form1[0].#subform[0].#area[0].#area[1].cbxDuty[0]) /V /1 >> 
+]
+/F (pcr3.pdf) >>>>
+endobj
+trailer
+<<
+/Root 1 0 R 
+
+>>
+%%EOF

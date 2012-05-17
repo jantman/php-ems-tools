@@ -33,7 +33,7 @@
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/addBk.php      $ |
 // +----------------------------------------------------------------------+
 
-require_once('./config/config.php'); // main configuration
+require_once('custom.php');
 
 // this script views the roster from the DB
 
@@ -57,7 +57,7 @@ else
 
 echo '<head>';
 echo '<meta http-equiv="refresh" content="180">';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
+echo '<link rel="stylesheet" href="php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 echo '<title>'.$shortName.' - View Address Book</title>';
 echo '<script type="text/javascript" src="php-ems-tools.js"> </script>';
 echo '</head>';

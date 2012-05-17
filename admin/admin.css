@@ -1,0 +1,33 @@
+table.general {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+}
+table.general th {
+    border-width: 1px 1px 1px 1px;
+ padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.general td {
+    border-width: 1px 1px 1px 1px;
+    padding: 6px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+A {
+	font-family: Verdana;
+	font-size: 10px;
+}
+
+TABLE, TD, TH, P, DIV, LI, INPUT, TEXTAREA {
+	font-size: 11px;
+}

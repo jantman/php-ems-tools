@@ -1,0 +1,25 @@
+table.resultTable
+{
+	     border-width: 1px 1px 1px 1px;
+	     border-spacing: 0px;
+	     border-style: solid solid solid solid;
+	     border-color: black black black black;
+	     border-collapse: collapse;
+	     background-color: white;
+}
+table.resultTable th
+{
+	     border-width: 1px 1px 1px 1px;
+	     padding: 3px 3px 3px 3px;
+	     border-style: solid solid solid solid;
+	     border-color: black black black black;
+	     background-color: white;
+}
+table.resultTable td
+{
+	     border-width: 1px 1px 1px 1px;
+	     padding: 3px 3px 3px 3px;
+	     border-style: solid solid solid solid;
+	     border-color: black black black black;
+	     background-color: white;
+}

@@ -2,7 +2,7 @@
 /*               */
 /* this is the main schedule page CSS file for print media*/
 /*     */
-/* Time-stamp: "2009-03-11 11:47:36 jantman" */
+/* Time-stamp: "2008-11-03 15:10:33 jantman" */
 /* +----------------------------------------------------------------------+ */
 /* | PHP EMS Tools      http://www.php-ems-tools.com                      | */
 /* +----------------------------------------------------------------------+ */
@@ -29,9 +29,7 @@
 /* +----------------------------------------------------------------------+ */
 /* | Authors: Jason Antman <jason@jasonantman.com>                        | */
 /* +----------------------------------------------------------------------+ */
-/* | $LastChangedRevision:: 155                                         $ | */
-/* | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/schedule_print#$ | */
-/* +----------------------------------------------------------------------+ */
+/*      $Id: schedule_print.css,v 1.1 2008/11/03 20:17:39 jantman Exp $        */
 
 a
 {

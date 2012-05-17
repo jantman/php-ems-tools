@@ -37,10 +37,14 @@
 // | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/handlers/signO#$ |
 // +----------------------------------------------------------------------+
 
+// debugging to error log
+$debug = true;
 
 // this file will import the user's customization
 require_once('../config/config.php');
 
+// signin stuff
+require_once('../config/memberTypes.php');
 // schedule configuration
 require_once('../config/scheduleConfig.php');
 
@@ -51,12 +55,15 @@ require_once('../inc/logging.php');
 
 // for i18n
 require_once('../inc/'.$config_i18n_filename);
+// start MySQL connection
+$conn = mysql_connect()   or die("ERROR: ".$i18n_strings["signOnWarnings"]["noDBconnect"].$errorCancel);
+mysql_select_db($dbName) or die ("ERROR: ".$i18n_strings["signOnWarnings"]["noDBselect"].$errorCancel);
 
 $action = $_POST['action'];
 if(isset($_POST['signonID'])){ $signonID = $_POST['signonID'];}
-$adminID = addslashes($_POST['adminID']);
+$adminID = mysql_real_escape_string($_POST['adminID']);
 $adminPW = md5($_POST['adminPW']);
-$EMTid = addslashes($_POST['EMTid']);
+$EMTid = mysql_real_escape_string($_POST['EMTid']);
 $start = $_POST['start'];
 $end = $_POST['end'];
 $ts = $_POST['ts'];
@@ -65,10 +72,12 @@ $signonID = $_POST['id'];
 $temp_ts_ary = makeTimestampsFromTimes($ts, $start, $end);
 $start_ts = $temp_ts_ary['start'];
 $end_ts = $temp_ts_ary['end'];
-$year = date("Y", $start_ts);
-$month = date("m", $start_ts);
-$date = date("d", $start_ts);
-$shift = tsToShiftName($start_ts);
+$year = date("Y", $ts);
+$month = date("m", $ts);
+$date = date("d", $ts);
+$shift = tsToShiftName($ts);
+
+if($debug){ error_log("handlers/signOn.php : action=".$action." adminID=".$adminID." EMTid=".$EMTid." start=".$start." end=".$end." ts=".$ts." signonID=".$signonID." start_ts=".$start_ts." end_ts=".$end_ts." year=".$year." month=".$month." date=".$date." shift=".$shift."\n");}
 
 // to append to all error messages - cancel button to close popup
 $errorCancel = '<div style="text-align: center;"><input name="buttonGroup[btnCancel]" value="'.$i18n_strings["signOn"]["Cancel"].'" onClick="hidePopup(\'popup\')" type="button" /></div>';
@@ -105,50 +114,40 @@ if($requireAuthToRemove && ($action=="remove") && ((! $auth) || ($rightsLevel < 
 {
     die("ERROR: ".$i18n_strings["signOnWarnings"]["errorRemove"].$errorCancel);
 }
+if($debug) { error_log("signOn.php: DEBUG: requireAuthToChangePast=$requireAuthToChangePast auth=$auth rightsLevel=$rightsLevel minRightsChangePast=$minRightsChangePast");}
 if($requireAuthToChangePast && ((! $auth) || ($rightsLevel < $minRightsChangePast)))
 {
     $changeDay = $start_ts;
-    $difference = time() - $changeDay;
-    $sameShift = false;
-    // TODO - get rid of this day and night stuff
-    if(strtolower($shift)=="night")
+    $shiftEndTS = $ts + 43200;
+    $now = time();
+    global $CONFIG_signon_grace_period;
+    if($debug) { error_log("signOn.php: DEBUG: ts=$ts shiftEndTS=$shiftEndTS now=$now CONFIG_signon_grace_period=$CONFIG_signon_grace_period");}
+
+    if($now > $shiftEndTS && ($now - $shiftEndTS) > $CONFIG_signon_grace_period)
     {
-	global $nightLastHour;
-	$lastHr = $nightLastHour;
-    }
-    else
-    {
-	global $dayLastHour;
-	$lastHr = $dayLastHour;
-    }
-    if((date("Y-m") == $year."-".$month) && (date("j")==($date+1)) && date("G")<$lastHr)
-    {
-	$sameShift = true;
-    }
-    if($difference > 86400 && (! $sameShift))
-    {
-	//we are more than a day in the past; fail.
+	//we are more than $CONFIG_signon_grace_period
+	error_log("signOn.php: AUTH-FAIL: Attempt to change past shift: ts=$ts shiftEndTS=$shiftEndTS now=$now EMTid=$EMTid");
 	die("ERROR: ".$i18n_strings["signOnWarnings"]["errorChangePast"].$errorCancel);
     }
 }
 
-//figure out whether this member is eligable to pull duty
-$query = 'SELECT status FROM roster WHERE EMTid="'.$EMTid.'";';
-$result = mysql_query($query) or die ("ERROR: Duty Eligibility Query Error");
-$row = mysql_fetch_array($result);
-$type = $row['status'];
-global $memberTypes;
-for($i=0; $i < count($memberTypes); $i++)
+// make sure EMTid exists
+if(! idInDB($EMTid))
 {
-    // TODO: move which member types can pull duty (and the rest of the memberTypes config) to the database and use a JOIN
-    if($memberTypes[$i]['name']==$type)
-    {
-	if(! $memberTypes[$i]['canPullDuty'])
-	{
-	    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorMemberType1"]." ".$type." ".$i18n_strings["signOnWarnings"]["errorMemberType2"]." ".$errorCancel);
-	}
-    }
+    die("ERROR: ".$i18n_strings["signOnWarnings"]["erroEMTidNoExist1"].$EMTid.$i18n_strings["signOnWarnings"]["erroEMTidNoExist2"]);
 }
+
+//figure out whether this member is eligable to pull duty
+if(! canPullDuty($EMTid)) // function in inc/global.php
+{
+    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorMemberType1"]." ".$type." ".$i18n_strings["signOnWarnings"]["errorMemberType2"]." ".$errorCancel);
+}
+// added 2009-09-13
+if($action != 'remove' && trim($EMTid) == "")
+{
+    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorNoId"]." ".$errorCancel);
+}
+// END added 2009-09-13
 
 if($action=='remove')
 {
@@ -165,9 +164,29 @@ else
     // TODO - get rid of this day and night stuff
     if($start_ts >= $end_ts)
     {
+	if($debug){ die("ERROR: ".$i18n_strings["signOnWarnings"]["errorTimeInvalid"]."<br />".$start_ts."=".date("Y-m-d H:i:s", $start_ts)."<br />".$end_ts."=".date("Y-m-d H:i:s", $end_ts)."<br />".$errorCancel);}
 	die("ERROR: ".$i18n_strings["signOnWarnings"]["errorTimeInvalid"].$errorCancel);
     }
-    
+    // CHECK AUTH FOR CHANGING ANYTHING IN THE PAST
+    // added 2010-03-31 by jantman
+    if($requireAuthToChangePast && ((! $auth) || ($rightsLevel < $minRightsChangePast)))
+    {
+	global $CONFIG_signon_grace_period;
+	
+	$now = time();
+	if($now > $end_ts && ($now - $end_ts) > $CONFIG_signon_grace_period)
+	{
+	    error_log("signOn.php: AUTH-FAIL: Attempt to change past: now=$now=".date("Y-m-d H:i:s", $now)." EMTid=$EMTid start_ts=$start_ts=".date("Y-m-d H:i:s", $start_ts)." end_ts=$end_ts=".date("Y-m-d H:i:s", $end_ts));
+	    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorChangePast"].$errorCancel);
+	}
+
+	if($now > $start_ts && ($now - $start_ts) > $CONFIG_signon_grace_period)
+	{
+	    error_log("signOn.php: AUTH-FAIL: Attempt to change past: now=$now=".date("Y-m-d H:i:s", $now)." EMTid=$EMTid start_ts=$start_ts=".date("Y-m-d H:i:s", $start_ts)." end_ts=$end_ts=".date("Y-m-d H:i:s", $end_ts));
+	    die("ERROR: ".$i18n_strings["signOnWarnings"]["errorChangePast"].$errorCancel);
+	}
+    }    
+    // END CHECKING TIME
     if($action == "edit")
     {
 	$query = 'UPDATE '.$config_sched_table.' SET deprecated=1 WHERE sched_entry_id='.$signonID.';';
@@ -182,7 +201,7 @@ else
 	// new signon
 
 	// first, make sure nothing is duplicated.
-	$checkQuery = "SELECT EMTid,start_ts,end_ts FROM ".$config_sched_table." WHERE EMTid='".$EMTid."' AND deprecated=0 AND ((start_ts <= ".$start_ts." AND end_ts >= ".$start_ts.") OR (start_ts <= ".$end_ts." AND end_ts >= ".$end_ts."));";
+	$checkQuery = "SELECT EMTid,start_ts,end_ts FROM ".$config_sched_table." WHERE EMTid='".$EMTid."' AND deprecated=0 AND ((start_ts <= ".$start_ts." AND end_ts >= ".($start_ts+1).") OR (start_ts < ".$end_ts." AND end_ts >= ".($end_ts+1)."));";
 	$checkResult = mysql_query($checkQuery) or die ("ERROR: checkQuery Error");
 	if(mysql_num_rows($checkResult) > 0)
 	{
@@ -191,6 +210,7 @@ else
 
 	// allow the signin
 	$query2 = 'INSERT INTO '.$config_sched_table.' SET EMTid="'.mysql_real_escape_string($EMTid).'",start_ts='.$start_ts.',end_ts='.$end_ts.',sched_year='.$year.',sched_month='.$month.',sched_date='.$date.',sched_shift_id='.shiftNameToID($shift).' ;';
+	if($debug){ error_log("handlers/signOn.php - NEW SIGNON. Query: ".$query2."\n");}
 	$result = mysql_query($query2) or die ("ERROR: INSERT Query Error");
 	$newID = mysql_insert_id();
 	logEditForm(null, $newID, $adminID, $auth, "signOn.php", $action, $query2);

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="66"
+   name=""
+   committed-date="2010-08-24T03:50:17.571463Z"
+   url="http://svn.jasonantman.com/newcall/phpdoc/default"
+   last-author="jantman"
+   kind="dir"
+   uuid="561a0531-3f7b-0410-9702-c3ad31a58c1b"
+   repos="http://svn.jasonantman.com/newcall"
+   revision="66"/>
+<entry
+   committed-rev="66"
+   name="_PCRedit.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="49d9a3ef4e786b2d3bcf7790ee1ece57"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_newcall.php.inc.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="7a1a2d94bd344ea00ecb42abd2cb8877"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_stats.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="55b2bd0df9d4096f67b90a099e04bcc3"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_PCRpopulate.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="6e5e02bdf93168210cde4ca9607a674e"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_validatePCR.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="a749418369ecfeaca17e0b6e558bc418"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_PCRvalidation.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="96963a594597ebd0ff09710dfdc10c1b"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_simpleForms.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="40d497c65e8d8355b8ef5244c9a140db"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_crew.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="c66700b5f22abde71d8824ce48ba747e"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_JAforms.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="276fc998764cae67aeede2be0ffb52ae"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_formFuncs.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="30f86ca3c30b38d773abdc7ed656f8d6"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_mileage.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="f6e5842838198caae752fb95f3138a38"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_antman.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="6a376c52647bac50e4fa21a6340957d4"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_ldap.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="76bebf4789a4a0ad4ae33a1377d436df"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_session.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="7f2777851793659c5e9598853e591a9e"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_PCRprocess.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="5930a67dd13a82cdb1c5d4b4659bcf9f"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_runNum.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="1739bcf97f31448983625f9f4a340099"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+<entry
+   committed-rev="66"
+   name="_nav.php.html"
+   text-time="2010-11-30T16:33:56.000000Z"
+   committed-date="2010-08-24T03:50:17.571463Z"
+   checksum="a39277518dc8e40483be680e6173773e"
+   last-author="jantman"
+   kind="file"
+   prop-time="2010-08-24T03:51:32.000000Z"/>
+</wc-entries>

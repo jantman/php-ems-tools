@@ -1,91 +1,80 @@
 <html>
 <head>
 <?php
-// rigCheck.php
-//
-// Form to input rig check data
-//
-// +----------------------------------------------------------------------+
-// | PHP EMS Tools      http://www.php-ems-tools.com                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2006, 2007 Jason Antman.                               |
-// |                                                                      |
-// | This program is free software; you can redistribute it and/or modify |
-// | it under the terms of the GNU General Public License as published by |
-// | the Free Software Foundation; either version 3 of the License, or    |
-// | (at your option) any later version.                                  |
-// |                                                                      |
-// | This program is distributed in the hope that it will be useful,      |
-// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
-// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
-// | GNU General Public License for more details.                         |
-// |                                                                      |
-// | You should have received a copy of the GNU General Public License    |
-// | along with this program; if not, write to:                           |
-// |                                                                      |
-// | Free Software Foundation, Inc.                                       |
-// | 59 Temple Place - Suite 330                                          |
-// | Boston, MA 02111-1307, USA.                                          |
-// +----------------------------------------------------------------------+
-// |Please use the above URL for bug reports and feature/support requests.|
-// +----------------------------------------------------------------------+
-// | Authors: Jason Antman <jason@jasonantman.com>                        |
-// +----------------------------------------------------------------------+
-// | $LastChangedRevision:: 155                                         $ |
-// | $HeadURL:: http://svn.jasonantman.com/php-ems-tools/rigCheck.php   $ |
-// +----------------------------------------------------------------------+
+//(C) 2006 Jason Antman. All Rights Reserved.
+// with questions, go to www.jasonantman.com
+// or email jason AT jasonantman DOT com
+// Time-stamp: "2010-04-24 20:33:55 jantman"
 
-// for good EMTs only: if you add &OK=true to the url, all fields will default to OK.
-if(! empty($_GET['OK']))
+//This software may not be copied, altered, or distributed in any way, shape, form, or means.
+// version: 2.0 as of 2006-10-3
+
+// rigCheck.php
+// page to do rig checks
+// see custom.php for more information - specifically rigCheckData variable
+
+if(! empty($_GET['unit']))
 {
-    if($_GET['OK'] == "true")
-    {
-	//default to OK
-	$OK = true;
-    }
+    //default to OK
+    $unit = $_GET['unit'];
+}
+else
+{
+    die("YOU MUST SPECIFY A UNIT NUMBER!");
 }
 
-require_once('./config/config.php'); // mian configuration
+//default to OK
+$OK = true;
 
-require_once('./config/rigCheckData.php'); // roster configuration
-
+require('custom.php');
 global $shortName;
 echo '<title>'.$shortName.' Rig Check</title>';
-echo '<link rel="stylesheet" href="'.$serverWebRoot.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
-
+echo '<link rel="stylesheet" href="'.'php_ems.css" type="text/css">'; // the location of the CSS file for the schedule
 ?>
 </head>
 <body>
 
 <?php
-if(! empty($_GET['index']))
+echo '<h3 align=center>'.$shortName.' Rig Check</h3>';
+
+
+if($unit == 589)
 {
-    $rigIndex = $_GET['index'];
+    global $rigCheckData;
+    global $table2start;
+    global $table3start;
+}
+else
+{
+    global $rigCheckData88;
+    $rigCheckData = $rigCheckData88;
+    global $table2start88;
+    $table2start = $table2start88;
+    global $table3start88;
+    $table3start = $table3start88;
 }
 
-global $rigChecks;
-$rigCheckData = $rigChecks[$rigIndex]['data'];
-$table2start = $rigChecks[$rigIndex]['table2start'];
-$table3start = $rigChecks[$rigIndex]['table3start'];
-$rigNum = $rigChecks[$rigIndex]['name'];
+showTable($rigCheckData, $table2start, $table3start);
 
-echo '<h3 align=center>'.$shortName.' Rig Check - '.$rigNum.'</h3>';
-
-
-showTable($rigCheckData, $table2start, $table3start, $rigNum);
-
-function showTable($rigCheckData, $table2start, $table3start, $rigNum)
+function showTable($rigCheckData, $table2start, $table3start)
 {
     global $OK;
+    global $unit;
     echo '<form method="post" action="doRigCheck.php">';
     echo '<DIV align="center"><b>Crew: </b><input type="text" name="crew1" size=3> <input type="text" name="crew2" size=3> <input type="text" name="crew3" size=3> <input type="text" name="crew4" size=3>';
     echo '<b>&nbsp;&nbsp;Rig:&nbsp;</b>';
-    echo '<input type=hidden name="rig" value="'.$rigNum.'">';
-    echo $rigNum."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    if($unit == 588)
+    {
+	echo '<select name="rig"><option value="588">588</option></select>';
+    }
+    else
+    {
+	echo '<select name="rig"><option value="589">589</option></select>';
+    }
     echo '<b>&nbsp;&nbsp;Mileage:&nbsp;</b>';
     echo '<input type="text" name="mileage" size=6>';
     echo '</DIV><br>';
-    echo '<table border=1 align=center>';
+    echo '<table border=1 align=center class="rigCheck">';
     echo '<tr>';
     echo '<td>';
     // show table 1
