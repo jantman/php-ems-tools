@@ -1,0 +1,46 @@
+body
+{
+	margin-left: 2em;
+	margin-right: 2em;
+}
+
+h1
+{
+	text-align: center;
+}
+
+table.callTable {
+    border-width: 1px 1px 1px 1px;
+    border-spacing: 0px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    border-collapse: separate;
+    background-color: white;
+}
+table.callTable th {
+    border-width: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+table.callTable td {
+    border-width: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: black black black black;
+    background-color: white;
+    -moz-border-radius: 0px 0px 0px 0px;
+}
+
+.bottomdiv
+{
+	position: absolute;
+	text-align: center;
+	width: 50%;
+	left: 25%;
+	bottom: 0px;
+	font-size: .7em;
+	font-style: italic;
+}

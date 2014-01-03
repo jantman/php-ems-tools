@@ -1,9 +1,10 @@
-# makefile to update SVN and do anything else needed
-#
+#!/usr/bin/env python
+# Python script to set SVN keyword substitution properties on files
+
 # +--------------------------------------------------------------------------------------------------------+
 # | PHP EMS Tools      http://www.php-ems-tools.com                                                        |
 # +--------------------------------------------------------------------------------------------------------+
-# | Time-stamp: "2010-08-26 08:42:54 jantman"                                                              |
+# | Time-stamp: "2009-12-21 11:16:48 jantman"                                                              |
 # +--------------------------------------------------------------------------------------------------------+
 # | Copyright (c) 2009, 2010 Jason Antman. All rights reserved.                                            |
 # |                                                                                                        |
@@ -28,29 +29,31 @@
 # +--------------------------------------------------------------------------------------------------------+
 # | Authors: Jason Antman <jason@jasonantman.com>                                                          |
 # +--------------------------------------------------------------------------------------------------------+
-# | $LastChangedRevision:: 68                                                                            $ |
-# | $HeadURL:: http://svn.jasonantman.com/newcall/Makefile                                               $ |
+# | $LastChangedRevision:: 12                                                                            $ |
+# | $HeadURL:: http://svn.jasonantman.com/newcall/makeprops.py                                           $ |
 # +--------------------------------------------------------------------------------------------------------+
 #
 
-.PHONY: commit docs
+# bottom line - this runs a given command on every regular file (and not in .svn/) under a path
 
-docs:
-	rm -Rf ~/rmt/central-home/temp/rm_me/jsdoc/*
-	mkdir -p temp/js
-	bin/js2phpdoc.php js/ temp/js/
-	cp -r inc temp/
-	cp *.php temp/
-	phpdoc -c docs/default.ini
-	cp -R docs/* ~/rmt/central-home/temp/rm_me/jsdoc/
-	rm -Rf temp
+import os, os.path, sys
 
-commit:
-	-rm *~
-	-cd bin/ && rm *~
-	-cd config/ && rm *~
-	-cd css/ && rm *~
-	-cd inc/ && rm *~
-	-cd js/ && rm *~
-	svn commit
+CMD = 'svn propset svn:keywords "Date Revision Author HeadURL Id" ' # will be postfixed by file name
 
+# propset all files in path, recurse
+def doDir(path):
+    # list all files in directory
+    for f in os.listdir(path):
+        # skip over '.', '..', and '.svn'
+        if f == "." or f == ".." or f == ".svn":
+            continue
+        # either do the file or recurse
+        if os.path.isfile(os.path.join(path, f)):
+            sys.stderr.write("Setting props on " + os.path.join(path, f) + "... ")
+            os.system(CMD + os.path.join(path, f))
+            sys.stderr.write(" OK.\n")
+        elif os.path.isdir(os.path.join(path, f)):
+            # recurse
+            doDir(os.path.join(path, f))
+# RUN THE FUNCTION:
+doDir("./")

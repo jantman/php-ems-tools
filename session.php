@@ -3,7 +3,7 @@
  +--------------------------------------------------------------------------------------------------------+
  | PHP EMS Tools      http://www.php-ems-tools.com                                                        |
  +--------------------------------------------------------------------------------------------------------+
- | Time-stamp: "2010-11-30 11:46:46 jantman"                                                              |
+ | Time-stamp: "2010-08-25 22:53:05 jantman"                                                              |
  +--------------------------------------------------------------------------------------------------------+
  | Copyright (c) 2009, 2010 Jason Antman. All rights reserved.                                            |
  |                                                                                                        |
@@ -28,19 +28,39 @@
  +--------------------------------------------------------------------------------------------------------+
  | Authors: Jason Antman <jason@jasonantman.com>                                                          |
  +--------------------------------------------------------------------------------------------------------+
- | $LastChangedRevision:: 73                                                                            $ |
+ | $LastChangedRevision:: 51                                                                            $ |
  | $HeadURL:: http://svn.jasonantman.com/newcall/index.php                                              $ |
  +--------------------------------------------------------------------------------------------------------+
 */
 
 /**
- * Index page.
+ * Sessions / login form.
  *
  * @package MPAC-NewCall-Pages
  */
 
-require_once('inc/runNum.php');
 require_once('inc/newcall.php.inc');
+require_once('inc/session.php');
+require_once('inc/ldap.php');
+
+$badPass = false;
+if(isset($_POST['username']))
+{
+    $foo = processLogin();
+    if(! $foo){ $badPass = true;}
+}
+
+$foo = is_valid_session();
+$needs_auth = false; $expired = false; $logged_out = false;
+if($foo == 1 || $foo == 2){ $needs_auth = true;}
+elseif($foo == 3){ $needs_auth = true; $expired = true;}
+elseif($foo == 0 && isset($_SESSION['EMTid'])){ update_session_time();}
+
+if(isset($_GET['action']) && $_GET['action'] == "logout")
+{
+    kill_session();
+    $logged_out = true;
+}
 
 ?>
 
@@ -50,72 +70,75 @@ require_once('inc/newcall.php.inc');
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<?php echo '<meta name="generator" content="MPAC PCR version '.$_VERSION.' (r'.stripSVNstuff($_SVN_rev).')">'."\n"; ?>
-<title><?php echo $shortName;?> Call Reports</title>
+<title><?php echo $shortName;?> Log In</title>
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
 
 <body>
-
-<div style="margin-top: 0.5em; margin-bottom: 0; text-align: left;"><a href="../">Home</a></div>
-
-<h1><?php echo $shortName;?> Call Reports</h1>
-<h2><a href="newcall.php">&rarr;Input New Call&larr;</a></h2>
-
-<table class="callTable">
-<tr><th>Run Number</th><th>Date</th><th>Unit</th><th>Dispatch Time</th><th>Crew</th><th>Call Type</th><th>Outcome</th><th>&nbsp;</th></tr>
 <?php
-$query = "SELECT c.RunNumber,c.call_type,c.date_ts,c.outcome,c.is_duty_call,c.is_second_rig,t.dispatched,cu.unit FROM calls AS c LEFT JOIN calls_times AS t ON c.RunNumber=t.RunNumber LEFT JOIN calls_units AS cu ON c.RunNumber=cu.RunNumber WHERE c.is_deprecated=0 AND t.is_deprecated=0 ORDER BY RunNumber DESC LIMIT 20;";
-$result = mysql_query($query) or die("Error in query: $query <br />ERROR: ".mysql_error());
-while($row = mysql_fetch_assoc($result))
+if(isset($_SESSION['EMTid']))
 {
-    echo '<tr>';
-    echo '<td>'.formatRunNum($row['RunNumber']).'</td>';
-    echo '<td>'.date("m/d/Y", $row['date_ts']).'</td>';
-    echo '<td>'.$row['unit'].'</td>';
-    echo '<td>'.date("H:i", $row['dispatched']).'</td>';
-
-    if($row['is_duty_call'] == 1){ echo '<td>Duty</td>';}
-    elseif($row['is_second_rig'] == 1){ echo '<td>2<sup>nd</sup> Rig</td>';}
-    else { echo '<td>General</td>';}
-
-    echo '<td>'.$row['call_type'].'</td>';
-    echo '<td>'.$row['outcome'].'</td>';
-
-    echo '<td>';
-    echo '<a href="newcall.php?RunNumber='.$row['RunNumber'].'">View</a>';
-    echo '&nbsp;&nbsp;&nbsp;';
-    echo 'Edit';
-    echo '&nbsp;&nbsp;&nbsp;';
-    echo '<a href="printCall.php?runNum='.$row['RunNumber'].'">Print</a>';
-    echo '</td>';
-	
-    echo '</tr>'."\n";
+    echo '<p><a href="session.php?action=logout">Log Out</a></p>';
 }
 
+if($logged_out)
+{
+    echo '<p><strong>Logged Out.</strong> <a href="session.php">Click here to log in.</a></p>';
+}
+
+if($badPass)
+{
+    echo '<p style="color: red;"><strong>ERROR: Invalid Credentials.</strong></p>';
+}
+
+if($needs_auth && ! $logged_out)
+{
+    echo '<form name="login" method="POST" AUTOCOMPLETE="off" >'."\n";
+    echo '<table>'."\n";
+    echo '<tr colspan="2"><th>Log In</th></tr>'."\n";
+    echo '<tr><th>Username</th><td><input type="text" name="username" size="10" /></td>'."\n";
+    echo '<tr><th>Password</th><td><input type="password" name="passwd" size="10" /></td>'."\n";
+    echo '<tr><td colspan="1"><input type="submit" value="Login" /></td>'."\n";
+    echo '</table>'."\n";
+
+    if(isset($_SERVER['HTTP_REFERER']))
+    {
+	$referrer = substr($_SERVER['HTTP_REFERER'], strrpos($_SERVER['HTTP_REFERER'], "/")+1);
+	echo '<input type="hidden" name="referrer" value="'.$referrer.'" />'."\n";
+    }
+
+}
+
+/* DEBUG
+echo '<p>is_valid_session returns: '.is_valid_session().'</p>';
+echo '<p>_SESSION:</p>';
+echo '<pre>';
+echo var_dump($_SESSION);
+echo '</pre>';
+echo '<p><strong>SID: </strong>'.session_id()."</p>";
+echo '<p><strong>Referrer:</strong> '.$_SERVER['HTTP_REFERER'].'<br />'.$referrer.'</p>';
+echo '<p><strong>POST Referrer:</strong> '.$_POST['referrer'].'</p>';
+*/ 
+
+echo '</form>'."\n";
 ?>
-</table>
-
-<div style="margin-top: 2em; margin-bottom: 2em;">
-<a href="pcr2c.pdf">Print Blank Call Report</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="RMAform.pdf">Print Blank RMA Form</a>
-</div>
-
-<div style="margin-top: 2em; margin-bottom: 2em;">
-<form name="goToCall" method="GET" action="newcall.php">
-<label for="RunNumber"><strong>View Call by Run Number:</strong> <input type="text" name="RunNumber" id="RunNumber" size="10" />
-<input type="submit" value="View Call" />
-</form>
-</div>
-
-<div style="margin-top: 2em; margin-bottom: 2em;">
-<p><strong><a href="../newcall-stats/">Call Stats</a></strong></p>
-</div>
-
-<div class="bottomdiv">
-<?php echo "MPAC PCR version $_VERSION (r".stripSVNstuff($_SVN_rev).")"; ?>
-</div>
 
 </body>
 </html>
+
+<?php
+
+function processLogin()
+{
+    if(! isset($_POST['username']) || ! isset($_POST['passwd'])){ return false;}
+    $res = login_start_sess($_POST['username'], $_POST['passwd']);
+    if(! $res){ return false;}
+    if(isset($_POST['referrer']))
+    {
+	header("Location: ".$_POST['referrer']);
+	die();
+    }
+    return true;
+}
+
+?>

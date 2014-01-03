@@ -3,7 +3,7 @@
  +--------------------------------------------------------------------------------------------------------+
  | PHP EMS Tools      http://www.php-ems-tools.com                                                        |
  +--------------------------------------------------------------------------------------------------------+
- | Time-stamp: "2010-11-30 11:46:46 jantman"                                                              |
+ | Time-stamp: "2010-08-25 23:17:50 jantman"                                                              |
  +--------------------------------------------------------------------------------------------------------+
  | Copyright (c) 2009, 2010 Jason Antman. All rights reserved.                                            |
  |                                                                                                        |
@@ -28,94 +28,70 @@
  +--------------------------------------------------------------------------------------------------------+
  | Authors: Jason Antman <jason@jasonantman.com>                                                          |
  +--------------------------------------------------------------------------------------------------------+
- | $LastChangedRevision:: 73                                                                            $ |
- | $HeadURL:: http://svn.jasonantman.com/newcall/index.php                                              $ |
+ | $LastChangedRevision:: 67                                                                            $ |
+ | $HeadURL:: http://svn.jasonantman.com/newcall/findCallLoc.php                                        $ |
  +--------------------------------------------------------------------------------------------------------+
 */
 
 /**
- * Index page.
+ * Find call location form.
  *
- * @package MPAC-NewCall-Pages
+ * This is displayed in a DHTML popup triggered by {@link findCallLoc()}
+ *
+ * @package MPAC-NewCall-Forms
  */
 
-require_once('inc/runNum.php');
 require_once('inc/newcall.php.inc');
 
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php echo '<meta name="generator" content="MPAC PCR version '.$_VERSION.' (r'.stripSVNstuff($_SVN_rev).')">'."\n"; ?>
-<title><?php echo $shortName;?> Call Reports</title>
-<link rel="stylesheet" type="text/css" href="css/index.css" />
+<title>Find Patient</title>
 </head>
-
 <body>
+<form name="findCallLocForm">
 
-<div style="margin-top: 0.5em; margin-bottom: 0; text-align: left;"><a href="../">Home</a></div>
 
-<h1><?php echo $shortName;?> Call Reports</h1>
-<h2><a href="newcall.php">&rarr;Input New Call&larr;</a></h2>
-
-<table class="callTable">
-<tr><th>Run Number</th><th>Date</th><th>Unit</th><th>Dispatch Time</th><th>Crew</th><th>Call Type</th><th>Outcome</th><th>&nbsp;</th></tr>
+<div> <!-- BEGIN results div -->
 <?php
-$query = "SELECT c.RunNumber,c.call_type,c.date_ts,c.outcome,c.is_duty_call,c.is_second_rig,t.dispatched,cu.unit FROM calls AS c LEFT JOIN calls_times AS t ON c.RunNumber=t.RunNumber LEFT JOIN calls_units AS cu ON c.RunNumber=cu.RunNumber WHERE c.is_deprecated=0 AND t.is_deprecated=0 ORDER BY RunNumber DESC LIMIT 20;";
-$result = mysql_query($query) or die("Error in query: $query <br />ERROR: ".mysql_error());
-while($row = mysql_fetch_assoc($result))
+$query = "SELECT Pkey,call_loc_id,place_name,StreetNumber,Street,AptNumber,City,State,Intsct_Street FROM calls_locations WHERE is_deprecated=0 ORDER BY Intsct_Street DESC,Street ASC;";
+$result = mysql_query($query) or die("Error in Query: ".$query."<br />ERROR: ".mysql_error()."<br />");
+
+echo '<table class="ptSearch">'."\n";
+echo '<tr><th>&nbsp;</th><th>Place Name</th><th>Address</th><th>City</th><th>ID</th></tr>'."\n";
+if(mysql_num_rows($result) < 1)
 {
-    echo '<tr>';
-    echo '<td>'.formatRunNum($row['RunNumber']).'</td>';
-    echo '<td>'.date("m/d/Y", $row['date_ts']).'</td>';
-    echo '<td>'.$row['unit'].'</td>';
-    echo '<td>'.date("H:i", $row['dispatched']).'</td>';
-
-    if($row['is_duty_call'] == 1){ echo '<td>Duty</td>';}
-    elseif($row['is_second_rig'] == 1){ echo '<td>2<sup>nd</sup> Rig</td>';}
-    else { echo '<td>General</td>';}
-
-    echo '<td>'.$row['call_type'].'</td>';
-    echo '<td>'.$row['outcome'].'</td>';
-
-    echo '<td>';
-    echo '<a href="newcall.php?RunNumber='.$row['RunNumber'].'">View</a>';
-    echo '&nbsp;&nbsp;&nbsp;';
-    echo 'Edit';
-    echo '&nbsp;&nbsp;&nbsp;';
-    echo '<a href="printCall.php?runNum='.$row['RunNumber'].'">Print</a>';
-    echo '</td>';
-	
-    echo '</tr>'."\n";
+    echo '<tr><td colspan="5"><span style="font-weight: bold; text-align: center;">No results found.</span></td></tr>'."\n";
 }
-
+else
+{
+    while($row = mysql_fetch_assoc($result))
+    {
+	echo '<tr>';
+	echo '<td><a href="javascript:setCallLoc('.$row['call_loc_id'].')">Select</a></td>';
+	echo '<td>'.$row['place_name'].'</td>';
+	if(trim($row['Intsct_Street']) != "")
+	{
+	    echo '<td>'.makeIntsctAddress($row['Street'], $row['Intsct_Street']).'</td>';
+	}
+	else
+	{
+	    echo '<td>'.makeAddress($row['StreetNumber'], $row['Street'], $row['AptNumber']).'</td>';
+	}
+	echo '<td>'.$row['City'].', '.$row['State'].'</td>';
+	echo '<td>'.$row['call_loc_id'].'</td>';
+	echo '</tr>'."\n";
+    }
+}
+echo '</table>'."\n";
+echo '<h2 style="text-align: center;"><a href="javascript:addCallLoc()">Add New Call Location</a></h2>'."\n";
 ?>
-</table>
-
-<div style="margin-top: 2em; margin-bottom: 2em;">
-<a href="pcr2c.pdf">Print Blank Call Report</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="RMAform.pdf">Print Blank RMA Form</a>
-</div>
-
-<div style="margin-top: 2em; margin-bottom: 2em;">
-<form name="goToCall" method="GET" action="newcall.php">
-<label for="RunNumber"><strong>View Call by Run Number:</strong> <input type="text" name="RunNumber" id="RunNumber" size="10" />
-<input type="submit" value="View Call" />
-</form>
-</div>
-
-<div style="margin-top: 2em; margin-bottom: 2em;">
-<p><strong><a href="../newcall-stats/">Call Stats</a></strong></p>
-</div>
-
-<div class="bottomdiv">
-<?php echo "MPAC PCR version $_VERSION (r".stripSVNstuff($_SVN_rev).")"; ?>
-</div>
+</div> <!-- END results div -->
 
 </body>
 </html>
+
+

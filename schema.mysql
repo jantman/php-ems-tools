@@ -1,0 +1,1085 @@
+-- MySQL dump 10.13  Distrib 5.5.28, for Linux (x86_64)
+--
+-- Host: localhost    Database: newcall
+-- ------------------------------------------------------
+-- Server version	5.5.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `OLDcalls`
+--
+
+DROP TABLE IF EXISTS `OLDcalls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `OLDcalls` (
+  `Pkey` int(11) NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(11) NOT NULL DEFAULT '0',
+  `Date` date NOT NULL DEFAULT '0000-00-00',
+  `Unit` tinytext,
+  `PatientNum` tinyint(4) DEFAULT NULL,
+  `PatientOf` tinyint(4) DEFAULT NULL,
+  `EndMileage` int(11) DEFAULT NULL,
+  `MA` tinyint(1) NOT NULL DEFAULT '0',
+  `MAto` tinytext,
+  `CallType` tinytext NOT NULL,
+  `PtFirstName` tinytext,
+  `PtLastName` tinytext,
+  `PtMiddleName` tinytext,
+  `PtAddress` text,
+  `PtTown` tinytext,
+  `PtSex` tinytext,
+  `DispatchedAs` tinytext,
+  `OtherRespText` tinytext,
+  `CallLoc` tinytext,
+  `LocPtAtScene` tinytext,
+  `TimeDisp` time DEFAULT NULL,
+  `TimeInSvc` time DEFAULT NULL,
+  `TimeOnScene` time DEFAULT NULL,
+  `TimeInRoute` time DEFAULT NULL,
+  `TimeArrived` time DEFAULT NULL,
+  `TimeAvail` time DEFAULT NULL,
+  `TimeOut` time DEFAULT NULL,
+  `TimeOfOnset` text,
+  `ChiefComplaint` tinytext,
+  `PtPhysician` tinytext,
+  `AidGiven` tinytext,
+  `AidGivenBy` tinytext,
+  `Allergies` text,
+  `Medications` text,
+  `Hx` text,
+  `Remarks` text,
+  `V1Time` time DEFAULT NULL,
+  `V1BP` tinytext,
+  `V1Pulse` tinytext,
+  `V1Resp` tinytext,
+  `V1Lung` tinytext,
+  `V1Consc` tinytext,
+  `V1Pupils` tinytext,
+  `V1GCS` tinytext,
+  `V1Skin` tinytext,
+  `V1by` tinytext,
+  `V2Time` time DEFAULT NULL,
+  `V2BP` tinytext,
+  `V2Pulse` tinytext,
+  `V2Resp` tinytext,
+  `V2Lung` tinytext,
+  `V2Consc` tinytext,
+  `V2Pupils` tinytext,
+  `V2GCS` tinytext,
+  `V2Skin` tinytext,
+  `V2by` tinytext,
+  `V3Time` time DEFAULT NULL,
+  `V3BP` tinytext,
+  `V3Pulse` tinytext,
+  `V3Resp` tinytext,
+  `V3Lung` tinytext,
+  `V3Consc` tinytext,
+  `V3Pupils` tinytext,
+  `V3GCS` tinytext,
+  `V3Skin` tinytext,
+  `V3by` tinytext,
+  `V4Time` time DEFAULT NULL,
+  `V4BP` tinytext,
+  `V4Pulse` tinytext,
+  `V4Resp` tinytext,
+  `V4Lung` tinytext,
+  `V4Consc` tinytext,
+  `V4Pupils` tinytext,
+  `V4GCS` tinytext,
+  `V4Skin` tinytext,
+  `V4by` tinytext,
+  `V5Time` time DEFAULT NULL,
+  `V5BP` tinytext,
+  `V5Pulse` tinytext,
+  `V5Resp` tinytext,
+  `V5Lung` tinytext,
+  `V5Consc` tinytext,
+  `V5Pupils` tinytext,
+  `V5GCS` tinytext,
+  `V5Skin` tinytext,
+  `V5by` tinytext,
+  `Tx` longtext,
+  `ToHosp` tinytext,
+  `Passengers` tinytext,
+  `EquipLeft` tinytext,
+  `CrewType` text,
+  `DriverToScene` varchar(4) DEFAULT NULL,
+  `DriverToHosp` varchar(4) DEFAULT NULL,
+  `DriverToBldg` varchar(4) DEFAULT NULL,
+  `Crew1Name` tinytext,
+  `Crew1Num` tinytext,
+  `Crew1OnScene` tinyint(1) DEFAULT '0',
+  `Crew2Name` tinytext,
+  `Crew2Num` tinytext,
+  `Crew2OnScene` tinyint(1) NOT NULL DEFAULT '0',
+  `Crew3Name` tinytext,
+  `Crew3Num` tinytext,
+  `Crew3OnScene` tinyint(1) DEFAULT '0',
+  `Crew4Name` tinytext,
+  `Crew4Num` tinytext,
+  `Crew4OnScene` tinyint(1) DEFAULT '0',
+  `Crew5Name` tinytext,
+  `Crew5Num` tinytext,
+  `Crew5OnScene` tinyint(1) DEFAULT '0',
+  `Crew6Name` tinytext,
+  `Crew6Num` tinytext,
+  `Crew6OnScene` tinyint(1) DEFAULT '0',
+  `ALSunit` int(9) DEFAULT NULL,
+  `ALStime` time DEFAULT NULL,
+  `ALSstatus` text NOT NULL,
+  `Transport` text NOT NULL,
+  `Injuries` text,
+  `COI` text,
+  `LOC` tinyint(1) DEFAULT NULL,
+  `MCItotal` tinyint(4) DEFAULT NULL,
+  `MCIalsDisp` tinyint(4) DEFAULT NULL,
+  `MCIblsDisp` tinyint(4) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `Age` int(3) DEFAULT NULL,
+  `OC` text,
+  `termID` tinytext,
+  `RigChecked` tinyint(1) NOT NULL DEFAULT '0',
+  `edits` text,
+  `Printed` tinyint(1) NOT NULL DEFAULT '0',
+  `RMAattached` tinyint(1) DEFAULT '0',
+  `signatureID` varchar(4) DEFAULT NULL,
+  `crew1` varchar(4) DEFAULT NULL,
+  `crew2` varchar(4) DEFAULT NULL,
+  `crew3` varchar(4) DEFAULT NULL,
+  `crew4` varchar(4) DEFAULT NULL,
+  `crew5` varchar(4) DEFAULT NULL,
+  `crew6` varchar(4) DEFAULT NULL,
+  `onScene1` varchar(4) DEFAULT NULL,
+  `onScene2` varchar(4) DEFAULT NULL,
+  `onScene3` varchar(4) DEFAULT NULL,
+  `onScene4` varchar(4) DEFAULT NULL,
+  `onScene5` varchar(4) DEFAULT NULL,
+  `onScene6` varchar(4) DEFAULT NULL,
+  `needsChanges` tinyint(1) DEFAULT '0',
+  `needsSignature` tinyint(1) DEFAULT '0',
+  `checked` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`Pkey`)
+) ENGINE=MyISAM AUTO_INCREMENT=6424 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `addBk`
+--
+
+DROP TABLE IF EXISTS `addBk`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `addBk` (
+  `pKey` int(10) NOT NULL AUTO_INCREMENT,
+  `company` tinytext,
+  `description` tinytext,
+  `contact` tinytext,
+  `address` tinytext,
+  `phone1` tinytext,
+  `phone2` tinytext,
+  `fax` tinytext,
+  `email` tinytext,
+  `notes` blob,
+  `web` tinytext,
+  PRIMARY KEY (`pKey`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `archive_roster`
+--
+
+DROP TABLE IF EXISTS `archive_roster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `archive_roster` (
+  `EMTid` tinytext NOT NULL,
+  `LastName` tinytext NOT NULL,
+  `FirstName` tinytext NOT NULL,
+  `password` tinytext,
+  `rightsLevel` tinyint(4) NOT NULL DEFAULT '0',
+  `status` text NOT NULL,
+  `driver` tinyint(1) NOT NULL DEFAULT '1',
+  `Address` text,
+  `HomePhone` tinytext,
+  `CellPhone` tinytext,
+  `Email` tinytext,
+  `CPR` int(11) DEFAULT NULL,
+  `EMT` int(11) DEFAULT NULL,
+  `HazMat` int(11) DEFAULT NULL,
+  `BBP` int(11) DEFAULT NULL,
+  `ICS100` int(11) DEFAULT NULL,
+  `ICS200` int(11) DEFAULT NULL,
+  `NIMS` int(11) DEFAULT NULL,
+  `Pkey` int(11) NOT NULL AUTO_INCREMENT,
+  `SpouseName` varchar(30) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `pwdMD5` tinytext,
+  `shownAs` varchar(15) DEFAULT NULL,
+  `unitID` tinytext,
+  `textEmail` tinytext,
+  `position` tinytext,
+  `comm1` tinytext,
+  `comm1pos` tinytext,
+  `comm2` tinytext,
+  `comm2pos` tinytext,
+  `officer` tinytext,
+  `PHTLS` int(11) DEFAULT NULL,
+  `NREMT` int(11) DEFAULT NULL,
+  `FR` int(11) DEFAULT NULL,
+  `trustee` tinytext,
+  `comm3` tinytext,
+  `comm3pos` tinytext,
+  `dateJoined_ts` int(11) DEFAULT NULL,
+  `dateActive_ts` int(11) DEFAULT NULL,
+  `WorkPhone` varchar(15) DEFAULT NULL,
+  `OtherPhone` varchar(15) DEFAULT NULL,
+  `reminder_emails` tinyint(1) DEFAULT '1',
+  `memberDN` varchar(200) DEFAULT NULL,
+  `userDN` varchar(200) DEFAULT NULL,
+  `uid` int(10) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `archive_ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_ts` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `cellProvider` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`Pkey`)
+) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attendance` (
+  `att_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `date_ts` int(10) unsigned DEFAULT NULL,
+  `start_ts` int(10) unsigned DEFAULT NULL,
+  `end_ts` int(10) unsigned DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `EMTid` varchar(10) DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`att_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=160 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls`
+--
+
+DROP TABLE IF EXISTS `calls`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls` (
+  `Pkey` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned NOT NULL,
+  `date_ts` int(10) unsigned DEFAULT NULL,
+  `date_date` date DEFAULT NULL,
+  `submit_ts` int(10) unsigned DEFAULT NULL,
+  `updated_ts` int(10) unsigned DEFAULT NULL,
+  `pt_num` tinyint(3) unsigned DEFAULT NULL,
+  `pt_total` tinyint(3) unsigned DEFAULT NULL,
+  `patient_pkey` int(10) unsigned DEFAULT NULL,
+  `pt_age` int(10) unsigned DEFAULT NULL,
+  `pt_loc_at_scene` varchar(45) DEFAULT NULL,
+  `pt_physician` varchar(45) DEFAULT NULL,
+  `call_loc_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `outcome` varchar(30) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  `is_duty_call` tinyint(1) unsigned DEFAULT '0',
+  `call_type` varchar(60) DEFAULT NULL,
+  `signature_ID` varchar(10) DEFAULT NULL,
+  `signature_auth` tinyint(1) unsigned DEFAULT '0',
+  `PtTransferredTo` varchar(50) DEFAULT NULL,
+  `Passengers` varchar(50) DEFAULT NULL,
+  `EquipmentLeft` varchar(50) DEFAULT NULL,
+  `is_second_rig` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`Pkey`),
+  KEY `patients_id` (`patient_pkey`),
+  KEY `call_loc_id` (`call_loc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_MA`
+--
+
+DROP TABLE IF EXISTS `calls_MA`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_MA` (
+  `callsMA_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned NOT NULL,
+  `City` varchar(100) DEFAULT NULL,
+  `State` varchar(10) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`callsMA_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_als`
+--
+
+DROP TABLE IF EXISTS `calls_als`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_als` (
+  `calls_als_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned DEFAULT NULL,
+  `als_unit` varchar(10) DEFAULT NULL,
+  `als_status` varchar(30) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`calls_als_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_clinical`
+--
+
+DROP TABLE IF EXISTS `calls_clinical`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_clinical` (
+  `cc_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned DEFAULT NULL,
+  `chief_complaint` varchar(50) DEFAULT NULL,
+  `time_of_onset` varchar(50) DEFAULT NULL,
+  `aid_given` varchar(50) DEFAULT NULL,
+  `aid_given_by` varchar(50) DEFAULT NULL,
+  `allergies` varchar(255) DEFAULT NULL,
+  `medications` varchar(255) DEFAULT NULL,
+  `pt_hx` text,
+  `remarks` text,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  `has_loss_of_consc` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`cc_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_crew`
+--
+
+DROP TABLE IF EXISTS `calls_crew`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_crew` (
+  `cc_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned DEFAULT NULL,
+  `EMTid` varchar(10) DEFAULT NULL,
+  `is_driver_to_scene` tinyint(1) unsigned DEFAULT '0',
+  `is_driver_to_hosp` tinyint(1) unsigned DEFAULT '0',
+  `is_driver_to_bldg` tinyint(1) unsigned DEFAULT '0',
+  `is_on_duty` tinyint(1) unsigned DEFAULT '0',
+  `is_on_scene` tinyint(1) unsigned DEFAULT '0',
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`cc_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_edits`
+--
+
+DROP TABLE IF EXISTS `calls_edits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_edits` (
+  `edits_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ts` int(10) unsigned DEFAULT NULL,
+  `auth_username` varchar(45) DEFAULT NULL,
+  `auth_EMTid` varchar(6) DEFAULT NULL,
+  `auth_method` varchar(45) DEFAULT NULL,
+  `remote_ip` varchar(45) DEFAULT NULL,
+  `edit_type` varchar(10) DEFAULT NULL,
+  `auth_allowed_reason` varchar(60) DEFAULT NULL,
+  `table_name` varchar(45) DEFAULT NULL,
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`edits_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_injured_area`
+--
+
+DROP TABLE IF EXISTS `calls_injured_area`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_injured_area` (
+  `cia_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`cia_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_locations`
+--
+
+DROP TABLE IF EXISTS `calls_locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_locations` (
+  `Pkey` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `StreetNumber` varchar(6) DEFAULT NULL,
+  `Street` varchar(50) DEFAULT NULL,
+  `AptNumber` varchar(10) DEFAULT NULL,
+  `place_name` varchar(50) DEFAULT NULL,
+  `City` varchar(100) DEFAULT NULL,
+  `State` varchar(10) NOT NULL,
+  `Intsct_Street` varchar(50) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  `call_loc_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`Pkey`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_times`
+--
+
+DROP TABLE IF EXISTS `calls_times`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_times` (
+  `ct_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned NOT NULL,
+  `dispatched` int(10) unsigned DEFAULT NULL,
+  `inservice` int(10) unsigned DEFAULT NULL,
+  `onscene` int(10) unsigned DEFAULT NULL,
+  `enroute` int(10) unsigned DEFAULT NULL,
+  `arrived` int(10) unsigned DEFAULT NULL,
+  `available` int(10) unsigned DEFAULT NULL,
+  `outservice` int(10) unsigned DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ct_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_tx`
+--
+
+DROP TABLE IF EXISTS `calls_tx`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_tx` (
+  `ct_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned DEFAULT NULL,
+  `treatment` varchar(45) DEFAULT NULL,
+  `quantity_or_rate` varchar(45) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ct_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=latin1 COMMENT='calls - treatments';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_units`
+--
+
+DROP TABLE IF EXISTS `calls_units`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_units` (
+  `cu_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned NOT NULL,
+  `unit` varchar(10) DEFAULT NULL,
+  `start_mileage` decimal(11,2) DEFAULT NULL,
+  `end_mileage` decimal(11,2) DEFAULT NULL,
+  `total_mileage` decimal(11,2) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`cu_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `calls_vitals`
+--
+
+DROP TABLE IF EXISTS `calls_vitals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `calls_vitals` (
+  `cv_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `RunNumber` int(10) unsigned DEFAULT NULL,
+  `vitals_set_number` tinyint(3) unsigned DEFAULT NULL,
+  `time` varchar(10) DEFAULT NULL,
+  `bp` varchar(10) DEFAULT NULL,
+  `pulse` varchar(10) DEFAULT NULL,
+  `resps` varchar(10) DEFAULT NULL,
+  `lung_sounds` varchar(25) DEFAULT NULL,
+  `consciousness` varchar(20) DEFAULT NULL,
+  `pupils_left` varchar(20) DEFAULT NULL,
+  `pupils_right` varchar(20) DEFAULT NULL,
+  `skin_temp` varchar(10) DEFAULT NULL,
+  `skin_moisture` varchar(10) DEFAULT NULL,
+  `skin_color` varchar(10) DEFAULT NULL,
+  `is_deprecated` tinyint(1) unsigned DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  `spo2` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`cv_id`),
+  KEY `RunNumber` (`RunNumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `changes_view`
+--
+
+DROP TABLE IF EXISTS `changes_view`;
+/*!50001 DROP VIEW IF EXISTS `changes_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `changes_view` (
+  `sched_change_ID` tinyint NOT NULL,
+  `deprecated_sched_ID` tinyint NOT NULL,
+  `deprecated_by_sched_ID` tinyint NOT NULL,
+  `change_ts` tinyint NOT NULL,
+  `admin_username` tinyint NOT NULL,
+  `remote_host` tinyint NOT NULL,
+  `php_auth_username` tinyint NOT NULL,
+  `action` tinyint NOT NULL,
+  `old_EMTid` tinyint NOT NULL,
+  `old_start_ts` tinyint NOT NULL,
+  `old_end_ts` tinyint NOT NULL,
+  `old_year` tinyint NOT NULL,
+  `old_month` tinyint NOT NULL,
+  `old_date` tinyint NOT NULL,
+  `old_shift_id` tinyint NOT NULL,
+  `new_EMTid` tinyint NOT NULL,
+  `new_start_ts` tinyint NOT NULL,
+  `new_end_ts` tinyint NOT NULL,
+  `new_year` tinyint NOT NULL,
+  `new_month` tinyint NOT NULL,
+  `new_date` tinyint NOT NULL,
+  `new_shift_id` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `committee_positions`
+--
+
+DROP TABLE IF EXISTS `committee_positions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `committee_positions` (
+  `comm_pos_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `comm_pos_name` varchar(50) DEFAULT NULL,
+  `max_per_committee` int(11) DEFAULT NULL,
+  PRIMARY KEY (`comm_pos_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `committees`
+--
+
+DROP TABLE IF EXISTS `committees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `committees` (
+  `comm_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `comm_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`comm_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `log_external`
+--
+
+DROP TABLE IF EXISTS `log_external`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `log_external` (
+  `pKey` int(11) NOT NULL AUTO_INCREMENT,
+  `timestamp` int(11) DEFAULT NULL,
+  `auth_user` tinytext,
+  `auth_type` tinytext,
+  `URL` tinytext,
+  `local_filename` tinytext,
+  `remoteIP` tinytext,
+  `client` tinytext,
+  `additional` text,
+  `appID` tinytext,
+  PRIMARY KEY (`pKey`)
+) ENGINE=MyISAM AUTO_INCREMENT=15157 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `members_committees`
+--
+
+DROP TABLE IF EXISTS `members_committees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `members_committees` (
+  `memb_comm_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `EMTid` varchar(10) DEFAULT NULL,
+  `comm_id` int(10) unsigned DEFAULT NULL,
+  `pos_id` int(10) unsigned DEFAULT NULL,
+  `appointed_ts` int(11) DEFAULT NULL,
+  `removed_ts` int(11) DEFAULT NULL,
+  PRIMARY KEY (`memb_comm_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_CallType`
+--
+
+DROP TABLE IF EXISTS `opt_CallType`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_CallType` (
+  `oct_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `oct_name` varchar(50) DEFAULT NULL,
+  `oct_order` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`oct_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_Cities`
+--
+
+DROP TABLE IF EXISTS `opt_Cities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_Cities` (
+  `oC_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `oC_State` varchar(3) DEFAULT NULL,
+  `oC_City` varchar(100) DEFAULT NULL,
+  `oC_is_MA` tinyint(1) DEFAULT '0',
+  `oC_is_default` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`oC_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=540 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_TransportTo`
+--
+
+DROP TABLE IF EXISTS `opt_TransportTo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_TransportTo` (
+  `ott_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ott_name` varchar(50) DEFAULT NULL,
+  `ott_order` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ott_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_cell_providers`
+--
+
+DROP TABLE IF EXISTS `opt_cell_providers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_cell_providers` (
+  `ocp_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ocp_name` varchar(50) NOT NULL,
+  `email_format` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ocp_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_equip`
+--
+
+DROP TABLE IF EXISTS `opt_equip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_equip` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type_id` int(10) unsigned DEFAULT NULL,
+  `mfr` varchar(100) DEFAULT NULL,
+  `model` varchar(100) DEFAULT NULL,
+  `model_num` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_streets`
+--
+
+DROP TABLE IF EXISTS `opt_streets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_streets` (
+  `os_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `state_abbrev` varchar(3) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `street` varchar(100) DEFAULT NULL,
+  `zipcode` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`os_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=269 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `opt_units`
+--
+
+DROP TABLE IF EXISTS `opt_units`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `opt_units` (
+  `oU_pkey` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `oU_unitID` varchar(20) DEFAULT NULL,
+  `oU_order` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`oU_pkey`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `patients`
+--
+
+DROP TABLE IF EXISTS `patients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patients` (
+  `Pkey` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `patient_id` int(10) unsigned NOT NULL,
+  `FirstName` varchar(50) DEFAULT NULL,
+  `LastName` varchar(50) DEFAULT NULL,
+  `MiddleName` varchar(50) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `Sex` varchar(6) DEFAULT NULL,
+  `StreetNumber` varchar(6) DEFAULT NULL,
+  `Street` varchar(50) DEFAULT NULL,
+  `AptNumber` varchar(10) DEFAULT NULL,
+  `State` varchar(10) DEFAULT NULL,
+  `City` varchar(100) DEFAULT NULL,
+  `is_from_old_calls` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_deprecated` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `deprecated_by_id` int(10) unsigned DEFAULT NULL,
+  `deprecates_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`Pkey`)
+) ENGINE=InnoDB AUTO_INCREMENT=1100 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `responding_notices`
+--
+
+DROP TABLE IF EXISTS `responding_notices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `responding_notices` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `start_ts` int(10) unsigned DEFAULT NULL,
+  `end_ts` int(10) unsigned DEFAULT NULL,
+  `type` varchar(10) DEFAULT NULL,
+  `message` varchar(500) DEFAULT NULL,
+  `is_killed` tinyint(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `rigCheck`
+--
+
+DROP TABLE IF EXISTS `rigCheck`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rigCheck` (
+  `pKey` int(11) NOT NULL AUTO_INCREMENT,
+  `timeStamp` int(11) DEFAULT NULL,
+  `crew1` tinytext,
+  `crew2` tinytext,
+  `crew3` tinytext,
+  `crew4` tinytext,
+  `rig` tinytext,
+  `comments` text,
+  `stillBroken` text,
+  `sigID` tinytext,
+  `OK` text,
+  `NG` text,
+  `mileage` int(6) DEFAULT NULL,
+  PRIMARY KEY (`pKey`)
+) ENGINE=MyISAM AUTO_INCREMENT=199 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `rigCheckData`
+--
+
+DROP TABLE IF EXISTS `rigCheckData`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rigCheckData` (
+  `rcd_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `unit_id` varchar(4) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `parent_id` int(10) unsigned DEFAULT '0',
+  `col_num` tinyint(3) unsigned DEFAULT NULL,
+  `col_order` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`rcd_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `roster`
+--
+
+DROP TABLE IF EXISTS `roster`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roster` (
+  `EMTid` tinytext NOT NULL,
+  `LastName` tinytext NOT NULL,
+  `FirstName` tinytext NOT NULL,
+  `password` tinytext,
+  `rightsLevel` tinyint(4) NOT NULL DEFAULT '0',
+  `status` text NOT NULL,
+  `driver` tinyint(1) NOT NULL DEFAULT '1',
+  `Address` text,
+  `HomePhone` tinytext,
+  `CellPhone` tinytext,
+  `Email` tinytext,
+  `CPR` int(11) DEFAULT NULL,
+  `EMT` int(11) DEFAULT NULL,
+  `HazMat` int(11) DEFAULT NULL,
+  `BBP` int(11) DEFAULT NULL,
+  `ICS100` int(11) DEFAULT NULL,
+  `ICS200` int(11) DEFAULT NULL,
+  `NIMS` int(11) DEFAULT NULL,
+  `Pkey` int(11) NOT NULL AUTO_INCREMENT,
+  `SpouseName` varchar(30) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `pwdMD5` tinytext,
+  `shownAs` varchar(15) DEFAULT NULL,
+  `unitID` tinytext,
+  `textEmail` tinytext,
+  `position` tinytext,
+  `comm1` tinytext,
+  `comm1pos` tinytext,
+  `comm2` tinytext,
+  `comm2pos` tinytext,
+  `officer` tinytext,
+  `PHTLS` int(11) DEFAULT NULL,
+  `NREMT` int(11) DEFAULT NULL,
+  `FR` int(11) DEFAULT NULL,
+  `trustee` tinytext,
+  `comm3` tinytext,
+  `comm3pos` tinytext,
+  `dateJoined_ts` int(11) DEFAULT NULL,
+  `dateActive_ts` int(11) DEFAULT NULL,
+  `WorkPhone` varchar(15) DEFAULT NULL,
+  `OtherPhone` varchar(15) DEFAULT NULL,
+  `reminder_emails` tinyint(1) DEFAULT '1',
+  `memberDN` varchar(200) DEFAULT NULL,
+  `userDN` varchar(200) DEFAULT NULL,
+  `uid` int(10) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `update_ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cellProvider` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`Pkey`)
+) ENGINE=MyISAM AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schedule`
+--
+
+DROP TABLE IF EXISTS `schedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedule` (
+  `sched_entry_id` int(11) NOT NULL AUTO_INCREMENT,
+  `EMTid` varchar(10) DEFAULT NULL,
+  `start_ts` int(11) DEFAULT NULL,
+  `end_ts` int(11) DEFAULT NULL,
+  `sched_year` smallint(6) DEFAULT NULL,
+  `sched_month` tinyint(4) DEFAULT NULL,
+  `sched_date` tinyint(4) DEFAULT NULL,
+  `sched_shift_id` tinyint(4) DEFAULT NULL,
+  `deprecated` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`sched_entry_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8606 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schedule_changes`
+--
+
+DROP TABLE IF EXISTS `schedule_changes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedule_changes` (
+  `sched_change_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `deprecated_sched_ID` int(11) DEFAULT NULL,
+  `deprecated_by_sched_ID` int(11) DEFAULT NULL,
+  `change_ts` int(11) DEFAULT NULL,
+  `admin_username` varchar(50) DEFAULT NULL,
+  `remote_host` varchar(50) DEFAULT NULL,
+  `php_auth_username` varchar(50) DEFAULT NULL,
+  `form` varchar(20) DEFAULT NULL,
+  `queries` text,
+  `admin_auth_success` tinyint(1) DEFAULT '0',
+  `auth_type` varchar(50) DEFAULT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`sched_change_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2984 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schedule_dailyMessage`
+--
+
+DROP TABLE IF EXISTS `schedule_dailyMessage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedule_dailyMessage` (
+  `sched_message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shift_start_ts` int(11) DEFAULT NULL,
+  `sched_year` smallint(6) DEFAULT NULL,
+  `sched_month` tinyint(4) DEFAULT NULL,
+  `sched_date` tinyint(4) DEFAULT NULL,
+  `sched_shift_id` tinyint(4) DEFAULT NULL,
+  `message_text` varchar(100) DEFAULT NULL,
+  `deprecated` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`sched_message_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schedule_message_changes`
+--
+
+DROP TABLE IF EXISTS `schedule_message_changes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedule_message_changes` (
+  `sched_message_change_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `deprecated_message_ID` int(11) DEFAULT NULL,
+  `deprecated_by_message_ID` int(11) DEFAULT NULL,
+  `change_ts` int(11) DEFAULT NULL,
+  `admin_username` varchar(50) DEFAULT NULL,
+  `auth_type` varchar(50) DEFAULT NULL,
+  `admin_auth_success` tinyint(1) DEFAULT NULL,
+  `remote_host` varchar(50) DEFAULT NULL,
+  `php_auth_username` varchar(50) DEFAULT NULL,
+  `form` varchar(20) DEFAULT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  `queries` text,
+  PRIMARY KEY (`sched_message_change_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schedule_shifts`
+--
+
+DROP TABLE IF EXISTS `schedule_shifts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schedule_shifts` (
+  `sched_shift_id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `shiftName` varchar(30) DEFAULT NULL,
+  `shiftTitle` varchar(30) DEFAULT NULL,
+  `deprecated` int(11) DEFAULT '0',
+  PRIMARY KEY (`sched_shift_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `web_sessions`
+--
+
+DROP TABLE IF EXISTS `web_sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `web_sessions` (
+  `sessid` varchar(100) DEFAULT NULL,
+  `start_ts` int(11) DEFAULT NULL,
+  `last_load_ts` int(11) DEFAULT NULL,
+  `EMTid` varchar(10) DEFAULT NULL,
+  `remote_ip` varchar(15) DEFAULT NULL,
+  `user_agent` varchar(400) DEFAULT NULL,
+  `expire_ts` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Final view structure for view `changes_view`
+--
+
+/*!50001 DROP TABLE IF EXISTS `changes_view`*/;
+/*!50001 DROP VIEW IF EXISTS `changes_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`jantman`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `changes_view` AS select `sc`.`sched_change_ID` AS `sched_change_ID`,`sc`.`deprecated_sched_ID` AS `deprecated_sched_ID`,`sc`.`deprecated_by_sched_ID` AS `deprecated_by_sched_ID`,`sc`.`change_ts` AS `change_ts`,`sc`.`admin_username` AS `admin_username`,`sc`.`remote_host` AS `remote_host`,`sc`.`php_auth_username` AS `php_auth_username`,`sc`.`action` AS `action`,`s1`.`EMTid` AS `old_EMTid`,`s1`.`start_ts` AS `old_start_ts`,`s1`.`end_ts` AS `old_end_ts`,`s1`.`sched_year` AS `old_year`,`s1`.`sched_month` AS `old_month`,`s1`.`sched_date` AS `old_date`,`s1`.`sched_shift_id` AS `old_shift_id`,`s2`.`EMTid` AS `new_EMTid`,`s2`.`start_ts` AS `new_start_ts`,`s2`.`end_ts` AS `new_end_ts`,`s2`.`sched_year` AS `new_year`,`s2`.`sched_month` AS `new_month`,`s2`.`sched_date` AS `new_date`,`s2`.`sched_shift_id` AS `new_shift_id` from ((`schedule_changes` `sc` left join `schedule` `s1` on((`sc`.`deprecated_sched_ID` = `s1`.`sched_entry_id`))) left join `schedule` `s2` on((`sc`.`deprecated_by_sched_ID` = `s2`.`sched_entry_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-01-02 21:15:13

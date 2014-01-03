@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page version.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/inc/version.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-variables">Variables</a>
+			|							<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Variables for version, SVN revision, SVN head; stripSVNstuff() function to get SVN rev as clean string</p>
+<p class="description"><p>Variables for version, SVN revision, SVN head; stripSVNstuff() function to get SVN rev as clean string</p></p>
+	<ul class="tags">
+				<li><span class="field">filesource:</span> <a href="../__filesource/fsource_MPAC-NewCall-PHP__incversion.php.html">Source Code for this file</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	
+	
+	<a name="sec-variables"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Variables</span>
+			|							<a href="#sec-functions">Functions</a>
+					</div>
+		<div class="info-box-body">	
+			<a name="global$_SVN_headURL" id="global$_SVN_headURL"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_SVN_headURL</span>
+						(line <span class="line-number"><a href="../__filesource/fsource_MPAC-NewCall-PHP__incversion.php.html#a53">53</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Variable to hold the HeadURL SVN string.</p>
+<p class="description"><p>Variable to hold the HeadURL SVN string. Variable content is updated by SVN, making it accessible to the scripts.</p></p>
+	
+		
+</div>
+<a name="global$_SVN_rev" id="global$_SVN_rev"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_SVN_rev</span>
+						(line <span class="line-number"><a href="../__filesource/fsource_MPAC-NewCall-PHP__incversion.php.html#a47">47</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Variable to hold LastChangedRevision string from SVN.</p>
+<p class="description"><p>Variable to hold LastChangedRevision string from SVN. Variable content is updated by SVN, making it accessible to the scripts.</p></p>
+	
+		
+</div>
+<a name="global$_VERSION" id="global$_VERSION"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_VERSION</span>
+						(line <span class="line-number"><a href="../__filesource/fsource_MPAC-NewCall-PHP__incversion.php.html#a59">59</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Current human-readable version string for the program</p>
+<p class="description"><p>Current human-readable version string for the program</p></p>
+	
+		
+</div>
+		</div>
+	</div>
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-variables">Variables</a>
+				|						<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functionstripSVNstuff" id="functionstripSVNstuff"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">stripSVNstuff</span> (line <span class="line-number"><a href="../__filesource/fsource_MPAC-NewCall-PHP__incversion.php.html#a67">67</a></span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extract the numeric revision number from a SVN LastChangedRevision string, return it</p>
+<p class="description"><p>Extract the numeric revision number from a SVN LastChangedRevision string, return it</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> revision number</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			stripSVNstuff
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$s</span>)
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$s</span><span class="var-description">: svn LastChangedRevision string</span>			</li>
+				</ul>
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 26 Aug 2010 08:43:31 -0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

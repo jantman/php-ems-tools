@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>File Source for callLoc.js</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<h1>Source for file callLoc.js</h1>
+<p>Documentation is available at <a href="../MPAC-NewCall-JS/_js---callLoc.js.html">callLoc.js</a></p>
+<div class="src-code">
+<div class="src-code"><ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a3"></a><span class="src-doc">&nbsp;*&nbsp;Functions&nbsp;related&nbsp;to&nbsp;call&nbsp;location&nbsp;stuff.</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;MPAC-NewCall-JS</span></div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a7"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*&nbsp;Changes&nbsp;which&nbsp;Call&nbsp;Location&nbsp;fields&nbsp;are&nbsp;displayed&nbsp;when&nbsp;cl_AddressState&nbsp;dropdown&nbsp;is&nbsp;changed.</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a11"></a><span class="src-doc">&nbsp;*&nbsp;Called&nbsp;from&nbsp;cl_AddressState&nbsp;onChange()&nbsp;in&nbsp;HTML.</span></div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a13"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a14"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a15"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionupdate_state_CL">update_state_CL</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a16"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a17"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a18"></a><span class="src-doc">&nbsp;*&nbsp;Changes&nbsp;which&nbsp;cl_Address&nbsp;Divs&nbsp;are&nbsp;dis</span></div></li>
+<li><div class="src-line"><a name="a19"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a20"></a><span class="src-doc">&nbsp;*&nbsp;Called&nbsp;from&nbsp;HTML&nbsp;onChange()&nbsp;event.</span></div></li>
+<li><div class="src-line"><a name="a21"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a22"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a24"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionupdateCLintsct">updateCLintsct</a><span class="src-sym">(</span><span class="src-id">foo</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a25"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a26"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a27"></a><span class="src-doc">&nbsp;*&nbsp;Update&nbsp;which&nbsp;street&nbsp;options&nbsp;are&nbsp;shown&nbsp;depending&nbsp;on&nbsp;whether&nbsp;city&nbsp;is&nbsp;Midland&nbsp;Park&nbsp;or&nbsp;not.</span></div></li>
+<li><div class="src-line"><a name="a28"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a29"></a><span class="src-doc">&nbsp;*&nbsp;Called&nbsp;from&nbsp;HTML&nbsp;onChange()&nbsp;event.</span></div></li>
+<li><div class="src-line"><a name="a30"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a31"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a32"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a33"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionupdate_city_CL">update_city_CL</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a34"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a35"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a36"></a><span class="src-doc">&nbsp;*&nbsp;Handler&nbsp;for&nbsp;clicks&nbsp;on&nbsp;the&nbsp;Find&nbsp;Call&nbsp;Location&nbsp;link.</span></div></li>
+<li><div class="src-line"><a name="a37"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a38"></a><span class="src-doc">&nbsp;*&nbsp;Calls&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;newFindCallLocFormRequest()}</span><span class="src-doc">&nbsp;with&nbsp;argument&nbsp;of&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;findCallLoc.php}</span><span class="src-doc">&nbsp;for&nbsp;form.</span></div></li>
+<li><div class="src-line"><a name="a39"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a40"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a42"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionfindCallLoc">findCallLoc</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a43"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a44"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a45"></a><span class="src-doc">&nbsp;*&nbsp;Fire&nbsp;HTTP&nbsp;Request&nbsp;for&nbsp;call&nbsp;location&nbsp;form.</span></div></li>
+<li><div class="src-line"><a name="a46"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a47"></a><span class="src-doc">&nbsp;*&nbsp;Called&nbsp;by&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;findCallLoc()}</span><span class="src-doc">&nbsp;in&nbsp;JS.</span></div></li>
+<li><div class="src-line"><a name="a48"></a><span class="src-doc">&nbsp;*&nbsp;Form&nbsp;is&nbsp;generated&nbsp;by&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;findCallLoc.php}</span></div></li>
+<li><div class="src-line"><a name="a49"></a><span class="src-doc">&nbsp;*&nbsp;Callback&nbsp;handler&nbsp;is&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;handleNewFindCallLocFormRequest()}</span></div></li>
+<li><div class="src-line"><a name="a50"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a51"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@param&nbsp;</span><span class="src-doc-type">string&nbsp;</span><span class="src-doc-var">$url&nbsp;</span><span class="src-doc">the&nbsp;url&nbsp;to&nbsp;HTTP&nbsp;Request</span></div></li>
+<li><div class="src-line"><a name="a52"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a54"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionnewFindCallLocFormRequest">newFindCallLocFormRequest</a><span class="src-sym">(</span><span class="src-id">url</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a56"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a57"></a><span class="src-doc">&nbsp;*&nbsp;Callback&nbsp;handler&nbsp;for&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;newFindCallLocFormRequest()}</span><span class="src-doc">,&nbsp;displays&nbsp;Find&nbsp;Call&nbsp;Location&nbsp;form&nbsp;as&nbsp;DHTML&nbsp;popup.</span></div></li>
+<li><div class="src-line"><a name="a58"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a59"></a><span class="src-doc">&nbsp;*&nbsp;Callback&nbsp;handler&nbsp;for&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;newFindCallLocFormRequest()}</span><span class="src-doc">.</span></div></li>
+<li><div class="src-line"><a name="a60"></a><span class="src-doc">&nbsp;*&nbsp;Form&nbsp;content&nbsp;should&nbsp;be&nbsp;generated&nbsp;by&nbsp;</span><span class="src-doc-inlinetag">{@link&nbsp;findCallLoc.php}</span></div></li>
+<li><div class="src-line"><a name="a61"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a62"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a63"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a64"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionhandleNewFindCallLocFormRequest">handleNewFindCallLocFormRequest</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a65"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a66"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionsubmitFindCallLocForm">submitFindCallLocForm</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a68"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionaddCallLoc">addCallLoc</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a69"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a70"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionnewAddCallLocFormRequest">newAddCallLocFormRequest</a><span class="src-sym">(</span><span class="src-id">url</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a71"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a72"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionhandleAddCallLocFormRequest">handleAddCallLocFormRequest</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a73"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a74"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionvalidateCallLocForm">validateCallLocForm</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a75"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a76"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionsubmitCallLocForm">submitCallLocForm</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a77"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a78"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionnewSubmitCallLocFormRequest">newSubmitCallLocFormRequest</a><span class="src-sym">(</span><span class="src-id">url</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a79"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a80"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionhandleSubmitCallLocFormRequest">handleSubmitCallLocFormRequest</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a81"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a82"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionsetCallLoc">setCallLoc</a><span class="src-sym">(</span><span class="src-id">id</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a83"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a84"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionsetCallLocByPkey">setCallLocByPkey</a><span class="src-sym">(</span><span class="src-id">pkey</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a85"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a86"></a><span class="src-key">function&nbsp;</span><a href="../MPAC-NewCall-JS/_js---callLoc.js.html#functionhandleNewSetCallLocRequest">handleNewSetCallLocRequest</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;&nbsp;</span><span class="src-sym">}&nbsp;</span></div></li>
+<li><div class="src-line"><a name="a87"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a88"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a89"></a><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Thu, 26 Aug 2010 08:43:18 -0400 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</body>
+</html>
