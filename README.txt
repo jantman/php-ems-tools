@@ -4,6 +4,8 @@ http://www.php-ems-tools.com
 
 ###########################################################################
 
+This is TOTALLY UNSUPPORTED ABANDONWARE.
+
 This is a PHP-based Patient Care Report and organization management
 program that I wrote quite a few years ago for a volunteer Emergency
 Medical Services organization that I was involved in.
@@ -75,28 +77,3 @@ view it with a text-mode browser like Lynx/Links, or view the on-line
 documentation available at http://www.php-ems-tools.com.
 
 Installation instructions can be found in the INSTALL.txt file.
-
-FOR BUG REPORTS, feature requests, and support requests, please visit 
-www.php-ems-tools.com and use the "Bug Report" link. Feature requests will be
-taken seriously an acted on, but may take some time.
-
-If you modify the code for your own use, add features, or fix bugs, please
-email me a patch or the modified file so that others can benifit from your
-changes.
-
-Thanks,
-Jason Antman
-PHP EMS Tools
-Midland Park (Vol.) Amb. Corps, Midland Park, NJ
-
-PS - If you like the software and think it's worth money, or want to support
-development efforts, please send a donation to:
-Midland Park Ambulance Corps
-PO Box 38
-Midland Park, NJ
-07432
-
-Or donate online via Pay Pal at:
-http://www.midlandparkambulance.com
-
-(we are a 501(c)(3) non-profit).
