@@ -2,7 +2,21 @@ PHP EMS Tools
 Version 3.0 README
 http://www.php-ems-tools.com
 
+###########################################################################
 
+This is a PHP-based Patient Care Report and organization management
+program that I wrote quite a few years ago for a volunteer Emergency
+Medical Services organization that I was involved in.
+
+This probably isn't even usable/installable. It DEFINITELY is customized
+to our one organization, and probably won't be of much use to anyone else
+except as an example.
+
+That being said, the organization that I wrote it for no longer uses it,
+in favor of a free state-provided alternative. A few people have asked
+for the code, so here it is.
+
+###########################################################################
 
 This software is licensed under GNU GPLv3. The full text of this license can
 be found in the LICENSE.txt file.
