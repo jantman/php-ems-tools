@@ -18,6 +18,8 @@ That being said, the organization that I wrote it for no longer uses it,
 in favor of a free state-provided alternative. A few people have asked
 for the code, so here it is.
 
+[![Project Status: Unsupported - The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired.](http://www.repostatus.org/badges/0.1.0/unsupported.svg)](http://www.repostatus.org/#unsupported)
+
 ###########################################################################
 
 This software is licensed under GNU GPLv3. The full text of this license can
